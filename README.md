@@ -1,26 +1,45 @@
-# Immuminati
+# Immuminati · 微觀防線
 
-回合制免疫策略遊戲。以細胞協作、病原特性、感染控制與組織保護形成策略，玩家可在遊玩中查閱百科、理解免疫機制。
+一款回合制免疫指揮遊戲，採 TypeScript、Vite、React，以及獨立規則引擎與事件式動畫。
 
-## 開發狀態
+目前交付 **M1「莢膜防線／肺炎鏈球菌」**：三個相連肺部區域、共用 AP、多指令、調理與吞噬、細胞自動行為、調度及增援、組織損傷與保全星等。M2–M6 自首頁可查閱但明示開發中；沒有解鎖鏈或永久戰力升級。
 
-玩法規格已確認，美術選定 **C「柔光微觀立體」**。目前交付規格、開發指引與概念參考圖；實際遊戲、分層角色素材與動畫仍待製作。
+## 執行
 
-遊戲必須有細胞各自的待機漂浮、呼吸與局部生命感；下達行動後有對應的移動、吞噬、調理、呈遞、訊號及病原反應動畫。整張靜態預覽圖加點擊區不符合完成條件。
+需要 Node 24。
 
-## 雲端開工入口
+```sh
+npm ci
+npm run dev
+```
 
-1. [開發指引](AGENTS.md)
-2. [完整遊戲規格 v1.1](docs/Immuminati-spec.md)
-3. [C 美術與動畫製作規格](docs/art-direction/C-art-and-animation.md)
-4. [雲端開發交接與可直接使用的開工訊息](docs/CLOUD-HANDOFF.md)
+開啟 `http://localhost:5173/Immuminati/`。
 
-![已選定 C 柔光微觀立體](docs/art-direction/c-soft-micro-3d.png)
+```sh
+npm run verify       # 規則／存檔／播放器測試、型別與 production build
+npm run preview      # http://localhost:4173/Immuminati/
+npx playwright install --with-deps chromium
+npm run test:browser # 桌面／360px 手機完整操作、截圖與錄影
+npm run test:animation # 偽足包覆、清除／胞內存活展示契約
+```
 
-先完成一個具有真實規則與動態美術的肺炎鏈球菌關卡，再擴充沙門氏菌、結核分枝桿菌、流感 A、白色念珠菌及 HIV。全部關卡與百科從開場可選；各關的感染目標、星等與 HIV 敘事細節以規格為準。
+## 怎麼玩
 
-## 技術方向
+1. 選擇 M1。點選雙球菌，花 1 AP 施加調理；標記不直接殺菌。
+2. 同區細胞在回合末自動吞噬。巨噬／嗜中性球對已標記來源效率更好；也可花 2 AP 主動吞噬，再安排移動。
+3. 點選細胞調度，或點區域招募。增援會預留容量、等待 1–2 次結算。
+4. 結束回合依序播放細胞、病原、組織與等待結果；可加速或跳過，結果相同。
+5. 清除感染且保住三區取得勝利。組織保全 ≥85% 三星、≥60% 二星。每回合未結算前可撤銷；本機自動續玩，設定內可匯出／匯入。
 
-TypeScript＋Vite＋React，純規則引擎、資料驅動內容、事件動畫、版本化本機存檔。電腦與手機同等重要，預定以 GitHub Pages 部署。
+百科可隨時查閱全部九種角色、六種病原、機制來源與簡化範圍。
 
-目前尚未建立程式專案，安裝／執行／驗證指令會在初始化後依實際 package scripts 補上。正式動畫由獨立物件與素材完成，概念圖不直接作為整張遊戲畫面。
+## 文件與證據
+
+- [規格入口](AGENTS.md)／[主規格](docs/Immuminati-spec.md)／[C 美術規格](docs/art-direction/C-art-and-animation.md)
+- [實作、數值、存檔與擴充指南](docs/IMPLEMENTATION.md)
+- [素材來源、完成狀態與動畫映射](docs/ART-MANIFEST.md)
+- [實際驗證結果與限制](docs/VALIDATION.md)
+- [桌面畫面](docs/evidence/desktop-field.png)／[手機畫面](docs/evidence/mobile-field.png)
+- [桌面通關錄影](docs/evidence/desktop-m1.webm)／[手機通關錄影](docs/evidence/mobile-m1.webm)／[吞噬分支錄影](docs/evidence/engulf-branches.webm)
+
+GitHub Pages base 為 `/Immuminati/`，main 的 Actions 會在驗證通過後發布 dist；需於 repository Pages 設定使用 GitHub Actions。遠端是否已發布請以驗證紀錄為準。
