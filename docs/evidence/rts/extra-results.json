@@ -1,0 +1,27 @@
+{
+  "browser": "154.0.8037.57",
+  "results": [
+    {
+      "name": "tab visibility",
+      "status": "unsupported",
+      "limitation": "headless browser did not expose hidden tab state"
+    },
+    {
+      "name": "controlled visibility event safely pauses/saves; no time catch-up",
+      "passed": true,
+      "method": "controlled document.hidden, not actual OS background"
+    },
+    {
+      "name": "reduced motion, keyboard focus wrap and Escape",
+      "passed": true
+    },
+    {
+      "name": "visible primary button targets at least 44px",
+      "passed": true
+    },
+    {
+      "name": "menu encyclopedia never overwrites existing continuation",
+      "passed": true
+    }
+  ]
+}

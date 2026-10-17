@@ -1,0 +1,32 @@
+{
+  "browser": "154.0.8037.57",
+  "viewport": {
+    "width": 1280,
+    "height": 1000
+  },
+  "rendering": "headless Chromium, SVG/CPU; not physical phone",
+  "results": [
+    "independent idle membrane phases >5 seconds",
+    "provider replacement leaves authoritative state and events unchanged",
+    "contact → continuous membrane wrap → moving internal vesicle → digest → clear",
+    "controlled intracellular survival retains viable cargo; not M1 common course",
+    "normal/reduced/skip display exact same authoritative state and events"
+  ],
+  "perf": [
+    {
+      "speed": "1",
+      "frames": 139,
+      "seconds": 2.5156999999999536,
+      "p50": 16.69999999999709,
+      "p95": 33.299999999995634
+    },
+    {
+      "speed": "4",
+      "frames": 59,
+      "seconds": 2.5380000000000944,
+      "p50": 33.30000000000291,
+      "p95": 83.30000000000291
+    }
+  ],
+  "errors": []
+}

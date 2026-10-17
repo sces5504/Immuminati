@@ -1,6 +1,7 @@
 # Immuminati 遊戲重建規格 v2.0
 
-更新：2026-10-17（Asia/Taipei） · 專案：[sces5504/Immuminati](https://github.com/sces5504/Immuminati)
+> 程式重建狀態另見 [RTS M1 實作與驗證紀錄](RTS-M1-DELIVERY.md)。本文件原有「本次僅更新文件」段落描述規格改版的歷史工作，後續程式交付以該紀錄及實際驗證為準。
+> 更新：2026-10-17（Asia/Taipei） · 專案：[sces5504/Immuminati](https://github.com/sces5504/Immuminati)
 
 **製作分工補充：先用簡單、可替換的佔位模型完成可玩 M1；使用者之後另派 agent 製作精緻美術。最終 C 畫質不阻擋第一階段交付，核心動作與辨識度仍需成立。**
 

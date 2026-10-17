@@ -1,9 +1,10 @@
 import { createRoot } from "react-dom/client";
-import TacticalApp from "./tactics/ui/TacticalApp";
-import "./styles/main.css";
+import App from "./rts/ui/App";
+import Preview from "./rts/presentation/Preview";
+import "./rts/ui/style.css";
 const root = createRoot(document.getElementById("root")!);
-if (import.meta.env.DEV && location.hash === "#animation-lab") {
-  void import("./tactics/dev/AnimationLab").then(({ default: Lab }) =>
-    root.render(<Lab />),
-  );
-} else root.render(<TacticalApp />);
+function render() {
+  root.render(location.hash === "#visual-lab" ? <Preview /> : <App />);
+}
+window.addEventListener("hashchange", render);
+render();
