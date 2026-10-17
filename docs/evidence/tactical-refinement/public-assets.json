@@ -1,0 +1,28 @@
+{
+  "source": "7d9c82c",
+  "url": "https://sces5504.github.io/Immuminati/?v=7d9c82c",
+  "htmlStatus": 200,
+  "scriptMatchesLocalBuild": true,
+  "assets": [
+    {
+      "path": "/Immuminati/assets/mark.svg",
+      "status": 200,
+      "bytes": 504
+    },
+    {
+      "path": "/Immuminati/assets/index-Bz__LxSi.js",
+      "status": 200,
+      "bytes": 325752
+    },
+    {
+      "path": "/Immuminati/assets/three-BZvNXzUD.js",
+      "status": 200,
+      "bytes": 498378
+    },
+    {
+      "path": "/Immuminati/assets/index-DSd6G-bR.css",
+      "status": 200,
+      "bytes": 80442
+    }
+  ]
+}

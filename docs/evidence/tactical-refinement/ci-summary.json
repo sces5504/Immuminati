@@ -1,0 +1,52 @@
+{
+  "source": "7d9c82c",
+  "run": 39013892747,
+  "url": "https://github.com/sces5504/Immuminati/actions/runs/39013892747",
+  "conclusion": "success",
+  "verify": "success",
+  "deploy": "success",
+  "unitTests": 33,
+  "typecheck": true,
+  "build": true,
+  "browserCheckCount": 24,
+  "browserChecks": [
+    "desktop: zero-tick legacy imports can resume without restarting",
+    "desktop: independent 3D idle without rule mutation",
+    "desktop: 44px primary controls and no horizontal overflow",
+    "desktop: marking, duplicate input, delayed recruitment and planning undo",
+    "desktop: grab-map drag follows mouse/touch across rotation and zoom without issuing orders [",
+    "desktop: camera independent of rules, pointer picking, spatial order and undo",
+    "desktop: real UI completes three-wave tactical M1 {",
+    "desktop: stable reload and legacy save retained",
+    "desktop: controlled 30-cell fixture supports crowded deployment, recruitment and reload",
+    "desktop: WebGL, assets and page console { pageErrors: 0, httpErrors: 0 }",
+    "mobile: zero-tick legacy imports can resume without restarting",
+    "mobile: independent 3D idle without rule mutation",
+    "mobile: 44px primary controls and no horizontal overflow",
+    "mobile: marking, duplicate input, delayed recruitment and planning undo",
+    "mobile: grab-map drag follows mouse/touch across rotation and zoom without issuing orders [",
+    "mobile: camera independent of rules, pointer picking, spatial order and undo",
+    "mobile: real UI completes three-wave tactical M1 {",
+    "mobile: stable reload and legacy save retained",
+    "mobile: controlled 30-cell fixture supports crowded deployment, recruitment and reload",
+    "mobile: WebGL, assets and page console { pageErrors: 0, httpErrors: 0 }",
+    "reload preserves paused plan undo",
+    "encyclopedia pauses real time and supports search/return",
+    "hidden page safely pauses instead of catching up damage",
+    "versioned export/import and invalid import preservation"
+  ],
+  "animationFixture": true,
+  "wins": {
+    "desktop": {
+      "preservation": 87.0,
+      "stars": 3.0,
+      "seconds": 62.0
+    },
+    "mobile": {
+      "preservation": 91.0,
+      "stars": 3.0,
+      "seconds": 46.6
+    }
+  },
+  "environment": "CI Chromium / SwiftShader; 1440x1000 desktop, 360x800 touch emulation; not physical mobile"
+}

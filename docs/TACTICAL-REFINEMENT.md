@@ -36,7 +36,9 @@
 - [吞噬分支結果](evidence/tactical-refinement/animation-results.json)／[錄影](evidence/tactical-refinement/engulf-branches.webm)：接觸、偽足包覆、吞入，清除後無胞內負荷；存活分支保留囊泡內 3 負荷。受控 dev fixture 不是 M1 病程或 M2 已完成的證據。
 - 首輪同戰鬥規則的本機實戰，桌面 86%、手機 89% 保全，均三星。[約 46 秒桌面剪輯](evidence/tactical-refinement/desktop-highlights.webm) 含原版畫面、鏡頭、吞噬與結算；此剪輯早於最後的標記／零步匯入 UI 修正，不能當作這兩項的驗證。各證據 commit 與剪輯區間見 [來源索引](evidence/tactical-refinement/evidence-index.json)。
 
-證據放在 `docs/evidence/tactical-refinement/`，不覆寫保留基準。最終版本 `7d9c82c` 的 [完整 CI／Pages 流程](https://github.com/sces5504/Immuminati/actions/runs/39013892747) 尚在進行；完整通關回歸與部署結果需待該流程通過後補入，早期失敗不列為通過。
+證據放在 `docs/evidence/tactical-refinement/`，不覆寫保留基準。最終版本 `7d9c82c` 的 [完整 CI／Pages 流程](https://github.com/sces5504/Immuminati/actions/runs/39013892747) 已成功：33 項規則測試、型別、建置、24 類瀏覽器檢查與吞噬分支檢查通過，部署成功。最終桌面／手機均由真實介面完成三波，組織保全分別 87%／91%，均三星。詳見 [CI 摘要](evidence/tactical-refinement/ci-summary.json)。
+
+[公開新版本](https://sces5504.github.io/Immuminati/?v=7d9c82c) 已核對 HTML 與本機建置的程式指紋一致；JS、Three.js、CSS 及圖示全為 HTTP 200，子路徑正確。CSS 檔仍為原版 `index-DSd6G-bR.css`。見 [公開資產檢查](evidence/tactical-refinement/public-assets.json)。公開站的額外完整瀏覽器 workflow 另由既有自動流程執行，不把其尚未完成的結果列為本次已通過項目。
 
 ## 保留的限制與下一步
 
