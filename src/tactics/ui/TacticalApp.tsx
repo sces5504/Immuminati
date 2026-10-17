@@ -4,8 +4,9 @@ import type {
   TacticalCommand,
   TacticalSave,
   TacticalState,
+  TacticalContent,
 } from "../domain/model";
-import { m1 } from "../content/m1";
+import { m1, tacticalScenarios } from "../content/m1";
 import { TacticalController } from "../application/controller";
 import {
   distance,
@@ -16,6 +17,7 @@ import {
   validateTactical,
 } from "../engine/simulation";
 import {
+  TACTICS_KEY,
   exportTactical,
   parseTactical,
   readTactical,
@@ -45,9 +47,19 @@ function time(tick: number) {
     .padStart(2, "0")}:${(s % 60).toString().padStart(2, "0")}`;
 }
 export default function TacticalApp() {
-  const [boot] = useState(() => readTactical(m1));
-  const [controller] = useState(() => {
-    const ctrl = new TacticalController(m1, boot.save);
+  const [boot] = useState(() => {
+    let content = m1;
+    try {
+      const id = JSON.parse(localStorage.getItem(TACTICS_KEY) ?? "null")?.state
+        ?.scenario;
+      content = tacticalScenarios[id] ?? m1;
+    } catch {
+      /* readTactical reports malformed saves without replacing them. */
+    }
+    return { content, ...readTactical(content) };
+  });
+  const [controller, setController] = useState(() => {
+    const ctrl = new TacticalController(boot.content, boot.save);
     if (!boot.save)
       ctrl.save.settings.reduced = matchMedia(
         "(prefers-reduced-motion: reduce)",
@@ -55,11 +67,12 @@ export default function TacticalApp() {
     ctrl.save.paused = true;
     return ctrl;
   });
+  const content = controller.content;
   const [snapshot, setSnapshot] = useState(() => controller.snapshot());
   const [home, setHome] = useState(true);
   const homeRef = useRef(true);
   const [selected, setSelected] = useState<string>();
-  const [region, setRegion] = useState("a");
+  const [region, setRegion] = useState(boot.content.fields[0].id);
   const [mode, setMode] = useState<"command" | "mark" | "move">("command");
   const [modal, setModal] = useState<Modal>(null);
   const [entry, setEntry] = useState("");
@@ -134,11 +147,11 @@ export default function TacticalApp() {
       }
       if (selected && s.cells.some((u) => u.id === selected)) {
         if (command({ type: "move", cell: selected, point: pick.point })) {
-          setRegion(fieldOf(pick.point, m1).id);
+          setRegion(fieldOf(pick.point, content).id);
           setMode("command");
         }
       } else {
-        setRegion(fieldOf(pick.point, m1).id);
+        setRegion(fieldOf(pick.point, content).id);
         setSelected(undefined);
       }
     }
@@ -149,7 +162,7 @@ export default function TacticalApp() {
       const view = new BattleScene(
         host.current!,
         canvas.current!,
-        m1,
+        content,
         () => ({ ...input.current, state: controller.save.state }),
         (p) => pickRef.current(p),
       );
@@ -168,7 +181,8 @@ export default function TacticalApp() {
   useEffect(() => {
     let previous = performance.now(),
       accumulator = 0,
-      raf = 0;
+      raf = 0,
+      lastSavedTick = controller.save.state.tick;
     const frame = (now: number) => {
       const dt = Math.min(0.5, (now - previous) / 1000);
       previous = now;
@@ -185,10 +199,11 @@ export default function TacticalApp() {
           steps++;
         }
         if (steps) {
-          update(
-            controller.save.state.tick % 25 === 0 ||
-              !!controller.save.state.result,
-          );
+          const persist =
+            controller.save.state.tick - lastSavedTick >= 25 ||
+            !!controller.save.state.result;
+          if (persist) lastSavedTick = controller.save.state.tick;
+          update(persist);
         }
       } else accumulator = 0;
       raf = requestAnimationFrame(frame);
@@ -236,13 +251,30 @@ export default function TacticalApp() {
       update(true);
     }
   }, [modal, controller]);
-  function start(fresh = true) {
+  function start(fresh = true, id = content.id) {
+    const nextContent = tacticalScenarios[id];
+    if (!nextContent) return;
+    if (fresh && id !== content.id) {
+      const next = new TacticalController(nextContent);
+      next.save.settings = { ...controller.save.settings };
+      next.save.read = [...controller.save.read];
+      next.save.records = structuredClone(controller.save.records);
+      setController(next);
+      setSnapshot(next.snapshot());
+      setStorage(writeTactical(next.save));
+      homeRef.current = false;
+      setHome(false);
+      setSelected(undefined);
+      setRegion(nextContent.fields[0].id);
+      setMenu(false);
+      return;
+    }
     if (fresh) controller.restart((controller.save.state.seed % 3) + 1);
     controller.pause(true);
     homeRef.current = false;
     setHome(false);
     setSelected(undefined);
-    setRegion("a");
+    setRegion(content.fields[0].id);
     setMode("command");
     setNotice("");
     setMenu(false);
@@ -276,14 +308,30 @@ export default function TacticalApp() {
   async function importFile(f: File) {
     try {
       if (f.size > 2_000_000) throw new Error("檔案超過 2 MB。");
-      const save = parseTactical(await f.text(), m1);
+      const text = await f.text();
+      let id: string | undefined;
+      try {
+        id = JSON.parse(text)?.state?.scenario;
+      } catch {
+        /* parser supplies a useful error */
+      }
+      const nextContent = id ? tacticalScenarios[id] : undefined;
+      const save = parseTactical(text, nextContent ?? content);
       save.paused = true;
-      controller.save = save;
+      if (nextContent && nextContent.id !== content.id) {
+        const next = new TacticalController(nextContent, save);
+        setController(next);
+        setSnapshot(next.snapshot());
+        setStorage(writeTactical(save));
+      } else {
+        controller.save = save;
+        update(true);
+      }
       homeRef.current = true;
       setHome(true);
       setModal(null);
       setSelected(undefined);
-      update(true);
+      setRegion((nextContent ?? content).fields[0].id);
       setNotice("已匯入新版存檔，繼續遊玩時先維持戰術暫停。");
     } catch (e) {
       setNotice((e as Error).message);
@@ -292,7 +340,7 @@ export default function TacticalApp() {
   const s = snapshot.state,
     cell = s.cells.find((u) => u.id === selected),
     colony = s.colonies.find((p) => p.id === selected),
-    field = m1.fields.find((f) => f.id === region)!;
+    field = content.fields.find((f) => f.id === region) ?? content.fields[0];
   const paused = snapshot.paused,
     result = s.result,
     burden = loadOf(s),
@@ -306,7 +354,7 @@ export default function TacticalApp() {
   const remainingWave = Math.max(0, Math.ceil((s.nextWaveAt - s.tick) * 0.2));
   const isMarked = !!colony && colony.markedUntil > s.tick;
   const markError = colony
-    ? validateTactical(s, { type: "mark", target: colony.id }, m1)
+    ? validateTactical(s, { type: "mark", target: colony.id }, content)
     : undefined;
   return (
     <div
@@ -324,7 +372,7 @@ export default function TacticalApp() {
         />
         {!home && (
           <div className="t-world-labels">
-            {m1.fields.map((f) => (
+            {content.fields.map((f) => (
               <button
                 key={f.id}
                 data-world-label={`field-${f.id}`}
@@ -355,9 +403,11 @@ export default function TacticalApp() {
                 data-world-label={u.id}
                 className={`t-cell-label ${selected === u.id ? "is-chosen" : ""}`}
                 onClick={() => pick({ type: "cell", id: u.id })}
-                aria-label={`場上${m1.cells[u.kind].name} ${u.id}`}
+                aria-label={`場上${content.cells[u.kind].name} ${u.id}`}
               >
-                <span>{selected === u.id ? m1.cells[u.kind].name : "◇"}</span>
+                <span>
+                  {selected === u.id ? content.cells[u.kind].name : "◇"}
+                </span>
                 {s.internal.some((p) => p.host === u.id) && (
                   <small>胞內存活</small>
                 )}
@@ -439,7 +489,7 @@ export default function TacticalApp() {
               >
                 開始 M1 <span>↗</span>
               </button>
-              {boot.save || s.tick > 0 ? (
+              {boot.save || s.tick > 0 || s.eventId > 1 ? (
                 <button className="t-outline" onClick={() => start(false)}>
                   繼續防線 →
                 </button>
@@ -463,9 +513,9 @@ export default function TacticalApp() {
               {scenarioCards.map((c) => (
                 <button
                   key={c.id}
-                  className={c.ready ? "ready" : ""}
+                  className={tacticalScenarios[c.id] ? "ready" : ""}
                   onClick={() => {
-                    if (c.ready) start(true);
+                    if (tacticalScenarios[c.id]) start(true, c.id);
                     else {
                       setUnavailable(c.id);
                       setModal("unavailable");
@@ -473,11 +523,11 @@ export default function TacticalApp() {
                   }}
                 >
                   <small>
-                    {c.index} / {c.ready ? "可玩" : "開發中"}
+                    {c.index} / {tacticalScenarios[c.id] ? "可玩" : "開發中"}
                   </small>
                   <b>{c.name}</b>
                   <span>
-                    {c.subtitle} {c.ready ? "↗" : "→"}
+                    {c.subtitle} {tacticalScenarios[c.id] ? "↗" : "→"}
                   </span>
                 </button>
               ))}
@@ -492,13 +542,15 @@ export default function TacticalApp() {
                 ‹
               </button>
               <div>
-                <span>M1 · 莢膜防線</span>
-                <b>肺炎鏈球菌</b>
+                <span>
+                  {content.id.toUpperCase()} · {content.title}
+                </span>
+                <b>{content.pathogen.name}</b>
               </div>
             </div>
             <div className="t-hud-stat">
               <small>組織保全</small>
-              <b className={preservation(s) < 60 ? "warn" : ""}>
+              <b className={preservation(s) < content.stars[1] ? "warn" : ""}>
                 {preservation(s)}
                 <i>%</i>
               </b>
@@ -508,14 +560,14 @@ export default function TacticalApp() {
             </div>
             <div className="t-hud-stat t-energy">
               <small>
-                反應資源 <span>每 8 秒 +1</span>
+                反應資源 <span>每 {content.energyEvery * 0.2} 秒 +1</span>
               </small>
               <b>
                 {s.energy}
-                <i>/ {m1.energyMax}</i>
+                <i>/ {content.energyMax}</i>
               </b>
               <span className="t-energy-dots">
-                {Array.from({ length: m1.energyMax }, (_, i) => (
+                {Array.from({ length: content.energyMax }, (_, i) => (
                   <i key={i} className={i < s.energy ? "full" : ""} />
                 ))}
               </span>
@@ -523,7 +575,7 @@ export default function TacticalApp() {
             <div className="t-time">
               <b>{time(s.tick)}</b>
               <small>
-                感染波次 {s.wave + 1} / {m1.waves.length}
+                感染波次 {s.wave + 1} / {content.waves.length}
               </small>
             </div>
             <button
@@ -540,9 +592,9 @@ export default function TacticalApp() {
           </section>
           <div className="t-objective">
             <span className="t-kicker">DEFEND THE ALVEOLI</span>
-            <h2>守住組織，清除三波感染。</h2>
+            <h2>守住組織，清除 {content.waves.length} 波感染。</h2>
             <div className="t-wave-pips">
-              {m1.waves.map((w, i) => (
+              {content.waves.map((w, i) => (
                 <span className={s.wave >= i ? "active" : ""} key={w.label}>
                   <i />
                   {i + 1}
@@ -552,7 +604,7 @@ export default function TacticalApp() {
                 活感染負荷 <b>{burden}</b>
               </small>
             </div>
-            {burden === 0 && s.wave < m1.waves.length - 1 ? (
+            {burden === 0 && s.wave < content.waves.length - 1 ? (
               <button
                 className="t-next-wave"
                 onClick={() => command({ type: "advance" })}
@@ -561,14 +613,14 @@ export default function TacticalApp() {
               </button>
             ) : (
               <p>
-                {s.wave < m1.waves.length - 1
-                  ? `下一波約 ${remainingWave} 秒 · ${m1.waves[s.wave + 1].label}`
+                {s.wave < content.waves.length - 1
+                  ? `下一波約 ${remainingWave} 秒 · ${content.waves[s.wave + 1].label}`
                   : "最後一波 · 處理所有活感染來源"}
               </p>
             )}
             <button
               className="t-objective-detail"
-              onClick={() => encyclopedia("pneumococcus")}
+              onClick={() => encyclopedia(content.pathogen.id)}
             >
               案例與機制 ↗
             </button>
@@ -596,7 +648,7 @@ export default function TacticalApp() {
               <span>
                 募集增援
                 <small>
-                  {s.cells.length + s.arrivals.length} / {m1.maxCells} 族群
+                  {s.cells.length + s.arrivals.length} / {content.maxCells} 族群
                 </small>
               </span>
             </button>
@@ -622,7 +674,7 @@ export default function TacticalApp() {
                   value={region}
                   onChange={(e) => setRegion(e.target.value)}
                 >
-                  {m1.fields.map((f) => (
+                  {content.fields.map((f) => (
                     <option key={f.id} value={f.id}>
                       {f.name} · {occupied(s, f.id)}/{f.capacity}
                     </option>
@@ -630,9 +682,9 @@ export default function TacticalApp() {
                 </select>
               </label>
               {(["neutrophil", "macrophage"] as CellType[]).map((kind) => {
-                const def = m1.cells[kind],
+                const def = content.cells[kind],
                   cmd: TacticalCommand = { type: "recruit", kind, region };
-                const error = validateTactical(s, cmd, m1);
+                const error = validateTactical(s, cmd, content);
                 return (
                   <button
                     className="t-recruit-option"
@@ -670,8 +722,8 @@ export default function TacticalApp() {
                 <div key={a.id}>
                   <i>◷</i>
                   <span>
-                    {m1.cells[a.kind].short} →{" "}
-                    {m1.fields.find((f) => f.id === a.region)!.name}
+                    {content.cells[a.kind].short} →{" "}
+                    {content.fields.find((f) => f.id === a.region)!.name}
                   </span>
                   <b>{Math.ceil((a.at - s.tick) * 0.2)}s</b>
                 </div>
@@ -736,14 +788,14 @@ export default function TacticalApp() {
                   </div>
                   <div className="t-selection-info">
                     <small>
-                      {m1.fields.find((f) => f.id === cell.region)!.name} ·{" "}
+                      {content.fields.find((f) => f.id === cell.region)!.name} ·{" "}
                       {cell.order.type === "attack"
                         ? "追蹤菌群"
                         : cell.path.length
                           ? "移動中"
                           : "自動巡防"}
                     </small>
-                    <h2>{m1.cells[cell.kind].name}</h2>
+                    <h2>{content.cells[cell.kind].name}</h2>
                     <p>
                       {mode === "move"
                         ? "點地面指定位置"
@@ -818,7 +870,7 @@ export default function TacticalApp() {
                                   cell: u.id,
                                   target: colony.id,
                                 },
-                                m1,
+                                content,
                               ),
                           );
                         if (candidate) {
@@ -874,10 +926,10 @@ export default function TacticalApp() {
                   data-cell-id={u.id}
                   className={selected === u.id ? "active" : ""}
                   onClick={() => pick({ type: "cell", id: u.id })}
-                  aria-label={`選取${m1.cells[u.kind].name} ${u.id}`}
+                  aria-label={`選取${content.cells[u.kind].name} ${u.id}`}
                 >
                   <CellArt kind={u.kind} />
-                  <small>{m1.cells[u.kind].short}</small>
+                  <small>{content.cells[u.kind].short}</small>
                   {u.path.length > 0 && <i>↗</i>}
                 </button>
               ))}
@@ -918,10 +970,12 @@ export default function TacticalApp() {
           {result && (
             <section
               className={`t-result ${result.type}`}
-              aria-label="M1 結算"
+              aria-label={`${content.id.toUpperCase()} 結算`}
               data-testid="tactical-result"
             >
-              <span className="t-kicker">FIELD REPORT · M1</span>
+              <span className="t-kicker">
+                FIELD REPORT · {content.id.toUpperCase()}
+              </span>
               <div className="t-result-stars">
                 {result.stars ? "★".repeat(result.stars) : "⌁"}
               </div>
@@ -940,7 +994,7 @@ export default function TacticalApp() {
                 </span>
               </div>
               <small>
-                三星 ≥85% · 二星 ≥60%
+                三星 ≥{content.stars[0]}% · 二星 ≥{content.stars[1]}%
                 <br />
                 此為教學情境結果，不代表臨床治癒。
               </small>
@@ -1001,13 +1055,14 @@ export default function TacticalApp() {
                 4、8 秒後到場。預約先占容量。
               </li>
               <li>
-                <b>守住三波感染。</b>{" "}
-                菌群會繁殖、擴散並損傷組織；清場後可提前迎擊。三區都要存活。
+                <b>守住 {content.waves.length} 波感染。</b>{" "}
+                菌群會繁殖、擴散並損傷組織；清場後可提前迎擊。所有防區都要存活。
               </li>
             </ol>
             <p>
-              反應資源每 8 秒恢復 1，上限 8。每區最多 3 個族群，全場最多
-              7。時間與數量為遊戲抽象。
+              反應資源每 {content.energyEvery * 0.2} 秒恢復 1，上限{" "}
+              {content.energyMax}。 各防區容量見場上標記，全場最多{" "}
+              {content.maxCells} 個族群。時間與數量為遊戲抽象。
             </p>
             <button className="t-primary" onClick={() => setModal(null)}>
               回到戰場

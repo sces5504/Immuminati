@@ -5,6 +5,7 @@ import type {
   TacticalState,
 } from "../domain/model";
 import { occupied, preservation, loadOf } from "../engine/simulation";
+import { tacticalScenarios } from "../content/m1";
 import { entries } from "../../content/encyclopedia";
 export const TACTICS_KEY = "immuminati:tactics:v2";
 const num = (max = 100000) => z.number().finite().min(0).max(max);
@@ -205,7 +206,9 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
   }
   if (
     save.read.some((id) => !entries.some((e) => e.id === id)) ||
-    Object.keys(save.records).some((id) => id !== c.id)
+    Object.keys(save.records).some(
+      (id) => id !== c.id && !tacticalScenarios[id],
+    )
   )
     throw new Error("未知內容紀錄。");
   return save;

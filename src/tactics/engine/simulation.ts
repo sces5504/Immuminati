@@ -473,7 +473,7 @@ export function stepTactical(
       reason: lost
         ? "必要組織失守"
         : won
-          ? "三波感染來源均已清除"
+          ? `${c.waves.length} 波感染來源均已清除`
           : "防禦時間內未能控制感染",
       preservation: rate,
       stars:

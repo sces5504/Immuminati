@@ -41,13 +41,14 @@ try {
     },
   });
   const page = await ctx.newPage();
+  page.setDefaultTimeout(20000);
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(url);
   await page.waitForTimeout(500);
   await page.getByRole("button", { name: "播放清除分支" }).click();
   await page.waitForTimeout(400);
-  await page.screenshot({ path: dir + "engulf-wrap.png" });
+  await page.screenshot({ path: dir + "engulf-clear.png" });
   await expect(page.getByTestId("lab-result")).toHaveText(
     "已清除；沒有活的胞內來源。",
     { timeout: 15000 },

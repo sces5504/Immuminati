@@ -228,6 +228,27 @@ describe("spatial fixed-step tactics", () => {
       b = defend(2, "reinforce").s;
     expect(a).toEqual(b);
   });
+  it("existing mechanics accept another content ID, wave count and star thresholds", () => {
+    const c = copy(m1);
+    c.id = "content-only-fixture";
+    c.waves = [c.waves[0]];
+    c.stars = [95, 90];
+    const ctrl = new TacticalController(c);
+    expect(ctrl.save.state.scenario).toBe(c.id);
+    expect(
+      parseTactical(JSON.stringify(ctrl.snapshot()), c).state.scenario,
+    ).toBe(c.id);
+    ctrl.save.state.colonies = [];
+    ctrl.save.state.health = { a: 94, b: 94, c: 94 };
+    ctrl.pause(false);
+    ctrl.step();
+    expect(ctrl.save.state.result?.type).toBe("victory");
+    expect(ctrl.save.state.result?.stars).toBe(2);
+    expect(ctrl.save.state.result?.reason).toContain("1 波");
+    expect(parseTactical(JSON.stringify(ctrl.snapshot()), c).state).toEqual(
+      ctrl.save.state,
+    );
+  });
   it("bounded scenarios never lose capacity, loads or energy invariants", () => {
     for (let seed = 1; seed <= 15; seed++) {
       let s = createTactical(m1, seed);

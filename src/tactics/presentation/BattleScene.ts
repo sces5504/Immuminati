@@ -129,11 +129,11 @@ export class BattleScene {
       ? String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL))
       : "";
     const software = /swiftshader|llvmpipe|software/i.test(rendererName);
-    this.frameInterval = software ? 1000 / 20 : 0;
+    this.frameInterval = software ? 1000 / 10 : 0;
     this.renderer.setPixelRatio(
-      software ? 0.75 : Math.min(devicePixelRatio, 1.5),
+      software ? 0.6 : Math.min(devicePixelRatio, 1.5),
     );
-    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.enabled = !software;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;

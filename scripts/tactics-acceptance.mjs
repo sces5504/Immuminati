@@ -93,6 +93,7 @@ try {
       if (r.status() >= 400)
         httpErrors.push({ url: r.url(), status: r.status() });
     });
+    page.setDefaultTimeout(20000);
     activePage = page;
     await page.goto(url, { waitUntil: "networkidle" });
     await expect(page.locator(".t-scene-error")).toHaveCount(0);
@@ -218,7 +219,7 @@ try {
           iterations,
           (await save(page)).state.tick,
         );
-      await page.waitForTimeout(800);
+      await page.waitForTimeout(2600);
       if (await page.getByTestId("tactical-result").count()) break;
       await pause(page);
       let state = (await save(page)).state;
@@ -287,6 +288,7 @@ try {
     viewport: { width: 1280, height: 900 },
   });
   const page = await ctx.newPage();
+  page.setDefaultTimeout(20000);
   await page.goto(url);
   await page.getByRole("button", { name: "開始 M1", exact: true }).click();
   const p = (await save(page)).state.colonies[0];
