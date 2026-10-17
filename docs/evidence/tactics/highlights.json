@@ -1,0 +1,15 @@
+{
+  "source": "desktop-m1.webm",
+  "sourceCI": "https://github.com/sces5504/Immuminati/actions/runs/38991018147",
+  "sourceCommit": "7d0c1ca4af25ee1adb730b8ef4c7e4d9978385af",
+  "edited": true,
+  "speed": "original, 25 fps",
+  "segmentsSeconds": [
+    [4, 8],
+    [14, 26],
+    [42, 54],
+    [65, 75],
+    [94, 111]
+  ],
+  "purpose": "Idle, marking/recruitment, contact/engulfment, dispatch and three-wave result. The full uncut desktop and mobile recordings are retained."
+}

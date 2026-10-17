@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "fixture": "Completed authoritative state from CI d0e67d7, replayed only to inspect current presentation",
+  "checks": [
+    "software quality survives home/pause React updates",
+    "completed authoritative save displays animated report",
+    "no damage or resource mutation from CSS entry animation"
+  ],
+  "presentationCommit": "7d0c1ca4af25ee1adb730b8ef4c7e4d9978385af"
+}

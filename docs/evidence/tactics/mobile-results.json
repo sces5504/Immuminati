@@ -1,0 +1,67 @@
+{
+  "browser": "141.0.7390.37",
+  "url": "http://127.0.0.1:4175/Immuminati/",
+  "viewports": {
+    "mobile": [360, 800]
+  },
+  "renderer": "Headless Chromium WebGL / SwiftShader; not physical mobile GPU",
+  "results": [
+    {
+      "name": "mobile: independent 3D idle without rule mutation",
+      "passed": true
+    },
+    {
+      "name": "mobile: 44px primary controls and no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile: marking, duplicate input, reserved recruitment and planning undo",
+      "passed": true
+    },
+    {
+      "name": "mobile: camera independent of rules, pointer picking, spatial order and undo",
+      "passed": true
+    },
+    {
+      "name": "mobile: real UI completes three-wave tactical M1",
+      "passed": true,
+      "detail": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 89,
+        "stars": 3,
+        "seconds": 51.800000000000004
+      }
+    },
+    {
+      "name": "mobile: stable reload and legacy save retained",
+      "passed": true
+    },
+    {
+      "name": "mobile: WebGL, assets and page console",
+      "passed": true,
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "reload preserves paused plan undo",
+      "passed": true
+    },
+    {
+      "name": "encyclopedia pauses real time and supports search/return",
+      "passed": true
+    },
+    {
+      "name": "hidden page safely pauses instead of catching up damage",
+      "passed": true
+    },
+    {
+      "name": "versioned export/import and invalid import preservation",
+      "passed": true
+    }
+  ],
+  "sourceCommit": "4eeea069dae5ee1644ada4585f86093a9db1900f",
+  "note": "Supplemental local run before camera synchronization refinement; final dual-device acceptance is browser-results.json."
+}

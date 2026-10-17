@@ -1,0 +1,105 @@
+{
+  "browser": "141.0.7390.37",
+  "url": "https://sces5504.github.io/Immuminati/",
+  "viewports": {
+    "desktop": [1440, 1000],
+    "mobile": [360, 800]
+  },
+  "renderer": "Headless Chromium WebGL / SwiftShader; not physical mobile GPU",
+  "results": [
+    {
+      "name": "desktop: independent 3D idle without rule mutation",
+      "passed": true
+    },
+    {
+      "name": "desktop: 44px primary controls and no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "desktop: marking, duplicate input, reserved recruitment and planning undo",
+      "passed": true
+    },
+    {
+      "name": "desktop: camera independent of rules, pointer picking, spatial order and undo",
+      "passed": true
+    },
+    {
+      "name": "desktop: real UI completes three-wave tactical M1",
+      "passed": true,
+      "detail": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 58.2
+      }
+    },
+    {
+      "name": "desktop: stable reload and legacy save retained",
+      "passed": true
+    },
+    {
+      "name": "desktop: WebGL, assets and page console",
+      "passed": true,
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "mobile: independent 3D idle without rule mutation",
+      "passed": true
+    },
+    {
+      "name": "mobile: 44px primary controls and no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile: marking, duplicate input, reserved recruitment and planning undo",
+      "passed": true
+    },
+    {
+      "name": "mobile: camera independent of rules, pointer picking, spatial order and undo",
+      "passed": true
+    },
+    {
+      "name": "mobile: real UI completes three-wave tactical M1",
+      "passed": true,
+      "detail": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 91,
+        "stars": 3,
+        "seconds": 46.2
+      }
+    },
+    {
+      "name": "mobile: stable reload and legacy save retained",
+      "passed": true
+    },
+    {
+      "name": "mobile: WebGL, assets and page console",
+      "passed": true,
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "reload preserves paused plan undo",
+      "passed": true
+    },
+    {
+      "name": "encyclopedia pauses real time and supports search/return",
+      "passed": true
+    },
+    {
+      "name": "hidden page safely pauses instead of catching up damage",
+      "passed": true
+    },
+    {
+      "name": "versioned export/import and invalid import preservation",
+      "passed": true
+    }
+  ]
+}

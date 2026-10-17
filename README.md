@@ -45,6 +45,7 @@ Production preview 預設在 `http://localhost:4173/Immuminati/`。瀏覽器腳�
 - [ImmuneQuest 參考檢視](docs/art-direction/ImmuneQuest-reference-review.md)
 - [原始六關內容規格](docs/Immuminati-spec.md)
 - [新版桌面畫面](docs/evidence/tactics/desktop-field.png)／[手機畫面](docs/evidence/tactics/mobile-field.png)
+- [實戰短剪輯](docs/evidence/tactics/m1-highlights.webm)
 - [桌面錄影](docs/evidence/tactics/desktop-m1.webm)／[手機錄影](docs/evidence/tactics/mobile-m1.webm)／[立體吞噬分支](docs/evidence/tactics/engulf-branches.webm)
 
 `src/tactics` 分離 domain、content、engine、application、presentation、persistence、ui。引擎固定步進且無瀏覽器相依，Three.js 展示層不計算傷害或扣資源。正式立體幾何及材質為本專案原創，不使用參考網站的角色或截圖素材。
