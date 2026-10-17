@@ -22,6 +22,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Verify published clarity controls on desktop and mobile
+        run: npm run test:clarity
+        env:
+          TARGET_URL: https://sces5504.github.io/Immuminati/
+          EVIDENCE_DIR: ../docs/evidence/live-clarity/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-clarity-evidence
+          path: docs/evidence/live-clarity/
       - name: Play published tactical M1 on desktop and mobile
         run: npm run test:browser
         env:

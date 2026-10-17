@@ -2665,3 +2665,239 @@
     bottom: 286px;
   }
 }
+/* v2.4: quiet battlefield; full labels remain an explicit accessibility option. */
+.t-world-labels.is-minimal .t-region-connectors {
+  display: none;
+}
+.t-world-labels.is-minimal .t-field-label {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.t-world-labels.is-minimal .t-field-label > span {
+  display: none;
+}
+.t-world-labels.is-minimal .t-field-label > b {
+  border: 0;
+  background: #263c4766;
+  font-size: 10px;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.t-world-labels.is-minimal .t-cell-label,
+.t-world-labels.is-minimal .t-colony-label,
+.t-world-labels.is-minimal .t-host-label {
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  outline: none;
+  backdrop-filter: none;
+  color: transparent;
+}
+.t-world-labels.is-minimal .t-cell-label > *,
+.t-world-labels.is-minimal .t-colony-label > *,
+.t-world-labels.is-minimal .t-portal-label {
+  visibility: hidden;
+}
+.t-world-labels.is-minimal .t-host-label {
+  font-size: 0;
+}
+.t-world-labels.is-minimal button:focus-visible {
+  outline: 2px solid #fff0ba;
+}
+.t-objective {
+  width: 206px;
+  padding: 0;
+}
+.t-objective-toggle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 44px;
+  width: 100%;
+  padding: 8px 12px;
+  gap: 3px;
+  color: #dfebed;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  font-size: 12px;
+}
+.t-objective-toggle small {
+  color: #bac8cf;
+  font-size: 10px;
+}
+.t-objective-body {
+  padding: 12px;
+}
+.t-objective.is-collapsed .t-objective-body,
+.t-objective.is-collapsed > p {
+  display: none;
+}
+.t-objective > p,
+.t-objective > .t-next-wave {
+  margin: 6px 10px 10px;
+}
+.t-panel-dismiss {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: default;
+}
+.t-recruit-card {
+  z-index: 22;
+}
+.t-antibody-card p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #d5e1e6;
+}
+.t-antibody-card > button {
+  min-height: 44px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+.t-antibody-recruit {
+  color: #dce9e9;
+  border: 1px solid #bdd6db44;
+  background: #2a4055;
+  border-radius: 6px;
+}
+.t-antibody-card > small {
+  display: block;
+  line-height: 1.6;
+}
+.t-command-dock.is-empty .t-dock-main {
+  grid-template-columns: 42px minmax(0, 1fr) 100px 32px;
+  min-height: 80px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  column-gap: 10px;
+}
+.t-command-dock.is-empty .t-dock-emblem {
+  grid-column: 1;
+  grid-row: 1;
+}
+.t-command-dock.is-empty .t-selection-info {
+  grid-column: 2;
+  grid-row: 1;
+}
+.t-command-dock.is-empty .t-context-actions {
+  grid-column: 3;
+  grid-row: 1;
+  margin: 0;
+}
+.t-command-dock.is-empty .t-context-actions button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 7px;
+  font-size: 11px;
+}
+.t-command-dock.is-empty .t-undo {
+  grid-column: 4;
+  grid-row: 1;
+  align-self: center;
+}
+@media (max-width: 760px) {
+  .t-objective {
+    width: 158px;
+  }
+  .t-objective-toggle {
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+  .t-objective-toggle small {
+    font-size: 8px;
+  }
+  .t-objective.is-expanded {
+    max-height: 260px;
+    overflow-y: auto;
+  }
+  .t-field-tools button {
+    width: 112px;
+    min-height: 44px;
+    padding: 6px 8px;
+  }
+  .t-field-tools button b {
+    font-size: 16px;
+  }
+  .t-field-tools button small {
+    font-size: 8px;
+  }
+  .t-command-dock.is-empty .t-dock-main {
+    grid-template-columns: 28px minmax(0, 1fr) 56px 27px;
+    column-gap: 5px;
+    min-height: 76px;
+    padding: 7px 9px;
+  }
+  .t-command-dock.is-empty .t-dock-emblem {
+    width: 27px;
+    height: 34px;
+    font-size: 20px;
+  }
+  .t-command-dock.is-empty .t-selection-info h2 {
+    font-size: 16px;
+    margin: 3px 0;
+  }
+  .t-command-dock.is-empty .t-selection-info p {
+    font-size: 8px;
+  }
+  .t-command-dock.is-empty .t-context-actions button {
+    width: 56px;
+    font-size: 9px;
+  }
+  .t-command-dock.is-empty .t-context-actions button span {
+    display: block;
+  }
+  .tactical-root:has(.t-command-dock.is-empty) .t-event-ribbon {
+    bottom: 154px;
+  }
+}
+.t-command-dock.is-empty .t-dock-main {
+  display: grid;
+}
+.t-command-dock.is-empty .t-dock-emblem {
+  width: 42px;
+  height: 42px;
+  font-size: 26px;
+}
+@media (max-width: 760px) {
+  .t-command-dock.is-empty .t-dock-emblem {
+    width: 27px;
+    height: 34px;
+    font-size: 20px;
+  }
+}
+.t-command-dock.is-empty .t-selection-info p {
+  margin: 3px 0 0;
+  line-height: 1.5;
+}
+.t-command-dock.is-empty .t-selection-info h2 {
+  margin: 4px 0;
+}
+.t-command-dock.is-empty .t-selection-info > small {
+  display: block;
+  line-height: 1.3;
+}
+.t-command-dock.is-empty .t-selection-info > h2 {
+  line-height: 1.3;
+}

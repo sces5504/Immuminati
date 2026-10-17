@@ -1,3 +1,4 @@
+import { coat, coatings } from "./opsonization";
 import { populateTissue, syncTissueHealth } from "../content/anatomy";
 import type {
   Cell,
@@ -82,6 +83,8 @@ function wave(s: TacticalState, c: TacticalContent) {
       position: pos,
       load: group.load,
       markedUntil: 0,
+      complementUntil: 0,
+      antibodyUntil: 0,
       pathogen: c.pathogen.id,
     });
   }
@@ -150,10 +153,17 @@ export function validateTactical(
   c: TacticalContent,
 ): string | undefined {
   if (s.result) return "此局已結算，請重試。";
-  if (cmd.type === "mark") {
+  if (cmd.type === "mark" || cmd.type === "antibody") {
     const p = s.colonies.find((p) => p.id === cmd.target && p.load > 0);
     if (!p) return "此菌群已清除。";
-    if (p.markedUntil > s.tick) return "調理仍有效，請支援其他菌群。";
+    const coating = coatings(p, s.tick);
+    if (cmd.type === "antibody") {
+      if (coating.antibody) return "抗體仍附著於此菌群，請支援其他目標。";
+      if (s.immunity.antibodies < 1)
+        return "尚無可用抗體；需要 B 細胞接受活化並分化為漿細胞。";
+      return;
+    }
+    if (coating.complement) return "補體調理仍有效，請支援其他菌群。";
     if (!s.support) return "本案例的既存調理支援已用盡。";
     if (s.energy < c.markCost) return "反應資源不足，稍後會恢復。";
   } else if (cmd.type === "recruit") {
@@ -207,14 +217,25 @@ export function commandTactical(
     const p = s.colonies.find((p) => p.id === cmd.target)!;
     s.energy -= c.markCost;
     s.support--;
-    p.markedUntil = s.tick + c.markDuration;
-    p.opsonin = "c3b";
+    coat(p, "c3b", s.tick + c.markDuration);
     emit(
       s,
       "mark",
       p.position,
       "補體 C3b 已沉積；經補體受體促進吞噬，不直接裂解肺炎鏈球菌。",
       c.markDuration,
+      { target: p.id },
+    );
+  } else if (cmd.type === "antibody") {
+    const p = s.colonies.find((p) => p.id === cmd.target)!;
+    s.immunity.antibodies--;
+    coat(p, "antibody", s.tick + 30);
+    emit(
+      s,
+      "mark",
+      p.position,
+      "已指定漿細胞產生的抗體結合胞外菌，消耗 1 抗體；經 Fc 受體支援吞噬，不直接殺菌。",
+      30,
       { target: p.id },
     );
   } else if (cmd.type === "recruit") {
@@ -481,6 +502,8 @@ export function stepTactical(
             position: { x: f.center.x + 2, z: f.center.z - 2 },
             load: 2,
             markedUntil: 0,
+            complementUntil: 0,
+            antibodyUntil: 0,
           };
           spreading.push(to);
         }

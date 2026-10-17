@@ -9,6 +9,7 @@ function sample(survives = false) {
   s.colonies = [s.colonies[0]];
   s.colonies[0].load = 3;
   s.colonies[0].markedUntil = 100;
+  s.colonies[0].complementUntil = 100;
   s.cells = [s.cells[0]];
   s.cells[0].position = {
     x: s.colonies[0].position.x - 2,

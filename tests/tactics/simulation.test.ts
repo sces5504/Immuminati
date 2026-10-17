@@ -148,6 +148,8 @@ describe("spatial fixed-step tactics", () => {
   it("allows crowded-region movement, attacks, recruitment, arrival and saves beyond old limits", () => {
     const ctrl = new TacticalController(m1);
     const s = ctrl.save.state;
+    // This fixture measures manual crowded deployment, not autonomous redistribution.
+    s.immunity.autoSeek = false;
     for (let i = 0; i < 27; i++)
       s.cells.push({
         ...copy(s.cells[0]),

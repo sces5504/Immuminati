@@ -131,7 +131,9 @@ try {
     });
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.deepEqual((await save(page)).state, pristine.state);
-    assert.equal((await save(page)).rules, "2.3");
+    assert.equal((await save(page)).rules, "2.4");
+    if ((await save(page)).state.immunity.autoSeek)
+      await page.getByTestId("autoseek").click();
     record(name + ": zero-tick legacy imports can resume without restarting");
     await page.screenshot({ path: dir + name + "-field.png" });
     console.log("CHECK", name, "idle capture");
@@ -184,9 +186,11 @@ try {
     await page.getByRole("combobox", { name: "增援防區" }).selectOption("c");
     await page.locator('[data-recruit="neutrophil"]').click();
     assert.equal((await save(page)).state.arrivals.length, 1);
+    await page.getByRole("button", { name: "關閉增援面板" }).click();
     await page.getByRole("button", { name: "撤銷暫停指令" }).click();
     assert.equal((await save(page)).state.energy, 3);
     assert.equal((await save(page)).state.arrivals.length, 0);
+    await page.getByRole("button", { name: "開啟募集增援" }).click();
     await page.locator('[data-recruit="neutrophil"]').click();
     await page.getByRole("button", { name: "關閉增援面板" }).click();
     record(

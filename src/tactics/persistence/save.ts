@@ -1,3 +1,4 @@
+import { coatings } from "../engine/opsonization";
 import { populateTissue } from "../content/anatomy";
 import { z } from "zod";
 import type {
@@ -78,6 +79,8 @@ const battle = z
             load: integer(1000),
             markedUntil: integer(10000),
             opsonin: z.enum(["c3b", "antibody"]).optional(),
+            complementUntil: integer(10000).optional(),
+            antibodyUntil: integer(10000).optional(),
             pathogen: id,
           })
           .strict(),
@@ -206,12 +209,13 @@ const battle = z
 const schema = z
   .object({
     schema: z.literal(2),
-    rules: z.enum(["2.0", "2.1", "2.2", "2.3"]),
+    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4"]),
     content: z.enum([
       "m1-tactics.1",
       "m1-tactics.2",
       "m1-tactics.3",
       "m1-tactics.4",
+      "m1-tactics.5",
     ]),
     state: battle,
     paused: z.boolean(),
@@ -222,6 +226,7 @@ const schema = z
         reduced: z.boolean(),
         idle: z.boolean(),
         hints: z.boolean(),
+        labels: z.boolean().default(false),
       })
       .strict(),
     read: z.array(id).max(200),
@@ -244,6 +249,13 @@ function check(s: TacticalState, c: TacticalContent) {
     throw new Error("區域資料不完整。");
   for (const thing of [...s.cells, ...s.colonies, ...s.arrivals, ...s.hosts])
     if (!fields.includes(thing.region)) throw new Error("未知區域。");
+  for (const p of s.colonies)
+    if (
+      p.complementUntil === undefined ||
+      p.antibodyUntil === undefined ||
+      p.markedUntil !== Math.max(p.complementUntil, p.antibodyUntil)
+    )
+      throw new Error("補體／抗體時間資料不一致。");
   const ids = [
     ...s.cells,
     ...s.colonies,
@@ -320,17 +332,18 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     "2.1": "m1-tactics.2",
     "2.2": "m1-tactics.3",
     "2.3": "m1-tactics.4",
+    "2.4": "m1-tactics.5",
   };
   if (versions[data.rules] !== data.content)
     throw new Error("規則與內容版本不一致。");
   const migrate = (state: typeof data.state): TacticalState => {
     if (
-      ["2.2", "2.3"].includes(data.rules) &&
+      ["2.2", "2.3", "2.4"].includes(data.rules) &&
       (!state.immunity || !state.hosts)
     )
       throw new Error("新版免疫狀態不完整。");
     if (
-      data.rules === "2.3" &&
+      ["2.3", "2.4"].includes(data.rules) &&
       (!state.hosts?.length ||
         state.hosts.some(
           (h) =>
@@ -346,7 +359,7 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
       throw new Error("新版組織／區室狀態不完整。");
     const migrated: TacticalState = {
       ...state,
-      immunity: state.immunity ?? initialImmunity(c),
+      immunity: state.immunity ?? initialImmunity(c, false),
       hosts: (state.hosts ?? []).map((h) => ({
         ...h,
         kind: h.kind ?? "alveolarII",
@@ -365,14 +378,23 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
         clearAt: p.clearAt ?? 0,
       })),
     };
-    if (data.rules !== "2.3" && !migrated.hosts.some((h) => h.wall))
+    if (data.rules !== "2.4")
+      for (const p of migrated.colonies) {
+        const previous = coatings(p, 0);
+        p.complementUntil = previous.complementUntil;
+        p.antibodyUntil = previous.antibodyUntil;
+      }
+    if (
+      !["2.3", "2.4"].includes(data.rules) &&
+      !migrated.hosts.some((h) => h.wall)
+    )
       populateTissue(migrated, c);
     return migrated;
   };
   const save: TacticalSave = {
     ...data,
-    rules: "2.3",
-    content: "m1-tactics.4",
+    rules: "2.4",
+    content: "m1-tactics.5",
     state: migrate(data.state),
     undo: data.undo.map(migrate),
   };
@@ -401,7 +423,7 @@ export function readTactical(c: TacticalContent): {
     return value
       ? {
           save: parseTactical(value, c),
-          migrated: JSON.parse(value).rules !== "2.3",
+          migrated: JSON.parse(value).rules !== "2.4",
         }
       : {};
   } catch (e) {
@@ -419,10 +441,10 @@ export function writeTactical(save: TacticalSave) {
     }
     if (
       previous &&
-      previousRules !== "2.3" &&
-      !localStorage.getItem("immuminati:tactics:pre-2.3")
+      previousRules !== "2.4" &&
+      !localStorage.getItem("immuminati:tactics:pre-2.4")
     )
-      localStorage.setItem("immuminati:tactics:pre-2.3", previous);
+      localStorage.setItem("immuminati:tactics:pre-2.4", previous);
     localStorage.setItem(TACTICS_KEY, JSON.stringify(save));
     return "已儲存";
   } catch {

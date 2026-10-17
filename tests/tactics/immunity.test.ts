@@ -243,7 +243,7 @@ describe("immune roles and causal prerequisites", () => {
       delete s.hosts;
     }
     const migrated = parseTactical(JSON.stringify(raw), m1);
-    expect(migrated.rules).toBe("2.3");
+    expect(migrated.rules).toBe("2.4");
     expect(migrated.state.immunity.autoSeek).toBe(false);
     expect(migrated.state.energy).toBe(4);
     expect(migrated.undo[0].energy).toBe(5);

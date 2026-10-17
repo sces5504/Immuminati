@@ -85,6 +85,8 @@ export interface Colony {
   load: number;
   markedUntil: number;
   opsonin?: "c3b" | "antibody";
+  complementUntil?: number;
+  antibodyUntil?: number;
   pathogen: string;
 }
 export interface Arrival {
@@ -219,6 +221,7 @@ export type TacticalCommand =
   | { type: "attack"; cell: string; target: string }
   | { type: "guard"; cell: string }
   | { type: "mark"; target: string }
+  | { type: "antibody"; target: string }
   | { type: "recruit"; kind: CellType; region: string }
   | { type: "advance" }
   | { type: "autoseek"; enabled: boolean };
@@ -227,11 +230,12 @@ export interface TacticalSettings {
   reduced: boolean;
   idle: boolean;
   hints: boolean;
+  labels: boolean;
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "2.3";
-  content: "m1-tactics.4";
+  rules: "2.4";
+  content: "m1-tactics.5";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];

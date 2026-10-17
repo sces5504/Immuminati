@@ -1,3 +1,4 @@
+import { coatings } from "../engine/opsonization";
 import { chooseEntity } from "./selection";
 import {
   makeTissueActor,
@@ -516,8 +517,10 @@ export class BattleScene {
       phase: Number(p.id.slice(1)),
     };
   }
-  private updateBacteria(p: Colony, b: Bacteria, marked: boolean) {
-    const signature = `${p.load}:${marked}:${p.opsonin}`;
+  private updateBacteria(p: Colony, b: Bacteria, tick: number) {
+    const active = coatings(p, tick),
+      marked = active.complement || active.antibody;
+    const signature = `${p.load}:${active.complement}:${active.antibody}`;
     if (signature === b.signature) return;
     b.signature = signature;
     const count = Math.min(p.load, 50);
@@ -544,7 +547,9 @@ export class BattleScene {
     b.capsule.instanceMatrix.needsUpdate = true;
     b.marks.visible = marked;
     b.marks.children.forEach(
-      (child) => (child.visible = child.name === (p.opsonin ?? "c3b")),
+      (child) =>
+        (child.visible =
+          child.name === "c3b" ? active.complement : active.antibody),
     );
     (b.core.material as THREE.MeshStandardMaterial).color.setHex(
       marked ? 0x7291b2 : 0x536eaa,
@@ -853,7 +858,7 @@ export class BattleScene {
           ? Math.sin(this.now * 0.7 + b.phase) * 0.025
           : 0;
       b.ring.visible = input.selected === p.id;
-      this.updateBacteria(p, b, p.markedUntil > s.tick);
+      this.updateBacteria(p, b, s.tick);
     }
     for (const [id, root] of this.hosts)
       if (!s.hosts.some((h) => h.id === id)) {

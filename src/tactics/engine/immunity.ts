@@ -1,3 +1,4 @@
+import { coat } from "./opsonization";
 import type {
   Cell,
   HostCell,
@@ -9,9 +10,9 @@ import type {
 import { emit } from "./events";
 const dist = (a: Vec, b: Vec) => Math.hypot(a.x - b.x, a.z - b.z);
 const clamp = (v: number) => Math.max(0, Math.min(100, v));
-export function initialImmunity(c: TacticalContent): Immunity {
+export function initialImmunity(c: TacticalContent, autoSeek = true): Immunity {
   return {
-    autoSeek: false,
+    autoSeek,
     signals: Object.fromEntries(
       c.fields.map((f) => [
         f.id,
@@ -149,8 +150,7 @@ export function updateImmunity(s: TacticalState, c: TacticalContent) {
     for (const p of s.colonies) {
       if (s.immunity.antibodies < 1 || p.markedUntil > s.tick + 5) continue;
       s.immunity.antibodies--;
-      p.opsonin = "antibody";
-      p.markedUntil = Math.max(p.markedUntil, s.tick + 30);
+      coat(p, "antibody", s.tick + 30);
       emit(
         s,
         "mark",

@@ -113,7 +113,8 @@ try {
       .getByRole("button", { name: "防區深部肺泡", exact: true })
       .click();
     await next(2);
-    await page.getByTestId("autoseek").click();
+    if (!(await saved(page)).state.immunity.autoSeek)
+      await page.getByTestId("autoseek").click();
     await next(3);
     await page.getByTestId("mark-tool").click();
     await page.locator("[data-colony]").first().click();
@@ -153,7 +154,8 @@ try {
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
     if ((await saved(page)).settings.speed !== 2)
       await page.getByTestId("speed-toggle").click();
-    await page.getByTestId("autoseek").click();
+    if (!(await saved(page)).state.immunity.autoSeek)
+      await page.getByTestId("autoseek").click();
     await page.getByTestId("recruit-tool").click();
     for (const kind of ["helperT", "bcell"]) {
       await page.locator(`[data-recruit="${kind}"]`).scrollIntoViewIfNeeded();
@@ -227,22 +229,22 @@ try {
     const legacyText = JSON.stringify(legacy);
     await page.evaluate((text) => {
       localStorage.setItem("immuminati:tactics:v2", text);
-      localStorage.removeItem("immuminati:tactics:pre-2.3");
+      localStorage.removeItem("immuminati:tactics:pre-2.4");
     }, legacyText);
     await page.reload();
     await page.getByRole("button", { name: "繼續防線 →", exact: true }).click();
-    assert.equal((await saved(page)).rules, "2.3");
+    assert.equal((await saved(page)).rules, "2.4");
     assert.equal((await saved(page)).state.immunity.autoSeek, false);
     assert.equal(
       await page.evaluate(() =>
-        localStorage.getItem("immuminati:tactics:pre-2.3"),
+        localStorage.getItem("immuminati:tactics:pre-2.4"),
       ),
       legacyText,
     );
     checks.push({
       device,
       check:
-        "real pre-2.3 save migration preserves original text backup and starts new immunity explicitly inactive",
+        "real pre-2.4 save migration preserves original text backup and starts new immunity explicitly inactive",
       passed: true,
     });
     assert.deepEqual(errors, []);

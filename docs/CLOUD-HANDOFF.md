@@ -1,59 +1,52 @@
-# Immuminati 開發交接 v2.3
+# Immuminati 開發交接 v2.4
 
-先讀 [AGENTS.md](../AGENTS.md)、[主規格](Immuminati-spec.md)、[美術與動畫](art-direction/C-art-and-animation.md)，實際檢視 C 圖與本輪截圖。最新八項任務保留立體戰術 UI／操作與柔光風格，但明確要求改善組織／細胞模型，並增加免疫機制與教學；優先於 v2.1「模型不改」限制。禁止整套 RTS 重製或退回佔位球體。
+先讀 [AGENTS.md](../AGENTS.md)、[主規格](Immuminati-spec.md)、[美術與動畫](art-direction/C-art-and-animation.md)、[本輪 UI 紀錄](UI-CLARITY.md)，實際檢視 C 概念圖及最新截圖。
 
-Repo `sces5504/Immuminati`，通常 `/workspace/Immuminati`，開工確認 Git／環境與當次使用者要求。正式入口 `src/tactics`；延續 main，不 hard reset 回舊美術基準。已完成的抓取式拖曳與無區域／全場名額限制不可回退。
+## 現行方向（不要套用歷史重製提案）
 
-## 最新接續：組織與區室 v2.3
+保留已發布的原立體戰術 UI、指揮方式、抓取式拖曳與柔光微觀風格；不再做另一套 RTS。無區域／全場單位名額限制，仍有資源與募集等待。M1 三波肺炎鏈球菌是唯一完整關卡；M2–M6 不製作。教學宿主演練不算新關卡、不覆寫 M1。
 
-使用者要求每關一致顯示宿主人體細胞，避免把肺泡腔誤認成細胞內。最新實作／證據見 [TISSUE-COMPARTMENTS.md](TISSUE-COMPARTMENTS.md)，以其完成狀態為準，以下 v2.2 已交付段落為歷史。
+使用者最近七項要求是：減少浮動標籤及任務卡遮擋、補體／B 抗體分開、血管破面修正、新局預設自動尋敵、提示移右並壓縮空選指揮列、增援點外部關閉、完整交接。這些追加優先於先前「保持完全相同布局」的描述。詳見 UI 紀錄，不任意改換整套介面或渲染器。
 
-v2.3 程式 `9425293` 已通過 [CI 39037490956](https://github.com/sces5504/Immuminati/actions/runs/39037490956) 並部署 Pages：59 項單元測試、原操作 28 項、剖視 10 項、免疫流程 10 項及吞噬雙分支成功。公開 HTML／4 個資產與 production build 完全一致；真實 2.2 舊檔續玩與原文備份亦通過。部署後公開桌面／手機整局 [CI 39038356284](https://github.com/sces5504/Immuminati/actions/runs/39038356284) 亦全部成功。
+## 目前架構與必要約束
 
-新增 `content/anatomy.ts` 共用健康組織、區室名稱與健康映射；`presentation/TissueGeometry.ts` 對應每顆宿主；`ui/AnatomyPanel.tsx` 為解剖剖面、可選人體／免疫細胞與權威局部剖視。所有器官都產生組織細胞，但其他器官只是架構／基本 adapter，沒有新增關卡。
+- 正式入口 `src/tactics`，TypeScript＋Vite＋React＋Three.js；舊根目錄回合制不是現行遊戲。
+- `domain/model.ts`：權威狀態、指令、細胞角色、來源區室、事件。
+- `content/{m1,cells,tissues,anatomy,practice}.ts`：單關、9 種細胞、器官 profile、健康宿主與可丟棄演練。8 種可募集，漿細胞由 B 分化。
+- `engine/{simulation,immunity,opsonization,events}.ts`：固定 0.2 秒步進、RNG、路徑、調理、吞噬、延遲胞內殺菌、訊號、呈遞、分化與勝敗。引擎先提交，再播放動畫；禁止動畫回呼計算資源／傷害。
+- `application/controller.ts`：暫停、撤銷與設定。新局 autoSeek=true，手動移動優先；舊局保存選擇原樣保留。
+- `presentation/{Anatomy,TissueGeometry,CellGeometry,BattleScene,labelLayout,selection}.ts`：程序模型 adapter、動作、相機、投影與選取。保留獨立單位待機、包覆吞入、清除／胞內存活、調理、募集、結算；不退成整張圖片或通用閃光。
+- `ui/{TacticalApp,AntibodyPanel,AnatomyPanel,ImmunePanel,Tutorial}.tsx`：精簡預設標籤、原指揮列、抗體流程、實際區室剖視與十步教學。完整標籤設定可開；透明命中區與 aria 名稱仍可操作。
 
-M1 吞入後建立 `internal` 的 phagosome／processing／clearAt；到期才殺菌並減少總活負荷。`persistent` 不自動清除，IFN-γ 只支援巨噬的持續吞噬體來源。HostCell 含種類、層次、區域健康及可選 infection 的 cytosol／nucleus；M1 不容許病毒宿主。普通肺泡上皮與血管內皮均 load=0、self 抗原，不能受 NK／CD8 攻擊。
+每關都有健康宿主組織，M1 有 27 個肺泡上皮及 5 個內皮。肺泡腔是胞外，上皮與血管間有屏障，肺泡隔不是單一細胞膜。宿主健康映射防區，不依可見細胞數重複扣損傷。吞入後是宿主綁定的活菌吞噬體，不能立即當成清除／宿主感染／呈遞。嗜中性 2 秒、巨噬／樹突 3 秒處理為教學壓縮。健康宿主不是 NK／CD8 合法對象。
 
-存檔目前規則 2.3／內容 m1-tactics.4；原 key 不變。接受原有配對 2.0/.1、2.1/.2、2.2/.3，顯式補上健康組織／現存胞內來源區室，不追算過去吞噬；state 與 undo 都遷移，原始文字另留 `pre-2.3`（舊 `pre-2.2` 保留）。
+## 補體、抗體與生物學邊界
 
-## 本輪架構
+C3b 補體支援耗 1 資源與支援次數；抗體按鈕說明 DC → MHC-II → CD4 協助 → B → 漿細胞，沒有抗體不能指定。新生抗體原自動分配保留，也可消耗 1 份優先指定。`complementUntil`、`antibodyUntil` 獨立，`markedUntil` 是兩者最大值；共存只計一次既有吞噬加成。C3b 小點與 Ig Y 形分別顯示，不能只顯示最後一種。重複施放／非法胞內對象不得扣資源；驗證函式不得突變。
 
-- `domain/model.ts`：權威狀態、細胞角色、訊號、抗原流程、宿主與事件。
-- `content/cells.ts`：9 種細胞資料與角色；8 種可募集，漿細胞由 B 分化。
-- `content/m1.ts`：肺炎鏈球菌、三區與三波、血管／淋巴入口及平衡。
-- `content/tissues.ts`：肺、口腔、腸黏膜方向；後二者只是 profile／基礎分支，沒有後續關卡。
-- `engine/simulation.ts`：固定 0.2 秒步進、路徑／指令、吞噬、感染、損傷與勝敗。
-- `engine/immunity.ts`：PRR、局部訊號、DC 引流／呈遞、CD4／B 活化、漿細胞與抗體、Treg、IFN-γ 囊泡支援、NK／CD8 合法宿主作用。
-- `engine/events.ts`：所有結果／事件由引擎提交；Three.js 不修改規則。
-- `application/controller.ts`：暫停、撤銷、步進、紀錄。
-- `presentation/Anatomy.ts`、`CellGeometry.ts`、`labelLayout.ts`、`BattleScene.ts`：可替換程序模型、獨立動畫、相機與命中。
-- `ui/ImmunePanel.tsx`、`Tutorial.tsx`：機制資訊與實際操作驅動教學；沿用 `TacticalApp`／CSS。
-- `content/practice.ts`：一次性機制演練，與 M1 共用規則／渲染；預先活化 CD8、合法／不相符／健康宿主。不算 M2–M6，不覆寫 M1 存檔，退出還原原局並暫停。
+M1 是胞外莢膜菌，補體／抗體促進吞噬，不直接清菌，不假裝 MAC 普遍裂解肺炎鏈球菌。訊號為防區濃度，無完整擴散；CD4 族群聚合 Th1／Tfh。Treg 不回血，MHC-II 不直接活化 CD8；NK／CD8 於獨立演練辨識合法宿主。莢膜多醣 T 非依賴反應、完整胚中心、親和力成熟、初始 CD8 活化與病毒生命週期未實作。
 
-## 生物學邊界
+## 存檔（唯一現行版本描述）
 
-M1 為胞外莢膜菌。C3b／抗體促進吞噬，不直接清菌；不是以 MAC 普遍裂解肺炎鏈球菌。蛋白抗原的 DC → MHC-II → CD4 幫助 → B → 漿細胞流程有順序與等待。莢膜多醣 T 非依賴反應、完整胚中心、親和力成熟及完整初始 CD8 活化未實作。
+key `immuminati:tactics:v2` 不變，schema 2、規則 **2.4**、內容 **m1-tactics.5**。解析器接受配對 2.0/.1、2.1/.2、2.2/.3、2.3/.4，state 與所有 undo 同步遷移。補體／抗體期限由原 opsonin 與 markedUntil 推定，不追算過去生物反應；保存已有 autoSeek=false。沒有免疫狀態的 2.0／2.1 舊檔由未啟動開始。
 
-CD4 支援族群聚合 Th1／Tfh 功能；訊號採防區濃度，不是擴散 PDE。CXCL8 影響募集，IL-12／IFN-γ 影響細胞活化，IL-10 調節發炎。Treg 不回血；NK／CD8 不吞噬胞外菌，MHC-II 不直接活化 CD8。參數及時間均為教學抽象，沒有專家完整審查的宣稱。
+第一次覆寫舊格式前保存原始文字 `immuminati:tactics:pre-2.4`；不刪 pre-2.3、pre-2.2、回合制 `immuminati:save:v1` 或任何歷史 key。有效匯入才替換進度；讀取後安全暫停，不計離線生理時間。
 
-## 存檔
+## 驗證、啟動與發布
 
-保留 `immuminati:save:v1` 及其他歷史 key。現行 `immuminati:tactics:v2` 為 schema 2、規則 2.2、內容 `m1-tactics.3`。解析器接受配對的 2.0／.1、2.1／.2 並顯式補上未啟動免疫狀態（自動尋敵關、無新抗體）；時間、單位、指令、事件與撤銷快照保留。首次覆寫前把原始文字保存在 `immuminati:tactics:pre-2.2`，也保留格式損壞的原始資料。匯入驗證完整成功才替換。
+`npm ci`、`npm run dev`，網址為終端顯示的 `/Immuminati/`。`npm run verify` 是單元、型別、正式建置。瀏覽器腳本依序執行（本機軟體 WebGL 不並行）：`test:clarity`、`test:browser`、`test:immune`、`test:anatomy`、`test:animation`。`DEVICE=mobile|desktop` 可選；`EVIDENCE_DIR` 由 scripts 目錄解析。新輪證據不要覆寫歷史目錄。
 
-新規則不重建舊局過去已發生的 PRR／呈遞，因此從當前局面繼續新反應；設定面板明示遷移。舊資料沒有新生抗體／訊號的歷史，不能假裝算過。
+本環境瀏覽器需授權本機網路／啟動權限；Playwright 路徑 `/workspace/.cache/ms-playwright`。GitHub Actions 每組在獨立 runner 驗證，部署依賴全部成功。正式 [Pages](https://sces5504.github.io/Immuminati/) 的 Vite base 固定 `/Immuminati/`。通過後發布並驗公開版本／資產，純紀錄追加用 `[skip ci]`。
 
-## 執行與交付
+本機透過代理連公開頁的 Chromium 曾遇憑證錯誤，不關閉 TLS；以正常 TLS 的 curl 比對公開資產，公開瀏覽器回歸使用 Actions 的正常網路。CLI artifact blob 403 可改用 GitHub 連接工具取檔案參照，不能把短效簽名 URL 或憑證寫入 repo。
 
-`npm ci` 後 `npm run dev`，網址使用終端顯示的 `/Immuminati/`。`npm run verify` 跑規則、型別與建置；`npm run test:browser` 為原操作／拖曳／擁擠／全局回歸；`npm run test:animation` 為吞噬兩分支；`npm run test:immune` 為新教學、適應性策略及 NK／CD8 演練。瀏覽器腳本的伺服器／埠需求見實作紀錄。
+本輪實測、部署狀態、來源與剩餘項目以 [UI-CLARITY.md](UI-CLARITY.md) 為準。真機 Safari／效能尚未驗證，不用觸控 Chrome 模擬冒充。模型仍為程序教學模型，沒有醫學精模／真實尺度宣稱。
 
-[本輪實作與驗證](IMMUNE-EXPANSION.md)記錄實測和限制；[前輪拖曳／容量修正](TACTICAL-REFINEMENT.md)與[原版驗證](TACTICAL-VALIDATION.md)作歷史背景。每輪只報自己真的跑過的結果。
+## 歷史資料（保留背景，不代表現行版本）
 
-[GitHub Pages](https://sces5504.github.io/Immuminati/) 為正式入口，Vite base 必須 `/Immuminati/`。必要檢查通過再發布並驗資產、公開 UI。純紀錄補充使用 `[skip ci]`，避免重跑未改程式的部署。最終 M2–M6 規格仍保留，但本輪不開發其關卡。
+- v2.3 組織／區室：原程式 9425293，見 [TISSUE-COMPARTMENTS.md](TISSUE-COMPARTMENTS.md)。
+- v2.2 免疫擴充：原程式 814243e，見 [IMMUNE-EXPANSION.md](IMMUNE-EXPANSION.md)。
+- 更早拖曳／無名額修正：[TACTICAL-REFINEMENT.md](TACTICAL-REFINEMENT.md)。
+- 原立體版：[TACTICAL-VALIDATION.md](TACTICAL-VALIDATION.md)。
 
-## 本輪已交付
-
-程式 `814243e` 已通過 [CI 39027769861](https://github.com/sces5504/Immuminati/actions/runs/39027769861) 的47項測試、建置、桌面／手機各14項原操作、新功能10項、吞噬雙分支與部署。部署後公開桌面／手機整局 CI 與 smoke 亦通過，資產內容與本機建置一致。37秒桌面／32秒直向手機短片、截圖、來源／時間紀錄與限制都在 [實作紀錄](IMMUNE-EXPANSION.md)／`docs/evidence/immune-expansion/evidence-index.json`；不要沿用更早失敗或部分完成的數字。
-
-CI 共用 `production-dist`，平行產生 `tactics-{device}-evidence`、`immune-{device}-evidence` 與 `animation-evidence`；部署仍依賴全部成功。額外自動公開整局回歸另見實作紀錄，其狀態不應混入發布前測試。
-
-本環境曾遇 CLI 取得 artifact 的短效 blob redirect 返回403；已透過連接的 GitHub artifact 下載工具取得檔案參照並下載ZIP，證據完整。不要把短效簽名URL寫入repo或交接。
+不要把歷史測試數字或畫面當成本輪新驗證。

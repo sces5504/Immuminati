@@ -14,7 +14,8 @@
     "test:animation": "node scripts/tactics-animation.mjs",
     "test:legacy-browser": "node scripts/acceptance.mjs",
     "test:immune": "node scripts/immune-acceptance.mjs",
-    "test:anatomy": "node scripts/anatomy-acceptance.mjs"
+    "test:anatomy": "node scripts/anatomy-acceptance.mjs",
+    "test:clarity": "node scripts/ui-clarity-acceptance.mjs"
   },
   "dependencies": {
     "react": "19.2.0",

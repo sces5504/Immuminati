@@ -106,6 +106,12 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
     const blend = THREE.MathUtils.smoothstep(inField, 0.8, 1.15);
     tint.setHex(profile.floor).lerp(new THREE.Color(profile.wall), blend);
     tint.lerp(new THREE.Color(0xe6b8c1), Math.min(0.75, Math.max(0, h) * 0.3));
+    // Tint the existing continuous surface; a flat overlay would intersect the septa.
+    const stripBlend =
+      (1 -
+        THREE.MathUtils.smoothstep(Math.abs(z - c.portal.z - 0.25), 1.4, 2.1)) *
+      (1 - THREE.MathUtils.smoothstep(Math.abs(x), 11, 12));
+    tint.lerp(new THREE.Color(0xb7a0ba), stripBlend * 0.65);
     tint.multiplyScalar(0.97 + 0.025 * Math.sin(x * 1.9) * Math.sin(z * 1.4));
     colors.set([tint.r, tint.g, tint.b], i * 3);
   }
@@ -146,8 +152,19 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
   }
   const regions = new Map<string, THREE.Mesh>();
   for (const f of c.fields) {
-    const fg = new THREE.CircleGeometry(f.radius - 1, 64);
+    const fg = new THREE.RingGeometry(0, f.radius - 1, 64, 12);
     fg.rotateX(-Math.PI / 2);
+    const surface = fg.attributes.position;
+    for (let i = 0; i < surface.count; i++)
+      surface.setY(
+        i,
+        anatomyHeight(
+          surface.getX(i) + f.center.x,
+          surface.getZ(i) + f.center.z,
+          c,
+        ) + 0.035,
+      );
+    fg.computeVertexNormals();
     const fm = new THREE.MeshStandardMaterial({
       color: profile.floor,
       transparent: true,
@@ -156,7 +173,7 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
       roughness: 0.6,
     });
     const fmsh = own(fg, fm);
-    fmsh.position.set(f.center.x, -0.04, f.center.z);
+    fmsh.position.set(f.center.x, 0, f.center.z);
     regions.set(f.id, fmsh);
     if (c.tissue === "lung") {
       // Capillaries follow both faces of each alveolar septum, rather than unrelated decorative rings.
@@ -226,46 +243,60 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
       villus.scale.set(1.1, 2.8, 1.1);
     }
   }
-  // A visible tissue-side strip separates vascular/lymph access from the air-facing lumen.
-  const stripMat = new THREE.MeshStandardMaterial({
-    color: 0xb7a0ba,
-    roughness: 0.7,
-  });
-  const strip = own(new THREE.PlaneGeometry(24, 4.2), stripMat);
-  strip.rotation.x = -Math.PI / 2;
-  strip.position.set(0, 0.06, c.portal.z + 0.25);
+  // All access structures follow the terrain instead of cutting through it.
+  const conform = (points: number[][], clearance: number) => {
+    const horizontal = new THREE.CatmullRomCurve3(
+      points.map(([x, z]) => new THREE.Vector3(x, 0, z)),
+    );
+    return horizontal
+      .getPoints(180)
+      .map(
+        (p) =>
+          new THREE.Vector3(p.x, anatomyHeight(p.x, p.z, c) + clearance, p.z),
+      );
+  };
   const borderMat = new THREE.MeshStandardMaterial({
     color: 0xe6cad7,
     roughness: 0.5,
   });
   tube(
-    [
-      new THREE.Vector3(-11, 0.25, 16.5),
-      new THREE.Vector3(-3, 0.25, 16.5),
-      new THREE.Vector3(3, 0.25, 16.5),
-      new THREE.Vector3(11, 0.25, 16.5),
-    ],
+    conform(
+      [
+        [-11, 16.5],
+        [-3, 16.5],
+        [3, 16.5],
+        [11, 16.5],
+      ],
+      0.14,
+    ),
     0.1,
     borderMat,
   );
   // The vascular entry is on the tissue side; entry through barriers is compressed, not an open airway.
 
-  const vesselPoints = [
-    [-23, 20],
-    [-13, 19.4],
-    [-3, 18.8],
-    [4, 18.8],
-    [13, 20],
-    [24, 20],
-  ].map(([x, z]) => new THREE.Vector3(x, 0.32, z));
-  tube(vesselPoints, 0.55, vesselMat);
-  tube(vesselPoints, 0.64, endothelium);
+  const vesselPoints = conform(
+    [
+      [-23, 20],
+      [-13, 19.4],
+      [-3, 18.8],
+      [4, 18.8],
+      [13, 20],
+      [24, 20],
+    ],
+    0.82,
+  );
+  tube(vesselPoints, 0.55, vesselMat).name = "vascular-core";
+  tube(vesselPoints, 0.64, endothelium).name = "vascular-wall";
   const portal = own(
     new THREE.TorusGeometry(1.25, 0.055, 8, 40),
     new THREE.MeshBasicMaterial({ color: 0xb6efff }),
   );
   portal.rotation.x = -Math.PI / 2;
-  portal.position.set(c.portal.x, 0.65, c.portal.z);
+  portal.position.set(
+    c.portal.x,
+    anatomyHeight(c.portal.x, c.portal.z, c) + 0.18,
+    c.portal.z,
+  );
   if (c.lymphExit) {
     const p = c.lymphExit;
     const lymphMat = new THREE.MeshStandardMaterial({
@@ -275,11 +306,14 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
       opacity: 0.65,
     });
     tube(
-      [
-        new THREE.Vector3(p.x - 5, 0.1, p.z + 4),
-        new THREE.Vector3(p.x - 2, 0.15, p.z + 2),
-        new THREE.Vector3(p.x, 0.2, p.z),
-      ],
+      conform(
+        [
+          [p.x - 5, p.z + 4],
+          [p.x - 2, p.z + 2],
+          [p.x, p.z],
+        ],
+        0.35,
+      ),
       0.23,
       lymphMat,
     );
@@ -288,7 +322,7 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
       new THREE.MeshBasicMaterial({ color: 0xc1eadb }),
     );
     opening.rotation.x = -Math.PI / 2;
-    opening.position.set(p.x, 0.4, p.z);
+    opening.position.set(p.x, anatomyHeight(p.x, p.z, c) + 0.18, p.z);
   }
   return { root, materials, geometries, regions };
 }
