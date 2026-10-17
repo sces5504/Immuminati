@@ -140,6 +140,7 @@ export default function TacticalApp() {
     const s = controller.save.state;
     if (homeRef.current || s.result) return;
     if (pick.type === "cell") {
+      setNotice("");
       setSelected(pick.id);
       const cell = s.cells.find((u) => u.id === pick.id);
       if (cell) setRegion(cell.region);
@@ -159,9 +160,7 @@ export default function TacticalApp() {
         setSelected(h.id);
         setRegion(h.region);
         setMode("command");
-        setNotice(
-          `${tissueCellCatalog[h.kind].name} · ${hostStatus(h)}。按「局部剖視」查看細胞內部。`,
-        );
+        setNotice("");
       }
     } else if (pick.type === "colony") {
       const p = s.colonies.find((p) => p.id === pick.id);

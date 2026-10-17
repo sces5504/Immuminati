@@ -821,7 +821,9 @@ export class BattleScene {
         input.reduced ? 1 : 1 + Math.sin(this.now * 4) * 0.04,
       );
       const infected = s.internal.some((p) => p.host === cell.id);
-      actor.vacuole.visible = infected;
+      actor.vacuole.visible = s.internal.some(
+        (p) => p.host === cell.id && p.compartment === "phagosome",
+      );
       (actor.shell.material as THREE.MeshPhysicalMaterial).emissive.setHex(
         infected ? 0x6b4110 : 0x120c26,
       );
