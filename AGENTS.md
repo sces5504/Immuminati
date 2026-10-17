@@ -6,7 +6,7 @@
 
 ## 現行方向與讀取順序
 
-1. [主規格 v2.4](docs/Immuminati-spec.md)：唯一現行產品／玩法依據。
+1. [主規格 v3.0](docs/Immuminati-spec.md)：唯一現行產品／玩法依據。
 2. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)。
 3. [開發交接](docs/CLOUD-HANDOFF.md)。
 4. 實際檢視 `docs/evidence/tactics/desktop-field.png`、`mobile-field.png` 與既有遊戲；C 概念圖作風格來源。

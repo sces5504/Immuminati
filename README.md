@@ -1,32 +1,34 @@
 # Immuminati · 微觀防線
 
-**保留已發布立體戰術版的 UI、畫面、操作與整體風格，並依已確認需求改善組織／細胞模型及免疫機制。** 使用者已撤回從頭 RTS 重建與替換佔位模型的安排；`src/tactics` 是正式入口，原版不是待淘汰的畫面。
+[線上遊玩](https://sces5504.github.io/Immuminati/?v=f004bdf)。保留已確認的立體戰術 UI、指揮、鏡頭與 C「柔光微觀立體」風格；沒有另做整套 RTS。
 
-[線上遊玩更新版](https://sces5504.github.io/Immuminati/?v=addcee9)。目前已發布程式 `addcee9`（v2.4）：精簡地圖標籤與任務卡、分開補體／B 抗體入口、新局預設自動尋敵、修正血管貼地、提示移右，以及增援點外部關閉。[本輪實作、驗證與交接](docs/UI-CLARITY.md)包含最新畫面、錄影、來源與限制。
+六關從開場全可選，使用同一套規則／展示架構：
 
-上一輪 `9425293` 的[組織／胞內區室](docs/TISSUE-COMPARTMENTS.md)及更早 [v2.2 免疫擴充](docs/IMMUNE-EXPANSION.md)均保留。原立體程式基準 `d2c16ab`、證據 `af6bcb3`；`6e1d5f7` 已回退另一次 RTS 重製，這些皆為歷史來源。
+| 關卡 | 核心 |
+|---|---|
+| M1 肺炎鏈球菌 | 莢膜、補體／抗體調理、吞入與胞內殺菌 |
+| M2 鼠傷寒沙門氏菌 | 腸黏膜、巨噬含菌囊泡、Th1／IFN-γ |
+| M3 結核 | 肺部既存感染焦點、圍堵及組織保全，不要求滅菌 |
+| M4 流感 A | 胞外病毒、上皮感染、IFN-I、NK、DC 交叉呈遞與 CD8 |
+| M5 白色念珠菌 | 口腔上皮、酵母／菌絲、Th17／ILC3 與顆粒防禦 |
+| M6 HIV | 淋巴組織、易感／產毒／潛伏宿主、CD4 免疫支援 |
 
-## 開發入口
+14 種免疫細胞／狀態可募集或分化：巨噬、嗜中性、DC、一般 helper T、Th1、Tfh、Th17、CD8、B、漿細胞、NK、Treg、pDC、ILC3。無同區或全場單位名額限制，保留反應資源與到場等待；新局自動尋敵預設開、手動移動優先，可隨時暫停或切換2×。
 
-1. [開發指引](AGENTS.md)
-2. [現行主規格 v2.4](docs/Immuminati-spec.md)
-3. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)
-4. [交接與下一個 AI 的工作說明](docs/CLOUD-HANDOFF.md)
+補體黃三葉與抗體綠 Y 有各自的模型、移近／灑落／附著動畫及期限。有抗體庫存直接指定目標；獨立 ⓘ 說明蛋白抗原的同源 T–B 對接及分化等待。頁首「回主頁」會保存並暫停當前局。關內保留教學、百科、因果紀錄、組織與胞內剖視、本機續玩及匯入／匯出。
 
-維持可暫停立體戰術操作。本輪加入自動尋敵、戰場 2×、9 種細胞、PRR／局部訊號、抗原呈遞與適應性抗體流程、Treg 調節，以及十步互動教學。肺泡組織與細胞形態同步改善；[實作、驗證與限制](docs/IMMUNE-EXPANSION.md)。既有[拖曳／無名額修正](docs/TACTICAL-REFINEMENT.md)保留。M2–M6 尚未製作。
+[本輪實作與生物學依據](docs/CAMPAIGN-IMPLEMENTATION.md)／[本輪實測、畫面與動畫證據](docs/CAMPAIGN-VERIFICATION.md)／[接續交接](docs/CLOUD-HANDOFF.md)。免疫數值與時間為教學抽象；模型為可替換程序素材，未含完整全身反應、胚中心或專業美術精修。實體 iPhone Safari／Android GPU 尚待驗證。
 
-新增「組織剖視」：每個器官配置都會生成宿主組織細胞，M1 先實作肺泡上皮與血管內皮；可點選查看健康、感染與胞內位置。剖視時暫停，關閉後自行恢復；保留原指揮與鏡頭。現行規則 2.4 支援舊檔續玩及原文備份，其他器官／病毒完整生命週期仍未完成。
+## 啟動
 
-## 執行與驗證
-
-現有專案以 Node 24、package-lock.json 鎖定依賴：
+Node 24，依賴鎖定於 package-lock.json：
 
 ```sh
 npm ci
 npm run dev
 ```
 
-開啟 `http://localhost:5173/Immuminati/`。目前驗證與預覽命令：
+開啟 `http://localhost:5173/Immuminati/`。正式建置以 `/Immuminati/` 作為 Pages 子路徑。
 
 ```sh
 npm run verify
@@ -37,17 +39,17 @@ npm run test:animation
 npm run test:immune
 npm run test:anatomy
 npm run test:clarity
+npm run test:campaign
+npm run test:campaign-ui
+node scripts/campaign-compartments.mjs
 ```
 
-Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試覆蓋既有立體戰術版；改規則時同步更新相應斷言，並保留其餘回歸檢查。手機瀏覽器腳本是 viewport／touch 模擬，不等同真機測試。
+`DEVICE=desktop|mobile`、`CASE=m1|...|m6` 可限定六關驗證；`TARGET_URL` 指向公開站則驗證實際發布版本。受控時鐘在載入遊戲前安裝／暫停，仍透過正式 UI 與 RAF 固定步進，沒有注入通關狀態。胞內剖視檢查使用實際遊玩累積的病原來源。
 
-## 歷史資料與相容性
+## 接續與相容性
 
-- [立體戰術基準決策](docs/TACTICAL-REDESIGN.md)／[其實作與驗證](docs/TACTICAL-VALIDATION.md)
-- [首版實作](docs/IMPLEMENTATION.md)／[首版驗證](docs/VALIDATION.md)
-- [ImmuneQuest 截圖參考觀察](docs/art-direction/ImmuneQuest-reference-review.md)
-- [基準桌面](docs/evidence/tactics/desktop-field.png)／[手機](docs/evidence/tactics/mobile-field.png)／[基準短剪輯](docs/evidence/tactics/m1-highlights.webm)
+先讀 [AGENTS.md](AGENTS.md)、[現行規格](docs/Immuminati-spec.md)、[美術規範](docs/art-direction/C-art-and-animation.md) 與 [交接](docs/CLOUD-HANDOFF.md)。正式入口為 `src/tactics`，維持 TypeScript＋Vite＋React＋Three.js 的 domain／content／engine／application／presentation／UI／persistence 分層。
 
-基準截圖與影片用於確認原體驗保留；歷史測試結果不能作後續改動已通過的證據。舊存檔 `immuminati:save:v1` 與 `immuminati:tactics:v2` 必須保留；玩法改動先確認相容性，不靜默轉換或覆寫不同規則的存檔。
+存檔 schema2、規則3.0、內容campaign.1；舊2.0–2.4的 state／undo 顯式遷移，保留原本尋敵選擇與進度，另留原文備份，不刪歷史 key。M3 控制感染與 M6 特殊有限結果的定義見主規格與實作文件；不要改成六關全部清場勝利。
 
-Pages base 維持 `/Immuminati/`。程式修改後驗證資產、重新整理及公開網址；純文件變更不重新部署遊戲。
+歷史 [v2.4 UI 精簡](docs/UI-CLARITY.md)、[胞內區室](docs/TISSUE-COMPARTMENTS.md)、[v2.2 免疫擴充](docs/IMMUNE-EXPANSION.md) 與 [立體基準](docs/TACTICAL-VALIDATION.md) 供追溯，舊測試數字及影片不能當作本輪通過證據。

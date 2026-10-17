@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "browser": "141.0.7390.37",
+  "fixture": "Abstract dev-only sample, not M1 intracellular behavior or a complete M2",
+  "checks": [
+    "3D contact, pseudopod wrapping and ingestion recording",
+    "clearance has no intracellular load",
+    "survival retains phagosomal load 3 and a distinct visible vacuole",
+    "C3b globular deposition and green Y antibody travel before attachment, no direct killing",
+    "no runtime errors"
+  ]
+}

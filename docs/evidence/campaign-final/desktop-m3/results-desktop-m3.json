@@ -1,0 +1,63 @@
+{
+  "target": "http://127.0.0.1:4186/Immuminati/",
+  "browser": "141.0.7390.37",
+  "checks": [
+    {
+      "device": "desktop",
+      "case": "m3",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 82.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "survive",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "clear",
+        "present",
+        "arrive",
+        "damage",
+        "activate",
+        "signal",
+        "contain",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    }
+  ]
+}

@@ -1,0 +1,175 @@
+{
+  "workflow": 39064690786,
+  "commit": "f004bdfac6e1bfcf52e7975ae81b2bb01e9585c7",
+  "target": "https://sces5504.github.io/Immuminati/",
+  "checks": [
+    {
+      "job_id": 117489757337,
+      "device": "mobile",
+      "scenario": "m5",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 99,
+        "stars": 3,
+        "seconds": 78.2
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757337"
+    },
+    {
+      "job_id": 117489757402,
+      "device": "desktop",
+      "scenario": "m6",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 93,
+        "stars": 0,
+        "seconds": 81.4
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757402"
+    },
+    {
+      "job_id": 117489757405,
+      "device": "mobile",
+      "scenario": "m6",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 93,
+        "stars": 0,
+        "seconds": 81.4
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757405"
+    },
+    {
+      "job_id": 117489757434,
+      "device": "mobile",
+      "scenario": "m1",
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 83
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757434"
+    },
+    {
+      "job_id": 117489757446,
+      "device": "mobile",
+      "scenario": "m2",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 90,
+        "stars": 3,
+        "seconds": 102
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757446"
+    },
+    {
+      "job_id": 117489757449,
+      "device": "mobile",
+      "scenario": "m3",
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 82.2
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757449"
+    },
+    {
+      "job_id": 117489757458,
+      "device": "mobile",
+      "scenario": "m4",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 87,
+        "stars": 3,
+        "seconds": 130.6
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757458"
+    },
+    {
+      "job_id": 117489757462,
+      "device": "desktop",
+      "scenario": "m3",
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 82.2
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757462"
+    },
+    {
+      "job_id": 117489757468,
+      "device": "desktop",
+      "scenario": "m1",
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 83
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757468"
+    },
+    {
+      "job_id": 117489757511,
+      "device": "desktop",
+      "scenario": "m2",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 90,
+        "stars": 3,
+        "seconds": 102
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757511"
+    },
+    {
+      "job_id": 117489757552,
+      "device": "desktop",
+      "scenario": "m5",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 99,
+        "stars": 3,
+        "seconds": 78.2
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757552"
+    },
+    {
+      "job_id": 117489757689,
+      "device": "desktop",
+      "scenario": "m4",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 87,
+        "stars": 3,
+        "seconds": 130.6
+      },
+      "passed": true,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39064690786/job/117489757689"
+    }
+  ]
+}

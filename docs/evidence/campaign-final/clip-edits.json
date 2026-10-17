@@ -1,0 +1,315 @@
+[
+  {
+    "case": "animation",
+    "originalVideo": "engulf-branches.webm",
+    "originalDuration": 36.64,
+    "segments": [
+      {
+        "start": 0,
+        "seconds": 36.64
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "desktop-m1",
+    "originalVideo": "desktop-m1-play.webm",
+    "originalDuration": 172.12,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 9.103,
+        "seconds": 5
+      },
+      {
+        "start": 86.612,
+        "seconds": 4
+      },
+      {
+        "start": 167.12,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "desktop-m2",
+    "originalVideo": "desktop-m2-play.webm",
+    "originalDuration": 145.16,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 4.55,
+        "seconds": 5
+      },
+      {
+        "start": 70.855,
+        "seconds": 4
+      },
+      {
+        "start": 140.16,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "desktop-m3",
+    "originalVideo": "desktop-m3-play.webm",
+    "originalDuration": 178.4,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 13.101,
+        "seconds": 5
+      },
+      {
+        "start": 91.751,
+        "seconds": 4
+      },
+      {
+        "start": 173.4,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "desktop-m4",
+    "originalVideo": "desktop-m4-play.webm",
+    "originalDuration": 269.12,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 13.744,
+        "seconds": 5
+      },
+      {
+        "start": 137.432,
+        "seconds": 4
+      },
+      {
+        "start": 264.12,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "desktop-m5",
+    "originalVideo": "desktop-m5-play.webm",
+    "originalDuration": 175.56,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 12.992,
+        "seconds": 5
+      },
+      {
+        "start": 90.276,
+        "seconds": 4
+      },
+      {
+        "start": 170.56,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "desktop-m6",
+    "originalVideo": "desktop-m6-play.webm",
+    "originalDuration": 222.68,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 13.587,
+        "seconds": 5
+      },
+      {
+        "start": 114.134,
+        "seconds": 4
+      },
+      {
+        "start": 217.68,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "mobile-m1",
+    "originalVideo": "mobile-m1-play.webm",
+    "originalDuration": 65.96,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 8.07,
+        "seconds": 5
+      },
+      {
+        "start": 33.015,
+        "seconds": 4
+      },
+      {
+        "start": 60.96,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "mobile-m2",
+    "originalVideo": "mobile-m2-play.webm",
+    "originalDuration": 143.44,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 9.621,
+        "seconds": 5
+      },
+      {
+        "start": 72.531,
+        "seconds": 4
+      },
+      {
+        "start": 138.44,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "mobile-m3",
+    "originalVideo": "mobile-m3-play.webm",
+    "originalDuration": 100.64,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 10.719,
+        "seconds": 5
+      },
+      {
+        "start": 51.679,
+        "seconds": 4
+      },
+      {
+        "start": 95.64,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "mobile-m4",
+    "originalVideo": "mobile-m4-play.webm",
+    "originalDuration": 135.44,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 9.397,
+        "seconds": 5
+      },
+      {
+        "start": 68.418,
+        "seconds": 4
+      },
+      {
+        "start": 130.44,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "mobile-m5",
+    "originalVideo": "mobile-m5-play.webm",
+    "originalDuration": 100.48,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 8.36,
+        "seconds": 5
+      },
+      {
+        "start": 50.42,
+        "seconds": 4
+      },
+      {
+        "start": 95.48,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  },
+  {
+    "case": "mobile-m6",
+    "originalVideo": "mobile-m6-play.webm",
+    "originalDuration": 103.48,
+    "segments": [
+      {
+        "start": 1,
+        "seconds": 4
+      },
+      {
+        "start": 7.389,
+        "seconds": 5
+      },
+      {
+        "start": 51.435,
+        "seconds": 4
+      },
+      {
+        "start": 98.48,
+        "seconds": 5
+      }
+    ],
+    "output": "highlights.webm",
+    "note": "Time-edited original screen recording; full continuous play retained in linked Actions artifact."
+  }
+]

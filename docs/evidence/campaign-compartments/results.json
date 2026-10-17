@@ -1,0 +1,126 @@
+{
+  "target": "http://127.0.0.1:4188/Immuminati/",
+  "date": "2026-10-17T20:02:20.334Z",
+  "checks": [
+    {
+      "device": "desktop",
+      "case": "m1",
+      "tick": 90,
+      "compartment": "phagosome",
+      "phase": "processing",
+      "load": 1,
+      "healthy": "h7",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "case": "m2",
+      "tick": 95,
+      "compartment": "phagosome",
+      "phase": "persistent",
+      "load": 5,
+      "healthy": "h8",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "case": "m3",
+      "tick": 100,
+      "compartment": "phagosome",
+      "phase": "persistent",
+      "load": 11,
+      "healthy": "h6",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "case": "m4",
+      "tick": 100,
+      "compartment": "nucleus",
+      "phase": "productive",
+      "load": 1,
+      "healthy": "h8",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "case": "m5",
+      "tick": 90,
+      "compartment": "phagosome",
+      "phase": "processing",
+      "load": 1,
+      "healthy": "h9",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "case": "m6",
+      "tick": 90,
+      "compartment": "nucleus",
+      "phase": "latent",
+      "load": 1,
+      "healthy": "h9",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "case": "m1",
+      "tick": 71,
+      "compartment": "phagosome",
+      "phase": "processing",
+      "load": 1,
+      "healthy": "h7",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "case": "m2",
+      "tick": 93,
+      "compartment": "phagosome",
+      "phase": "persistent",
+      "load": 5,
+      "healthy": "h8",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "case": "m3",
+      "tick": 79,
+      "compartment": "phagosome",
+      "phase": "persistent",
+      "load": 11,
+      "healthy": "h6",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "case": "m4",
+      "tick": 84,
+      "compartment": "nucleus",
+      "phase": "productive",
+      "load": 1,
+      "healthy": "h8",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "case": "m5",
+      "tick": 85,
+      "compartment": "phagosome",
+      "phase": "processing",
+      "load": 1,
+      "healthy": "h9",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "case": "m6",
+      "tick": 85,
+      "compartment": "nucleus",
+      "phase": "latent",
+      "load": 1,
+      "healthy": "h9",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,783 @@
+{
+  "commit": "f004bdfac6e1bfcf52e7975ae81b2bb01e9585c7",
+  "workflow": 39063810584,
+  "artifacts": [
+    {
+      "case": "desktop-m6",
+      "artifact": 12112865865,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112865865",
+      "bytes": 16968779,
+      "sha256": "65082f0a9fa56229a04b62976d44defcacd2076c1809bc037e162506226a7977"
+    },
+    {
+      "case": "desktop-m3",
+      "artifact": 12112766153,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112766153",
+      "bytes": 14062846,
+      "sha256": "52ddf5e9b62c0bab1f58687f9b245244f1ff8e91a9efbb017431b6829c0c71ee"
+    },
+    {
+      "case": "mobile-m5",
+      "artifact": 12112765992,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112765992",
+      "bytes": 4044417,
+      "sha256": "415c9f96512ed2e30e1f9281d2a3d993540018f85db93b7c0b7d8da79b37e879"
+    },
+    {
+      "case": "mobile-m4",
+      "artifact": 12112731101,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112731101",
+      "bytes": 5771132,
+      "sha256": "bd92e0cf0b3879332bd6aa645608614fc7f638763eb0a2c51250f462e09d34d5"
+    },
+    {
+      "case": "desktop-m4",
+      "artifact": 12112641845,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112641845",
+      "bytes": 21605893,
+      "sha256": "520291b2a9073a2b635bca9e29698cc87c721db21043d232dd381ae7eb42fac3"
+    },
+    {
+      "case": "desktop-m5",
+      "artifact": 12112691398,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112691398",
+      "bytes": 13420860,
+      "sha256": "e640e6288b1724859cb608246f872e7139db6d35474fb98dbd12fe4a50a77152"
+    },
+    {
+      "case": "mobile-m1",
+      "artifact": 12112433186,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112433186",
+      "bytes": 3182302,
+      "sha256": "e7815e2227ffbcb6e6c5e1155d63773d3e0199576c256e4b0d7ba28b9d23aca5"
+    },
+    {
+      "case": "desktop-m1",
+      "artifact": 12112552854,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112552854",
+      "bytes": 13724241,
+      "sha256": "8dc2d2b98137d39a33747a6e5f7357c3122a7e75c82df54dad251632b65c561f"
+    },
+    {
+      "case": "mobile-m6",
+      "artifact": 12112099568,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112099568",
+      "bytes": 4222124,
+      "sha256": "97d6102cd712974ce500d0b45a607269e7bb95c8231ba3bc9abc3a191fad0a19"
+    },
+    {
+      "case": "mobile-m2",
+      "artifact": 12112252502,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112252502",
+      "bytes": 4651353,
+      "sha256": "f45d9b771a0c9f4f51f9bacd4c25f739f50fe83b1bef49434924d087d2e024bc"
+    },
+    {
+      "case": "mobile-m3",
+      "artifact": 12112099405,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112099405",
+      "bytes": 3923762,
+      "sha256": "c8f5ce80b9c3943b2684485810b3ee6b507d26dc19e77448384f1b87d98b234e"
+    },
+    {
+      "case": "desktop-m2",
+      "artifact": 12112088020,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12112088020",
+      "bytes": 11592789,
+      "sha256": "7b1647383a865b9d5b9a2e0f7981581bd0b36460d0f21cb57e64763156e8e0b7"
+    },
+    {
+      "case": "animation",
+      "artifact": 12111988079,
+      "url": "https://github.com/sces5504/Immuminati/actions/runs/39063810584/artifacts/12111988079",
+      "bytes": 4468522,
+      "sha256": "e18f402aa863f84221560a9004c93319923e63447c1b7f8936266e99d242a65c"
+    }
+  ],
+  "cases": [
+    {
+      "device": "desktop",
+      "case": "m6",
+      "passed": true,
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 93,
+        "stars": 0,
+        "seconds": 81.4
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "infect",
+        "mark",
+        "request",
+        "present",
+        "engulf",
+        "recognize",
+        "clear",
+        "release",
+        "arrive",
+        "damage",
+        "cytotoxic",
+        "activate",
+        "dock",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m3",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 82.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "survive",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "clear",
+        "present",
+        "arrive",
+        "damage",
+        "activate",
+        "signal",
+        "contain",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "mobile",
+      "case": "m5",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 99,
+        "stars": 3,
+        "seconds": 78.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "degranulate",
+        "present",
+        "recognize",
+        "clear",
+        "arrive",
+        "barrier",
+        "grow",
+        "damage",
+        "activate",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "mobile",
+      "case": "m4",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 87,
+        "stars": 3,
+        "seconds": 130.6
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "infect",
+        "clear",
+        "arrive",
+        "present",
+        "damage",
+        "cytotoxic",
+        "release",
+        "activate",
+        "signal",
+        "dock",
+        "antibody",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m4",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 87,
+        "stars": 3,
+        "seconds": 130.6
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "infect",
+        "clear",
+        "arrive",
+        "present",
+        "damage",
+        "cytotoxic",
+        "release",
+        "activate",
+        "signal",
+        "dock",
+        "antibody",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m5",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 99,
+        "stars": 3,
+        "seconds": 78.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "degranulate",
+        "present",
+        "recognize",
+        "clear",
+        "arrive",
+        "barrier",
+        "grow",
+        "damage",
+        "activate",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "mobile",
+      "case": "m1",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 83
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "present",
+        "clear",
+        "arrive",
+        "grow",
+        "damage",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m1",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 83
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "present",
+        "clear",
+        "arrive",
+        "grow",
+        "damage",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "mobile",
+      "case": "m6",
+      "passed": true,
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 93,
+        "stars": 0,
+        "seconds": 81.4
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "infect",
+        "mark",
+        "request",
+        "present",
+        "engulf",
+        "recognize",
+        "clear",
+        "release",
+        "arrive",
+        "damage",
+        "cytotoxic",
+        "activate",
+        "dock",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "mobile",
+      "case": "m2",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 90,
+        "stars": 3,
+        "seconds": 102
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "clear",
+        "arrive",
+        "damage",
+        "present",
+        "activate",
+        "signal",
+        "grow",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "mobile",
+      "case": "m3",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 82.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "survive",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "clear",
+        "present",
+        "arrive",
+        "damage",
+        "activate",
+        "signal",
+        "contain",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m2",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 90,
+        "stars": 3,
+        "seconds": 102
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "clear",
+        "arrive",
+        "damage",
+        "present",
+        "activate",
+        "signal",
+        "grow",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    }
+  ]
+}

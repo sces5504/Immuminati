@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-17T19:47:41.533Z",
+  "checks": [
+    {
+      "device": "mobile",
+      "passed": true,
+      "next": {
+        "fits": true,
+        "width": 136,
+        "height": 44
+      },
+      "help": {
+        "fits": true,
+        "w": 76,
+        "h": 44
+      },
+      "errors": [],
+      "checks": [
+        "stock tool targets directly",
+        "one antibody charge; independent energy and living load",
+        "duplicate rejected",
+        "cosmetic skip never changes state",
+        "independent explanation entry",
+        "next wave reward and right-side help stay in bounds",
+        "home saves and pauses"
+      ]
+    }
+  ]
+}

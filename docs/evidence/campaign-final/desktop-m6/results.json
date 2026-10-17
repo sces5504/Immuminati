@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-17T19:50:40.665Z",
+  "target": "http://127.0.0.1:4186/Immuminati/",
+  "browser": "141.0.7390.37",
+  "checks": [
+    {
+      "device": "desktop",
+      "case": "m6",
+      "passed": true,
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 93,
+        "stars": 0,
+        "seconds": 81.4
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 18
+      },
+      "events": [
+        "wave",
+        "infect",
+        "mark",
+        "request",
+        "present",
+        "engulf",
+        "recognize",
+        "clear",
+        "release",
+        "arrive",
+        "damage",
+        "cytotoxic",
+        "activate",
+        "dock",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    }
+  ]
+}

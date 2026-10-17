@@ -1,0 +1,2063 @@
+{
+  "schema": 2,
+  "rules": "3.0",
+  "content": "campaign.1",
+  "state": {
+    "version": 2,
+    "scenario": "m5",
+    "seed": 1,
+    "rng": 1,
+    "tick": 391,
+    "energy": 2,
+    "support": 3,
+    "wave": 1,
+    "nextWaveAt": 1600,
+    "health": {
+      "a": 97.55,
+      "b": 99.46,
+      "c": 99.21999999999997
+    },
+    "cells": [
+      {
+        "id": "u1",
+        "kind": "macrophage",
+        "position": {
+          "x": -7.930091435651828,
+          "z": -3.8951371534777444
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -11,
+            "z": -5
+          }
+        },
+        "path": [
+          {
+            "x": -10,
+            "z": -7
+          },
+          {
+            "x": -10,
+            "z": -7
+          }
+        ],
+        "readyAt": 365,
+        "recognized": true
+      },
+      {
+        "id": "u2",
+        "kind": "neutrophil",
+        "position": {
+          "x": -8.630736494747355,
+          "z": -4.9461047421210305
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 11,
+            "z": -4
+          }
+        },
+        "path": [],
+        "readyAt": 401,
+        "recognized": true
+      },
+      {
+        "id": "u3",
+        "kind": "dendritic",
+        "position": {
+          "x": -4.130495168499707,
+          "z": 16.260990336999416
+        },
+        "region": "c",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -1,
+            "z": 10
+          }
+        },
+        "path": [
+          {
+            "x": -5,
+            "z": 18
+          }
+        ],
+        "readyAt": 21,
+        "antigen": "candida:protein",
+        "recognized": true
+      },
+      {
+        "id": "u4",
+        "kind": "th17",
+        "position": {
+          "x": -6.447737650506105,
+          "z": -1.671606475759158
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -9,
+            "z": -5
+          }
+        },
+        "path": [
+          {
+            "x": -10,
+            "z": -7
+          },
+          {
+            "x": -10,
+            "z": -7
+          }
+        ],
+        "readyAt": 0,
+        "activation": "effector",
+        "antigen": "candida:protein",
+        "activationAt": 95
+      },
+      {
+        "id": "u5",
+        "kind": "ilc3",
+        "position": {
+          "x": -8.386668408408248,
+          "z": -4.5800026126123745
+        },
+        "region": "b",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 9,
+            "z": -4
+          }
+        },
+        "path": [
+          {
+            "x": -10,
+            "z": -7
+          },
+          {
+            "x": -10,
+            "z": -7
+          }
+        ],
+        "readyAt": 0
+      },
+      {
+        "id": "u60",
+        "kind": "neutrophil",
+        "position": {
+          "x": -8.542383021868531,
+          "z": -4.813574532802793
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 10,
+            "z": -6
+          }
+        },
+        "path": [],
+        "readyAt": 391,
+        "recognized": true
+      },
+      {
+        "id": "u66",
+        "kind": "th17",
+        "position": {
+          "x": -6.239244128590782,
+          "z": -1.3588661928861736
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -5,
+            "z": 18
+          }
+        },
+        "path": [
+          {
+            "x": -10,
+            "z": -7
+          },
+          {
+            "x": -10,
+            "z": -7
+          }
+        ],
+        "readyAt": 199,
+        "activation": "effector",
+        "antigen": "candida:protein",
+        "activationAt": 250
+      },
+      {
+        "id": "u68",
+        "kind": "neutrophil",
+        "position": {
+          "x": -8.542383021868531,
+          "z": -4.813574532802793
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 0,
+            "z": 8
+          }
+        },
+        "path": [],
+        "readyAt": 391,
+        "recognized": true
+      }
+    ],
+    "colonies": [],
+    "arrivals": [],
+    "internal": [],
+    "immunity": {
+      "autoSeek": true,
+      "signals": {
+        "a": {
+          "cxcl8": 100,
+          "il12": 7,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 21,
+          "ifni": 0,
+          "il17": 68,
+          "il22": 60
+        },
+        "b": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 0,
+          "il17": 0,
+          "il22": 0
+        },
+        "c": {
+          "cxcl8": 97,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 24,
+          "ifni": 0,
+          "il17": 96,
+          "il22": 96
+        }
+      },
+      "node": {
+        "stage": "primed",
+        "antigen": "candida:protein",
+        "until": 55,
+        "crossPresented": false
+      },
+      "antibodies": 0
+    },
+    "hosts": [
+      {
+        "id": "h9",
+        "region": "a",
+        "position": {
+          "x": -14.95,
+          "z": -11.275
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h10",
+        "region": "a",
+        "position": {
+          "x": -11.65,
+          "z": -9.875
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h11",
+        "region": "a",
+        "position": {
+          "x": -8.35,
+          "z": -11.275
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h12",
+        "region": "a",
+        "position": {
+          "x": -5.050000000000001,
+          "z": -9.875
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h13",
+        "region": "a",
+        "position": {
+          "x": -14.95,
+          "z": -8.425
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h14",
+        "region": "a",
+        "position": {
+          "x": -11.65,
+          "z": -7.025
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h15",
+        "region": "a",
+        "position": {
+          "x": -8.35,
+          "z": -8.425
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h16",
+        "region": "a",
+        "position": {
+          "x": -5.050000000000001,
+          "z": -7.025
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h17",
+        "region": "a",
+        "position": {
+          "x": -14.95,
+          "z": -5.575
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h18",
+        "region": "a",
+        "position": {
+          "x": -11.65,
+          "z": -4.175000000000001
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h19",
+        "region": "a",
+        "position": {
+          "x": -8.35,
+          "z": -5.575
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h20",
+        "region": "a",
+        "position": {
+          "x": -5.050000000000001,
+          "z": -4.175000000000001
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h21",
+        "region": "a",
+        "position": {
+          "x": -14.95,
+          "z": -2.7249999999999996
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h22",
+        "region": "a",
+        "position": {
+          "x": -11.65,
+          "z": -1.3249999999999997
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 97.55,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h23",
+        "region": "b",
+        "position": {
+          "x": 5.050000000000001,
+          "z": -10.275
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h24",
+        "region": "b",
+        "position": {
+          "x": 8.35,
+          "z": -8.875
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h25",
+        "region": "b",
+        "position": {
+          "x": 11.65,
+          "z": -10.275
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h26",
+        "region": "b",
+        "position": {
+          "x": 14.95,
+          "z": -8.875
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h27",
+        "region": "b",
+        "position": {
+          "x": 5.050000000000001,
+          "z": -7.425
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h28",
+        "region": "b",
+        "position": {
+          "x": 8.35,
+          "z": -6.025
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h29",
+        "region": "b",
+        "position": {
+          "x": 11.65,
+          "z": -7.425
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h30",
+        "region": "b",
+        "position": {
+          "x": 14.95,
+          "z": -6.025
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h31",
+        "region": "b",
+        "position": {
+          "x": 5.050000000000001,
+          "z": -4.575
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h32",
+        "region": "b",
+        "position": {
+          "x": 8.35,
+          "z": -3.1750000000000003
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h33",
+        "region": "b",
+        "position": {
+          "x": 11.65,
+          "z": -4.575
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h34",
+        "region": "b",
+        "position": {
+          "x": 14.95,
+          "z": -3.1750000000000003
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h35",
+        "region": "b",
+        "position": {
+          "x": 5.050000000000001,
+          "z": -1.7249999999999996
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h36",
+        "region": "b",
+        "position": {
+          "x": 8.35,
+          "z": -0.32499999999999973
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.46,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h37",
+        "region": "c",
+        "position": {
+          "x": -4.949999999999999,
+          "z": 3.7249999999999996
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h38",
+        "region": "c",
+        "position": {
+          "x": -1.65,
+          "z": 5.125
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h39",
+        "region": "c",
+        "position": {
+          "x": 1.65,
+          "z": 3.7249999999999996
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h40",
+        "region": "c",
+        "position": {
+          "x": 4.949999999999999,
+          "z": 5.125
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h41",
+        "region": "c",
+        "position": {
+          "x": -4.949999999999999,
+          "z": 6.575
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h42",
+        "region": "c",
+        "position": {
+          "x": -1.65,
+          "z": 7.975
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h43",
+        "region": "c",
+        "position": {
+          "x": 1.65,
+          "z": 6.575
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h44",
+        "region": "c",
+        "position": {
+          "x": 4.949999999999999,
+          "z": 7.975
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h45",
+        "region": "c",
+        "position": {
+          "x": -4.949999999999999,
+          "z": 9.425
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h46",
+        "region": "c",
+        "position": {
+          "x": -1.65,
+          "z": 10.825000000000001
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h47",
+        "region": "c",
+        "position": {
+          "x": 1.65,
+          "z": 9.425
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h48",
+        "region": "c",
+        "position": {
+          "x": 4.949999999999999,
+          "z": 10.825000000000001
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h49",
+        "region": "c",
+        "position": {
+          "x": -4.949999999999999,
+          "z": 12.275
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h50",
+        "region": "c",
+        "position": {
+          "x": -1.65,
+          "z": 13.675
+        },
+        "kind": "mucosal",
+        "layer": "epithelium",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h51",
+        "region": "c",
+        "position": {
+          "x": -6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h52",
+        "region": "c",
+        "position": {
+          "x": -3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h53",
+        "region": "c",
+        "position": {
+          "x": 0,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h54",
+        "region": "c",
+        "position": {
+          "x": 3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h55",
+        "region": "c",
+        "position": {
+          "x": 6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.21999999999997,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      }
+    ],
+    "serial": 76,
+    "eventId": 74,
+    "events": [
+      {
+        "id": 1,
+        "tick": 0,
+        "type": "wave",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "第 1 波：酵母聚落。感染入口與負荷已標示。",
+        "amount": 1
+      },
+      {
+        "id": 2,
+        "tick": 0,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p6",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 3,
+        "tick": 0,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "嗜中性球向口咽表面集結，5 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 4,
+        "tick": 1,
+        "type": "engulf",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u1",
+        "target": "p6",
+        "from": {
+          "x": -11,
+          "z": -5
+        },
+        "survives": false
+      },
+      {
+        "id": 5,
+        "tick": 1,
+        "type": "degranulate",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+        "amount": 3,
+        "actor": "u2",
+        "target": "p7",
+        "from": {
+          "x": 11,
+          "z": -4
+        }
+      },
+      {
+        "id": 6,
+        "tick": 1,
+        "type": "present",
+        "position": {
+          "x": -1,
+          "z": 10
+        },
+        "message": "樹突細胞已捕捉蛋白抗原，成熟後將由淋巴引流至淋巴結；吞入病原不等於直接活化所有淋巴球。",
+        "amount": 1,
+        "actor": "u3"
+      },
+      {
+        "id": 7,
+        "tick": 1,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "樹突細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u3",
+        "target": "p8",
+        "from": {
+          "x": -1,
+          "z": 10
+        },
+        "survives": false
+      },
+      {
+        "id": 8,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -11,
+          "z": -5
+        },
+        "message": "巨噬細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u1"
+      },
+      {
+        "id": 9,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": 11,
+          "z": -4
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u2"
+      },
+      {
+        "id": 10,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -1.6708203932499368,
+          "z": 11.341640786499875
+        },
+        "message": "樹突細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u3"
+      },
+      {
+        "id": 11,
+        "tick": 11,
+        "type": "degranulate",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+        "amount": 3,
+        "actor": "u2",
+        "target": "p7",
+        "from": {
+          "x": 11,
+          "z": -4
+        }
+      },
+      {
+        "id": 12,
+        "tick": 15,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "樹突細胞經引流到達淋巴結：開始蛋白肽 MHC-II 呈遞，需共刺激與活化等待。",
+        "amount": 8,
+        "actor": "u3"
+      },
+      {
+        "id": 13,
+        "tick": 16,
+        "type": "clear",
+        "position": {
+          "x": -11,
+          "z": -5
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u1",
+        "target": "i57"
+      },
+      {
+        "id": 14,
+        "tick": 16,
+        "type": "clear",
+        "position": {
+          "x": -4.130495168499707,
+          "z": 16.260990336999416
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u3",
+        "target": "i58"
+      },
+      {
+        "id": 15,
+        "tick": 16,
+        "type": "engulf",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u1",
+        "target": "p6",
+        "from": {
+          "x": -11,
+          "z": -5
+        },
+        "survives": false
+      },
+      {
+        "id": 16,
+        "tick": 21,
+        "type": "degranulate",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+        "amount": 3,
+        "actor": "u2",
+        "target": "p7",
+        "from": {
+          "x": 11,
+          "z": -4
+        }
+      },
+      {
+        "id": 17,
+        "tick": 25,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "嗜中性球由微血管抵達，正前往口咽表面。",
+        "amount": 1,
+        "actor": "u60"
+      },
+      {
+        "id": 18,
+        "tick": 31,
+        "type": "clear",
+        "position": {
+          "x": -11,
+          "z": -5
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u1",
+        "target": "i59"
+      },
+      {
+        "id": 19,
+        "tick": 31,
+        "type": "engulf",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "巨噬細胞吞入 1 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "p6",
+        "from": {
+          "x": -11,
+          "z": -5
+        },
+        "survives": false
+      },
+      {
+        "id": 20,
+        "tick": 31,
+        "type": "clear",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p6"
+      },
+      {
+        "id": 21,
+        "tick": 35,
+        "type": "recognize",
+        "position": {
+          "x": 0,
+          "z": 11.700000000000006
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u60"
+      },
+      {
+        "id": 22,
+        "tick": 46,
+        "type": "clear",
+        "position": {
+          "x": -8.544504392237473,
+          "z": -4.816756588356208
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "i61"
+      },
+      {
+        "id": 23,
+        "tick": 50,
+        "type": "barrier",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 92
+      },
+      {
+        "id": 24,
+        "tick": 50,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 30
+      },
+      {
+        "id": 25,
+        "tick": 50,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p8",
+        "from": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "survives": false
+      },
+      {
+        "id": 26,
+        "tick": 50,
+        "type": "grow",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p8"
+      },
+      {
+        "id": 27,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "上皮前緣殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 28,
+        "tick": 55,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "淋巴結：MHC-II／蛋白肽及共刺激已就緒；相符 CD4 T 可活化。這不是 MHC-I 交叉呈遞，不會直接活化 CD8。",
+        "amount": 1
+      },
+      {
+        "id": 29,
+        "tick": 55,
+        "type": "activate",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "相符 CD4 T 接受 MHC-II 肽／共刺激，開始擴增分化（8 秒教學壓縮）。",
+        "amount": 1,
+        "actor": "u4"
+      },
+      {
+        "id": 30,
+        "tick": 59,
+        "type": "mark",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p8",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 31,
+        "tick": 60,
+        "type": "clear",
+        "position": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "i62"
+      },
+      {
+        "id": 32,
+        "tick": 60,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u2",
+        "target": "p8",
+        "from": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "survives": false
+      },
+      {
+        "id": 33,
+        "tick": 69,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "巨噬細胞吞入 1 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "p8",
+        "from": {
+          "x": -1.355589849158504,
+          "z": 5.966615226262244
+        },
+        "survives": false
+      },
+      {
+        "id": 34,
+        "tick": 69,
+        "type": "clear",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p8"
+      },
+      {
+        "id": 35,
+        "tick": 70,
+        "type": "clear",
+        "position": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u2",
+        "target": "i63"
+      },
+      {
+        "id": 36,
+        "tick": 84,
+        "type": "clear",
+        "position": {
+          "x": -1.355589849158504,
+          "z": 5.966615226262244
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "i64"
+      },
+      {
+        "id": 37,
+        "tick": 95,
+        "type": "activate",
+        "position": {
+          "x": -5.43868543912612,
+          "z": 17.625991927656848
+        },
+        "message": "Th17 細胞已活化，依其亞群及相符抗原執行效應；不直接清除所有種類的病原。",
+        "amount": 1,
+        "actor": "u4"
+      },
+      {
+        "id": 38,
+        "tick": 100,
+        "type": "barrier",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 52
+      },
+      {
+        "id": 39,
+        "tick": 100,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 99
+      },
+      {
+        "id": 40,
+        "tick": 150,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 99
+      },
+      {
+        "id": 41,
+        "tick": 159,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "Th17 細胞向頰側黏膜集結，8 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 42,
+        "tick": 199,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "Th17 細胞由微血管抵達，先前往淋巴結接受活化；頰側黏膜為後續支援防區。",
+        "amount": 1,
+        "actor": "u66"
+      },
+      {
+        "id": 43,
+        "tick": 200,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 99
+      },
+      {
+        "id": 44,
+        "tick": 210,
+        "type": "activate",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "相符 CD4 T 接受 MHC-II 肽／共刺激，開始擴增分化（8 秒教學壓縮）。",
+        "amount": 1,
+        "actor": "u66"
+      },
+      {
+        "id": 45,
+        "tick": 250,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 99
+      },
+      {
+        "id": 46,
+        "tick": 250,
+        "type": "activate",
+        "position": {
+          "x": -5.54,
+          "z": 18
+        },
+        "message": "Th17 細胞已活化，依其亞群及相符抗原執行效應；不直接清除所有種類的病原。",
+        "amount": 1,
+        "actor": "u66"
+      },
+      {
+        "id": 47,
+        "tick": 300,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 99
+      },
+      {
+        "id": 48,
+        "tick": 309,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "嗜中性球向上皮前緣集結，4 秒後到場（CXCL8 促進募集）。",
+        "amount": 1
+      },
+      {
+        "id": 49,
+        "tick": 329,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "嗜中性球由微血管抵達，正前往上皮前緣。",
+        "amount": 1,
+        "actor": "u68"
+      },
+      {
+        "id": 50,
+        "tick": 350,
+        "type": "wave",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "第 2 波：黏膜擴增。感染入口與負荷已標示。",
+        "amount": 2
+      },
+      {
+        "id": 51,
+        "tick": 350,
+        "type": "recognize",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u68"
+      },
+      {
+        "id": 52,
+        "tick": 350,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "IL-17／IL-22 作用於上皮：提高抗菌肽、屏障與募集；不是直接傷害技能。",
+        "amount": 99
+      },
+      {
+        "id": 53,
+        "tick": 350,
+        "type": "grow",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "酵母轉為侵襲性菌絲；長菌絲不能整條吞入，需嗜中性球顆粒與上皮防禦。",
+        "amount": 5,
+        "target": "p69"
+      },
+      {
+        "id": 54,
+        "tick": 350,
+        "type": "barrier",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "上皮抗菌肽限制表面真菌，負荷減少；IL-17 的效應經由組織。",
+        "amount": 1,
+        "target": "p70"
+      },
+      {
+        "id": 55,
+        "tick": 350,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "p70",
+        "from": {
+          "x": -1.355589849158504,
+          "z": 5.966615226262244
+        },
+        "survives": false
+      },
+      {
+        "id": 56,
+        "tick": 350,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p70",
+        "from": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "survives": false
+      },
+      {
+        "id": 57,
+        "tick": 350,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u60",
+        "target": "p70",
+        "from": {
+          "x": 0,
+          "z": 8
+        },
+        "survives": false
+      },
+      {
+        "id": 58,
+        "tick": 350,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u68",
+        "target": "p70",
+        "from": {
+          "x": 0,
+          "z": 8
+        },
+        "survives": false
+      },
+      {
+        "id": 59,
+        "tick": 350,
+        "type": "grow",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p69"
+      },
+      {
+        "id": 60,
+        "tick": 350,
+        "type": "grow",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p70"
+      },
+      {
+        "id": 61,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "頰側黏膜殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 62,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "上皮前緣殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 63,
+        "tick": 359,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p69",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 64,
+        "tick": 360,
+        "type": "clear",
+        "position": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "i72"
+      },
+      {
+        "id": 65,
+        "tick": 360,
+        "type": "clear",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u60",
+        "target": "i73"
+      },
+      {
+        "id": 66,
+        "tick": 360,
+        "type": "clear",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u68",
+        "target": "i74"
+      },
+      {
+        "id": 67,
+        "tick": 360,
+        "type": "engulf",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "嗜中性球吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p70",
+        "from": {
+          "x": 1.5348864577942702,
+          "z": 5.851158959088023
+        },
+        "survives": false
+      },
+      {
+        "id": 68,
+        "tick": 360,
+        "type": "clear",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p70"
+      },
+      {
+        "id": 69,
+        "tick": 365,
+        "type": "clear",
+        "position": {
+          "x": -0.15743742531200955,
+          "z": 7.763843862031985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "i71"
+      },
+      {
+        "id": 70,
+        "tick": 370,
+        "type": "clear",
+        "position": {
+          "x": -0.08835347287882453,
+          "z": 7.867469790681763
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "i75"
+      },
+      {
+        "id": 71,
+        "tick": 381,
+        "type": "degranulate",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+        "amount": 3,
+        "actor": "u60",
+        "target": "p69",
+        "from": {
+          "x": -8.542383021868531,
+          "z": -4.813574532802793
+        }
+      },
+      {
+        "id": 72,
+        "tick": 381,
+        "type": "degranulate",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+        "amount": 3,
+        "actor": "u68",
+        "target": "p69",
+        "from": {
+          "x": -8.542383021868531,
+          "z": -4.813574532802793
+        }
+      },
+      {
+        "id": 73,
+        "tick": 391,
+        "type": "degranulate",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p69",
+        "from": {
+          "x": -8.630736494747355,
+          "z": -4.9461047421210305
+        }
+      },
+      {
+        "id": 74,
+        "tick": 391,
+        "type": "result",
+        "position": {
+          "x": 0,
+          "z": 0
+        },
+        "message": "2 波感染來源均已清除",
+        "amount": 3
+      }
+    ],
+    "campaign": {
+      "containment": {
+        "a": 0,
+        "b": 0,
+        "c": 0
+      },
+      "barrier": {
+        "a": 63.64172000000001,
+        "b": 0,
+        "c": 95.25119999999997
+      },
+      "stable": 0,
+      "cd4": 100,
+      "impairment": 0
+    },
+    "result": {
+      "type": "victory",
+      "reason": "2 波感染來源均已清除",
+      "preservation": 99,
+      "stars": 3,
+      "seconds": 78.2
+    }
+  },
+  "paused": false,
+  "undo": [],
+  "settings": {
+    "speed": 2,
+    "reduced": false,
+    "idle": true,
+    "hints": true,
+    "labels": false
+  },
+  "read": [],
+  "records": {
+    "m5": {
+      "type": "victory",
+      "reason": "2 波感染來源均已清除",
+      "preservation": 99,
+      "stars": 3,
+      "seconds": 78.2
+    }
+  },
+  "revealed": []
+}
