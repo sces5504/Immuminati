@@ -1,0 +1,357 @@
+{
+  "url": "https://sces5504.github.io/Immuminati/",
+  "recordedAt": "2026-10-17T06:18:32.421963+00:00",
+  "source": "GitHub Actions public live-browser job log (not local proxy browser)",
+  "run": {
+    "conclusion": "success",
+    "databaseId": 39009181362,
+    "headSha": "f99e44faf882c3100ea51907c5e68a8204652bab",
+    "jobs": [
+      {
+        "completedAt": "2026-10-17T06:17:01Z",
+        "conclusion": "success",
+        "databaseId": 117327801259,
+        "name": "smoke",
+        "startedAt": "2026-10-17T06:14:43Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/setup-node@v4",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm ci",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npx playwright install --with-deps chromium",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Play published RTS M1 on desktop and mobile",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@v4",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@v4",
+            "number": 13,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 14,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/sces5504/Immuminati/actions/runs/39009181362/job/117327801259"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/sces5504/Immuminati/actions/runs/39009181362"
+  },
+  "deployment": {
+    "conclusion": "success",
+    "databaseId": 39008952191,
+    "headSha": "f99e44faf882c3100ea51907c5e68a8204652bab",
+    "jobs": [
+      {
+        "completedAt": "2026-10-17T06:14:20Z",
+        "conclusion": "success",
+        "databaseId": 117327117789,
+        "name": "verify",
+        "startedAt": "2026-10-17T06:10:57Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/checkout@v4",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/setup-node@v4",
+            "number": 3,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm ci",
+            "number": 4,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm run verify",
+            "number": 5,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npx playwright install --with-deps chromium",
+            "number": 6,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm run test:browser",
+            "number": 7,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm run test:animation",
+            "number": 8,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run npm run test:extra",
+            "number": 9,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/upload-artifact@v4",
+            "number": 10,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/upload-pages-artifact@v3",
+            "number": 11,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/setup-node@v4",
+            "number": 21,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v4",
+            "number": 22,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/sces5504/Immuminati/actions/runs/39008952191/job/117327117789"
+      },
+      {
+        "completedAt": "2026-10-17T06:14:36Z",
+        "conclusion": "success",
+        "databaseId": 117327742826,
+        "name": "deploy",
+        "startedAt": "2026-10-17T06:14:25Z",
+        "status": "completed",
+        "steps": [
+          {
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Run actions/deploy-pages@v4",
+            "number": 2,
+            "status": "completed"
+          },
+          {
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 3,
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/sces5504/Immuminati/actions/runs/39008952191/job/117327742826"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/sces5504/Immuminati/actions/runs/39008952191"
+  },
+  "assetChecks": [
+    {
+      "asset": "/Immuminati/assets/index-B3dRx9Gy.js",
+      "sha256": "5db241033cde1c1e3f9d0a90f5923b6e859056f5f694870cfdd0f31df361877f",
+      "matches": true
+    },
+    {
+      "asset": "/Immuminati/assets/index-Bmmolp_w.css",
+      "sha256": "61640c304af8e983e6b51d1e952dced50cc1c1ffdb027535437af8fd6d0d5dfe",
+      "matches": true
+    },
+    {
+      "asset": "/Immuminati/assets/mark.svg",
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86",
+      "matches": true
+    }
+  ],
+  "results": [
+    {
+      "name": "desktop: positive drag, reverse, zoom, no accidental orders",
+      "passed": true
+    },
+    {
+      "name": "desktop: direct move order",
+      "passed": true,
+      "position": {
+        "id": "u1",
+        "kind": "macrophage",
+        "visualId": "cell.macrophage.v1",
+        "x": 400.5969371702106,
+        "y": 273.5309256296611,
+        "action": "approach",
+        "since": 11,
+        "until": 11,
+        "life": 1000000000,
+        "signal": false,
+        "order": {
+          "x": 500,
+          "y": 285.0021660436928
+        }
+      }
+    },
+    {
+      "name": "desktop: real AI, opsonization, recruitment and field",
+      "passed": true,
+      "step": 112
+    },
+    {
+      "name": "desktop: export, reload, import validation, legacy preserved",
+      "passed": true
+    },
+    {
+      "name": "desktop: full playable M1 victory",
+      "passed": true,
+      "result": {
+        "outcome": "won",
+        "reason": "來源已控制，胞外／胞內活病原均已清除",
+        "stars": 3,
+        "step": 550
+      },
+      "tissue": 80.17967360000013,
+      "events": 81,
+      "errors": [],
+      "bad": [],
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "browser": "155.0.8059.0"
+    },
+    {
+      "name": "desktop: controlled 30-group focus, roster selection and contact actions",
+      "passed": true
+    },
+    {
+      "name": "desktop: 20px root text without horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile-touch-emulation: positive drag, reverse, zoom, no accidental orders",
+      "passed": true
+    },
+    {
+      "name": "mobile-touch-emulation: direct move order",
+      "passed": true,
+      "position": {
+        "id": "u1",
+        "kind": "macrophage",
+        "visualId": "cell.macrophage.v1",
+        "x": 400.7342216371655,
+        "y": 272.01186986596707,
+        "action": "approach",
+        "since": 11,
+        "until": 11,
+        "life": 1000000000,
+        "signal": false,
+        "order": {
+          "x": 500,
+          "y": 278.5098326439951
+        }
+      }
+    },
+    {
+      "name": "mobile-touch-emulation: real AI, opsonization, recruitment and field",
+      "passed": true,
+      "step": 110
+    },
+    {
+      "name": "mobile-touch-emulation: export, reload, import validation, legacy preserved",
+      "passed": true
+    },
+    {
+      "name": "mobile-touch-emulation: full playable M1 victory",
+      "passed": true,
+      "result": {
+        "outcome": "won",
+        "reason": "來源已控制，胞外／胞內活病原均已清除",
+        "stars": 3,
+        "step": 550
+      },
+      "tissue": 80.13204480000013,
+      "events": 81,
+      "errors": [],
+      "bad": [],
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "browser": "155.0.8059.0"
+    },
+    {
+      "name": "mobile-touch-emulation: controlled 30-group focus, roster selection and contact actions",
+      "passed": true
+    },
+    {
+      "name": "mobile-touch-emulation: 20px root text without horizontal overflow",
+      "passed": true
+    }
+  ]
+}

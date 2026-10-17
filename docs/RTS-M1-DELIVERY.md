@@ -48,7 +48,7 @@
 - 相同種子／指令／600 步，1×／2×／4× × 正常／略過／降低動態，完整狀態與事件完全相等。全局無動畫回呼提交規則。每 10 步存檔還原再推一步，和未中斷局一致。
 - 30 群同熱區規則測試：可接觸及清除，不會因舊名額拒絕。瀏覽器另以明示受控的 30 群 fixture 驗證名單選取與實際接觸。
 - 動作驗證：[animation-results.json](evidence/rts/animation-results.json)，正常／降低／略過的同一步狀態相等；切換替換 provider 前後權威 JSON 相等；獨立膜待機 >5 秒，包覆／吞入／清除與受控胞內存活分支均驗證。
-- 本機完整操作通過，見 [browser-results.json](evidence/rts/browser-results.json)：桌面與 360px 觸控模擬各 7 項檢查。兩者組織 80.180%／80.132%、三星；無 console 錯誤或資產 404。公開 Pages 結果待實際發布後補記。
+- 本機完整操作通過，見 [browser-results.json](evidence/rts/browser-results.json)：桌面與 360px 觸控模擬各 7 項檢查。兩者組織 80.180%／80.132%、三星；無 console 錯誤或資產 404。公開 Pages 另 14 項全通過，見 [live-browser-results.json](evidence/rts/live-browser-results.json)，資料取自實際公開頁面 CI 工作紀錄。
 
 瀏覽器為 headless Chromium 154.0.8037.57，桌面 1440×1000，手機 360×800 的觸控模擬；地圖拖曳使用真實 CDP touch 事件，位置指令使用 touchscreen tap。其他介面亦經 Playwright 實際點按。不是實體手機，也未涵蓋 Safari／iOS。額外檢查見 [extra-results.json](evidence/rts/extra-results.json)：44px 目標、鍵盤焦點／Escape、降低動態、選關百科保留續玩。headless 沒有提供真實 hidden 頁籤狀態；背景安全暫停以受控 visibility 事件驗證，真實 OS 背景切換仍待實機複驗。
 
@@ -81,4 +81,10 @@ M2–M6 只有開發中入口與百科，未實作其關卡；受控存活不是
 
 ## 發布紀錄
 
-待本次驗證完成後填入實際 commit、Actions run 與公開頁面結果。
+- 實際部署 commit：`f99e44faf882c3100ea51907c5e68a8204652bab`（v0.3.0）。
+- [驗證與 Pages 發布成功](https://github.com/sces5504/Immuminati/actions/runs/39008952191)：乾淨安裝、規則／型別／建置、桌面／手機、動作與額外介面檢查，全部通過後部署。
+- [公開 Pages 操作成功](https://github.com/sces5504/Immuminati/actions/runs/39009181362)：Chromium 155.0.8059.0，桌面 1440×1000／360×800 觸控模擬共 14 項全通過，兩者均於 110 秒三星勝利，無 console 錯誤與資產 404。
+- 公開 index 與本機 production index 完全一致；JS、CSS、favicon 逐檔 SHA-256 比對一致。明確驗證 `/Immuminati/` 子路徑與資產，不以舊公開頁面作證。
+- 公開：[直接遊玩](https://sces5504.github.io/Immuminati/) ／ [獨立素材預覽](https://sces5504.github.io/Immuminati/#visual-lab)。本機啟動及測試命令見 README。
+- 公開頁面本機瀏覽器嘗試因雲端代理憑證 `ERR_CERT_AUTHORITY_INVALID` 未完成；自動核准審查拒絕永久加入 NSS 信任庫，因其會擴大後續憑證信任。未執行信任庫變更，改以 GitHub Actions 的乾淨瀏覽器完成相同公開驗證。沒有關閉 TLS 驗證。公開工作紀錄的 14 個 PASS 已存入 JSON；該工作另保留公開畫面／錄影 artifact。
+- 發布後僅補文件與 CI 證據的提交使用 `[skip ci]`，不替換已驗證的遊戲 bundle。
