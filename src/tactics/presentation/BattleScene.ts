@@ -1,3 +1,4 @@
+import { chooseEntity } from "./selection";
 import {
   makeTissueActor,
   updateTissueActor,
@@ -19,6 +20,7 @@ export interface SceneInput {
   state: TacticalState;
   selected?: string;
   inspect?: boolean;
+  moving?: boolean;
   reduced: boolean;
   idle: boolean;
   speed: number;
@@ -1136,8 +1138,9 @@ export class BattleScene {
         ),
       }))
       .sort((a, b) => a.d - b.d);
-    if (entities[0]?.d < 28) {
-      this.pick({ type: entities[0].type, id: entities[0].id });
+    const entity = chooseEntity(entities, this.read().moving);
+    if (entity) {
+      this.pick({ type: entity.type, id: entity.id });
       return;
     }
     const hit = this.groundAt(e.clientX, e.clientY);
