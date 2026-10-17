@@ -326,6 +326,10 @@ export default function TacticalApp() {
   function start(fresh = true, id = content.id) {
     const nextContent = tacticalScenarios[id];
     if (!nextContent) return;
+    setMode("command");
+    setNotice("");
+    setTutorial(false);
+    setObjectiveExpanded(false);
     if (fresh && id !== content.id) {
       const next = new TacticalController(nextContent);
       next.save.settings = { ...controller.save.settings };
@@ -402,6 +406,8 @@ export default function TacticalApp() {
     update(true);
     homeRef.current = true;
     setHome(true);
+    setMode("command");
+    setTutorial(false);
     setMenu(false);
     setAntibodyMenu(false);
     setSelected(undefined);
@@ -827,7 +833,9 @@ export default function TacticalApp() {
                   ? "肺泡腔"
                   : content.tissue === "lymphoid"
                     ? "淋巴組織間隙"
-                    : "黏膜腔面"}{" "}
+                    : content.tissue === "intestinal"
+                      ? "黏膜組織間隙"
+                      : "黏膜腔面"}{" "}
                 · 細胞外
               </span>
               <small>
@@ -866,7 +874,9 @@ export default function TacticalApp() {
               {content.practice && (
                 <>
                   <button className="t-practice-back" onClick={endPractice}>
-                    結束演練，返回原關卡
+                    結束演練，返回{" "}
+                    {practiceReturn.current?.content.id.toUpperCase() ??
+                      "原關卡"}
                   </button>
                   <details className="t-practice-notes">
                     <summary>目標與限制</summary>
@@ -941,34 +951,38 @@ export default function TacticalApp() {
                 補體調理<small>1 資源／{s.support} 次</small>
               </span>
             </button>
-            <button
-              data-testid="antibody-tool"
-              onClick={() => {
-                if (s.immunity.antibodies > 0 && !result) {
-                  setMode(mode === "antibody" ? "command" : "antibody");
-                  setSelected(undefined);
-                  setAntibodyMenu(false);
-                } else setAntibodyMenu(!antibodyMenu);
-                setMenu(false);
-              }}
-              className={antibodyMenu || mode === "antibody" ? "active" : ""}
-            >
-              <b>Y</b>
-              <span>
-                B／抗體
-                <small>抗體 {s.immunity.antibodies}</small>
-              </span>
-            </button>
-            <button
-              className="t-antibody-explain"
-              data-testid="antibody-explain"
-              onClick={() => {
-                setAntibodyMenu(true);
-                setMenu(false);
-              }}
-            >
-              抗體流程 ⓘ
-            </button>
+            <div className="t-antibody-tools">
+              <button
+                data-testid="antibody-tool"
+                onClick={() => {
+                  if (s.immunity.antibodies > 0 && !result) {
+                    setMode(mode === "antibody" ? "command" : "antibody");
+                    setSelected(undefined);
+                    setAntibodyMenu(false);
+                  } else setAntibodyMenu(!antibodyMenu);
+                  setMenu(false);
+                }}
+                className={antibodyMenu || mode === "antibody" ? "active" : ""}
+              >
+                <b>Y</b>
+                <span>
+                  B／抗體
+                  <small>抗體 {s.immunity.antibodies}</small>
+                </span>
+              </button>
+              <button
+                className="t-antibody-explain"
+                aria-label="抗體流程說明"
+                title="抗體流程說明"
+                data-testid="antibody-explain"
+                onClick={() => {
+                  setAntibodyMenu(true);
+                  setMenu(false);
+                }}
+              >
+                ⓘ
+              </button>
+            </div>
             <button
               data-testid="recruit-tool"
               onClick={() => {

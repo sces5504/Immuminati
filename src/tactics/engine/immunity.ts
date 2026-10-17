@@ -234,6 +234,12 @@ export function supportDestination(
         dist(cell.position, a.position) - dist(cell.position, b.position),
     )[0]?.position;
   if (
+    cell.kind === "helperT" &&
+    cell.activation === "effector" &&
+    s.cells.some((u) => u.kind === "bcell" && u.activation !== "effector")
+  )
+    return nodePoint(c);
+  if (
     role === "helper" &&
     cell.activation === "effector" &&
     cell.kind !== "th17"

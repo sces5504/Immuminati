@@ -1612,7 +1612,7 @@
     font-size: 8px;
     padding: 5px;
     gap: 4px;
-    min-height: 36px !important;
+    min-height: 44px !important;
     margin-top: 8px;
   }
   .t-next-wave b {
@@ -3105,4 +3105,58 @@
 }
 .t-colony-label b.t-ig-symbol {
   color: #9be7b0;
+}
+
+/* The explanation shares one tool row, keeping the original battlefield footprint. */
+.t-antibody-tools {
+  width: 173px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 44px;
+  gap: 0;
+}
+.t-antibody-tools > button {
+  min-height: 56px;
+  min-width: 44px;
+  padding: 8px 10px;
+  background: #15283fe6;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  box-sizing: border-box;
+}
+.t-antibody-tools > button > span {
+  font-size: 11px;
+  white-space: nowrap;
+}
+.t-antibody-tools > button > b {
+  font-size: 22px;
+}
+.t-antibody-tools .t-antibody-explain {
+  width: 44px;
+  min-height: 56px;
+  justify-content: center;
+  padding: 4px;
+}
+@media (max-width: 760px) {
+  .t-antibody-tools {
+    width: 112px;
+  }
+  .t-antibody-tools > button {
+    min-height: 44px;
+    width: 100%;
+    padding: 4px;
+    gap: 3px;
+  }
+  .t-antibody-tools > button > b {
+    font-size: 16px;
+  }
+  .t-antibody-tools > button > span {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  .t-antibody-tools .t-antibody-explain {
+    min-height: 44px;
+    width: 44px;
+  }
 }

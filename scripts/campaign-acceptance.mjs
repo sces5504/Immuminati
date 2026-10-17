@@ -97,6 +97,7 @@ try {
       page.on("response", (r) => {
         if (r.status() >= 400) bad.push([r.status(), r.url()]);
       });
+      await page.clock.install({ time: new Date("2030-01-01T00:00:00Z") });
       await page.goto(target);
       await page
         .locator(".t-case-cards button")
@@ -154,8 +155,7 @@ try {
       await page.getByRole("button", { name: "關閉視窗", exact: true }).click();
       await page.getByTestId("speed-toggle").click();
       // Controlled browser clock drives the actual production RAF controller. No rule state injection.
-      await page.clock.install();
-      await page.clock.pauseAt(new Date());
+      await page.clock.pauseAt(new Date("2030-01-01T01:00:00Z"));
       const tick = async () =>
         Number(await page.locator(".tactical-root").getAttribute("data-tick"));
       const click = async (locator) => locator.evaluate((el) => el.click());
@@ -179,6 +179,11 @@ try {
         n < 180 && !(await page.getByTestId("tactical-result").count());
         n++
       ) {
+        if (
+          (await page.locator(".tactical-root").getAttribute("data-paused")) ===
+          "false"
+        )
+          await click(page.getByTestId("pause-toggle"));
         const now = await tick();
         if (now >= nextMark) {
           const save = await read();

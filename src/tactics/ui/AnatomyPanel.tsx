@@ -14,10 +14,54 @@ import { tissueProfiles } from "../content/tissues";
 function SectionDiagram({
   lung,
   lymphoid = false,
+  intestinal = false,
 }: {
   lung: boolean;
   lymphoid?: boolean;
+  intestinal?: boolean;
 }) {
+  if (lymphoid)
+    return (
+      <svg
+        className="t-anatomy-section"
+        viewBox="0 0 560 240"
+        role="img"
+        aria-label="淋巴基質與 CD4 宿主細胞；細胞膜內外區分"
+      >
+        <rect width="560" height="240" rx="16" fill="#263a50" />
+        <path
+          d="M10 80L150 40L290 90L440 40L550 110M10 170L150 120L290 180L440 120L550 190M150 40V120M290 90V180M440 40V120"
+          stroke="#b79ebc"
+          strokeWidth="4"
+          fill="none"
+        />
+        <text x="22" y="26" fill="#d4ece2">
+          淋巴組織間隙｜細胞膜外＝細胞外
+        </text>
+        {[120, 280, 440].map((x) => (
+          <g key={x}>
+            <circle
+              cx={x}
+              cy="112"
+              r="37"
+              fill="#9ac6b5"
+              stroke="#d8f0e5"
+              strokeWidth="3"
+            />
+            <circle cx={x} cy="112" r="21" fill="#907aab" />
+            <text x={x - 13} y="118" fill="#fff">
+              CD4
+            </text>
+          </g>
+        ))}
+        <text x="22" y="185" fill="#dfd9ec">
+          每顆宿主的膜內：細胞質、細胞核
+        </text>
+        <text x="22" y="212" fill="#bacfd7">
+          基質不等於一顆大細胞；潛伏基因組位於宿主核內
+        </text>
+      </svg>
+    );
   return (
     <svg
       className="t-anatomy-section"
@@ -36,17 +80,25 @@ function SectionDiagram({
           ? "肺泡腔｜細胞外"
           : lymphoid
             ? "淋巴組織間隙｜細胞外"
-            : "黏膜腔面｜細胞外"}
+            : intestinal
+              ? "腸腔｜細胞外（屏障另一側）"
+              : "黏膜腔面｜細胞外"}
       </text>
       <text x="32" y="63" className="t-svg-small" fill="#48626a">
         {lymphoid
           ? "基質與淋巴球之間是胞外；潛伏病毒位於 CD4 宿主細胞核內"
-          : "病原與巡防免疫細胞位於腔面；這個空間不是一顆細胞"}
+          : intestinal
+            ? "本關主要戰場在下方黏膜組織間隙，並非上皮細胞內"
+            : "病原與巡防免疫細胞位於腔面；這個空間不是一顆細胞"}
       </text>
       {[0, 1, 2, 3, 4].map((i) => (
         <g key={i}>
           <path
-            d={`M${18 + i * 105} 96 Q${70 + i * 105} 87 ${120 + i * 105} 96V118H${18 + i * 105}Z`}
+            d={
+              intestinal
+                ? `M${18 + i * 105} 72H${120 + i * 105}V118H${18 + i * 105}Z`
+                : `M${18 + i * 105} 96 Q${70 + i * 105} 87 ${120 + i * 105} 96V118H${18 + i * 105}Z`
+            }
             fill="#dcaebe"
             stroke="#8f718e"
             strokeWidth="2"
@@ -67,7 +119,9 @@ function SectionDiagram({
       </text>
       <path d="M18 122H542" stroke="#c9cee4" strokeWidth="3" />
       <text x="32" y="168" fill="#cededc">
-        間質｜也是細胞外，但不等於肺泡腔
+        {intestinal
+          ? "黏膜固有層間隙｜本關主要胞外戰場"
+          : "間質｜也是細胞外，但不等於肺泡腔"}
       </text>
       <rect
         x="25"
@@ -267,12 +321,19 @@ export function AnatomyPanel({
     <div className="t-anatomy-panel">
       <p className="t-anatomy-intro">
         <b>{tissueProfiles[c.tissue].name} · 開放剖視</b>：戰場中央是
-        {c.tissue === "lung" ? "肺泡腔" : "黏膜腔面"}
+        {c.tissue === "lung"
+          ? "肺泡腔"
+          : c.tissue === "intestinal"
+            ? "黏膜組織間隙"
+            : c.tissue === "lymphoid"
+              ? "淋巴組織間隙"
+              : "黏膜腔面"}
         的細胞外環境。周圍薄片是宿主上皮細胞，不是包住整個戰場的單一細胞膜。
       </p>
       <SectionDiagram
         lung={c.tissue === "lung"}
         lymphoid={c.tissue === "lymphoid"}
+        intestinal={c.tissue === "intestinal"}
       />
       <p className="t-anatomy-note">
         圖中以放大間距區分各層，非真實厚度。微血管與淋巴引流在組織側；目前募集以等待＋跨屏障入口壓縮呈現，並未完整模擬穿越各層。

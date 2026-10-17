@@ -279,8 +279,8 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
   } else {
     for (let i = 0; i < 18; i++) {
       const a = (i / 18) * Math.PI * 2,
-        x = Math.cos(a) * 23,
-        z = Math.sin(a) * 20;
+        x = Math.cos(a) * 20,
+        z = Math.sin(a) * 18;
       const points = Array.from({ length: 17 }, (_, j) => {
         const t = j / 16;
         return new THREE.Vector2(
