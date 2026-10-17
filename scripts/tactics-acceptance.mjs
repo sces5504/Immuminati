@@ -393,8 +393,12 @@ try {
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.equal((await save(page)).state.cells.length, 30);
     await page.locator('[data-cell-id="u1"]').click();
-    await page.getByRole("button", { name: "防區深部肺泡" }).click();
+    // Crowded map labels can overlap in portrait. Use the existing direct
+    // target gesture instead of forcing a click through an occluded field.
+    const crowdTarget = crowded.state.colonies.find((p) => p.region === "b");
+    await page.locator(`[data-colony="${crowdTarget.id}"]`).click();
     assert.equal((await save(page)).state.cells[0].region, "b");
+    assert.equal((await save(page)).state.cells[0].order.type, "attack");
     await page.keyboard.press("Escape");
     await page.getByRole("button", { name: "開啟募集增援" }).click();
     await page.getByRole("combobox", { name: "增援防區" }).selectOption("b");
