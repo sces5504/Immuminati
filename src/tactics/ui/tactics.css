@@ -2158,6 +2158,7 @@
 /* Stable touch targets also cover the projected world labels. */
 .t-world-labels .t-field-label,
 .t-camera-controls > button,
+.t-field-tools > button,
 .t-roster > button,
 .t-pause,
 .t-top-links > button {
