@@ -89,7 +89,6 @@ export interface Field {
   name: string;
   center: Vec;
   radius: number;
-  capacity: number;
 }
 export interface CellSpec {
   name: string;
@@ -127,7 +126,6 @@ export interface TacticalContent {
   damageEvery: number;
   damagePerLoad: number;
   spreadAt: number;
-  maxCells: number;
   stars: [number, number];
 }
 export type TacticalCommand =
@@ -145,8 +143,8 @@ export interface TacticalSettings {
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "2.0";
-  content: "m1-tactics.1";
+  rules: "2.1";
+  content: "m1-tactics.2";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];

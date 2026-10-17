@@ -81,7 +81,7 @@ function defend(seed: number, plan: "reinforce" | "dispatch") {
   return { s, transcript };
 }
 describe("spatial fixed-step tactics", () => {
-  it("rejects illegal support, capacity and targets without mutation", () => {
+  it("rejects illegal support and targets without mutation", () => {
     const s = createTactical(m1);
     const frozen = copy(s);
     for (const cmd of [
@@ -133,7 +133,7 @@ describe("spatial fixed-step tactics", () => {
       s = stepTactical(s, m1);
     expect(s.colonies[0].load).toBe(n);
   });
-  it("recruitment reserves destination and arrives through the portal after waiting", () => {
+  it("recruitment retains its cost and arrives through the portal after waiting", () => {
     let s = createTactical(m1);
     s = send(s, { type: "recruit", kind: "neutrophil", region: "c" });
     expect(occupied(s, "c")).toBe(2);
@@ -145,34 +145,45 @@ describe("spatial fixed-step tactics", () => {
     expect(s.cells[3].position).toEqual(m1.portal);
     expect(s.cells[3].path.length).toBeGreaterThan(0);
   });
-  it("prevents overbooking in moves, attacks and recruit requests", () => {
-    const s = createTactical(m1);
-    s.cells.push(
-      { ...copy(s.cells[0]), id: "u99", region: "b" },
-      { ...copy(s.cells[0]), id: "u98", region: "b" },
-    );
+  it("allows crowded-region movement, attacks, recruitment, arrival and saves beyond old limits", () => {
+    const ctrl = new TacticalController(m1);
+    const s = ctrl.save.state;
+    for (let i = 0; i < 27; i++)
+      s.cells.push({
+        ...copy(s.cells[0]),
+        id: `u${s.serial++}`,
+        region: "b",
+        position: { ...m1.fields[1].center },
+      });
     s.energy = 8;
     expect(
-      validateTactical(
-        s,
-        { type: "move", cell: "u1", point: m1.fields[1].center },
-        m1,
-      ),
-    ).toContain("容量");
+      ctrl.command({ type: "move", cell: "u1", point: m1.fields[1].center }),
+    ).toBeUndefined();
     expect(
-      validateTactical(
-        s,
-        { type: "attack", cell: "u1", target: s.colonies[1].id },
-        m1,
-      ),
-    ).toContain("容量");
+      ctrl.command({ type: "attack", cell: "u1", target: s.colonies[1].id }),
+    ).toBeUndefined();
     expect(
-      validateTactical(
-        s,
-        { type: "recruit", kind: "neutrophil", region: "b" },
-        m1,
-      ),
-    ).toContain("容量");
+      ctrl.command({ type: "recruit", kind: "neutrophil", region: "b" }),
+    ).toBeUndefined();
+    expect(ctrl.save.state.energy).toBe(5);
+    expect(occupied(ctrl.save.state, "b")).toBe(30);
+    expect(parseTactical(JSON.stringify(ctrl.snapshot()), m1)).toEqual(
+      ctrl.snapshot(),
+    );
+    ctrl.pause(false);
+    for (let i = 0; i < m1.cells.neutrophil.delay; i++) ctrl.step();
+    expect(ctrl.save.state.arrivals).toHaveLength(0);
+    expect(ctrl.save.state.cells).toHaveLength(31);
+    expect(occupied(ctrl.save.state, "b")).toBe(30);
+    expect(parseTactical(JSON.stringify(ctrl.snapshot()), m1)).toEqual(
+      ctrl.snapshot(),
+    );
+    ctrl.save.state.energy = 0;
+    const before = ctrl.snapshot();
+    expect(
+      ctrl.command({ type: "recruit", kind: "neutrophil", region: "b" }),
+    ).toContain("資源");
+    expect(ctrl.snapshot()).toEqual(before);
   });
   it("cannot win while future waves or intracellular sources remain", () => {
     let s = createTactical(m1);
@@ -249,7 +260,7 @@ describe("spatial fixed-step tactics", () => {
       ctrl.save.state,
     );
   });
-  it("bounded scenarios never lose capacity, loads or energy invariants", () => {
+  it("bounded scenarios retain valid positions, loads, IDs and energy invariants", () => {
     for (let seed = 1; seed <= 15; seed++) {
       let s = createTactical(m1, seed);
       for (let i = 0; i < 400 && !s.result; i++) {
@@ -261,8 +272,13 @@ describe("spatial fixed-step tactics", () => {
         s = stepTactical(s, m1);
         expect(s.energy).toBeGreaterThanOrEqual(0);
         expect(s.energy).toBeLessThanOrEqual(m1.energyMax);
-        for (const f of m1.fields)
-          expect(occupied(s, f.id)).toBeLessThanOrEqual(f.capacity);
+        expect(new Set(s.cells.map((u) => u.id)).size).toBe(s.cells.length);
+        for (const u of s.cells) {
+          expect(
+            Number.isFinite(u.position.x) && Number.isFinite(u.position.z),
+          ).toBe(true);
+          expect(m1.fields.some((f) => f.id === u.region)).toBe(true);
+        }
         for (const p of s.colonies) expect(p.load).toBeGreaterThan(0);
       }
     }
@@ -306,6 +322,19 @@ describe("pause, save and rendering independence", () => {
     const corrupt = copy(parsed);
     corrupt.state.cells[0].position.x = Infinity;
     expect(() => parseTactical(JSON.stringify(corrupt), m1)).toThrow();
+  });
+  it("upgrades legacy rule labels without changing saved combat or pause plans", () => {
+    const ctrl = new TacticalController(m1);
+    ctrl.command({ type: "mark", target: ctrl.save.state.colonies[0].id });
+    const legacy = {
+      ...ctrl.snapshot(),
+      rules: "2.0",
+      content: "m1-tactics.1",
+    };
+    const restored = parseTactical(JSON.stringify(legacy), m1);
+    expect(restored).toEqual(ctrl.snapshot());
+    const mismatch = { ...legacy, content: "m1-tactics.2" };
+    expect(() => parseTactical(JSON.stringify(mismatch), m1)).toThrow("版本");
   });
   it("completed final-wave saves roundtrip with bounded planning history", () => {
     const ctrl = new TacticalController(m1);

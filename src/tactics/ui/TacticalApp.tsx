@@ -393,8 +393,7 @@ export default function TacticalApp() {
                 <span>
                   {f.name}
                   <small>
-                    {Math.round(s.health[f.id])}% · {occupied(s, f.id)}/
-                    {f.capacity}
+                    {Math.round(s.health[f.id])}% · {occupied(s, f.id)} 族群
                   </small>
                 </span>
               </button>
@@ -650,7 +649,7 @@ export default function TacticalApp() {
               <span>
                 募集增援
                 <small>
-                  {s.cells.length + s.arrivals.length} / {content.maxCells} 族群
+                  {s.cells.length + s.arrivals.length} 族群 · 按資源募集
                 </small>
               </span>
             </button>
@@ -678,7 +677,7 @@ export default function TacticalApp() {
                 >
                   {content.fields.map((f) => (
                     <option key={f.id} value={f.id}>
-                      {f.name} · {occupied(s, f.id)}/{f.capacity}
+                      {f.name} · {occupied(s, f.id)} 族群
                     </option>
                   ))}
                 </select>
@@ -701,7 +700,7 @@ export default function TacticalApp() {
                     <CellArt kind={kind} />
                     <span>
                       <b>{def.name}</b>
-                      <small>{def.delay * 0.2} 秒後到場 · 預留 1 容量</small>
+                      <small>{def.delay * 0.2} 秒後到場 · 沿通道支援</small>
                     </span>
                     <strong>
                       {def.cost}
@@ -710,9 +709,6 @@ export default function TacticalApp() {
                   </button>
                 );
               })}
-              {occupied(s, region) >= field.capacity && (
-                <p>此防區已滿，先調度單位再招募。</p>
-              )}
               <small>
                 抵達後會由微血管沿通道走向防區。等待只在行動時推進。
               </small>
@@ -882,7 +878,7 @@ export default function TacticalApp() {
                             target: colony.id,
                           });
                           setSelected(candidate.id);
-                        } else setNotice("目標區容量已滿，請先調度現有防線。");
+                        } else setNotice("目前沒有可指派的吞噬者。");
                       }}
                     >
                       ↗ <span>指派吞噬者</span>
@@ -894,8 +890,7 @@ export default function TacticalApp() {
                   <div className="t-dock-emblem">⌁</div>
                   <div className="t-selection-info">
                     <small>
-                      {field.name} · {occupied(s, region)}/{field.capacity}{" "}
-                      駐守／預留
+                      {field.name} · {occupied(s, region)} 族群（含待到場）
                     </small>
                     <h2>選擇你的防線</h2>
                     <p>點場上的細胞或菌群，直接下達指令。</p>
@@ -1054,7 +1049,7 @@ export default function TacticalApp() {
               </li>
               <li>
                 <b>叫增援填補空缺。</b> 嗜中性球花 3 資源、5 秒後到場；巨噬花
-                4、8 秒後到場。預約先占容量。
+                4、8 秒後到場。各區不限名額，仍需資源與到場時間。
               </li>
               <li>
                 <b>守住 {content.waves.length} 波感染。</b>{" "}
@@ -1063,8 +1058,9 @@ export default function TacticalApp() {
             </ol>
             <p>
               反應資源每 {content.energyEvery * 0.2} 秒恢復 1，上限{" "}
-              {content.energyMax}。 各防區容量見場上標記，全場最多{" "}
-              {content.maxCells} 個族群。時間與數量為遊戲抽象。
+              {content.energyMax}
+              。沒有區域或全場名額限制，依資源與到場時間安排支援。
+              時間與數量為遊戲抽象。
             </p>
             <button className="t-primary" onClick={() => setModal(null)}>
               回到戰場

@@ -959,28 +959,32 @@ export class BattleScene {
     };
     this.canvas.setPointerCapture(e.pointerId);
   };
+  private groundAt(clientX: number, clientY: number) {
+    const rect = this.canvas.getBoundingClientRect();
+    this.raycaster.setFromCamera(
+      new THREE.Vector2(
+        ((clientX - rect.left) / rect.width) * 2 - 1,
+        -((clientY - rect.top) / rect.height) * 2 + 1,
+      ),
+      this.camera,
+    );
+    return this.raycaster.ray.intersectPlane(
+      this.basePlane,
+      new THREE.Vector3(),
+    );
+  }
   private move = (e: PointerEvent) => {
     if (!this.pointer) return;
     const p = this.pointer;
-    if (Math.hypot(e.clientX - p.x, e.clientY - p.y) > 6) p.moved = true;
-    if (p.moved) {
-      const factor = 35 / this.size.h / this.zoom;
-      const dx = (e.clientX - p.lastX) * factor,
-        dz = (e.clientY - p.lastY) * factor;
-      this.pan.x = Math.max(
-        -7,
-        Math.min(
-          7,
-          this.pan.x - dx * Math.cos(this.yaw) + dz * Math.sin(this.yaw),
-        ),
-      );
-      this.pan.z = Math.max(
-        -7,
-        Math.min(
-          7,
-          this.pan.z + dx * Math.sin(this.yaw) + dz * Math.cos(this.yaw),
-        ),
-      );
+    if (!p.moved && Math.hypot(e.clientX - p.x, e.clientY - p.y) <= 6) return;
+    p.moved = true;
+    // Keep the grabbed ground point under the pointer. Ray/plane projection
+    // handles camera pitch, yaw, zoom and viewport without inverted axes.
+    const from = this.groundAt(p.lastX, p.lastY);
+    const to = this.groundAt(e.clientX, e.clientY);
+    if (from && to) {
+      this.pan.x = Math.max(-7, Math.min(7, this.pan.x + from.x - to.x));
+      this.pan.z = Math.max(-7, Math.min(7, this.pan.z + from.z - to.z));
       this.updateCamera();
     }
     p.lastX = e.clientX;
@@ -1019,17 +1023,7 @@ export class BattleScene {
       this.pick({ type: entities[0].type, id: entities[0].id });
       return;
     }
-    this.raycaster.setFromCamera(
-      new THREE.Vector2(
-        (p.x / this.size.w) * 2 - 1,
-        (-p.y / this.size.h) * 2 + 1,
-      ),
-      this.camera,
-    );
-    const hit = this.raycaster.ray.intersectPlane(
-      this.basePlane,
-      new THREE.Vector3(),
-    );
+    const hit = this.groundAt(e.clientX, e.clientY);
     if (hit) this.pick({ type: "ground", point: { x: hit.x, z: hit.z } });
   };
   private cancelPointer = () => {

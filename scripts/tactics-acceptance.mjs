@@ -3,7 +3,10 @@ import { spawn } from "node:child_process";
 import { mkdir, writeFile, rm } from "node:fs/promises";
 import assert from "node:assert/strict";
 const expect = baseExpect.configure({ timeout: 15000 });
-const dir = new URL("../docs/evidence/tactics/", import.meta.url).pathname;
+const dir = new URL(
+  process.env.EVIDENCE_DIR ?? "../docs/evidence/tactics/",
+  import.meta.url,
+).pathname;
 await mkdir(dir, { recursive: true });
 const url = process.env.BASE_URL ?? "http://127.0.0.1:4175/Immuminati/";
 const server = process.env.BASE_URL
@@ -173,7 +176,7 @@ try {
     await page.getByRole("button", { name: "關閉增援面板" }).click();
     record(
       name +
-        ": marking, duplicate input, reserved recruitment and planning undo",
+        ": marking, duplicate input, delayed recruitment and planning undo",
     );
     // Camera changes are view-only; canvas hit-testing selects a cell without a DOM unit chip.
     console.log("CHECK", name, "camera/pointer");
@@ -182,6 +185,89 @@ try {
     await page.getByRole("button", { name: "放大戰場" }).click();
     await page.getByRole("button", { name: "重設鏡頭" }).click();
     assert.deepEqual((await save(page)).state, authority);
+    // Real mouse/touch gestures must move a projected landmark with the drag,
+    // at every quarter-turn and at both tested zooms. No test-only scene hook.
+    const cdp = mobile ? await ctx.newCDPSession(page) : null;
+    const marker = () =>
+      page.locator('[data-world-label="u1"]').evaluate((el) => {
+        const m = new DOMMatrix(getComputedStyle(el).transform);
+        return { x: m.m41, y: m.m42 };
+      });
+    const drag = async (dx, dy) => {
+      const point = await page.locator("canvas").evaluate((canvas) => {
+        const r = canvas.getBoundingClientRect();
+        for (const fy of [0.45, 0.55, 0.35, 0.65])
+          for (const fx of [0.5, 0.4, 0.6, 0.3, 0.7]) {
+            const x = r.x + r.width * fx,
+              y = r.y + r.height * fy;
+            if (
+              document.elementFromPoint(x, y) === canvas &&
+              document.elementFromPoint(x + 24, y + 18) === canvas
+            )
+              return { x, y };
+          }
+        throw new Error("No unobstructed canvas gesture location");
+      });
+      if (cdp) {
+        await cdp.send("Input.dispatchTouchEvent", {
+          type: "touchStart",
+          touchPoints: [{ ...point, id: 1 }],
+        });
+        for (let n = 1; n <= 3; n++)
+          await cdp.send("Input.dispatchTouchEvent", {
+            type: "touchMove",
+            touchPoints: [
+              { x: point.x + (dx * n) / 3, y: point.y + (dy * n) / 3, id: 1 },
+            ],
+          });
+        await cdp.send("Input.dispatchTouchEvent", {
+          type: "touchEnd",
+          touchPoints: [],
+        });
+      } else {
+        await page.mouse.move(point.x, point.y);
+        await page.mouse.down();
+        await page.mouse.move(point.x + dx, point.y + dy, { steps: 3 });
+        await page.mouse.up();
+      }
+    };
+    const dragResults = [];
+    const selectedBeforeDrag = await page
+      .locator(".tactical-root")
+      .getAttribute("data-selected");
+    for (const zoomed of [false, true])
+      for (let quarter = 0; quarter < 4; quarter++) {
+        console.log("CHECK", name, "drag", { quarter, zoomed });
+        await page.getByRole("button", { name: "重設鏡頭" }).click();
+        for (let n = 0; n < quarter * 4; n++)
+          await page.getByRole("button", { name: "旋轉鏡頭" }).click();
+        if (zoomed)
+          await page.getByRole("button", { name: "放大戰場" }).click();
+        const start = await marker();
+        await drag(24, 18);
+        const end = await marker();
+        const delta = { x: end.x - start.x, y: end.y - start.y };
+        assert(
+          Math.abs(delta.x - 24) < 2 && Math.abs(delta.y - 18) < 2,
+          JSON.stringify({ name, zoomed, quarter, delta }),
+        );
+        await drag(-24, -18);
+        const back = await marker();
+        assert(Math.hypot(back.x - start.x, back.y - start.y) < 2);
+        dragResults.push({ quarter, zoomed, delta });
+      }
+    await cdp?.detach();
+    assert.deepEqual((await save(page)).state, authority);
+    assert.equal(
+      await page.locator(".tactical-root").getAttribute("data-selected"),
+      selectedBeforeDrag,
+    );
+    await page.getByRole("button", { name: "重設鏡頭" }).click();
+    record(
+      name +
+        ": grab-map drag follows mouse/touch across rotation and zoom without issuing orders",
+      dragResults,
+    );
     const unitLabel = page.locator('[data-world-label="u1"]');
     const box = await unitLabel.boundingBox();
     if (mobile)
@@ -253,12 +339,7 @@ try {
       state = (await save(page)).state;
       for (const u of state.cells.filter((u) => u.kind !== "dendritic"))
         if (!state.colonies.some((p) => p.region === u.region)) {
-          const target = state.colonies.find(
-            (p) =>
-              state.cells.filter((v) => v.region === p.region).length +
-                state.arrivals.filter((v) => v.region === p.region).length <
-              3,
-          );
+          const target = state.colonies[0];
           if (target) {
             await page.locator(`[data-cell-id="${u.id}"]`).click();
             await page.locator(`[data-colony="${target.id}"]`).click();
@@ -286,6 +367,58 @@ try {
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.deepEqual((await save(page)).state, final);
     record(name + ": stable reload and legacy save retained");
+    // Controlled pressure fixture: keep the real UI, then issue actual commands
+    // to recruit and deploy into a crowded region without replaying a battle.
+    const crowded = structuredClone(await save(page));
+    crowded.state = structuredClone(authority);
+    crowded.state.arrivals = [];
+    crowded.state.energy = 8;
+    crowded.undo = [];
+    crowded.paused = true;
+    for (let i = 0; i < 27; i++)
+      crowded.state.cells.push({
+        ...structuredClone(crowded.state.cells[0]),
+        id: `u${crowded.state.serial++}`,
+        region: "b",
+        position: { x: 10 + (i % 6) * 0.4, z: -6 + Math.floor(i / 6) * 0.4 },
+        path: [],
+        order: { type: "guard", point: { x: 10, z: -6 } },
+      });
+    await page.getByRole("button", { name: "設定與存檔" }).click();
+    await page.getByLabel("新版存檔檔案").setInputFiles({
+      name: "crowded-controlled.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(crowded)),
+    });
+    await page.getByRole("button", { name: "繼續防線 →" }).click();
+    assert.equal((await save(page)).state.cells.length, 30);
+    await page.locator('[data-cell-id="u1"]').click();
+    await page.getByRole("button", { name: "防區深部肺泡" }).click();
+    assert.equal((await save(page)).state.cells[0].region, "b");
+    await page.keyboard.press("Escape");
+    await page.getByRole("button", { name: "開啟募集增援" }).click();
+    await page.getByRole("combobox", { name: "增援防區" }).selectOption("b");
+    await expect(page.locator('[data-recruit="neutrophil"]')).toBeEnabled();
+    await page.locator('[data-recruit="neutrophil"]').click();
+    assert.equal((await save(page)).state.arrivals.length, 1);
+    assert.equal((await save(page)).state.energy, 5);
+    assert(
+      !(await page
+        .locator(".tactical-root")
+        .innerText()
+        .then((t) => t.includes("容量已滿"))),
+    );
+    await page.getByRole("button", { name: "關閉增援面板" }).click();
+    await page.screenshot({ path: dir + name + "-crowded-controlled.png" });
+    const crowdedState = (await save(page)).state;
+    await page.reload();
+    await page.getByRole("button", { name: "繼續防線 →" }).click();
+    assert.deepEqual((await save(page)).state, crowdedState);
+    record(
+      name +
+        ": controlled 30-cell fixture supports crowded deployment, recruitment and reload",
+    );
+
     assert.deepEqual(errors, []);
     assert.deepEqual(httpErrors, []);
     record(name + ": WebGL, assets and page console", {

@@ -2,7 +2,10 @@ import { chromium, expect } from "@playwright/test";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile, rm } from "node:fs/promises";
 import assert from "node:assert/strict";
-const dir = new URL("../docs/evidence/tactics/", import.meta.url).pathname;
+const dir = new URL(
+  process.env.EVIDENCE_DIR ?? "../docs/evidence/tactics/",
+  import.meta.url,
+).pathname;
 await mkdir(dir, { recursive: true });
 let browser;
 const server = spawn(

@@ -4,7 +4,7 @@ import type {
   TacticalSave,
   TacticalState,
 } from "../domain/model";
-import { occupied, preservation, loadOf } from "../engine/simulation";
+import { preservation, loadOf } from "../engine/simulation";
 import { tacticalScenarios } from "../content/m1";
 import { entries } from "../../content/encyclopedia";
 export const TACTICS_KEY = "immuminati:tactics:v2";
@@ -58,7 +58,7 @@ const battle = z
           })
           .strict(),
       )
-      .max(20),
+      .max(1000),
     colonies: z
       .array(
         z
@@ -75,12 +75,12 @@ const battle = z
       .max(200),
     arrivals: z
       .array(z.object({ id, kind, region: id, at: integer(10000) }).strict())
-      .max(20),
+      .max(1000),
     internal: z
       .array(
         z.object({ id, host: id, load: integer(1000), pathogen: id }).strict(),
       )
-      .max(20),
+      .max(1000),
     serial: integer(100000),
     eventId: integer(100000),
     events: z
@@ -120,8 +120,8 @@ const battle = z
 const schema = z
   .object({
     schema: z.literal(2),
-    rules: z.literal("2.0"),
-    content: z.literal("m1-tactics.1"),
+    rules: z.enum(["2.0", "2.1"]),
+    content: z.enum(["m1-tactics.1", "m1-tactics.2"]),
     state: battle,
     paused: z.boolean(),
     undo: z.array(battle).max(10),
@@ -143,8 +143,7 @@ function check(s: TacticalState, c: TacticalContent) {
     s.scenario !== c.id ||
     s.tick > c.limit ||
     s.energy > c.energyMax ||
-    s.wave >= c.waves.length ||
-    s.cells.length + s.arrivals.length > c.maxCells
+    s.wave >= c.waves.length
   )
     throw new Error("關卡、資源或進度超出範圍。");
   if (
@@ -152,9 +151,6 @@ function check(s: TacticalState, c: TacticalContent) {
     fields.some((id) => s.health[id] === undefined)
   )
     throw new Error("區域資料不完整。");
-  for (const field of c.fields)
-    if (occupied(s, field.id) > field.capacity)
-      throw new Error("容量預約超出上限。");
   for (const thing of [...s.cells, ...s.colonies, ...s.arrivals])
     if (!fields.includes(thing.region)) throw new Error("未知區域。");
   const ids = [...s.cells, ...s.colonies, ...s.arrivals, ...s.internal].map(
@@ -197,7 +193,16 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
   const parsed = schema.safeParse(raw);
   if (!parsed.success)
     throw new Error("此檔不是新版即時戰術存檔；舊版存檔仍保留，請勿刪除原檔。");
-  const save = parsed.data as TacticalSave;
+  const data = parsed.data;
+  if ((data.rules === "2.0") !== (data.content === "m1-tactics.1"))
+    throw new Error("規則與內容版本不一致。");
+  // The previous format has the same state. Only slot restrictions were removed:
+  // preserve ticks, plans and events while explicitly upgrading the rule label.
+  const save: TacticalSave = {
+    ...data,
+    rules: "2.1",
+    content: "m1-tactics.2",
+  };
   check(save.state, c);
   for (const snapshot of save.undo) {
     check(snapshot, c);

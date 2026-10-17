@@ -9,21 +9,18 @@ export const m1: TacticalContent = {
       name: "肺泡入口",
       center: { x: -10, z: -7 },
       radius: 7.8,
-      capacity: 3,
     },
     {
       id: "b",
       name: "深部肺泡",
       center: { x: 10, z: -6 },
       radius: 7.8,
-      capacity: 3,
     },
     {
       id: "c",
       name: "微血管防線",
       center: { x: 0, z: 8 },
       radius: 7.8,
-      capacity: 3,
     },
   ],
   portal: { x: 0, z: 15 },
@@ -104,7 +101,6 @@ export const m1: TacticalContent = {
   damageEvery: 10,
   damagePerLoad: 0.12,
   spreadAt: 20,
-  maxCells: 7,
   stars: [85, 60],
 };
 export const tacticalScenarios: Record<string, TacticalContent> = { m1 };

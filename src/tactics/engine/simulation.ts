@@ -168,9 +168,6 @@ export function validateTactical(
     if (cmd.kind === "dendritic") return "M1 不募集新的樹突細胞。";
     if (s.energy < c.cells[cmd.kind].cost)
       return `需要 ${c.cells[cmd.kind].cost} 反應資源。`;
-    if (s.cells.length + s.arrivals.length >= c.maxCells)
-      return `全場最多 ${c.maxCells} 個細胞族群。`;
-    if (occupied(s, f.id) >= f.capacity) return "此區駐守與預留容量已滿。";
     if (s.health[f.id] <= 0) return "此區已失守。";
   } else if (cmd.type === "advance") {
     if (loadOf(s) > 0) return "先處理目前所有感染來源。";
@@ -191,18 +188,6 @@ export function validateTactical(
         Math.abs(cmd.point.z) > 30
       )
         return "目的地超出戰場。";
-      const f = fieldOf(walkable(cmd.point, c), c);
-      if (f.id !== cell.region && occupied(s, f.id) >= f.capacity)
-        return "目的區駐守與預留容量已滿。";
-    }
-    if (cmd.type === "attack") {
-      const target = s.colonies.find((p) => p.id === cmd.target)!;
-      if (
-        target.region !== cell.region &&
-        occupied(s, target.region) >=
-          c.fields.find((f) => f.id === target.region)!.capacity
-      )
-        return "目標區駐守與預留容量已滿。";
     }
   }
 }
@@ -240,7 +225,7 @@ export function commandTactical(
       s,
       "request",
       c.portal,
-      `${c.cells[cmd.kind].name}向${f.name}集結，已預留容量，${c.cells[cmd.kind].delay * STEP_SECONDS} 秒後到場。`,
+      `${c.cells[cmd.kind].name}向${f.name}集結，${c.cells[cmd.kind].delay * STEP_SECONDS} 秒後到場。`,
       1,
     );
   } else if (cmd.type === "advance") {
