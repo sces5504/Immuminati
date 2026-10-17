@@ -2222,6 +2222,7 @@
   z-index: 16;
 }
 .t-strategy-tools button {
+  min-width: 44px;
   background: #192b43e8;
   border: 1px solid #bdd9eb44;
   border-radius: 7px;

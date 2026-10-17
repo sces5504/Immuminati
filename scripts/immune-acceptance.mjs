@@ -83,6 +83,19 @@ try {
       ),
       false,
     );
+    const controlSizes = await page
+      .locator(".t-strategy-tools button")
+      .evaluateAll((nodes) =>
+        nodes.map((n) => {
+          const r = n.getBoundingClientRect();
+          return { text: n.textContent, width: r.width, height: r.height };
+        }),
+      );
+    for (const control of controlSizes)
+      assert.ok(
+        control.width >= 44 && control.height >= 44,
+        `${device} ${JSON.stringify(control)}`,
+      );
     console.log("CHECK", device, "tutorial");
     await page.getByTestId("tutorial-start").click();
     const next = async (index) => {
