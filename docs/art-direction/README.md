@@ -2,16 +2,18 @@
 
 日期：2026-10-17
 
-使用者已選定 **C「柔光微觀立體」**，並要求細胞待機漂浮與各動作的對應動畫。正式製作以 [主規格 v1.1](../Immuminati-spec.md) 與 [C 美術與動畫規格](C-art-and-animation.md) 為準。
+使用者已選定 **C「柔光微觀立體」**，並要求細胞待機漂浮與各動作的對應動畫。正式製作以 [主規格 v2.0](../Immuminati-spec.md) 與 [C 美術與動畫規格](C-art-and-animation.md) 為準。
+
+**以下為歷史美術探索。** 圖片與生成提示中的回合、AP、區域容量及布局不適用新版 RTS；只有選定的 C 視覺方向延續。既有遊戲模型不是已認可的品質基準，改進要求見 C 美術文件。
 
 以下保留內建 image_gen 製作的四款歷史比較圖與完整提示，採同一肺炎鏈球菌情境。A／B／D 不作正式方向。所有圖片均是概念預覽，正式去背、分層、動作及互動介面仍需製作。
 
-| 代號 | 方向 | 比較重點 |
-| --- | --- | --- |
-| A | 清透生物插畫 | 溫和、知識感、細胞結構辨識 |
-| B | 鮮明角色手繪 | 角色記憶點、明確輪廓、遊戲感 |
+| 代號            | 方向             | 比較重點                                     |
+| --------------- | ---------------- | -------------------------------------------- |
+| A               | 清透生物插畫     | 溫和、知識感、細胞結構辨識                   |
+| B               | 鮮明角色手繪     | 角色記憶點、明確輪廓、遊戲感                 |
 | **C（已選定）** | **柔光微觀立體** | **立體材質、組織深度、微觀臨場感；正式採用** |
-| D | 暗色螢光微觀 | 深色對比、螢光細節、戰局張力 |
+| D               | 暗色螢光微觀     | 深色對比、螢光細節、戰局張力                 |
 
 ## 圖片
 
@@ -102,4 +104,3 @@ Constraints: readable hierarchy, clean deliberate UI, large mobile touch targets
 
 Art direction D — DARK FLUORESCENT MICROSCOPY. On the outer artboard only, label "D 暗色螢光微觀". Deep midnight-blue surfaces, muted wine-violet tissue substrate, luminous cyan-teal immune membranes, warm amber bacteria and restrained coral threat warnings. Art-inspired fluorescent micrograph aesthetic: organic membranes and nuclei illuminate from within, subtly granular cellular texture, soft spectral light, no excessive bloom. Cells remain clearly distinct organic biological entities, not mechanical ships or monsters. Three tissue regions are clearly separated by softly visible organic boundaries and restrained connection paths. UI is solid dark matte panels with generous light typography, strong target selection and clean practical controls; never transparent neon hologram clutter. Tense and atmospheric but readable and welcoming enough for long play. No gore or horror creatures, no cyberpunk hardware, no bright white background.
 ```
-

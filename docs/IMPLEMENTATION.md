@@ -1,6 +1,6 @@
 # M1 實作與接續指南
 
-> 2026-10-17 重製更新：使用者試玩後選擇「畫面、操作和玩法一起重做」。目前正式入口為 `src/tactics` 的連續立體、可暫停即時戰術 M1；玩法優先見 [TACTICAL-REDESIGN.md](TACTICAL-REDESIGN.md)，實際驗證見 [TACTICAL-VALIDATION.md](TACTICAL-VALIDATION.md)。下方保留首版／開工時文件，回合 4 AP 與舊實作狀態不再代表目前版本。六關生物內容等未被修訂的要求仍保留。
+> **歷史文件，非現行規格。** 2026-10-17 已改採 [主規格 v2.0](Immuminati-spec.md) 的混合型可暫停 RTS；本檔記錄舊原型，以下容量、數值、實作與測試結論不代表新版需求或已完成。新開工請讀 [交接文件](CLOUD-HANDOFF.md)。
 
 ## 交付範圍
 

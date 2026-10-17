@@ -1,21 +1,29 @@
 # Immuminati · 微觀防線
 
-**線上遊玩：[Immuminati／M1 莢膜防線](https://sces5504.github.io/Immuminati/)**
+**下一版改為「混合型 RTS ＋ 可暫停即時戰略」。** 2026-10-17 本次先更新規格，供另一個 AI 從頭重建；新玩法尚未實作。C「柔光微觀立體」風格保留，但目前模型需改善，地圖拖曳需修正，區域單位上限取消。
 
-新版 M1 是可暫停的即時戰術遊戲。直接在連續立體組織戰場選取細胞、指定菌群或防守位置，運用調理與增援守住三波感染。細胞會沿通道移動，接近合法目標後自動吞噬；位置、距離、冷卻及感染擴散都有實際規則。
+## 新版開工入口
 
-本次依使用者選擇將畫面、操作與玩法一起重做，取代首版的回合／4 AP。M2–M6 的入口與百科可查，但專用關卡仍開發中，沒有解鎖鏈或永久戰力升級。
+1. [開發指引 AGENTS.md](AGENTS.md)
+2. [唯一現行玩法規格 v2.0](docs/Immuminati-spec.md)
+3. [C 美術、建模改善與動畫規格 v2.0](docs/art-direction/C-art-and-animation.md)
+4. [交接與可直接貼給新 AI 的開工 prompt](docs/CLOUD-HANDOFF.md)
+5. 實際檢視 [C 參考圖](docs/art-direction/c-soft-micro-3d.png)；圖中的回合／AP 介面不是新規則。
 
-## 執行與驗證
+新版目標是自主細胞 AI、訊號場與趨化、延遲募集、發炎取捨、連動淋巴結，以及隨時暫停與 1×／2×／4×。玩家協調反應，也能指揮關鍵單位；沒有同區格位或容量預留。先交付完整可玩的 M1，再擴充指定六關；最終全部開場可選，沒有永久戰力升級或裝備。
 
-Node 24，依賴版本由 package-lock.json 鎖定。
+## 目前公開版本是舊原型
+
+[GitHub Pages 舊原型](https://sces5504.github.io/Immuminati/) 仍可開啟。它的 `src/tactics`、每區／全場名額、模型、速度與流程不符合 v2.0，不代表新的 RTS 已完成；新規格不會因本次文件修改自動出現在網頁。
+
+現有專案以 Node 24、package-lock.json 鎖定依賴：
 
 ```sh
 npm ci
 npm run dev
 ```
 
-開啟 `http://localhost:5173/Immuminati/`。
+開啟 `http://localhost:5173/Immuminati/`。目前驗證與預覽命令：
 
 ```sh
 npm run verify
@@ -25,31 +33,15 @@ npm run test:browser
 npm run test:animation
 ```
 
-Production preview 預設在 `http://localhost:4173/Immuminati/`。瀏覽器腳本會自行啟動 4175 埠，也可透過 BASE_URL 檢查已發布版本。雲端 headless 測試採 Chromium SwiftShader，不代表已測實體手機 GPU。
+Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試目前驗證舊原型，重建時需依 v2.0 更新，不以保住舊容量斷言為目標。手機瀏覽器腳本是 viewport／touch 模擬，不等同真機測試。
 
-## 怎麼玩
+## 歷史資料與相容性
 
-1. 進入 M1，初始為戰術暫停。先點菌群、施加調理，再募集增援補強防區。
-2. 點細胞再點菌群，指派吞噬目標；點地面或防區，調度位置。細胞接觸目標後自動作用。
-3. 點「開始／繼續行動」推進時間，可隨時暫停。空白鍵切換暫停，Escape 取消選取。
-4. 反應資源每 8 模擬秒恢復 1，上限 8。調理花 1，嗜中性球／巨噬募集花 3／4，5／8 秒後從血管到場。調理不直接減少感染。
-5. 清場後可提前迎擊下一波，取得 1 資源；也可等待資源及增援。清除全部三波且三區存活才勝利。
-6. 組織保全 ≥85% 三星、≥60% 二星。暫停時能撤銷部署，恢復行動後不能回溯戰鬥。
+- [舊即時戰術原型決策](docs/TACTICAL-REDESIGN.md)／[其實作與驗證](docs/TACTICAL-VALIDATION.md)
+- [首版實作](docs/IMPLEMENTATION.md)／[首版驗證](docs/VALIDATION.md)
+- [ImmuneQuest 截圖參考觀察](docs/art-direction/ImmuneQuest-reference-review.md)
+- [舊原型桌面](docs/evidence/tactics/desktop-field.png)／[手機](docs/evidence/tactics/mobile-field.png)／[舊短剪輯](docs/evidence/tactics/m1-highlights.webm)
 
-拖曳可平移鏡頭，右側按鈕可縮放、旋轉及重設。手機採直向戰場與下方指揮列；單位列與菌群標記提供穩定點按目標。百科及設定會安全暫停時間。
+歷史截圖、影片及測試結果不作新版品質或完成證據。舊存檔 `immuminati:save:v1` 與 `immuminati:tactics:v2` 必須保留；新規則採獨立 schema／key，不靜默轉換或覆寫。
 
-## 架構、存檔與證據
-
-- [最新玩法及規格修訂](docs/TACTICAL-REDESIGN.md)
-- [新版實作與驗證紀錄](docs/TACTICAL-VALIDATION.md)
-- [ImmuneQuest 參考檢視](docs/art-direction/ImmuneQuest-reference-review.md)
-- [原始六關內容規格](docs/Immuminati-spec.md)
-- [新版桌面畫面](docs/evidence/tactics/desktop-field.png)／[手機畫面](docs/evidence/tactics/mobile-field.png)
-- [實戰短剪輯](docs/evidence/tactics/m1-highlights.webm)
-- [桌面錄影](docs/evidence/tactics/desktop-m1.webm)／[手機錄影](docs/evidence/tactics/mobile-m1.webm)／[立體吞噬分支](docs/evidence/tactics/engulf-branches.webm)
-
-`src/tactics` 分離 domain、content、engine、application、presentation、persistence、ui。引擎固定步進且無瀏覽器相依，Three.js 展示層不計算傷害或扣資源。正式立體幾何及材質為本專案原創，不使用參考網站的角色或截圖素材。
-
-新存檔為 `immuminati:tactics:v2`，包含暫停部署快照、事件、設定與表現，可匯出／匯入。舊版 `immuminati:save:v1` 保留，不能直接轉成不同規則的新局。
-
-Pages base 為 `/Immuminati/`。main 的 Actions 在本機子路徑驗證通過後發布，live-pages 再直接操作公開網址。先前 `docs/VALIDATION.md` 與 `docs/IMPLEMENTATION.md` 為第一版歷史紀錄。
+Pages base 維持 `/Immuminati/`。重建後需驗證資產、重新整理及公開網址；本次只有文件變更。

@@ -1,6 +1,6 @@
 # M1 驗證與交付紀錄
 
-> 2026-10-17 重製更新：使用者試玩後選擇「畫面、操作和玩法一起重做」。目前正式入口為 `src/tactics` 的連續立體、可暫停即時戰術 M1；玩法優先見 [TACTICAL-REDESIGN.md](TACTICAL-REDESIGN.md)，實際驗證見 [TACTICAL-VALIDATION.md](TACTICAL-VALIDATION.md)。下方保留首版／開工時文件，回合 4 AP 與舊實作狀態不再代表目前版本。六關生物內容等未被修訂的要求仍保留。
+> **歷史文件，非現行規格。** 2026-10-17 已改採 [主規格 v2.0](Immuminati-spec.md) 的混合型可暫停 RTS；本檔記錄舊原型，以下容量、數值、實作與測試結論不代表新版需求或已完成。新開工請讀 [交接文件](CLOUD-HANDOFF.md)。
 
 日期：2026-10-17（Asia/Taipei）。本文件僅列本次實際執行結果；M1 可玩與六關全數完成分開驗收。
 
@@ -50,16 +50,16 @@ Linux 雲端環境，3 個可用邏輯 CPU（Intel Xeon Platinum 8573C）、Node
 
 ## 影像及動畫證據
 
-| 證據 | 內容 |
-| --- | --- |
-| `evidence/desktop-home.png`、`desktop-field.png`、`desktop-result.png` | 桌面選關、可操作戰場、實際結算 |
-| `evidence/mobile-home.png`、`mobile-field.png`、`mobile-result.png` | 360px 直向版面與結算 |
-| `evidence/desktop-engulf.png`、`mobile-engulf.png` | 實際操作時的包覆／吞入中間畫面 |
-| `evidence/desktop-m1.webm` | 約 53 秒：待機、募集、調理、結算、主動吞噬、調度及三星結果 |
-| `evidence/mobile-m1.webm` | 約 26 秒：直向介面的同一流程，2× 動作速度 |
-| `evidence/engulf-branches.webm` | 約 12 秒：抽象契約樣本的清除／胞內存活分支 |
-| `evidence/animation-wrap.png`、`animation-survival.png` | 偽足包覆及宿主胞內存活標記 |
-| `evidence/save-roundtrip.json` | 本次實際匯出／匯入的測試存檔 |
+| 證據                                                                   | 內容                                                       |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `evidence/desktop-home.png`、`desktop-field.png`、`desktop-result.png` | 桌面選關、可操作戰場、實際結算                             |
+| `evidence/mobile-home.png`、`mobile-field.png`、`mobile-result.png`    | 360px 直向版面與結算                                       |
+| `evidence/desktop-engulf.png`、`mobile-engulf.png`                     | 實際操作時的包覆／吞入中間畫面                             |
+| `evidence/desktop-m1.webm`                                             | 約 53 秒：待機、募集、調理、結算、主動吞噬、調度及三星結果 |
+| `evidence/mobile-m1.webm`                                              | 約 26 秒：直向介面的同一流程，2× 動作速度                  |
+| `evidence/engulf-branches.webm`                                        | 約 12 秒：抽象契約樣本的清除／胞內存活分支                 |
+| `evidence/animation-wrap.png`、`animation-survival.png`                | 偽足包覆及宿主胞內存活標記                                 |
+| `evidence/save-roundtrip.json`                                         | 本次實際匯出／匯入的測試存檔                               |
 
 影片由瀏覽器操作直接錄製。M1 實戰錄影包含獨立單位與核心動作；靜態截圖沒有被當成動畫完成的唯一證據。胞內存活樣本使用測試字形，不把它當作肺炎鏈球菌的 M1 生物行為或正式沙門氏菌素材。
 
@@ -67,11 +67,11 @@ Linux 雲端環境，3 個可用邏輯 CPU（Intel Xeon Platinum 8573C）、Node
 
 `PLAYWRIGHT_BROWSERS_PATH=… node scripts/performance.mjs` 在獨立瀏覽器、沒有錄影及其他驗證同時執行時，量測 3 個細胞、3 個胞外群體、最多 1 個前景 clip，各狀態 2 秒 requestAnimationFrame 回呼間距：
 
-| 情境 | 中位數 | p95 | 平均 |
-| --- | --- | --- | --- |
-| 桌面待機 | 16.7 ms | 16.8 ms | 17.26 ms |
-| 桌面吞噬／清除 | 16.7 ms | 16.8 ms | 17.53 ms |
-| 手機模擬待機 | 16.7 ms | 16.7 ms | 16.81 ms |
+| 情境               | 中位數  | p95     | 平均     |
+| ------------------ | ------- | ------- | -------- |
+| 桌面待機           | 16.7 ms | 16.8 ms | 17.26 ms |
+| 桌面吞噬／清除     | 16.7 ms | 16.8 ms | 17.53 ms |
+| 手機模擬待機       | 16.7 ms | 16.7 ms | 16.81 ms |
 | 手機模擬吞噬／清除 | 16.7 ms | 16.8 ms | 16.67 ms |
 
 原始資料及方法在 `evidence/performance.json`。這是 headless RAF 回呼節奏，不等於實體手機 GPU 的畫面呈現率。先前同時執行多個錄影瀏覽器時曾有較大延遲，已停止競爭工作再量測；不能以此宣稱所有手機均穩定 60 fps。
