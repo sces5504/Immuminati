@@ -1,0 +1,33 @@
+{
+  "deploymentSource": "814243e",
+  "assets": [
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/index-a0KMjgs7.js",
+      "status": 200,
+      "bytes": 363201,
+      "sha256": "a1eda127d9870954da59107593ac4ab62a146f2f0ae10b8e6d156ad0cd383c05",
+      "matchesLocalBuild": true
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/index-Bf64WRYq.css",
+      "status": 200,
+      "bytes": 84067,
+      "sha256": "581937f078acfdef26fa4343913390a7d55805e8ebee4ea13a26286f5dac93cc",
+      "matchesLocalBuild": true
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/three-CgFCM4tS.js",
+      "status": 200,
+      "bytes": 500683,
+      "sha256": "769138d8f3b3c652f47def85e675a59cdf81a8dcf43663afd6bbebabc3c05db0",
+      "matchesLocalBuild": true
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/mark.svg",
+      "status": 200,
+      "bytes": 504,
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86",
+      "matchesLocalBuild": true
+    }
+  ]
+}

@@ -14,7 +14,7 @@ Repo `sces5504/Immuminati`，通常 `/workspace/Immuminati`，開工確認 Git�
 - `engine/immunity.ts`：PRR、局部訊號、DC 引流／呈遞、CD4／B 活化、漿細胞與抗體、Treg、IFN-γ 囊泡支援、NK／CD8 合法宿主作用。
 - `engine/events.ts`：所有結果／事件由引擎提交；Three.js 不修改規則。
 - `application/controller.ts`：暫停、撤銷、步進、紀錄。
-- `presentation/Anatomy.ts`、`CellGeometry.ts`、`BattleScene.ts`：可替換程序模型、獨立動畫、相機與命中。
+- `presentation/Anatomy.ts`、`CellGeometry.ts`、`labelLayout.ts`、`BattleScene.ts`：可替換程序模型、獨立動畫、相機與命中。
 - `ui/ImmunePanel.tsx`、`Tutorial.tsx`：機制資訊與實際操作驅動教學；沿用 `TacticalApp`／CSS。
 - `content/practice.ts`：一次性機制演練，與 M1 共用規則／渲染；預先活化 CD8、合法／不相符／健康宿主。不算 M2–M6，不覆寫 M1 存檔，退出還原原局並暫停。
 
@@ -37,3 +37,11 @@ CD4 支援族群聚合 Th1／Tfh 功能；訊號採防區濃度，不是擴散 P
 [本輪實作與驗證](IMMUNE-EXPANSION.md)記錄實測和限制；[前輪拖曳／容量修正](TACTICAL-REFINEMENT.md)與[原版驗證](TACTICAL-VALIDATION.md)作歷史背景。每輪只報自己真的跑過的結果。
 
 [GitHub Pages](https://sces5504.github.io/Immuminati/) 為正式入口，Vite base 必須 `/Immuminati/`。必要檢查通過再發布並驗資產、公開 UI。純紀錄補充使用 `[skip ci]`，避免重跑未改程式的部署。最終 M2–M6 規格仍保留，但本輪不開發其關卡。
+
+## 本輪已交付
+
+程式 `814243e` 已通過 [CI 39027769861](https://github.com/sces5504/Immuminati/actions/runs/39027769861) 的47項測試、建置、桌面／手機各14項原操作、新功能10項、吞噬雙分支與部署。公開桌面／手機 smoke 亦通過，資產內容與本機建置一致。37秒桌面／32秒直向手機短片、截圖、來源／時間紀錄與限制都在 [實作紀錄](IMMUNE-EXPANSION.md)／`docs/evidence/immune-expansion/evidence-index.json`；不要沿用更早失敗或部分完成的數字。
+
+CI 共用 `production-dist`，平行產生 `tactics-{device}-evidence`、`immune-{device}-evidence` 與 `animation-evidence`；部署仍依賴全部成功。額外自動公開整局回歸另見實作紀錄，其狀態不應混入發布前測試。
+
+本環境曾遇 CLI 取得 artifact 的短效 blob redirect 返回403；已透過連接的 GitHub artifact 下載工具取得檔案參照並下載ZIP，證據完整。不要把短效簽名URL寫入repo或交接。

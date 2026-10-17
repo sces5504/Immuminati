@@ -1,0 +1,50 @@
+{
+  "browser": "141.0.7390.37",
+  "viewport": [
+    360,
+    800
+  ],
+  "fixture": "Actual mark/recruit queue and field button clicks in all 8 views",
+  "checks": [
+    {
+      "q": 0,
+      "zoomed": false,
+      "passed": true
+    },
+    {
+      "q": 1,
+      "zoomed": false,
+      "passed": true
+    },
+    {
+      "q": 2,
+      "zoomed": false,
+      "passed": true
+    },
+    {
+      "q": 3,
+      "zoomed": false,
+      "passed": true
+    },
+    {
+      "q": 0,
+      "zoomed": true,
+      "passed": true
+    },
+    {
+      "q": 1,
+      "zoomed": true,
+      "passed": true
+    },
+    {
+      "q": 2,
+      "zoomed": true,
+      "passed": true
+    },
+    {
+      "q": 3,
+      "zoomed": true,
+      "passed": true
+    }
+  ]
+}

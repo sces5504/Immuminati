@@ -45,14 +45,21 @@ schema 仍 2；規則 `2.2`、內容 `m1-tactics.3`。配對的 2.0／.1、2.1�
 
 演練不寫入正式存檔；返回精確保留原局狀態並暫停。匯入失敗不替換資料；格式損壞的原始資料也保留備份，允許有效匯入修復當前 key。
 
-## 驗證狀態
+## 最終驗證與發布
 
-- 本機 `npm run verify`：47 項測試通過，型別與 Vite 建置通過。測試涵蓋原操作／無名額／策略／確定性／存檔及新增機制的必要條件、非法目標、自動尋敵與手動優先、實際舊格式遷移、Treg／IFN-γ、NK／CD8 目標、三個 seed 的適應性策略。
-- 三個 seed 均保留早期調理／增援與調度策略；另測以 CD4／B 建立後期抗體的較慢策略。建立適應性反應有前期成本，不是保證比先天防線更高星。
-- 本機 production 新功能 10 項桌面／390×844 觸控模擬檢查通過：十步教學、適應性策略通關、NK／CD8 目標與返回存檔、實際舊格式遷移／原文備份、續玩與無資產／runtime 錯誤。兩邊皆 84.4 模擬秒、60% 保全、二星。
-- 原操作回歸：桌面八組旋轉／縮放正反拖曳、97.6 秒／82% 二星通關、30 族群擁擠部署／存讀已通過；手機八組拖曳已通過，其餘與動畫／Pages 正在完成，最後以實際 JSON 與 CI 記錄補全。完整回歸曾在手機發現地標被因果紀錄／佇列遮擋，發布被 gate 擋下，沒有把紅燈版本當作已上線。修正後已另外在 360×800、帶調理及增援佇列的真實 UI，通過八種視角的防區點選（`label-results.json`）；正在重新跑完整發布檢查。
-- 新控制需 44×44 CSS px，修正倍速鍵寬度，加入新功能檢查。軟體 WebGL 的完整回歸耗時增加，公開驗證 workflow 預算由 15 改 30 分鐘；沒有移除鏡頭、戰鬥或存檔斷言。
-- 瀏覽器腳本：`npm run test:immune` 自啟 production preview 4179；也可 `TARGET_URL=...` 檢查指定網址。`test:browser` 自啟4175、`test:animation` 自啟4176。先建置，使用 `DEVICE=desktop|mobile` 可單獨執行。`EVIDENCE_DIR` 相對 scripts 的路徑可另外保存證據。
+正式部署程式：`814243e`（模型／規則與短片的 `385ae56` 相同，後一提交調整 CI 及觸控測試取點）。規則 `2.2`、內容 `m1-tactics.3`。
+
+- [發布 CI 39027769861](https://github.com/sces5504/Immuminati/actions/runs/39027769861)：單元／規則／存檔／呈現幾何共 **47 項**、型別、建置、桌面／手機原操作、新功能、動畫及部署 **全部成功**。[機器可讀摘要](evidence/immune-expansion/ci-summary.json)。
+- 原操作回歸：桌面、360×800 觸控模擬各 **14 項**，共28次檢查（四項生命週期／存檔在兩邊各跑一次）。八組旋轉／縮放正反拖曳，位移 `(24,18)`／拖回且不誤下命令；同區30族群仍可部署、募集、到場與存讀。百科搜尋、安全暫停、撤銷、匯入／匯出及非法匯入保護通過。兩邊均無 runtime／資產錯誤。[彙整](evidence/immune-regression/browser-results.json)。
+- 原操作策略的實際 M1：桌面 **78.2 秒、86% 保全、三星**；手機 **68.6 秒、88%、三星**。這是實際 UI 指令時序的不同試玩，不要求兩次手動操作產生相同輸入序列。
+- 新功能：1440×1000 桌面、390×844 直向觸控模擬，共 **10 項**通過。十步實際操作教學、尋敵／手動優先、2×、DC→CD4→B／漿細胞→抗體、NK／CD8 合法宿主與返回原局、真實舊格式升版／原文備份、續玩與資產。適應性策略兩邊皆 **84.4 秒、60%、二星**。[結果](evidence/immune-expansion/immune-results.json)。
+- 吞噬包覆／吞入及清除／胞內存活兩分支通過，短片與結果見下方；胞內分支是抽象開發夾具，不是假稱 M1 肺炎鏈球菌在本案例內存活。
+- 公開版 [Pages `?v=814243e`](https://sces5504.github.io/Immuminati/?v=814243e)：實際 Chromium 桌面／直向手機操作通過。新控制均 ≥44×44 px；尋敵、2×、教學、機制面板、8種可募集角色可操作；無資產／runtime 錯誤。[公開驗證](evidence/immune-expansion/public-smoke.json)。JS／CSS／Three／mark.svg 皆 HTTP200，且內容位元組與本機正式建置一致，[資產指紋](evidence/immune-expansion/public-assets.json)。
+- 額外的自動公開整局回歸 [39028429845](https://github.com/sces5504/Immuminati/actions/runs/39028429845) 由部署後自動觸發；本次紀錄當下仍執行中，不混入上述已通過數字。公開手動 smoke 與發布前完整通關檢查已通過。
+
+`test:immune` 自啟 production preview4179，也可 `TARGET_URL=...` 指向指定網址；`test:browser` 自啟4175，支援 `BASE_URL`；`test:animation` 自啟4176。先建置；`DEVICE=desktop|mobile` 可單獨執行，`EVIDENCE_DIR` 相對 scripts。CI共用同一正式建置，平行跑各裝置／動畫；部署依賴全部成功，不移除斷言。公開回歸的軟體繪圖預算由15調為30分鐘，並非真機效能認證。
+
+觸控測試保留32px手指範圍與整條手勢命中canvas，地標避讓後加密搜尋fallback，不 force-click、不拿掉位移／狀態不變斷言。[真實 CDP 正反重現](evidence/immune-expansion/dense-touch-results.json)。
 
 ## 開發中發現並修正
 
@@ -68,3 +75,14 @@ schema 仍 2；規則 `2.2`、內容 `m1-tactics.3`。配對的 2.0／.1、2.1�
 既有百科來源延續；本輪額外查核 [Treg 衍生 IL-10 限制屏障發炎（小鼠研究）](https://pubmed.ncbi.nlm.nih.gov/18387831/)、[誘導性先天反應與 NK 訊號](https://www.ncbi.nlm.nih.gov/books/NBK27122/)、[T 細胞毒作用](https://www.ncbi.nlm.nih.gov/books/NBK27101/)、[效應 T 活化與呈遞](https://www.ncbi.nlm.nih.gov/books/NBK27118/)。這些支持機制方向，不支持遊戲濃度、秒數或損傷係數，也不構成完整專家審查。
 
 瀏覽器為 Linux headless Chromium／SwiftShader；直向手機使用觸控／viewport 模擬，沒有實體 Android／iPhone／Safari 或行動 GPU 效能認證。未新增 M2–M6、沒有持續離線模擬或永久戰力升級。對低階裝置的模型與材質效能仍需真機調整。
+
+## 本輪畫面與動畫證據
+
+- [37 秒 M1 實際操作剪輯](evidence/immune-expansion/m1-highlights.webm)：程式 `385ae56`、1280×900、真實 UI 操作，沒有注入狀態；只剪掉等待段落，依序為待機、調度／吞噬、適應性支援、結算，再進入獨立 NK／CD8 演練。該次 85 模擬秒、59% 保全、一星，沒有挑選或改成高星結果。[原始時間紀錄](evidence/immune-expansion/capture-timeline.json)／[剪輯區段](evidence/immune-expansion/highlights.json)。
+- [32 秒直向手機剪輯](evidence/immune-expansion/mobile-highlights.webm)／[手機時間紀錄](evidence/immune-expansion/mobile-capture-timeline.json)：390×844，同樣真實操作且無狀態注入，與桌面錄製結算一致；屬觸控模擬。
+- [公開桌面](evidence/immune-expansion/public-desktop.png)／[公開手機](evidence/immune-expansion/public-mobile.png)／[公開機制面板](evidence/immune-expansion/public-desktop-mechanisms.png)。
+- [反應進行中](evidence/immune-expansion/adaptive-in-action.png)／[該次結算](evidence/immune-expansion/m1-capture-result.png)。
+- [手機地標避讓修正](evidence/immune-expansion/mobile-field-labels.png)／[八視角實際點選](evidence/immune-expansion/label-results.json)：360×800，包含調理與增援佇列，額外確認每個視角仍有手指寬度的可拖曳空白區。
+- [吞噬雙分支短片](evidence/immune-expansion/engulf-branches.webm)／[動畫檢查](evidence/immune-expansion/animation-results.json)：使用抽象開發夾具，示範包覆／吞入、清除與囊泡內存活的可辨識差異；不是 M1 肺炎鏈球菌在本案例胞內存活，也不是已完成 M2。
+
+原始長片保存在本機忽略的 `raw-playthrough` 目錄；正式交接以這些短片、截圖、機器可讀檢查及最後的 CI／公開版證據為準。Pages 已通過部署與公開驗證；影片及原始時間紀錄另存，以資產指紋連結同一遊戲建置。

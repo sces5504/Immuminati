@@ -1,0 +1,23 @@
+{
+  "gameSource": "385ae56",
+  "testSource": "814243e",
+  "viewport": [
+    360,
+    800
+  ],
+  "browser": "Chromium 141 / SwiftShader",
+  "fixture": "Real two C3b marks, queued neutrophil and selected p5; real CDP touch; 32px clearance retained",
+  "before": {
+    "x": 74.5074,
+    "y": 138.497
+  },
+  "afterForward": {
+    "x": 98.5074,
+    "y": 156.497
+  },
+  "afterReverse": {
+    "x": 74.5074,
+    "y": 138.497
+  },
+  "passed": true
+}

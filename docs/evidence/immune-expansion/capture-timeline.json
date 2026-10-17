@@ -1,0 +1,51 @@
+{
+  "source": "385ae56",
+  "viewport": [
+    1280,
+    900
+  ],
+  "recordedAt": "2026-10-17T11:02:59.200Z",
+  "timeline": [
+    {
+      "label": "idle",
+      "seconds": 5.877
+    },
+    {
+      "label": "move-queued",
+      "seconds": 40.863
+    },
+    {
+      "label": "simulation-start",
+      "seconds": 45.825
+    },
+    {
+      "label": "2x",
+      "seconds": 58.559
+    },
+    {
+      "label": "plasma",
+      "seconds": 69.365
+    },
+    {
+      "label": "result",
+      "seconds": 100.988
+    },
+    {
+      "label": "practice",
+      "seconds": 125.257
+    },
+    {
+      "label": "cytotoxic-result",
+      "seconds": 125.868
+    }
+  ],
+  "result": {
+    "type": "victory",
+    "reason": "3 波感染來源均已清除",
+    "preservation": 59,
+    "stars": 1,
+    "seconds": 85
+  },
+  "errors": [],
+  "notes": "Actual UI M1; no state injection. Starts 1x then 2x. Disposable NK/CD8 practice after victory."
+}

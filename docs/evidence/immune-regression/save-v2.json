@@ -1,0 +1,333 @@
+{
+  "schema": 2,
+  "rules": "2.2",
+  "content": "m1-tactics.3",
+  "state": {
+    "version": 2,
+    "scenario": "m1",
+    "seed": 2,
+    "rng": 2,
+    "tick": 20,
+    "energy": 5,
+    "support": 6,
+    "wave": 0,
+    "nextWaveAt": 175,
+    "health": {
+      "a": 97.48,
+      "b": 97.96000000000001,
+      "c": 99.28
+    },
+    "cells": [
+      {
+        "id": "u1",
+        "kind": "macrophage",
+        "position": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -11,
+            "z": -4
+          }
+        },
+        "path": [],
+        "readyAt": 34,
+        "recognized": true
+      },
+      {
+        "id": "u2",
+        "kind": "neutrophil",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "region": "b",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 10,
+            "z": -3
+          }
+        },
+        "path": [],
+        "readyAt": 22,
+        "recognized": true
+      },
+      {
+        "id": "u3",
+        "kind": "dendritic",
+        "position": {
+          "x": -2.901981701511867,
+          "z": 10.55003277812471
+        },
+        "region": "c",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -3,
+            "z": 9
+          }
+        },
+        "path": [
+          {
+            "x": -4,
+            "z": 12
+          }
+        ],
+        "readyAt": 26,
+        "recognized": true,
+        "antigen": "pneumococcus:protein"
+      }
+    ],
+    "colonies": [
+      {
+        "id": "p4",
+        "region": "a",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "load": 10,
+        "markedUntil": 0,
+        "pathogen": "pneumococcus"
+      },
+      {
+        "id": "p5",
+        "region": "b",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "load": 8,
+        "markedUntil": 0,
+        "pathogen": "pneumococcus"
+      },
+      {
+        "id": "p6",
+        "region": "c",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "load": 3,
+        "markedUntil": 0,
+        "pathogen": "pneumococcus"
+      }
+    ],
+    "arrivals": [],
+    "internal": [],
+    "immunity": {
+      "autoSeek": false,
+      "signals": {
+        "a": {
+          "cxcl8": 27,
+          "il12": 16,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 7.5
+        },
+        "b": {
+          "cxcl8": 27,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 7.5
+        },
+        "c": {
+          "cxcl8": 9,
+          "il12": 2,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 1.5
+        }
+      },
+      "node": {
+        "stage": "presenting",
+        "antigen": "pneumococcus:protein",
+        "until": 54
+      },
+      "antibodies": 0
+    },
+    "hosts": [],
+    "serial": 7,
+    "eventId": 11,
+    "events": [
+      {
+        "id": 1,
+        "tick": 0,
+        "type": "wave",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "amount": 1,
+        "message": "第 1 波：前緣接觸。感染入口與負荷已標示。"
+      },
+      {
+        "id": 2,
+        "tick": 2,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），完成清除。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p5",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 3,
+        "tick": 4,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 1 負荷（莢膜限制效率），完成清除。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "p4",
+        "from": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "survives": false
+      },
+      {
+        "id": 4,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "message": "巨噬細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u1"
+      },
+      {
+        "id": 5,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u2"
+      },
+      {
+        "id": 6,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -1.324778806322772,
+          "z": 7.907464438906154
+        },
+        "message": "樹突細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u3"
+      },
+      {
+        "id": 7,
+        "tick": 6,
+        "type": "present",
+        "position": {
+          "x": -0.48716820948415757,
+          "z": 7.3611966583592325
+        },
+        "message": "樹突細胞已捕捉蛋白抗原，成熟後將由淋巴引流至淋巴結；吞入病原不等於直接活化所有淋巴球。",
+        "amount": 1,
+        "actor": "u3"
+      },
+      {
+        "id": 8,
+        "tick": 6,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "樹突細胞吞入 1 負荷（莢膜限制效率），完成清除。",
+        "amount": 1,
+        "actor": "u3",
+        "target": "p6",
+        "from": {
+          "x": -0.48716820948415757,
+          "z": 7.3611966583592325
+        },
+        "survives": false
+      },
+      {
+        "id": 9,
+        "tick": 12,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），完成清除。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p5",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 10,
+        "tick": 14,
+        "type": "present",
+        "position": {
+          "x": -4,
+          "z": 12
+        },
+        "message": "樹突細胞經引流到達淋巴結：開始蛋白肽 MHC-II 呈遞，需共刺激與活化等待。",
+        "amount": 8,
+        "actor": "u3"
+      },
+      {
+        "id": 11,
+        "tick": 19,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 1 負荷（莢膜限制效率），完成清除。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "p4",
+        "from": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "survives": false
+      }
+    ]
+  },
+  "paused": true,
+  "undo": [],
+  "settings": {
+    "speed": 1,
+    "reduced": false,
+    "idle": true,
+    "hints": true
+  },
+  "read": [
+    "th1"
+  ],
+  "records": {}
+}

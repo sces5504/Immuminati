@@ -1,0 +1,40 @@
+{
+  "gameSource": "385ae56",
+  "publishedBuildCandidate": "814243e",
+  "file": "mobile-highlights.webm",
+  "viewport": [
+    390,
+    844
+  ],
+  "sourceSegmentsSeconds": [
+    [
+      5,
+      8
+    ],
+    [
+      24,
+      34
+    ],
+    [
+      44,
+      51
+    ],
+    [
+      72,
+      79
+    ],
+    [
+      87,
+      92
+    ]
+  ],
+  "edits": "Chronological cuts only. Actual 1x then 2x gameplay; no state injection.",
+  "result": {
+    "type": "victory",
+    "reason": "3 波感染來源均已清除",
+    "preservation": 59,
+    "stars": 1,
+    "seconds": 85
+  },
+  "limitations": "Chromium portrait/touch emulation; not physical phone."
+}

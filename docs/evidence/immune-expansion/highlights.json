@@ -1,0 +1,37 @@
+{
+  "source": "385ae56",
+  "file": "m1-highlights.webm",
+  "durationSeconds": 37,
+  "original": "raw-playthrough/m1-current-source.webm (local ignored full recording)",
+  "edits": "Chronological cuts only; no added playback speed. Actual game uses 1x then 2x.",
+  "sourceSegmentsSeconds": [
+    [
+      6,
+      9
+    ],
+    [
+      42,
+      54
+    ],
+    [
+      67,
+      75
+    ],
+    [
+      98,
+      106
+    ],
+    [
+      121,
+      127
+    ]
+  ],
+  "coverage": [
+    "independent idle motion",
+    "actual commanded movement and phagocytosis",
+    "adaptive support in action",
+    "M1 victory (85 simulated seconds, 59% preservation, one star)",
+    "separate NK/CD8 mechanism practice after M1"
+  ],
+  "notes": "Cells and tissue are procedural 3D meshes; no state injection. The intracellular-survival clip is a separate abstract dev fixture."
+}

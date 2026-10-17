@@ -1,0 +1,274 @@
+{
+  "deployment": "814243e9e672169b49a6d7cc80dd77fe99657080",
+  "gameSourceForLocalMovies": "385ae56",
+  "run": "https://github.com/sces5504/Immuminati/actions/runs/39027769861",
+  "checks": {
+    "tests": 47,
+    "originalBrowserExecutions": 28,
+    "immuneChecks": 10,
+    "publicViewports": 2,
+    "animationBranches": 2
+  },
+  "notes": [
+    "CI and public screenshots use final deployment; local 37s/32s movies use identical game source before test-only CI changes.",
+    "Raw native recordings and failed-run diagnostics are ignored, not included here.",
+    "Phone tests are Chromium viewport/touch emulation, not physical devices."
+  ],
+  "files": [
+    {
+      "file": "docs/evidence/immune-expansion/adaptive-in-action.png",
+      "bytes": 701153,
+      "sha256": "e41e79d1c302816a8f2d119edf9ea0f29cb700dd9889ca1ccd6c5c9c730db997"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/animation-results.json",
+      "bytes": 360,
+      "sha256": "617d2d4e6251bac619400e16a96dc82bfbe9a6e821a847efeaa2e631aab961f1"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/capture-timeline.json",
+      "bytes": 919,
+      "sha256": "a94d5a29cf999199e0836354aa10e93eb08d1c7c5a97d32397bc644765a83f74"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/ci-summary.json",
+      "bytes": 510,
+      "sha256": "7fc2127cc2d686fde8e9dbca087291c6b29404993c381576c2520c1cd8c07419"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/dense-touch-results.json",
+      "bytes": 441,
+      "sha256": "82cc466366570c3e1da3c3930848da3799f8cc1859d491caa232ce60ab1b549c"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/desktop-adaptive-result.png",
+      "bytes": 806431,
+      "sha256": "a4718a4f88d677cd706f3491717c6517769f354cdacfeeb1067b28c934ea61af"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/desktop-anatomy.png",
+      "bytes": 801073,
+      "sha256": "1f17115e3ca03506ce8f94acaaf3fbb54810edde86b33bb4d28994aca1e60dca"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/desktop-cytotoxic-result.png",
+      "bytes": 823722,
+      "sha256": "44baf22b1256488e8b60939d624d0944abb1e4d602371138ddbc9b085cf7813a"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/desktop-mechanisms.png",
+      "bytes": 404391,
+      "sha256": "f52f6e35cdcac77d49d8b91748092e99696ae1b39cf45e29cebdd78d6ca47a07"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/desktop-practice-start.png",
+      "bytes": 828236,
+      "sha256": "82d718902136677189aaa23290c1ccfe2947c9ed69053e365ffdb38b9cb1913b"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/desktop-tutorial.png",
+      "bytes": 800575,
+      "sha256": "685a2601dd228261cc5b75ad12b375c43063ad9e848133a717d68131d182e3dd"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/engulf-branches.webm",
+      "bytes": 1169801,
+      "sha256": "7d3e8f530d015035b61fd56808ebb0210038126896a7cbf9486a45d9b3f3271a"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/engulf-clear.png",
+      "bytes": 291878,
+      "sha256": "e03cd8e4262903f1ca814f63eeab25484c62803b4f13752f88209fb8ce989e8a"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/engulf-survival.png",
+      "bytes": 292396,
+      "sha256": "f2d5fa6f2e8da3d449f6c8976310f45d3daf651e784facd41ff6485cbd7e9acd"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/highlights.json",
+      "bytes": 857,
+      "sha256": "ba2746cdf4ace9c4b1bda0ca9d0cd7ac05eb834a98ef33f29ca092508ea8458e"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/immune-results.json",
+      "bytes": 2385,
+      "sha256": "380765f41a4a5e290814e262ab3344794f566fbdb8afc38f817999ea5fe0302e"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/label-results.json",
+      "bytes": 733,
+      "sha256": "e604ece36d389acdb0c0fa6934536c98125f3164c7470fc2afe7a8c5928a30f4"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/m1-capture-result.png",
+      "bytes": 626632,
+      "sha256": "ca3c7df307203c26e2ae9a8134141cc7f638ce7fbcc07364b8b990c0094f256b"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/m1-highlights.webm",
+      "bytes": 446208,
+      "sha256": "aff4d1cdc5011f15e2ab9b1ec4e8d1e22466b1352721ff4a913bc8d4ec20458c"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-adaptive-in-action.png",
+      "bytes": 240541,
+      "sha256": "8ed0bb0ae59fac4b53ac877cce526e869b021a11054f10a3e224c9cc657d4999"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-adaptive-result.png",
+      "bytes": 193642,
+      "sha256": "336ca6f99c74df63cb255c4ca5f9e185111e117498f1142340d5d822ef208787"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-anatomy.png",
+      "bytes": 233325,
+      "sha256": "42f75f13390326b1749e3b9bcefdbbd65cbd64d241dd890189b5450b07766c50"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-capture-timeline.json",
+      "bytes": 915,
+      "sha256": "489063db0cd4397bf5a6451914f4a03d5be9e059756d91e2147d562f81491582"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-current-result.png",
+      "bytes": 195005,
+      "sha256": "11c288bdda3aeed253f9ce1fe4f03a4308ffe4d1e5d014e94794a029df3b34be"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-cytotoxic-result.png",
+      "bytes": 234103,
+      "sha256": "9d5e906e20c1518bcdb485a515d5ab5f18aa060428a38ffd3f7f76392fca00f4"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-field-labels.png",
+      "bytes": 219135,
+      "sha256": "d4b22725ac3206b8cfe39d514d17597786579da52a39d78be85357fcbadeaa28"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-highlights.json",
+      "bytes": 644,
+      "sha256": "af84c37a8ab945dfc1395e514c949ffcf6943bc2584099493c9388d178f10c1f"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-highlights.webm",
+      "bytes": 305608,
+      "sha256": "b719962beb72edb3e9250e0ac6a3f5056114cc6910ed01c37f2d25d37e47d78a"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-mechanisms.png",
+      "bytes": 102240,
+      "sha256": "fd5b3f1ee961ffd368c2b889e58e7b43155c3cef13146d63933488c45e826f52"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-practice-start.png",
+      "bytes": 235131,
+      "sha256": "ef4d5b68c42736443bcfdafedb6d1dc7e69b03d25165217c1fd9f26fc2025ddf"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/mobile-tutorial.png",
+      "bytes": 215297,
+      "sha256": "0154f612bec84682026a4d691691b8831c2be913b40c55b49e39384be3d20a3e"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/public-assets.json",
+      "bytes": 1050,
+      "sha256": "73fa8d5d2a8f2396f1c6259b8596c22a7b3390d3225b6875560c11591d44beba"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/public-desktop-mechanisms.png",
+      "bytes": 380113,
+      "sha256": "c2d60a1fb7ec5b9b8f4def5b4ea504ec3a6d932dae676ac6f4377577bda1abe6"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/public-desktop.png",
+      "bytes": 800987,
+      "sha256": "1080cb04c267bd19159e781fbdf6b7194f05ea7663097dccfe1fd55779fa01cf"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/public-mobile-mechanisms.png",
+      "bytes": 91029,
+      "sha256": "8f9cdf998217ebd8cd6239cc7c28685598352a5fbe1568af4f64cca31eec1c20"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/public-mobile.png",
+      "bytes": 235155,
+      "sha256": "20059fa62f8b117f1d99c2606478956edb3d5a07c286561ff687179171e10932"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/public-smoke.json",
+      "bytes": 2961,
+      "sha256": "877474dc76a8e75b7000b7948ee472d117f26e4ec4bfc3010692d5f7b45fc243"
+    },
+    {
+      "file": "docs/evidence/immune-regression/browser-results.json",
+      "bytes": 6498,
+      "sha256": "a750d3711432e6bf506667c6a12be0de68c9b1371e402de33334d1aca69d04b2"
+    },
+    {
+      "file": "docs/evidence/immune-regression/desktop-crowded-controlled.png",
+      "bytes": 817797,
+      "sha256": "df1cf551b65d454d502c03f19a167eaa664c5a8a2260c91ce55179905264e303"
+    },
+    {
+      "file": "docs/evidence/immune-regression/desktop-engulf.png",
+      "bytes": 795894,
+      "sha256": "1013f901b528ff9b7f6b1ed067092ecc2e2116db2d7c9872f2b62d623e7f8488"
+    },
+    {
+      "file": "docs/evidence/immune-regression/desktop-field.png",
+      "bytes": 801073,
+      "sha256": "9a9668b26c575b92ffee23e807fe81be2d4460e5239f0a0853d60d65798385cf"
+    },
+    {
+      "file": "docs/evidence/immune-regression/desktop-home.png",
+      "bytes": 986590,
+      "sha256": "3a1dcae23dea42bbd2eb56dfc48c71018bf5acc4da40862625be810d7317db26"
+    },
+    {
+      "file": "docs/evidence/immune-regression/desktop-result.png",
+      "bytes": 802816,
+      "sha256": "5a35f2fa770e6ba38d2c1406cd8072884c7784ca7266849321c310b7a74dc3ed"
+    },
+    {
+      "file": "docs/evidence/immune-regression/desktop-results.json",
+      "bytes": 3246,
+      "sha256": "2c81e4087fdf6160b0cd7b3ffe269ae253dc915296fb20aa900c8835b7e54dc2"
+    },
+    {
+      "file": "docs/evidence/immune-regression/mobile-crowded-controlled.png",
+      "bytes": 210724,
+      "sha256": "8461f882627f9d6637be8d8551a7b625b4f8d8c7d5db28d9bf738df6bf594a56"
+    },
+    {
+      "file": "docs/evidence/immune-regression/mobile-engulf.png",
+      "bytes": 209759,
+      "sha256": "f8a4e60d4d6e89b6c02f93817ccdf2930fdc2ecf0104ad64e8d8ab09d2b87f11"
+    },
+    {
+      "file": "docs/evidence/immune-regression/mobile-field.png",
+      "bytes": 207904,
+      "sha256": "376061d84bf71fde06e009b99ca6f7b4272488f08f8e579cef0a8848fa27b20a"
+    },
+    {
+      "file": "docs/evidence/immune-regression/mobile-home.png",
+      "bytes": 247113,
+      "sha256": "ff2c2460d63eeb40cba6deea01e99932568d1b6d826ba5fd7ea5c644ddf4b214"
+    },
+    {
+      "file": "docs/evidence/immune-regression/mobile-result.png",
+      "bytes": 199134,
+      "sha256": "b5f127daab6ca54f1e1c26192382e2f7a27542009b1f98363b23b21a436cba36"
+    },
+    {
+      "file": "docs/evidence/immune-regression/mobile-results.json",
+      "bytes": 3306,
+      "sha256": "edfe3b86ffa6d0aa7c310e545062e2ceff5de2f7e7b64f733baeb6d295d156f6"
+    },
+    {
+      "file": "docs/evidence/immune-regression/save-v2.json",
+      "bytes": 7446,
+      "sha256": "069790226d0f6db748286bd6e580662d5ca98102ad2204fd90b20936c75d187e"
+    }
+  ]
+}
