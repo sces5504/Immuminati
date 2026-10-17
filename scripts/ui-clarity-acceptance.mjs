@@ -42,7 +42,7 @@ try {
   });
   for (const [device, viewport] of [
     ["desktop", { width: 1440, height: 1000 }],
-    ["mobile", { width: 390, height: 844 }],
+    ["mobile", { width: 360, height: 800 }],
   ]) {
     if (process.env.DEVICE && process.env.DEVICE !== device) continue;
     const ctx = await browser.newContext({
@@ -101,6 +101,25 @@ try {
       .getByRole("button", { name: "? 操作提示", exact: true })
       .boundingBox();
     assert.ok(help.x > viewport.width / 2);
+    const colonyTargets = await page
+      .locator("[data-colony]")
+      .evaluateAll((es) =>
+        es.map((el) => {
+          const b = el.getBoundingClientRect();
+          const hit = document.elementFromPoint(
+            b.x + b.width / 2,
+            b.y + b.height / 2,
+          );
+          return {
+            id: el.dataset.colony,
+            accessible: !!hit && el.contains(hit),
+          };
+        }),
+      );
+    assert.ok(
+      colonyTargets.every((p) => p.accessible),
+      JSON.stringify(colonyTargets),
+    );
     await page.screenshot({ path: dir + device + "-quiet-field.png" });
     record(
       "new game seeks by default; compact objective, right-side help and minimal 44px map targets",

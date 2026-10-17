@@ -432,8 +432,8 @@ export default function TacticalApp() {
       setRegion((nextContent ?? content).fields[0].id);
       setImported(true);
       setNotice(
-        JSON.parse(text).rules !== "2.3"
-          ? "已匯入並升級至規則 2.3；保留原局時間與指令，補上組織細胞；舊局不追算過去吞入的病原。"
+        JSON.parse(text).rules !== "2.4"
+          ? "已匯入並升級至規則 2.4；保留原局與尋敵選擇，分開補體／抗體期限，不追算過去免疫反應。"
           : "已匯入新版存檔，繼續遊玩時先維持戰術暫停。",
       );
     } catch (e) {
@@ -831,6 +831,12 @@ export default function TacticalApp() {
               >
                 案例與機制 ↗
               </button>
+              <button
+                className="t-objective-log"
+                onClick={() => setModal("log")}
+              >
+                ☷ 因果紀錄
+              </button>
             </div>
             {burden === 0 && s.wave < content.waves.length - 1 ? (
               <button
@@ -859,7 +865,7 @@ export default function TacticalApp() {
             >
               <b>C3</b>
               <span>
-                補體調理<small>1 資源 · 剩 {s.support} 次</small>
+                補體調理<small>1 資源／{s.support} 次</small>
               </span>
             </button>
             <button
@@ -873,7 +879,7 @@ export default function TacticalApp() {
               <b>Y</b>
               <span>
                 B／抗體
-                <small>{s.immunity.antibodies} 抗體 · 需 B 細胞反應</small>
+                <small>抗體 {s.immunity.antibodies}</small>
               </span>
             </button>
             <button
@@ -887,13 +893,8 @@ export default function TacticalApp() {
               <b>＋</b>
               <span>
                 募集增援
-                <small>
-                  {s.cells.length + s.arrivals.length} 族群 · 按資源募集
-                </small>
+                <small>{s.cells.length + s.arrivals.length} 族群</small>
               </span>
-            </button>
-            <button className="t-log-tool" onClick={() => setModal("log")}>
-              ☷ <span>因果紀錄</span>
             </button>
           </div>
           <div className="t-strategy-tools" aria-label="戰術輔助">
@@ -1497,8 +1498,13 @@ export default function TacticalApp() {
                 指派目標或部署位置；細胞會沿組織通道移動，接近合法目標後自動吞噬。
               </li>
               <li>
-                <b>調理需要吞噬者配合。</b> 點菌群按「施加調理」，或使用 Y
-                工具再點目標。花 1 資源、持續 20 秒，沒有直接傷害。
+                <b>補體需要吞噬者配合。</b> 點菌群按「補體調理」，或用 C3
+                工具再點目標。花 1 資源、持續 20 秒，不直接殺菌。
+              </li>
+              <li>
+                <b>B 細胞可分化為漿細胞，產生抗體。</b>{" "}
+                「B／抗體」可查看活化前提及募集；抗體產生後自動調理，也能消耗現有抗體指定胞外目標。Y
+                形是抗體，與 C3b 補體按鈕不同。
               </li>
               <li>
                 <b>叫增援填補空缺。</b> 嗜中性球花 3 資源、5 秒後到場；巨噬花
@@ -1513,7 +1519,7 @@ export default function TacticalApp() {
               反應資源每 {content.energyEvery * 0.2} 秒恢復 1，上限{" "}
               {content.energyMax}
               。沒有區域或全場名額限制，依資源與到場時間安排支援。
-              時間與數量為遊戲抽象。
+              時間與數量為遊戲抽象。點左上任務列展開，可開啟因果紀錄；設定中可恢復完整地圖標籤。
             </p>
             <button className="t-primary" onClick={() => setModal(null)}>
               回到戰場
