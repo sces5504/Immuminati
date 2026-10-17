@@ -88,7 +88,7 @@ describe("spatial fixed-step tactics", () => {
       { type: "mark", target: "missing" },
       { type: "attack", cell: "missing", target: "p4" },
       { type: "move", cell: "u1", point: { x: 100, z: 0 } },
-      { type: "recruit", kind: "dendritic", region: "a" },
+      { type: "recruit", kind: "plasma", region: "a" },
     ] as TacticalCommand[]) {
       const r = commandTactical(s, cmd, m1);
       expect(r.error).toBeTruthy();

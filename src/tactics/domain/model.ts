@@ -1,5 +1,52 @@
 export type Vec = { x: number; z: number };
-export type CellType = "macrophage" | "neutrophil" | "dendritic";
+export const CELL_TYPES = [
+  "macrophage",
+  "neutrophil",
+  "dendritic",
+  "helperT",
+  "cytotoxicT",
+  "bcell",
+  "plasma",
+  "nk",
+  "treg",
+] as const;
+export type CellType = (typeof CELL_TYPES)[number];
+export type CellRole =
+  | "phagocyte"
+  | "presenter"
+  | "helper"
+  | "cytotoxic"
+  | "bcell"
+  | "antibody"
+  | "nk"
+  | "regulatory";
+export interface Signals {
+  cxcl8: number;
+  il12: number;
+  ifng: number;
+  il10: number;
+  inflammation: number;
+}
+export interface Immunity {
+  autoSeek: boolean;
+  signals: Record<string, Signals>;
+  node: {
+    stage: "idle" | "migrating" | "presenting" | "primed";
+    antigen: string;
+    until: number;
+  };
+  antibodies: number;
+}
+export interface HostCell {
+  id: string;
+  region: string;
+  position: Vec;
+  antigen: string;
+  mhc1: boolean;
+  stressed: boolean;
+  load: number;
+  apoptoticAt: number;
+}
 export type Order =
   | { type: "guard"; point: Vec }
   | { type: "move"; point: Vec }
@@ -12,6 +59,10 @@ export interface Cell {
   order: Order;
   path: Vec[];
   readyAt: number;
+  recognized?: boolean;
+  antigen?: string;
+  activation?: "resting" | "activating" | "effector";
+  activationAt?: number;
 }
 export interface Colony {
   id: string;
@@ -19,6 +70,7 @@ export interface Colony {
   position: Vec;
   load: number;
   markedUntil: number;
+  opsonin?: "c3b" | "antibody";
   pathogen: string;
 }
 export interface Arrival {
@@ -48,7 +100,14 @@ export interface TacticalEvent {
     | "spread"
     | "damage"
     | "wave"
-    | "result";
+    | "result"
+    | "recognize"
+    | "signal"
+    | "present"
+    | "activate"
+    | "antibody"
+    | "regulate"
+    | "cytotoxic";
   actor?: string;
   target?: string;
   position: Vec;
@@ -79,6 +138,8 @@ export interface TacticalState {
   colonies: Colony[];
   arrivals: Arrival[];
   internal: Internal[];
+  immunity: Immunity;
+  hosts: HostCell[];
   serial: number;
   eventId: number;
   events: TacticalEvent[];
@@ -93,6 +154,11 @@ export interface Field {
 export interface CellSpec {
   name: string;
   short: string;
+  role: CellRole;
+  system: "innate" | "adaptive";
+  description: string;
+  encyclopedia: string;
+  recruitable: boolean;
   speed: number;
   range: number;
   power: number;
@@ -110,9 +176,12 @@ export interface Wave {
 export interface TacticalContent {
   id: string;
   title: string;
-  pathogen: { id: string; name: string; survives: boolean };
+  pathogen: { id: string; name: string; survives: boolean; antigen?: string };
+  tissue: "lung" | "oral" | "intestinal";
+  practice?: boolean;
   fields: Field[];
   portal: Vec;
+  lymphExit?: Vec;
   cells: Record<CellType, CellSpec>;
   initial: { kind: CellType; region: string; offset: Vec }[];
   waves: Wave[];
@@ -134,7 +203,8 @@ export type TacticalCommand =
   | { type: "guard"; cell: string }
   | { type: "mark"; target: string }
   | { type: "recruit"; kind: CellType; region: string }
-  | { type: "advance" };
+  | { type: "advance" }
+  | { type: "autoseek"; enabled: boolean };
 export interface TacticalSettings {
   speed: 1 | 2;
   reduced: boolean;
@@ -143,8 +213,8 @@ export interface TacticalSettings {
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "2.1";
-  content: "m1-tactics.2";
+  rules: "2.2";
+  content: "m1-tactics.3";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];

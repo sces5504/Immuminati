@@ -1,17 +1,17 @@
 # Immuminati · 微觀防線
 
-**保留已發布立體戰術版的 UI、畫面、操作與整體風格，後續增量優化玩法。** 使用者已撤回從頭 RTS 重建與替換佔位模型的安排；`src/tactics` 是正式入口，原版不是待淘汰的畫面。
+**保留已發布立體戰術版的 UI、畫面、操作與整體風格，並依本輪八項需求改善組織／細胞模型及免疫機制。** 使用者已撤回從頭 RTS 重建與替換佔位模型的安排；`src/tactics` 是正式入口，原版不是待淘汰的畫面。
 
 [線上遊玩](https://sces5504.github.io/Immuminati/)。保留程式基準為 `d2c16ab`，畫面與影片見 `af6bcb3` 的證據；`6e1d5f7` 已回退另一次 RTS 重製。公開部署狀態需依最新流程實查。
 
 ## 開發入口
 
 1. [開發指引](AGENTS.md)
-2. [現行主規格 v2.1](docs/Immuminati-spec.md)
+2. [現行主規格 v2.2](docs/Immuminati-spec.md)
 3. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)
 4. [交接與下一個 AI 的工作說明](docs/CLOUD-HANDOFF.md)
 
-維持現有立體戰場與可暫停即時戰術操作；玩法改進針對具體問題逐項實作。本輪修正拖曳反向、取消名額、改善重疊防區標記與零步匯入續玩，實作及檢查狀態見 [增量修正紀錄](docs/TACTICAL-REFINEMENT.md)。不重新設計首頁、HUD、指揮列、模型或手機布局。
+維持可暫停立體戰術操作。本輪加入自動尋敵、戰場 2×、9 種細胞、PRR／局部訊號、抗原呈遞與適應性抗體流程、Treg 調節，以及十步互動教學。肺泡組織與細胞形態同步改善；[實作、驗證與限制](docs/IMMUNE-EXPANSION.md)。既有[拖曳／無名額修正](docs/TACTICAL-REFINEMENT.md)保留。M2–M6 尚未製作。
 
 ## 執行與驗證
 
@@ -30,6 +30,7 @@ npm run preview
 npx playwright install --with-deps chromium
 npm run test:browser
 npm run test:animation
+npm run test:immune
 ```
 
 Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試覆蓋既有立體戰術版；改規則時同步更新相應斷言，並保留其餘回歸檢查。手機瀏覽器腳本是 viewport／touch 模擬，不等同真機測試。

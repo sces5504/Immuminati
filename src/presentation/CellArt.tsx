@@ -1,4 +1,5 @@
 import { useId } from "react";
+import type { CellType } from "../tactics/domain/model";
 import type { CellKind } from "../domain/model";
 const macrophage =
   "M 47 14 C 44 4 38 3 37 16 C 31 20 29 14 23 11 C 15 8 21 21 19 25 C 13 30 5 21 5 30 C 4 38 16 35 16 43 C 13 48 2 48 7 55 C 11 62 19 51 23 59 C 25 65 12 72 20 77 C 27 80 29 66 35 72 C 39 77 31 86 39 89 C 48 90 44 77 52 78 C 60 77 58 91 66 88 C 73 84 62 77 68 71 C 75 66 80 80 86 74 C 91 67 76 62 81 56 C 86 52 94 58 95 49 C 94 41 82 47 80 40 C 79 33 94 32 89 25 C 84 20 78 30 72 26 C 67 20 75 11 67 10 C 59 9 64 23 56 22 C 49 22 54 11 47 14 Z";
@@ -10,7 +11,7 @@ export function CellArt({
   infected = false,
   decorative = false,
 }: {
-  kind?: CellKind;
+  kind?: CellKind | CellType;
   active?: boolean;
   infected?: boolean;
   decorative?: boolean;
@@ -23,6 +24,15 @@ export function CellArt({
         ? dendritic
         : "M50 10 C73 7 90 24 91 48 C95 70 77 89 53 91 C31 94 10 79 9 56 C5 30 22 11 50 10Z";
   const pink = kind === "neutrophil";
+  const lymphocyte = !["macrophage", "neutrophil", "dendritic"].includes(kind);
+  const palette =
+    kind === "helperT" || kind === "treg"
+      ? ["#e5fff3", "#8cc9b9", "#5c928d"]
+      : kind === "cytotoxicT"
+        ? ["#e5eeff", "#8aaee1", "#5e7bae"]
+        : kind === "bcell" || kind === "plasma"
+          ? ["#fff0ff", "#c7a1d2", "#9567ad"]
+          : ["#f5e7ff", "#b398bb", "#785c8c"];
   return (
     <svg
       viewBox="0 0 100 100"
@@ -36,15 +46,25 @@ export function CellArt({
             ? "巨噬細胞，彎曲核與偽足"
             : kind === "neutrophil"
               ? "嗜中性球，分葉核與顆粒"
-              : "樹突細胞，分枝突起"
+              : lymphocyte
+                ? `${kind}，緻密圓核與細胞膜`
+                : "樹突細胞，分枝突起"
       }
     >
       <defs>
         <radialGradient id={`${uid}mem`} cx="32%" cy="24%" r="78%">
-          <stop stopColor={pink ? "#fff2ee" : "#e8e6ff"} />
-          <stop offset=".27" stopColor={pink ? "#efc6d3" : "#b9a3e7"} />
+          <stop
+            stopColor={pink ? "#fff2ee" : lymphocyte ? palette[0] : "#e8e6ff"}
+          />
+          <stop
+            offset=".27"
+            stopColor={pink ? "#efc6d3" : lymphocyte ? palette[1] : "#b9a3e7"}
+          />
           <stop offset=".72" stopColor={pink ? "#d59bad" : "#9683ce"} />
-          <stop offset="1" stopColor={pink ? "#9b6e94" : "#575c9d"} />
+          <stop
+            offset="1"
+            stopColor={pink ? "#9b6e94" : lymphocyte ? palette[2] : "#575c9d"}
+          />
         </radialGradient>
         <radialGradient id={`${uid}nuc`} cx="33%" cy="24%" r="80%">
           <stop stopColor="#b19cdb" />
@@ -129,12 +149,12 @@ export function CellArt({
               fill="none"
             />
           </>
-        ) : kind === "dendritic" ? (
+        ) : kind === "dendritic" || lymphocyte ? (
           <ellipse
             cx="49"
             cy="48"
-            rx="13"
-            ry="15"
+            rx={lymphocyte ? 23 : 13}
+            ry={lymphocyte ? 26 : 15}
             fill={`url(#${uid}nuc)`}
             stroke="#c1b2ed"
           />

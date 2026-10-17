@@ -2211,3 +2211,242 @@
     animation: none;
   }
 }
+
+/* Incremental strategy controls; retain the existing HUD, scene and command dock. */
+.t-strategy-tools {
+  position: absolute;
+  top: 164px;
+  right: 230px;
+  display: flex;
+  gap: 5px;
+  z-index: 16;
+}
+.t-strategy-tools button {
+  background: #192b43e8;
+  border: 1px solid #bdd9eb44;
+  border-radius: 7px;
+  color: #cce7ef;
+  padding: 8px 11px;
+  min-height: 44px;
+  font-size: 11px;
+}
+.t-strategy-tools [aria-pressed="true"] {
+  border-color: #8dded8;
+  background: #31515b;
+}
+.t-recruit-card {
+  max-height: calc(100dvh - 410px);
+  overflow: auto;
+}
+.t-recruit-option {
+  min-height: 76px;
+}
+.t-recruit-option small {
+  white-space: normal;
+  line-height: 1.55;
+}
+.t-recruit-option:disabled {
+  opacity: 0.62;
+}
+.t-immune-panel {
+  padding: 22px;
+  color: #24394b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.t-immune-panel section {
+  border-top: 1px solid #9cbdc755;
+  margin-top: 20px;
+  padding-top: 16px;
+}
+.t-immune-panel h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.t-immune-panel button {
+  min-height: 44px;
+  border: 1px solid #829cac88;
+  border-radius: 7px;
+  padding: 8px 13px;
+  background: #d9e8ee;
+  color: #203c52;
+}
+.t-signal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 15px 0;
+}
+.t-signal-grid article {
+  background: #e3eaf0;
+  border-radius: 9px;
+  padding: 12px;
+}
+.t-signal-grid label {
+  display: grid;
+  grid-template-columns: 1fr 65px 22px;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+}
+.t-signal-grid meter {
+  width: 65px;
+  height: 10px;
+}
+.t-immune-chain {
+  padding-left: 24px;
+}
+.t-immune-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 15px;
+}
+.t-tutorial {
+  position: absolute;
+  left: 28px;
+  top: 370px;
+  width: 300px;
+  z-index: 26;
+  padding: 18px;
+  border: 1px solid #9ddbd7;
+  border-radius: 12px;
+  background: #172c43f5;
+  color: #d4e5ee;
+  box-shadow: 0 8px 30px #14283f66;
+}
+.t-tutorial[hidden] {
+  display: none;
+}
+.t-tutorial > div,
+.t-tutorial footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+.t-tutorial h3 {
+  font-size: 16px;
+  margin: 8px 0;
+}
+.t-tutorial p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+.t-tutorial button {
+  min-height: 44px;
+  min-width: 44px;
+  background: #345469;
+  color: #daeff4;
+  border: 1px solid #afd5df55;
+  border-radius: 6px;
+  padding: 6px 9px;
+  font-size: 11px;
+}
+.t-tutorial button:disabled {
+  opacity: 0.5;
+}
+.t-tutorial-target {
+  outline: 2px solid #b5f4df !important;
+  outline-offset: 3px;
+  box-shadow: 0 0 16px #adf0d977 !important;
+}
+.t-host-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  background: #23384be8;
+  color: #dbf0ed;
+  border: 1px solid #a9c5c766;
+  border-radius: 6px;
+  min-height: 44px;
+  max-width: 145px;
+  padding: 5px 8px;
+  pointer-events: auto;
+}
+@media (max-width: 760px) {
+  .t-strategy-tools {
+    top: 137px;
+    right: 10px;
+    left: 10px;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .t-strategy-tools button {
+    font-size: 9px;
+    padding: 6px 8px;
+    min-height: 44px;
+  }
+  .t-objective {
+    top: 187px;
+  }
+  .t-field-tools {
+    top: 187px;
+  }
+  .t-recruit-card {
+    top: 245px;
+    max-height: calc(100dvh - 420px);
+    min-height: 180px;
+  }
+  .t-tutorial {
+    left: 10px;
+    top: auto;
+    bottom: 206px;
+    width: calc(100% - 20px);
+    padding: 12px;
+  }
+  .t-tutorial p {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .t-tutorial h3 {
+    font-size: 14px;
+    margin: 5px 0;
+  }
+  .t-signal-grid {
+    grid-template-columns: 1fr;
+  }
+  .t-immune-panel {
+    padding: 15px;
+    font-size: 13px;
+  }
+  .t-recruit-option {
+    min-height: 88px;
+  }
+}
+
+@media (max-width: 760px) {
+  .t-tutorial[data-tutorial-step="5"],
+  .t-tutorial[data-tutorial-step="6"] {
+    bottom: 10px;
+  }
+}
+.t-lymph-label {
+  border-color: #b4ebd977;
+  color: #e2f8ed;
+  background: #2c5b55cc;
+}
+.t-practice-back {
+  color: #d9f5f2 !important;
+  background: #2a4e60 !important;
+  border: 1px solid #a2d3d8 !important;
+  border-radius: 7px;
+  padding: 8px;
+  font-size: 11px;
+  min-height: 44px;
+  width: 100%;
+  margin: 8px 0;
+}
+.t-practice-notes {
+  font-size: 10px;
+  line-height: 1.6;
+}
+.t-practice-notes summary {
+  cursor: pointer;
+  min-height: 32px;
+  color: #c2dce6;
+}
+.t-practice-notes p {
+  font-size: 10px !important;
+}

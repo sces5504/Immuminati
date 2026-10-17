@@ -9,6 +9,14 @@ import type {
   Vec,
 } from "../domain/model";
 import { STEP_SECONDS } from "../domain/model";
+import { emit } from "./events";
+import {
+  initialImmunity,
+  updateImmunity,
+  supportDestination,
+  supportCell,
+  validHostTarget,
+} from "./immunity";
 export const copy = <T>(value: T): T => structuredClone(value);
 export const distance = (a: Vec, b: Vec) => Math.hypot(a.x - b.x, a.z - b.z);
 export const fieldOf = (point: Vec, c: TacticalContent) =>
@@ -20,7 +28,8 @@ export const occupied = (s: TacticalState, region: string) =>
   s.arrivals.filter((x) => x.region === region).length;
 export const loadOf = (s: TacticalState) =>
   s.colonies.reduce((n, p) => n + p.load, 0) +
-  s.internal.reduce((n, p) => n + p.load, 0);
+  s.internal.reduce((n, p) => n + p.load, 0) +
+  s.hosts.reduce((n, p) => n + p.load, 0);
 export const preservation = (s: TacticalState) =>
   Math.round(
     Object.values(s.health).reduce((a, n) => a + n, 0) /
@@ -54,25 +63,6 @@ export function walkable(point: Vec, c: TacticalContent): Vec {
     x: field.center.x + ((point.x - field.center.x) / d) * (field.radius - 1),
     z: field.center.z + ((point.z - field.center.z) / d) * (field.radius - 1),
   };
-}
-function emit(
-  s: TacticalState,
-  type: TacticalEvent["type"],
-  position: Vec,
-  message: string,
-  amount = 0,
-  extra: Partial<TacticalEvent> = {},
-) {
-  s.events.push({
-    id: ++s.eventId,
-    tick: s.tick,
-    type,
-    position: { ...position },
-    message,
-    amount,
-    ...extra,
-  });
-  if (s.events.length > 400) s.events.shift();
 }
 function wave(s: TacticalState, c: TacticalContent) {
   const def = c.waves[s.wave + 1];
@@ -121,6 +111,8 @@ export function createTactical(c: TacticalContent, seed = 1): TacticalState {
     colonies: [],
     arrivals: [],
     internal: [],
+    immunity: initialImmunity(c),
+    hosts: [],
     serial: 1,
     eventId: 0,
     events: [],
@@ -165,21 +157,31 @@ export function validateTactical(
   } else if (cmd.type === "recruit") {
     const f = c.fields.find((f) => f.id === cmd.region);
     if (!f) return "目標區不存在。";
-    if (cmd.kind === "dendritic") return "M1 不募集新的樹突細胞。";
+    if (!c.cells[cmd.kind]?.recruitable)
+      return "此細胞由分化產生，不能直接募集。";
     if (s.energy < c.cells[cmd.kind].cost)
       return `需要 ${c.cells[cmd.kind].cost} 反應資源。`;
     if (s.health[f.id] <= 0) return "此區已失守。";
+  } else if (cmd.type === "autoseek") {
+    if (typeof cmd.enabled !== "boolean") return "尋敵設定無效。";
   } else if (cmd.type === "advance") {
     if (loadOf(s) > 0) return "先處理目前所有感染來源。";
     if (s.wave >= c.waves.length - 1) return "已是最後一波。";
   } else {
     const cell = s.cells.find((u) => u.id === cmd.cell);
     if (!cell) return "單位不存在。";
-    if (
-      cmd.type === "attack" &&
-      !s.colonies.some((p) => p.id === cmd.target && p.load > 0)
-    )
-      return "目標菌群已清除。";
+    if (cmd.type === "attack") {
+      const p = s.colonies.find((p) => p.id === cmd.target && p.load > 0);
+      const host = s.hosts.find((h) => h.id === cmd.target && h.load > 0);
+      const role = c.cells[cell.kind].role;
+      if (p && role === "presenter" && cell.antigen)
+        return "此樹突細胞已攜帶抗原，正在引流呈遞；請用移動調度或改派吞噬者。";
+      if (p && !["phagocyte", "presenter"].includes(role))
+        return "此細胞不吞噬胞外菌；請查看細胞機制。";
+      if (host && !validHostTarget(cell, host, c))
+        return "缺少相符抗原／MHC 或壓力條件，不能攻擊此宿主。";
+      if (!p && !host) return "目標菌群已清除。";
+    }
     if (cmd.type === "move") {
       if (
         !Number.isFinite(cmd.point.x) ||
@@ -204,11 +206,12 @@ export function commandTactical(
     s.energy -= c.markCost;
     s.support--;
     p.markedUntil = s.tick + c.markDuration;
+    p.opsonin = "c3b";
     emit(
       s,
       "mark",
       p.position,
-      "既存特異性抗體／補體已附著；標記提高吞噬效率，不直接殺菌。",
+      "補體 C3b 已沉積；經補體受體促進吞噬，不直接裂解肺炎鏈球菌。",
       c.markDuration,
       { target: p.id },
     );
@@ -219,14 +222,35 @@ export function commandTactical(
       id: `q${s.serial++}`,
       kind: cmd.kind,
       region: f.id,
-      at: s.tick + c.cells[cmd.kind].delay,
+      at:
+        s.tick +
+        Math.max(
+          5,
+          c.cells[cmd.kind].delay -
+            (cmd.kind === "neutrophil" && s.immunity.signals[f.id].cxcl8 >= 20
+              ? 5
+              : 0),
+        ),
     });
     emit(
       s,
       "request",
       c.portal,
-      `${c.cells[cmd.kind].name}向${f.name}集結，${c.cells[cmd.kind].delay * STEP_SECONDS} 秒後到場。`,
+      `${c.cells[cmd.kind].name}向${f.name}集結，${(s.arrivals[s.arrivals.length - 1].at - s.tick) * STEP_SECONDS} 秒後到場${cmd.kind === "neutrophil" && s.immunity.signals[f.id].cxcl8 >= 20 ? "（CXCL8 促進募集）" : ""}。`,
       1,
+    );
+  } else if (cmd.type === "autoseek") {
+    s.immunity.autoSeek = cmd.enabled;
+    if (!cmd.enabled)
+      for (const cell of s.cells)
+        if (cell.order.type === "guard") cell.path = [];
+    emit(
+      s,
+      "move",
+      c.portal,
+      cmd.enabled
+        ? "自動尋敵已開啟：空閒吞噬者沿通道前往最近胞外菌；手動移動優先。"
+        : "自動尋敵已關閉：維持指派與同區巡防。",
     );
   } else if (cmd.type === "advance") {
     wave(s, c);
@@ -240,7 +264,9 @@ export function commandTactical(
       cell.region = fieldOf(point, c).id;
       pathTo(cell, point, c);
     } else if (cmd.type === "attack") {
-      const p = s.colonies.find((p) => p.id === cmd.target)!;
+      const p =
+        s.colonies.find((p) => p.id === cmd.target) ??
+        s.hosts.find((h) => h.id === cmd.target)!;
       order = { type: "attack", target: p.id };
       cell.region = p.region;
       pathTo(cell, p.position, c);
@@ -290,21 +316,41 @@ export function stepTactical(
   if (s.tick % c.energyEvery === 0)
     s.energy = Math.min(c.energyMax, s.energy + 1);
   if (s.wave < c.waves.length - 1 && s.tick >= s.nextWaveAt) wave(s, c);
+  updateImmunity(s, c);
   for (const cell of s.cells) {
     const spec = c.cells[cell.kind];
+    if (cell.order.type === "move") {
+      walk(cell, spec.speed);
+      if (!cell.path.length)
+        cell.order = { type: "guard", point: { ...cell.position } };
+      continue;
+    }
+    const destination = supportDestination(s, cell, c);
+    if (destination) {
+      if (distance(cell.position, destination) > 2) {
+        if (
+          !cell.path.length ||
+          distance(cell.path[cell.path.length - 1], destination) > 0.1
+        )
+          pathTo(cell, destination, c);
+        walk(cell, spec.speed);
+      } else cell.path = [];
+    }
+    if (supportCell(s, cell, c)) continue;
     if (s.tick < cell.readyAt - spec.cooldown + 6) continue;
     let target: Colony | undefined;
     if (cell.order.type === "attack")
       target = s.colonies.find(
         (p) => p.id === (cell.order as { target: string }).target && p.load > 0,
       );
-    if (!target && cell.order.type !== "move")
+    if (!target)
       target = s.colonies
         .filter(
           (p) =>
             p.load > 0 &&
-            p.region === cell.region &&
-            distance(cell.position, p.position) < 8,
+            (s.immunity.autoSeek ||
+              (p.region === cell.region &&
+                distance(cell.position, p.position) < 8)),
         )
         .sort(
           (a, b) =>
@@ -312,6 +358,7 @@ export function stepTactical(
               distance(cell.position, b.position) || a.id.localeCompare(b.id),
         )[0];
     if (target) {
+      if (s.immunity.autoSeek) cell.region = target.region;
       if (distance(cell.position, target.position) > spec.range) {
         if (
           !cell.path.length ||
@@ -327,9 +374,29 @@ export function stepTactical(
         cell.path = [];
         const n = Math.min(
           target.load,
-          spec.power + (target.markedUntil > s.tick ? spec.markedBonus : 0),
+          spec.power +
+            (target.markedUntil > s.tick ? spec.markedBonus : 0) +
+            (cell.kind === "macrophage" &&
+            s.immunity.signals[target.region].ifng >= 20
+              ? 1
+              : 0),
         );
         target.load -= n;
+        if (cell.kind === "dendritic" && !cell.antigen) {
+          cell.antigen = c.pathogen.antigen ?? `${c.pathogen.id}:protein`;
+          if (s.immunity.node.stage === "idle") {
+            s.immunity.node.stage = "migrating";
+            s.immunity.node.antigen = cell.antigen;
+          }
+          emit(
+            s,
+            "present",
+            cell.position,
+            "樹突細胞已捕捉蛋白抗原，成熟後將由淋巴引流至淋巴結；吞入病原不等於直接活化所有淋巴球。",
+            1,
+            { actor: cell.id },
+          );
+        }
         cell.readyAt = s.tick + spec.cooldown;
         if (c.pathogen.survives) {
           let internal = s.internal.find((p) => p.host === cell.id);
@@ -362,8 +429,6 @@ export function stepTactical(
       }
     } else if (cell.path.length) {
       walk(cell, spec.speed);
-      if (!cell.path.length && cell.order.type === "move")
-        cell.order = { type: "guard", point: { ...cell.position } };
     } else if (cell.order.type === "attack")
       cell.order = { type: "guard", point: { ...cell.position } };
   }
@@ -412,15 +477,17 @@ export function stepTactical(
         s.internal
           .filter((p) => s.cells.find((u) => u.id === p.host)?.region === f.id)
           .reduce((a, p) => a + p.load, 0);
-      if (load) {
-        const damage = load * c.damagePerLoad;
+      if (load || s.immunity.signals[f.id].inflammation > 60) {
+        const damage =
+          load * c.damagePerLoad +
+          Math.max(0, s.immunity.signals[f.id].inflammation - 60) * 0.015;
         s.health[f.id] = Math.max(0, s.health[f.id] - damage);
         if (s.tick % 25 === 0)
           emit(
             s,
             "damage",
             f.center,
-            `${f.name}殘餘感染造成組織損傷。`,
+            `${f.name}殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。`,
             Math.round(damage),
           );
       }
@@ -428,27 +495,32 @@ export function stepTactical(
   for (const arrival of [...s.arrivals])
     if (arrival.at <= s.tick) {
       const f = c.fields.find((f) => f.id === arrival.region)!;
+      const nodeBound = ["helper", "bcell"].includes(
+        c.cells[arrival.kind].role,
+      );
+      const destination = nodeBound ? (c.lymphExit ?? c.portal) : f.center;
       const cell: Cell = {
         id: `u${s.serial++}`,
         kind: arrival.kind,
         position: { ...c.portal },
         region: f.id,
-        order: { type: "move", point: { ...f.center } },
+        order: { type: "move", point: { ...destination } },
         path: [],
         readyAt: s.tick,
       };
-      pathTo(cell, f.center, c);
+      pathTo(cell, destination, c);
       s.cells.push(cell);
       s.arrivals = s.arrivals.filter((a) => a.id !== arrival.id);
       emit(
         s,
         "arrive",
         c.portal,
-        `${c.cells[cell.kind].name}由微血管抵達，正前往${f.name}。`,
+        `${c.cells[cell.kind].name}由微血管抵達，${nodeBound ? "先前往淋巴結接受活化；" : "正前往"}${f.name}${nodeBound ? "為後續支援防區" : ""}。`,
         1,
         { actor: cell.id },
       );
     }
+  if (c.practice) return s;
   const lost = Object.values(s.health).some((h) => h <= 0),
     won = s.wave === c.waves.length - 1 && loadOf(s) === 0;
   if (lost || won || s.tick >= c.limit) {

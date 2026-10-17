@@ -33,7 +33,12 @@ import { Dialog } from "../../ui/Dialog";
 import { scenarioCards } from "../../content/game";
 import { CellArt, PathogenArt } from "../../presentation/CellArt";
 import "./tactics.css";
+import { recruitableCells } from "../content/cells";
+import { ImmunePanel, cellActivity } from "./ImmunePanel";
+import { practiceContent, createPractice } from "../content/practice";
+import { Tutorial } from "./Tutorial";
 type Modal =
+  | "immune"
   | "help"
   | "settings"
   | "log"
@@ -77,12 +82,20 @@ export default function TacticalApp() {
   const [modal, setModal] = useState<Modal>(null);
   const [entry, setEntry] = useState("");
   const [unavailable, setUnavailable] = useState("");
-  const [notice, setNotice] = useState(boot.error ?? "");
+  const [notice, setNotice] = useState(
+    boot.error ??
+      (boot.migrated
+        ? "已升級至免疫規則 2.2：保留原局時間與指令，新免疫反應由未啟動開始；首次儲存另留原始備份。"
+        : ""),
+  );
   const [storage, setStorage] = useState(boot.save ? "已載入存檔" : "本機存檔");
   const [imported, setImported] = useState(false);
   const [sceneError, setSceneError] = useState("");
   const [cameraHint, setCameraHint] = useState(true);
   const [menu, setMenu] = useState(false);
+  const practiceReturn = useRef<TacticalController | undefined>(undefined);
+  const [tutorial, setTutorial] = useState(false);
+  const [seenMechanisms, setSeenMechanisms] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null),
     host = useRef<HTMLDivElement>(null),
     scene = useRef<BattleScene | null>(null),
@@ -105,7 +118,8 @@ export default function TacticalApp() {
   const update = (persist = false) => {
     setSnapshot(controller.snapshot());
     input.current.state = controller.save.state;
-    if (persist) setStorage(writeTactical(controller.save));
+    if (persist && !content.practice)
+      setStorage(writeTactical(controller.save));
   };
   const command = (cmd: TacticalCommand) => {
     const error = controller.command(cmd);
@@ -125,6 +139,21 @@ export default function TacticalApp() {
       const cell = s.cells.find((u) => u.id === pick.id);
       if (cell) setRegion(cell.region);
       setMode("command");
+    } else if (pick.type === "host") {
+      const h = s.hosts.find((h) => h.id === pick.id);
+      if (!h) return;
+      if (selected && s.cells.some((u) => u.id === selected))
+        command({ type: "attack", cell: selected, target: h.id });
+      else {
+        setSelected(h.id);
+        setNotice(
+          h.apoptoticAt > 0
+            ? "此宿主已進入凋亡。"
+            : h.antigen === "self"
+              ? "健康宿主：保留 MHC-I、無感染抗原，不可攻擊。"
+              : `宿主抗原 ${h.antigen}，MHC-I ${h.mhc1 ? "保留" : "降低"}，壓力訊號 ${h.stressed ? "高" : "低"}。`,
+        );
+      }
     } else if (pick.type === "colony") {
       const p = s.colonies.find((p) => p.id === pick.id);
       if (!p) return;
@@ -218,7 +247,7 @@ export default function TacticalApp() {
       }
     };
     const leave = () => {
-      if (!homeRef.current) writeTactical(controller.save);
+      if (!homeRef.current && !content.practice) writeTactical(controller.save);
     };
     const keys = (e: KeyboardEvent) => {
       if (
@@ -271,6 +300,10 @@ export default function TacticalApp() {
       setMenu(false);
       return;
     }
+    if (content.practice) {
+      endPractice();
+      return;
+    }
     if (fresh) controller.restart((controller.save.state.seed % 3) + 1);
     controller.pause(true);
     homeRef.current = false;
@@ -283,7 +316,42 @@ export default function TacticalApp() {
     update(true);
     scene.current?.reset();
   }
+  function beginPractice() {
+    controller.pause(true);
+    update(true);
+    practiceReturn.current = controller;
+    const next = new TacticalController(practiceContent);
+    next.save.state = createPractice();
+    next.save.settings = { ...controller.save.settings };
+    setController(next);
+    setSnapshot(next.snapshot());
+    setSelected(undefined);
+    setRegion("a");
+    setMode("command");
+    setMenu(false);
+    setModal(null);
+    setTutorial(false);
+    setStorage("機制演練 · 不覆寫 M1 存檔");
+  }
+  function endPractice() {
+    const previous = practiceReturn.current;
+    if (!previous) return;
+    setController(previous);
+    setSnapshot(previous.snapshot());
+    setSelected(undefined);
+    setRegion(previous.content.fields[0].id);
+    setMode("command");
+    setMenu(false);
+    setModal(null);
+    setStorage("已返回 M1，保持暫停");
+    practiceReturn.current = undefined;
+  }
   function back() {
+    if (content.practice) {
+      endPractice();
+      return;
+    }
+
     controller.pause(true);
     update(true);
     homeRef.current = true;
@@ -335,7 +403,11 @@ export default function TacticalApp() {
       setSelected(undefined);
       setRegion((nextContent ?? content).fields[0].id);
       setImported(true);
-      setNotice("已匯入新版存檔，繼續遊玩時先維持戰術暫停。");
+      setNotice(
+        JSON.parse(text).rules !== "2.2"
+          ? "已匯入並升級至規則 2.2；保留原局時間與指令，新免疫狀態由未啟動開始。"
+          : "已匯入新版存檔，繼續遊玩時先維持戰術暫停。",
+      );
     } catch (e) {
       setNotice((e as Error).message);
     }
@@ -350,9 +422,18 @@ export default function TacticalApp() {
     lastEvent = [...s.events]
       .reverse()
       .find((e) =>
-        ["engulf", "mark", "arrive", "spread", "wave", "result"].includes(
-          e.type,
-        ),
+        [
+          "engulf",
+          "mark",
+          "arrive",
+          "spread",
+          "wave",
+          "result",
+          "recognize",
+          "present",
+          "activate",
+          "antibody",
+        ].includes(e.type),
       );
   const remainingWave = Math.max(0, Math.ceil((s.nextWaveAt - s.tick) * 0.2));
   const isMarked = !!colony && colony.markedUntil > s.tick;
@@ -368,6 +449,8 @@ export default function TacticalApp() {
       data-wave={s.wave + 1}
       data-load={burden}
       data-selected={selected}
+      data-autoseek={s.immunity.autoSeek}
+      data-speed={snapshot.settings.speed}
     >
       <div className="t-scene" ref={host} data-testid="tactical-scene">
         <canvas
@@ -416,6 +499,25 @@ export default function TacticalApp() {
                 )}
               </button>
             ))}
+            {s.hosts.map((h) => (
+              <button
+                key={h.id}
+                data-world-label={h.id}
+                data-host={h.id}
+                className="t-host-label"
+                onClick={() => pick({ type: "host", id: h.id })}
+              >
+                {h.apoptoticAt > 0
+                  ? "凋亡"
+                  : h.antigen === "self"
+                    ? "健康宿主"
+                    : !h.mhc1
+                      ? "MHC-I↓／壓力↑"
+                      : h.antigen === "viral-peptide-A"
+                        ? "相符抗原／MHC-I"
+                        : "不相符抗原／MHC-I"}
+              </button>
+            ))}
             {s.colonies.map((p) => (
               <button
                 key={p.id}
@@ -426,11 +528,23 @@ export default function TacticalApp() {
                 aria-label={`菌群 ${p.id} 負荷 ${p.load}`}
               >
                 <span>
-                  {p.markedUntil > s.tick ? "Y " : ""}
+                  {p.markedUntil > s.tick
+                    ? p.opsonin === "antibody"
+                      ? "Ig "
+                      : "C3 "
+                    : ""}
                   {p.load}
                 </span>
               </button>
             ))}
+            {content.lymphExit && (
+              <span
+                className="t-portal-label t-lymph-label"
+                data-world-label="lymph"
+              >
+                淋巴引流 · 結內流程
+              </span>
+            )}
             <span className="t-portal-label" data-world-label="portal">
               微血管增援入口
             </span>
@@ -594,8 +708,28 @@ export default function TacticalApp() {
             </button>
           </section>
           <div className="t-objective">
-            <span className="t-kicker">DEFEND THE ALVEOLI</span>
-            <h2>守住組織，清除 {content.waves.length} 波感染。</h2>
+            <span className="t-kicker">
+              {content.practice ? "MECHANISM BENCH" : "DEFEND THE ALVEOLI"}
+            </span>
+            <h2>
+              {content.practice
+                ? "演練 · 感染宿主辨識"
+                : "守住組織，清除 " + content.waves.length + " 波感染。"}
+            </h2>
+            {content.practice && (
+              <>
+                <button className="t-practice-back" onClick={endPractice}>
+                  結束演練，返回 M1
+                </button>
+                <details className="t-practice-notes">
+                  <summary>目標與限制</summary>
+                  <p>
+                    預先活化 CD8 辨識相符 MHC-I 肽；NK 辨識壓力高且 MHC-I
+                    降低。觀察它們保留健康／不相符宿主。不計星等、不覆寫進度。病毒宿主為獨立教學標本，非肺炎鏈球菌造成。
+                  </p>
+                </details>
+              </>
+            )}
             <div className="t-wave-pips">
               {content.waves.map((w, i) => (
                 <span className={s.wave >= i ? "active" : ""} key={w.label}>
@@ -644,6 +778,7 @@ export default function TacticalApp() {
               </span>
             </button>
             <button
+              data-testid="recruit-tool"
               onClick={() => setMenu(!menu)}
               className={menu ? "active" : ""}
             >
@@ -657,6 +792,47 @@ export default function TacticalApp() {
             </button>
             <button className="t-log-tool" onClick={() => setModal("log")}>
               ☷ <span>因果紀錄</span>
+            </button>
+          </div>
+          <div className="t-strategy-tools" aria-label="戰術輔助">
+            <button
+              data-testid="autoseek"
+              aria-pressed={s.immunity.autoSeek}
+              onClick={() =>
+                command({ type: "autoseek", enabled: !s.immunity.autoSeek })
+              }
+              disabled={!!result}
+            >
+              ⌖ 自動尋敵 {s.immunity.autoSeek ? "開" : "關"}
+            </button>
+            <button
+              data-testid="speed-toggle"
+              aria-label="切換行動速度"
+              onClick={() =>
+                settings({ speed: snapshot.settings.speed === 1 ? 2 : 1 })
+              }
+            >
+              {snapshot.settings.speed}×
+            </button>
+            <button
+              data-testid="immune-panel"
+              onClick={() => {
+                setSeenMechanisms(true);
+                setModal("immune");
+              }}
+            >
+              免疫機制
+            </button>
+            <button
+              data-testid="tutorial-start"
+              onClick={() => {
+                controller.pause(true);
+                update(true);
+                setMenu(false);
+                setTutorial(true);
+              }}
+            >
+              教學
             </button>
           </div>
           {menu && (
@@ -684,7 +860,7 @@ export default function TacticalApp() {
                   ))}
                 </select>
               </label>
-              {(["neutrophil", "macrophage"] as CellType[]).map((kind) => {
+              {recruitableCells.map((kind) => {
                 const def = content.cells[kind],
                   cmd: TacticalCommand = { type: "recruit", kind, region };
                 const error = validateTactical(s, cmd, content);
@@ -702,7 +878,12 @@ export default function TacticalApp() {
                     <CellArt kind={kind} />
                     <span>
                       <b>{def.name}</b>
-                      <small>{def.delay * 0.2} 秒後到場 · 沿通道支援</small>
+                      <small>
+                        {def.system === "innate" ? "先天" : "適應性"} ·{" "}
+                        {def.delay * 0.2} 秒等待
+                        <br />
+                        {error ?? def.description}
+                      </small>
                     </span>
                     <strong>
                       {def.cost}
@@ -799,7 +980,7 @@ export default function TacticalApp() {
                     <p>
                       {mode === "move"
                         ? "點地面指定位置"
-                        : "點菌群指定目標 · 點地面調度"}
+                        : cellActivity(cell, s, content)}
                     </p>
                   </div>
                   <div className="t-context-actions">
@@ -818,7 +999,9 @@ export default function TacticalApp() {
                     </button>
                     <button
                       className="t-info-button"
-                      onClick={() => encyclopedia(cell.kind)}
+                      onClick={() =>
+                        encyclopedia(content.cells[cell.kind].encyclopedia)
+                      }
                       aria-label="所選細胞百科"
                     >
                       i
@@ -855,7 +1038,12 @@ export default function TacticalApp() {
                     <button
                       onClick={() => {
                         const candidate = [...s.cells]
-                          .filter((u) => u.kind !== "dendritic")
+                          .filter(
+                            (u) =>
+                              ["phagocyte", "presenter"].includes(
+                                content.cells[u.kind].role,
+                              ) && !u.antigen,
+                          )
                           .sort(
                             (a, b) =>
                               distance(a.position, colony.position) -
@@ -962,7 +1150,19 @@ export default function TacticalApp() {
                   ? "先調理入口與深部菌群，再調入嗜中性球支援微血管防區。調理不直接殺菌，需要吞噬者接近。"
                   : burden === 0
                     ? "防線清場了。可以等待資源與增援，或提前迎擊換取額外資源。"
-                    : "點細胞再點菌群，能改派防線。位置與接觸距離會影響何時開始吞噬。"}
+                    : s.immunity.node.stage === "primed" &&
+                        !s.cells.some((u) => u.kind === "helperT")
+                      ? "抗原呈遞已就緒。可募集 CD4 T 接受活化，再透過 B／漿細胞建立抗體支援；先天防線仍須守住組織。"
+                      : s.cells.some(
+                            (u) =>
+                              u.kind === "helperT" &&
+                              u.activation === "effector",
+                          ) &&
+                          !s.cells.some(
+                            (u) => u.kind === "bcell" || u.kind === "plasma",
+                          )
+                        ? "CD4 T 已活化。募集 B 細胞，讓它在淋巴結獲得蛋白抗原與 T 細胞幫助。"
+                        : "點細胞再點菌群可改派吞噬者；免疫機制面板能查看局部訊號與抗原流程。"}
               </p>
             </div>
           )}
@@ -1033,9 +1233,50 @@ export default function TacticalApp() {
           onClose={() => setModal(null)}
         />
       )}
+      {tutorial && !home && (
+        <Tutorial
+          save={snapshot}
+          selected={selected}
+          seenMechanisms={seenMechanisms}
+          blocked={!!modal}
+          onClose={() => {
+            setTutorial(false);
+            controller.pause(true);
+            update(true);
+          }}
+          onStep={(step) => {
+            if (step !== 6) {
+              controller.pause(true);
+              update(true);
+            }
+            if (step === 6) setMenu(false);
+          }}
+        />
+      )}
+      {modal === "immune" && (
+        <Dialog title="免疫反應與機制" onClose={() => setModal(null)} wide>
+          <ImmunePanel
+            state={s}
+            content={content}
+            onPractice={() => beginPractice()}
+            onEntry={encyclopedia}
+          />
+        </Dialog>
+      )}
       {modal === "help" && (
         <Dialog title="直接指揮你的免疫防線" onClose={() => setModal(null)}>
           <div className="t-dialog-content">
+            <button
+              className="t-primary"
+              onClick={() => {
+                setModal(null);
+                controller.pause(true);
+                update(true);
+                setTutorial(true);
+              }}
+            >
+              開始手把手教學
+            </button>
             <ol>
               <li>
                 <b>先暫停，觀察菌群。</b>{" "}
@@ -1112,6 +1353,11 @@ export default function TacticalApp() {
             </label>
             <h3>防線備份</h3>
             <p>
+              規則
+              2.2：舊戰術存檔會保留時間、單位及指令，新增免疫狀態從未啟動開始，自動尋敵預設關閉。第一次覆寫前，原始資料備份在本機
+              pre-2.2 key。
+            </p>
+            <p>
               {storage}
               。新版即時戰術使用獨立存檔，舊版回合制紀錄不會被覆寫。讀取後先暫停，準備好再繼續。
             </p>
@@ -1119,6 +1365,7 @@ export default function TacticalApp() {
               <button
                 className="t-primary"
                 onClick={() => exportTactical(controller.snapshot())}
+                disabled={content.practice}
               >
                 匯出存檔
               </button>

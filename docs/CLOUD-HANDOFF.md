@@ -1,51 +1,39 @@
-# Immuminati：保留立體戰術版，優化玩法
+# Immuminati 開發交接 v2.2
 
-## 1. 最新方向
+先讀 [AGENTS.md](../AGENTS.md)、[主規格](Immuminati-spec.md)、[美術與動畫](art-direction/C-art-and-animation.md)，實際檢視 C 圖與本輪截圖。最新八項任務保留立體戰術 UI／操作與柔光風格，但明確要求改善組織／細胞模型，並增加免疫機制與教學；優先於 v2.1「模型不改」限制。禁止整套 RTS 重製或退回佔位球體。
 
-使用者已確認要保留「改 RTS 規格前已發布 Pages 的立體戰術版」：原本 UI、畫面、操作方式與整體風格符合期待，只優化玩法。**不要再從頭重建、改 UI、換畫面、換操作或換成佔位模型。** 先前完整 RTS 重建與分派美術重製的 prompt 已撤換。
+Repo `sces5504/Immuminati`，通常 `/workspace/Immuminati`，開工確認 Git／環境與當次使用者要求。正式入口 `src/tactics`；延續 main，不 hard reset 回舊美術基準。已完成的抓取式拖曳與無區域／全場名額限制不可回退。
 
-依序讀 [AGENTS.md](../AGENTS.md)、[主規格 v2.1](Immuminati-spec.md)、[展示保留與動畫規格](art-direction/C-art-and-animation.md)，實際操作既有版本並查看 [桌面](evidence/tactics/desktop-field.png)／[手機](evidence/tactics/mobile-field.png)／[短錄影](evidence/tactics/m1-highlights.webm)。
+## 本輪架構
 
-## 2. Repo 現況與基準
+- `domain/model.ts`：權威狀態、細胞角色、訊號、抗原流程、宿主與事件。
+- `content/cells.ts`：9 種細胞資料與角色；8 種可募集，漿細胞由 B 分化。
+- `content/m1.ts`：肺炎鏈球菌、三區與三波、血管／淋巴入口及平衡。
+- `content/tissues.ts`：肺、口腔、腸黏膜方向；後二者只是 profile／基礎分支，沒有後續關卡。
+- `engine/simulation.ts`：固定 0.2 秒步進、路徑／指令、吞噬、感染、損傷與勝敗。
+- `engine/immunity.ts`：PRR、局部訊號、DC 引流／呈遞、CD4／B 活化、漿細胞與抗體、Treg、IFN-γ 囊泡支援、NK／CD8 合法宿主作用。
+- `engine/events.ts`：所有結果／事件由引擎提交；Three.js 不修改規則。
+- `application/controller.ts`：暫停、撤銷、步進、紀錄。
+- `presentation/Anatomy.ts`、`CellGeometry.ts`、`BattleScene.ts`：可替換程序模型、獨立動畫、相機與命中。
+- `ui/ImmunePanel.tsx`、`Tutorial.tsx`：機制資訊與實際操作驅動教學；沿用 `TacticalApp`／CSS。
+- `content/practice.ts`：一次性機制演練，與 M1 共用規則／渲染；預先活化 CD8、合法／不相符／健康宿主。不算 M2–M6，不覆寫 M1 存檔，退出還原原局並暫停。
 
-Repo 為 sces5504/Immuminati，預期 `/workspace/Immuminati`，開工仍須確認 Git／環境。正式入口是 `src/tactics`，TypeScript＋Vite＋React＋Three.js，既有 package scripts 繼續使用。
+## 生物學邊界
 
-保留基準為 `d2c16ab` 的發布程式及 `af6bcb3` 的證據。遠端 `6e1d5f7` 已回退另一個 AI 的 RTS 重製；回退當下曾確認程式／測試／套件等與基準一致，無須再刪檔或 hard reset；其後的增量修正見 [本輪紀錄](TACTICAL-REFINEMENT.md)，開工延續最新版，不能為還原基準而覆蓋已完成修正。現有 M1 已可玩；不要把另造一個遊戲當作本次目標。
+M1 為胞外莢膜菌。C3b／抗體促進吞噬，不直接清菌；不是以 MAC 普遍裂解肺炎鏈球菌。蛋白抗原的 DC → MHC-II → CD4 幫助 → B → 漿細胞流程有順序與等待。莢膜多醣 T 非依賴反應、完整胚中心、親和力成熟及完整初始 CD8 活化未實作。
 
-[Pages](https://sces5504.github.io/Immuminati/) 是正式遊玩網址；公開內容是否已完成最新部署需另驗，不能只憑 repo 推論。歷史 [戰術規則](TACTICAL-REDESIGN.md) 與 [實測紀錄](TACTICAL-VALIDATION.md) 可解釋基準，後續變更以主規格與實際程式為準。
+CD4 支援族群聚合 Th1／Tfh 功能；訊號採防區濃度，不是擴散 PDE。CXCL8 影響募集，IL-12／IFN-γ 影響細胞活化，IL-10 調節發炎。Treg 不回血；NK／CD8 不吞噬胞外菌，MHC-II 不直接活化 CD8。參數及時間均為教學抽象，沒有專家完整審查的宣稱。
 
-## 3. 增量工作邊界
+## 存檔
 
-- 保留既有模型、地形、材質、光照、UI、布局、選取／指揮、暫停與鏡頭操作，只修正具體缺陷與玩法規則。
-- 已提出優化：抓取式拖曳方向（拖右地形也向右）、取消同區上限／目的地容量預留。修改時同步規則、介面文字及存檔驗證，不只提高容量數字。
-- 自主行為、細胞差異、調理／募集取捨、資源與波次節奏，依使用者當次優先項調整，不一次包入整套訊號場、淋巴結或發炎模擬。
-- 需要的提示沿用原元件，不另造 HUD；不得把原版降級成簡模再說將來補美術。
-- 純文件任務只改規格；程式任務重現問題後實作、測試、試玩與修正。不得把候選功能或文件變更宣稱已完成。
+保留 `immuminati:save:v1` 及其他歷史 key。現行 `immuminati:tactics:v2` 為 schema 2、規則 2.2、內容 `m1-tactics.3`。解析器接受配對的 2.0／.1、2.1／.2 並顯式補上未啟動免疫狀態（自動尋敵關、無新抗體）；時間、單位、指令、事件與撤銷快照保留。首次覆寫前把原始文字保存在 `immuminati:tactics:pre-2.2`，也保留格式損壞的原始資料。匯入驗證完整成功才替換。
 
-## 4. 驗證與紀錄
+新規則不重建舊局過去已發生的 PRR／呈遞，因此從當前局面繼續新反應；設定面板明示遷移。舊資料沒有新生抗體／訊號的歷史，不能假裝算過。
 
-依 package.json 執行相關的型別／規則／建置及桌面／直向手機檢查；測試保留有價值的回歸覆蓋，已取消的容量規則改為新規則驗證。存檔不清空，匯入失敗不覆寫。
+## 執行與交付
 
-以基準畫面比較確認外觀與操作保留，留下必要待機／移動／吞噬／結算影片。鏡頭正反拖曳、縮放／旋轉及觸控，無區域名額的募集／移動／到場／存讀，皆在相應修改時驗證。原有歷史測試數字不能直接拿來當本輪結果。
+`npm ci` 後 `npm run dev`，網址使用終端顯示的 `/Immuminati/`。`npm run verify` 跑規則、型別與建置；`npm run test:browser` 為原操作／拖曳／擁擠／全局回歸；`npm run test:animation` 為吞噬兩分支；`npm run test:immune` 為新教學、適應性策略及 NK／CD8 演練。瀏覽器腳本的伺服器／埠需求見實作紀錄。
 
-部署維持 `/Immuminati/`。程式改動通過必要檢查後交付可玩網址與明確版本；純文件修訂用 `[skip ci]`，不觸發舊遊戲重新部署。
+[本輪實作與驗證](IMMUNE-EXPANSION.md)記錄實測和限制；[前輪拖曳／容量修正](TACTICAL-REFINEMENT.md)與[原版驗證](TACTICAL-VALIDATION.md)作歷史背景。每輪只報自己真的跑過的結果。
 
-## 5. 可直接給下一個 AI 的工作說明
-
-```text
-請在 sces5504/Immuminati 優化既有 M1 的玩法，保留改 RTS 規格前已發布 Pages 的立體戰術版。先確認 repo 與環境，閱讀 AGENTS.md、docs/Immuminati-spec.md v2.1、docs/art-direction/C-art-and-animation.md 與 docs/CLOUD-HANDOFF.md，實際操作 src/tactics 並檢視 docs/evidence/tactics 的桌面／手機畫面與影片。
-
-使用者確認原本 UI、畫面、操作方式與整體風格符合期待。以 d2c16ab／af6bcb3 為保留基準；6e1d5f7 已回退另一次 RTS 重製。不要從頭重建、改 UI／布局、換引擎、換成簡模、重製模型或另造入口。先前 v2.0 的重建／佔位美術要求已撤銷，以 v2.1 為準。
-
-沿用現有模組、模型與動作。依使用者本次指定的玩法優先項，先重現問題、簡述小幅計畫，再直接修改、驗證與修正。既有候選是地圖拖曳方向、取消同區單位上限／容量預留、自主行為、細胞差異、調理／募集取捨與波次節奏。不要把所有候選一口氣做完，也不把整套訊號場／淋巴結當成強制重建清單。必要數量／條件／提示在原元件中最小更新。
-
-保持規則與展示分離、固定步進與確定性，不在動畫回呼算傷害／扣點；保留待機、包覆吞入與清除／存活差異。保留舊存檔及桌面／直向手機完整操作，修改規則時同步相容性與驗證。
-
-跑與改動相關的型別、規則、建置與實際瀏覽器檢查，確認原外觀與操作保留，修正發現的問題。留下本輪實測、基準對比、必要截圖／錄影、策略改變與限制；程式任務完成後驗證並發布 GitHub Pages /Immuminati/，交付公開網址與明確版本。若本次只要求文件，則只改文件，不宣稱玩法已實作。
-```
-
-## 6. 本次方向修訂紀錄
-
-使用者明確選擇恢復原立體戰術版體驗，取消從頭重建與佔位美術安排。工作區已同步遠端現有回退，並確認相關程式和 af6bcb3 一致；本輪先修正規格與交接，具體程式優化另依使用者優先項記錄。
-
-方向文件檢查：12 份 Markdown 的格式與 50 個本機連結／章節錨點通過，`git diff --check` 通過。此項檢查只驗文件；本輪程式修改與瀏覽器結果另記錄。
+[GitHub Pages](https://sces5504.github.io/Immuminati/) 為正式入口，Vite base 必須 `/Immuminati/`。必要檢查通過再發布並驗資產、公開 UI。純紀錄補充使用 `[skip ci]`，避免重跑未改程式的部署。最終 M2–M6 規格仍保留，但本輪不開發其關卡。

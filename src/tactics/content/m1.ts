@@ -1,7 +1,9 @@
 import type { TacticalContent } from "../domain/model";
+import { cellCatalog } from "./cells";
 export const m1: TacticalContent = {
   id: "m1",
   title: "莢膜防線",
+  tissue: "lung",
   pathogen: { id: "pneumococcus", name: "肺炎鏈球菌", survives: false },
   fields: [
     {
@@ -24,44 +26,8 @@ export const m1: TacticalContent = {
     },
   ],
   portal: { x: 0, z: 15 },
-  cells: {
-    macrophage: {
-      name: "巨噬細胞",
-      short: "巨噬",
-      speed: 2.7,
-      range: 2.9,
-      power: 1,
-      markedBonus: 2,
-      cooldown: 15,
-      cost: 4,
-      delay: 40,
-      color: 0x9876d7,
-    },
-    neutrophil: {
-      name: "嗜中性球",
-      short: "嗜中性",
-      speed: 3.5,
-      range: 2.7,
-      power: 1,
-      markedBonus: 1,
-      cooldown: 10,
-      cost: 3,
-      delay: 25,
-      color: 0xe0adc5,
-    },
-    dendritic: {
-      name: "樹突細胞",
-      short: "樹突",
-      speed: 2.5,
-      range: 2.8,
-      power: 1,
-      markedBonus: 0,
-      cooldown: 20,
-      cost: 4,
-      delay: 40,
-      color: 0x7f9bdf,
-    },
-  },
+  lymphExit: { x: -4, z: 12 },
+  cells: cellCatalog,
   initial: [
     { kind: "macrophage", region: "a", offset: { x: -1, z: 3 } },
     { kind: "neutrophil", region: "b", offset: { x: 0, z: 3 } },

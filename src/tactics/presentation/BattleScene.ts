@@ -1,4 +1,6 @@
 import * as THREE from "three";
+import { membraneGeometry, lymphoid } from "./CellGeometry";
+import { buildAnatomy, tissueFloor } from "./Anatomy";
 import type {
   Cell,
   Colony,
@@ -17,6 +19,7 @@ export interface SceneInput {
 export type Pick =
   | { type: "cell"; id: string }
   | { type: "colony"; id: string }
+  | { type: "host"; id: string }
   | { type: "ground"; point: Vec };
 interface Actor {
   root: THREE.Group;
@@ -46,9 +49,7 @@ interface Effect {
   ghost?: THREE.Group;
   ring?: THREE.Mesh;
 }
-const terrain = (x: number, z: number) =>
-  0.14 * Math.sin(x * 0.35) * Math.cos(z * 0.28) +
-  0.08 * Math.sin(z * 0.8 + x * 0.2);
+const terrain = tissueFloor;
 const vector = (p: Vec, y = 0) => new THREE.Vector3(p.x, y, p.z);
 const sphere = new THREE.SphereGeometry(1, 24, 16);
 const smallSphere = new THREE.SphereGeometry(1, 10, 8);
@@ -72,6 +73,7 @@ export class BattleScene {
   scene = new THREE.Scene();
   camera = new THREE.OrthographicCamera();
   private actors = new Map<string, Actor>();
+  private hosts = new Map<string, THREE.Group>();
   private bacteria = new Map<string, Bacteria>();
   private effects: Effect[] = [];
   private fields = new Map<string, THREE.Mesh>();
@@ -189,7 +191,7 @@ export class BattleScene {
     canvas.width = 128;
     canvas.height = 128;
     const ctx = canvas.getContext("2d")!;
-    ctx.fillStyle = "#bd7f91";
+    ctx.fillStyle = "#f3d6dc";
     ctx.fillRect(0, 0, 128, 128);
     for (let i = 0; i < 500; i++) {
       const x = (Math.sin(i * 13.79) * 0.5 + 0.5) * 128,
@@ -204,7 +206,7 @@ export class BattleScene {
         0,
         Math.PI * 2,
       );
-      ctx.fillStyle = i % 3 ? "rgba(255,218,222,.12)" : "rgba(83,43,77,.12)";
+      ctx.fillStyle = i % 3 ? "rgba(255,240,244,.08)" : "rgba(103,63,97,.05)";
       ctx.fill();
     }
     const t = new THREE.CanvasTexture(canvas);
@@ -214,110 +216,11 @@ export class BattleScene {
     return t;
   }
   private buildTerrain() {
-    const geo = new THREE.PlaneGeometry(84, 76, 100, 90);
-    geo.rotateX(-Math.PI / 2);
-    const positions = geo.attributes.position;
-    for (let i = 0; i < positions.count; i++) {
-      const x = positions.getX(i),
-        z = positions.getZ(i);
-      positions.setY(i, terrain(x, z));
-    }
-    geo.computeVertexNormals();
-    const mat = new THREE.MeshStandardMaterial({
-      color: 0xc995a3,
-      map: this.texture,
-      bumpMap: this.texture,
-      bumpScale: 0.22,
-      roughness: 0.9,
-    });
-    const ground = new THREE.Mesh(geo, mat);
-    ground.receiveShadow = true;
-    this.scene.add(ground);
-    this.ownedGeometry.push(geo);
-    this.ownedMaterials.push(mat);
-    const slab = mesh(
-      new THREE.BoxGeometry(54, 1.3, 48),
-      material(0x9d697e),
-      new THREE.Vector3(0, -0.78, 0),
-      new THREE.Vector3(1, 1, 1),
-    );
-    this.ownedGeometry.push(slab.geometry);
-    this.ownedMaterials.push(slab.material as THREE.Material);
-    const ridgeMat = material(0xae6c80, 0.68);
-    this.ownedMaterials.push(ridgeMat);
-    for (let i = 0; i < 24; i++) {
-      const a = (i / 24) * Math.PI * 2;
-      const x = Math.cos(a) * 24,
-        z = Math.sin(a) * 21;
-      const ridge = mesh(
-        new THREE.TorusGeometry(2.5, 0.72, 8, 32, Math.PI * 1.25),
-        ridgeMat,
-        new THREE.Vector3(x, -0.15, z),
-        new THREE.Vector3(1.2, 1, 0.8),
-      );
-      ridge.rotation.set(-Math.PI / 2, 0.1, a);
-      ridge.castShadow = true;
-      ridge.receiveShadow = true;
-      this.scene.add(ridge);
-      this.ownedGeometry.push(ridge.geometry);
-    }
-    // Alveolar rims and narrow tissue bridges form a continuous navigable environment.
-    for (const f of this.content.fields) {
-      const g = new THREE.TorusGeometry(f.radius, 0.09, 6, 60, Math.PI * 0.72);
-      const m = new THREE.MeshStandardMaterial({
-        color: 0x995d75,
-        roughness: 0.55,
-      });
-      const r = new THREE.Mesh(g, m);
-      r.rotation.x = -Math.PI / 2;
-      r.position.set(f.center.x, 0.04, f.center.z);
-      r.receiveShadow = true;
-      this.scene.add(r);
-      this.ownedGeometry.push(g);
-      this.ownedMaterials.push(m);
-      this.fields.set(f.id, r);
-      for (let j = 0; j < 5; j++) {
-        const a = (j / 5) * Math.PI * 2;
-        const p = mesh(
-          smallSphere,
-          ridgeMat,
-          new THREE.Vector3(
-            f.center.x + Math.cos(a) * (f.radius + 0.5),
-            0.05,
-            f.center.z + Math.sin(a) * (f.radius + 0.5),
-          ),
-          new THREE.Vector3(1.5, 0.35, 0.8),
-        );
-        p.rotation.y = a;
-        p.receiveShadow = true;
-        this.scene.add(p);
-      }
-    }
-    const vesselMat = material(0x8e527c, 0.5);
-    this.ownedMaterials.push(vesselMat);
-    const curve = new THREE.CatmullRomCurve3([
-      new THREE.Vector3(-17, 0.3, 18),
-      new THREE.Vector3(-7, 0.55, 16.5),
-      new THREE.Vector3(1, 0.6, 16),
-      new THREE.Vector3(10, 0.3, 19),
-      new THREE.Vector3(22, 0.1, 17),
-    ]);
-    const vein = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, 40, 0.65, 10, false),
-      vesselMat,
-    );
-    vein.castShadow = true;
-    this.scene.add(vein);
-    this.ownedGeometry.push(vein.geometry);
-    const portal = new THREE.Mesh(
-      new THREE.TorusGeometry(1.5, 0.12, 8, 40),
-      new THREE.MeshBasicMaterial({ color: 0xb6efff }),
-    );
-    portal.rotation.x = -Math.PI / 2;
-    portal.position.copy(vector(this.content.portal, 0.65));
-    this.scene.add(portal);
-    this.ownedMaterials.push(portal.material);
-    this.ownedGeometry.push(portal.geometry);
+    const anatomy = buildAnatomy(this.content, this.texture);
+    this.scene.add(anatomy.root);
+    this.ownedGeometry.push(...anatomy.geometries);
+    this.ownedMaterials.push(...anatomy.materials);
+    this.fields = anatomy.regions;
   }
   private makeActor(cell: Cell): Actor {
     const root = new THREE.Group(),
@@ -329,19 +232,20 @@ export class BattleScene {
       roughness: 0.28,
       metalness: 0.02,
       transparent: true,
-      opacity: 0.46,
+      opacity: 0.56,
       depthWrite: false,
-      clearcoat: 0.7,
+      clearcoat: 0.4,
       clearcoatRoughness: 0.3,
     });
     const shell = mesh(
-      sphere,
+      membraneGeometry(cell.kind),
       shellMat,
       new THREE.Vector3(0, 1.2, 0),
       new THREE.Vector3(1.35, 1.1, 1.3),
     );
     shell.castShadow = true;
     body.add(shell);
+    this.ownedGeometry.push(shell.geometry);
     const lobeMat = new THREE.MeshStandardMaterial({
       color,
       roughness: 0.4,
@@ -351,7 +255,7 @@ export class BattleScene {
     const lobes = new THREE.InstancedMesh(
       smallSphere,
       lobeMat,
-      cell.kind === "dendritic" ? 12 : 10,
+      cell.kind === "macrophage" ? 7 : cell.kind === "dendritic" ? 8 : 0,
     );
     body.add(lobes);
     const nucleus = material(
@@ -363,45 +267,101 @@ export class BattleScene {
     const nuclei =
       cell.kind === "neutrophil"
         ? [
-            [0.1, 0.1, 0.4, 0.48],
-            [-0.4, -0.12, -0.1, 0.45],
-            [0.4, -0.1, -0.2, 0.44],
+            [-0.43, 0.05, 0.15, 0.4],
+            [0.03, 0.25, -0.14, 0.37],
+            [0.42, -0.12, 0.08, 0.37],
           ]
-        : cell.kind === "macrophage"
-          ? [
-              [-0.35, 0, 0, 0.58],
-              [0.05, 0.35, -0.1, 0.52],
-              [0.1, -0.3, 0, 0.4],
-            ]
-          : [[0, 0, 0, 0.68]];
+        : [
+            [
+              cell.kind === "plasma" ? -0.35 : -0.12,
+              0,
+              0,
+              lymphoid(cell.kind) ? 0.85 : 0.63,
+            ],
+          ];
     for (const [x, y, z, r] of nuclei) {
+      const ng = new THREE.SphereGeometry(1, 24, 16);
+      if (cell.kind === "macrophage") {
+        const p = ng.attributes.position;
+        for (let i = 0; i < p.count; i++)
+          p.setX(i, p.getX(i) * 0.67 + 0.32 * Math.cos(p.getY(i) * 2.7));
+        ng.computeVertexNormals();
+      }
       const n = mesh(
-        sphere,
+        ng,
         nucleus,
         new THREE.Vector3(x, y, z),
-        new THREE.Vector3(r, r * 0.85, r),
+        new THREE.Vector3(r, r * 0.92, r * 0.85),
       );
       nucleusGroup.add(n);
+      this.ownedGeometry.push(ng);
+    }
+    if (cell.kind === "neutrophil") {
+      const curve = new THREE.CatmullRomCurve3(
+        nuclei.map(([x, y, z]) => new THREE.Vector3(x, y, z)),
+      );
+      const link = new THREE.Mesh(
+        new THREE.TubeGeometry(curve, 16, 0.07, 6, false),
+        nucleus,
+      );
+      nucleusGroup.add(link);
+      this.ownedGeometry.push(link.geometry);
     }
     body.add(nucleusGroup);
     const granuleMat = material(
-      cell.kind === "neutrophil" ? 0x89649e : 0x857ebd,
+      cell.kind === "neutrophil"
+        ? 0xb48b9d
+        : ["nk", "cytotoxicT"].includes(cell.kind)
+          ? 0xbc678c
+          : cell.kind === "macrophage"
+            ? 0xb79d7e
+            : 0x857ebd,
       0.22,
     );
-    const granules = new THREE.InstancedMesh(smallSphere, granuleMat, 16);
-    for (let i = 0; i < 16; i++) {
+    const granules = new THREE.InstancedMesh(
+      smallSphere,
+      granuleMat,
+      cell.kind === "neutrophil" ? 36 : lymphoid(cell.kind) ? 12 : 24,
+    );
+    for (let i = 0; i < granules.count; i++) {
       const a = i * 2.39996;
       dummy.position.set(
         Math.cos(a) * (0.85 + (i % 2) * 0.12),
         1.25 + Math.sin(i * 1.7) * 0.45,
         Math.sin(a) * 0.8,
       );
-      dummy.scale.setScalar(0.09 + (i % 3) * 0.04);
+      dummy.scale.setScalar(0.055 + (i % 3) * 0.025);
       dummy.rotation.set(0, a, 0);
       dummy.updateMatrix();
       granules.setMatrixAt(i, dummy.matrix);
     }
     body.add(granules);
+    if (cell.kind === "plasma") {
+      const roughER = material(0xa58ab2, 0.5);
+      this.ownedMaterials.push(roughER);
+      for (let i = 0; i < 4; i++) {
+        const pts = Array.from({ length: 12 }, (_, j) => {
+          const a = -1.2 + (j / 11) * 2.4;
+          return new THREE.Vector3(
+            0.2 + Math.cos(a) * (0.65 + i * 0.08),
+            1 + 0.15 * i,
+            Math.sin(a) * 0.66,
+          );
+        });
+        const band = new THREE.Mesh(
+          new THREE.TubeGeometry(
+            new THREE.CatmullRomCurve3(pts),
+            16,
+            0.045,
+            5,
+            false,
+          ),
+          roughER,
+        );
+        body.add(band);
+        this.ownedGeometry.push(band.geometry);
+      }
+    }
     const ringMat = new THREE.MeshBasicMaterial({
       color: 0x70e6ff,
       transparent: true,
@@ -508,7 +468,16 @@ export class BattleScene {
       ]);
       group.add(new THREE.Line(geometry, markMat));
       group.rotation.y = -a;
+      group.name = "antibody";
       marks.add(group);
+      const deposit = mesh(
+        smallSphere,
+        markMat,
+        new THREE.Vector3(Math.cos(a) * 1.7, 0.45, Math.sin(a) * 1.7),
+        new THREE.Vector3(0.13, 0.13, 0.13),
+      );
+      deposit.name = "c3b";
+      marks.add(deposit);
       this.ownedGeometry.push(geometry);
     }
     root.add(marks);
@@ -539,7 +508,7 @@ export class BattleScene {
     };
   }
   private updateBacteria(p: Colony, b: Bacteria, marked: boolean) {
-    const signature = `${p.load}:${marked}`;
+    const signature = `${p.load}:${marked}:${p.opsonin}`;
     if (signature === b.signature) return;
     b.signature = signature;
     const count = Math.min(p.load, 50);
@@ -565,22 +534,48 @@ export class BattleScene {
     b.core.instanceMatrix.needsUpdate = true;
     b.capsule.instanceMatrix.needsUpdate = true;
     b.marks.visible = marked;
+    b.marks.children.forEach(
+      (child) => (child.visible = child.name === (p.opsonin ?? "c3b")),
+    );
     (b.core.material as THREE.MeshStandardMaterial).color.setHex(
       marked ? 0x7291b2 : 0x536eaa,
     );
   }
   private effect(event: TacticalEvent) {
     if (
-      !["engulf", "mark", "grow", "arrive", "spread", "clear", "move"].includes(
-        event.type,
-      )
+      ![
+        "engulf",
+        "mark",
+        "grow",
+        "arrive",
+        "spread",
+        "clear",
+        "move",
+        "cytotoxic",
+      ].includes(event.type)
     )
       return;
     const root = new THREE.Group();
     let arms: THREE.InstancedMesh | undefined,
       ghost: THREE.Group | undefined,
       ring: THREE.Mesh | undefined;
-    if (event.type === "engulf") {
+    if (event.type === "cytotoxic") {
+      ghost = new THREE.Group();
+      const gm = material(0xf3b2ca, 0.28);
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2;
+        ghost.add(
+          mesh(
+            smallSphere,
+            gm,
+            new THREE.Vector3(Math.cos(a) * 0.23, Math.sin(a) * 0.23, 0),
+            new THREE.Vector3(0.07, 0.07, 0.1),
+          ),
+        );
+      }
+      root.add(ghost);
+      this.ownedMaterials.push(gm);
+    } else if (event.type === "engulf") {
       const mat = new THREE.MeshStandardMaterial({
         color: 0xb29ada,
         roughness: 0.3,
@@ -656,7 +651,14 @@ export class BattleScene {
         f.root.visible = false;
         return true;
       }
-      if (f.arms && f.ghost && e.from) {
+      if (e.type === "cytotoxic" && f.ghost && e.from) {
+        const from = vector(e.from, 1),
+          to = vector(e.position, 1);
+        f.ghost.position.copy(from.lerp(to, Math.min(1, p / 0.55)));
+        f.ghost.scale.setScalar(p < 0.55 ? 1 : 1 - (p - 0.55));
+        // Contact-local pore ring and granule transfer precede host shrinkage/blebbing.
+        f.ghost.lookAt(to);
+      } else if (f.arms && f.ghost && e.from) {
         const from = vector(e.from, 1.1),
           to = vector(e.position, 0.7);
         const direction = to.clone().sub(from).setY(0).normalize();
@@ -754,6 +756,13 @@ export class BattleScene {
       }
     for (const cell of s.cells) {
       let actor = this.actors.get(cell.id);
+      if (actor && actor.kind !== cell.kind) {
+        this.scene.remove(actor.root);
+        actor.lobes.dispose();
+        actor.granules.dispose();
+        this.actors.delete(cell.id);
+        actor = undefined;
+      }
       if (!actor) {
         actor = this.makeActor(cell);
         this.actors.set(cell.id, actor);
@@ -778,27 +787,23 @@ export class BattleScene {
         1.1 * (1 + (live ? Math.cos(phase * 1.7) * 0.025 : 0)),
         1.3,
       );
+      if (actor.shell.morphTargetInfluences)
+        actor.shell.morphTargetInfluences[0] = live
+          ? 0.5 + Math.sin(phase * 1.2) * 0.45
+          : 0.5;
       const count = actor.lobes.count;
       for (let i = 0; i < count; i++) {
-        const a = (i / count) * Math.PI * 2;
-        const dendritic = cell.kind === "dendritic";
-        const reach = dendritic
-          ? 1.95
-          : cell.kind === "neutrophil"
-            ? 1.02
-            : 1.18;
-        const wave = live ? Math.sin(phase * 1.2 + i * 1.8) * 0.12 : 0;
+        const a = (i / count) * Math.PI * 2 + 0.15 * Math.sin(i * 3.1),
+          dc = cell.kind === "dendritic";
+        const wave = live ? Math.sin(phase * 1.2 + i * 1.8) * 0.045 : 0;
+        const reach = dc ? 2.55 : 1.65;
         dummy.position.set(
           Math.cos(a) * (reach + wave),
-          1.1 + Math.sin(i * 2) * 0.22,
+          1.2 + Math.sin(i * 2) * 0.06,
           Math.sin(a) * (reach + wave),
         );
-        dummy.scale.set(
-          dendritic ? 0.14 : cell.kind === "neutrophil" ? 0.16 : 0.2,
-          dendritic ? 0.18 : cell.kind === "neutrophil" ? 0.13 : 0.19,
-          dendritic ? 0.7 : cell.kind === "neutrophil" ? 0.22 : 0.42,
-        );
-        dummy.rotation.set(0.1, a, 0);
+        dummy.scale.set(dc ? 0.09 : 0.15, dc ? 0.1 : 0.13, dc ? 0.12 : 0.22);
+        dummy.rotation.set(0, Math.PI / 2 - a, 0);
         dummy.updateMatrix();
         actor.lobes.setMatrixAt(i, dummy.matrix);
       }
@@ -839,13 +844,87 @@ export class BattleScene {
       b.ring.visible = input.selected === p.id;
       this.updateBacteria(p, b, p.markedUntil > s.tick);
     }
+    for (const [id, root] of this.hosts)
+      if (!s.hosts.some((h) => h.id === id)) {
+        this.scene.remove(root);
+        this.hosts.delete(id);
+      }
+    for (const host of s.hosts) {
+      let root = this.hosts.get(host.id);
+      if (!root) {
+        root = new THREE.Group();
+        const mat = new THREE.MeshPhysicalMaterial({
+          color: host.antigen === "self" ? 0xd5a8b4 : 0xba8ca8,
+          roughness: 0.5,
+          transparent: true,
+          opacity: 0.75,
+          clearcoat: 0.2,
+        });
+        const shell = mesh(
+          sphere,
+          mat,
+          new THREE.Vector3(0, 0.8, 0),
+          new THREE.Vector3(1.65, 0.75, 1.3),
+        );
+        root.add(shell);
+        const nuc = material(0x86668e);
+        root.add(
+          mesh(
+            sphere,
+            nuc,
+            new THREE.Vector3(-0.3, 0.95, 0),
+            new THREE.Vector3(0.5, 0.4, 0.5),
+          ),
+        );
+        const fragmentMat = material(0x9c718e);
+        for (let i = 0; i < 6; i++) {
+          const a = (i / 6) * Math.PI * 2;
+          const fragment = mesh(
+            smallSphere,
+            fragmentMat,
+            new THREE.Vector3(Math.cos(a), 0.6, Math.sin(a)),
+            new THREE.Vector3(0.33, 0.3, 0.33),
+          );
+          fragment.name = "fragment";
+          fragment.visible = false;
+          root.add(fragment);
+        }
+        this.ownedMaterials.push(mat, nuc, fragmentMat);
+        this.scene.add(root);
+        this.hosts.set(host.id, root);
+      }
+      root.position.set(
+        host.position.x,
+        terrain(host.position.x, host.position.z),
+        host.position.z,
+      );
+      const dying = host.apoptoticAt > 0,
+        p = dying ? Math.min(1, (s.tick - host.apoptoticAt) / 12) : 0;
+      root.children[0].scale.set(
+        1.65 * (1 - p * 0.55),
+        0.75 * (1 - p * 0.6),
+        1.3 * (1 - p * 0.55),
+      );
+      root.children.forEach((child) => {
+        if (child.name === "fragment") {
+          child.visible = p > 0.3;
+          child.scale.setScalar(0.3 + Math.sin(p * Math.PI) * 0.1);
+        }
+      });
+      (
+        root.children[0] as THREE.Mesh<
+          THREE.BufferGeometry,
+          THREE.MeshPhysicalMaterial
+        >
+      ).material.opacity = 0.75 - p * 0.45;
+    }
     for (const f of this.content.fields) {
       const m = this.fields.get(f.id)!;
       const damage = 1 - s.health[f.id] / 100;
       (m.material as THREE.MeshStandardMaterial).color.setRGB(
-        0.34 - damage * 0.15,
-        0.14 - damage * 0.08,
-        0.21 - damage * 0.1,
+        0.7 - damage * 0.22,
+        0.35 - damage * 0.16,
+        0.45 - damage * 0.13,
       );
     }
     const selectedCell = s.cells.find((u) => u.id === input.selected);
@@ -883,12 +962,16 @@ export class BattleScene {
     const items = [
       ...s.cells.map((u) => ({ id: u.id, p: u.position, y: 3.1 })),
       ...s.colonies.map((p) => ({ id: p.id, p: p.position, y: 1 })),
+      ...s.hosts.map((h) => ({ id: h.id, p: h.position, y: 2.5 })),
       ...this.content.fields.map((f) => ({
         id: `field-${f.id}`,
         p: { x: f.center.x, z: f.center.z - 5.8 },
         y: 0.6,
       })),
       { id: "portal", p: this.content.portal, y: 1 },
+      ...(this.content.lymphExit
+        ? [{ id: "lymph", p: this.content.lymphExit, y: 1 }]
+        : []),
     ];
     // Keep field controls clear of the existing unit/colony hit targets.
     // Only labels move; terrain, models, camera and authority stay unchanged.
@@ -1042,6 +1125,12 @@ export class BattleScene {
         id: u.id,
         point: u.position,
         y: 1.5,
+      })),
+      ...s.hosts.map((h) => ({
+        type: "host" as const,
+        id: h.id,
+        point: h.position,
+        y: 1,
       })),
       ...s.colonies.map((u) => ({
         type: "colony" as const,
