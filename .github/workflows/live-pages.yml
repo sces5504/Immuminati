@@ -1,0 +1,84 @@
+name: Verify live GitHub Pages
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/live-pages.yml]
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Verify and publish to GitHub Pages]
+    types: [completed]
+permissions:
+  contents: read
+concurrency:
+  group: live-pages-smoke
+  cancel-in-progress: false
+jobs:
+  smoke:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Check public desktop and mobile gameplay
+        run: |
+          mkdir -p live-evidence
+          node --input-type=module <<'JS'
+          import { chromium, expect } from '@playwright/test';
+          import assert from 'node:assert/strict';
+          import { writeFile } from 'node:fs/promises';
+          const url = 'https://sces5504.github.io/Immuminati/';
+          const browser = await chromium.launch();
+          const results = [];
+          try {
+            for (const mobile of [false, true]) {
+              const name = mobile ? 'mobile' : 'desktop';
+              const context = await browser.newContext({
+                viewport: mobile ? {width:360,height:800} : {width:1440,height:1100},
+                isMobile: mobile, hasTouch: mobile
+              });
+              const page = await context.newPage();
+              const errors = [], httpErrors = [];
+              page.on('pageerror', e => errors.push(e.message));
+              page.on('response', r => { if(r.status() >= 400) httpErrors.push({status:r.status(),url:r.url()}); });
+              const response = await page.goto(url, {waitUntil:'networkidle'});
+              assert.equal(response.status(), 200);
+              await expect(page.locator('.scenario-card')).toHaveCount(6);
+              await page.screenshot({path:'live-evidence/'+name+'-home.png',fullPage:true});
+              await page.getByRole('button',{name:'進入莢膜防線'}).click();
+              await expect(page.locator('.battlefield')).toBeVisible();
+              await page.locator('[data-pathogen="p1"]').click();
+              await page.getByRole('button',{name:'Y 施加調理'}).click();
+              await expect(page.locator('.battlefield')).not.toHaveClass(/is-playing/);
+              assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('immuminati:save:v1')).session.state.ap),3);
+              await page.getByRole('button',{name:'結束回合',exact:false}).click();
+              await page.locator('.field-toolbar').getByRole('button',{name:'跳過動畫 »'}).click();
+              await expect(page.locator('.battlefield')).not.toHaveClass(/is-playing/);
+              assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('immuminati:save:v1')).session.state.turn),2);
+              await page.reload({waitUntil:'networkidle'});
+              await page.getByRole('button',{name:'繼續回合 2'}).click();
+              await expect(page.locator('.battlefield')).toBeVisible();
+              await page.getByRole('button',{name:'開啟百科',exact:true}).click();
+              await expect(page.getByRole('dialog')).toBeVisible();
+              await page.keyboard.press('Escape');
+              await page.evaluate(()=>window.scrollTo(0,0));
+              await page.screenshot({path:'live-evidence/'+name+'-field.png',fullPage:true});
+              assert(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth+1));
+              assert.deepEqual(errors, []);
+              assert.deepEqual(httpErrors, []);
+              results.push({name,url,httpStatus:response.status(),pageErrors:errors,httpErrors,checks:['homepage','subpath assets','M1 start','opsonization AP','end turn','skip','reload and continue','encyclopedia','no horizontal overflow']});
+              await context.close();
+            }
+            await writeFile('live-evidence/results.json', JSON.stringify({url,browser:browser.version(),results},null,2));
+            console.log(JSON.stringify(results));
+          } finally { await browser.close(); }
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-pages-evidence
+          path: live-evidence/
