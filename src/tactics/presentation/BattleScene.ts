@@ -1021,6 +1021,15 @@ export class BattleScene {
     p.lastY = e.clientY;
   };
   private up = (e: PointerEvent) => {
+    const active = this.pointer;
+    // Touch moves may be coalesced until the next frame. Apply the release
+    // position before clearing capture, so a quick swipe cannot become a click.
+    if (
+      active &&
+      (active.moved ||
+        Math.hypot(e.clientX - active.x, e.clientY - active.y) > 6)
+    )
+      this.move(e);
     const down = this.pointer;
     this.pointer = undefined;
     if (!down || down.moved) return;

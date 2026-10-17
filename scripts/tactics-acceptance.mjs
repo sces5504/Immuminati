@@ -209,20 +209,43 @@ try {
         return { x: m.m41, y: m.m42 };
       });
     const drag = async (dx, dy) => {
-      const point = await page.locator("canvas").evaluate((canvas) => {
-        const r = canvas.getBoundingClientRect();
-        for (const fy of [0.45, 0.55, 0.35, 0.65])
-          for (const fx of [0.5, 0.4, 0.6, 0.3, 0.7]) {
-            const x = r.x + r.width * fx,
-              y = r.y + r.height * fy;
-            if (
-              document.elementFromPoint(x, y) === canvas &&
-              document.elementFromPoint(x + 24, y + 18) === canvas
-            )
-              return { x, y };
-          }
-        throw new Error("No unobstructed canvas gesture location");
-      });
+      // CDP bypasses locator actionability: let the compositor commit the new
+      // camera/label hit regions before choosing a genuinely open touch point.
+      await page.evaluate(
+        () =>
+          new Promise((resolve) =>
+            requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+          ),
+      );
+      // A screenshot forces presentation; SwiftShader can leave compositor
+      // hit regions behind the latest DOM transforms despite animation frames.
+      await page.screenshot();
+      const point = await page.locator("canvas").evaluate(
+        (canvas, delta) => {
+          const r = canvas.getBoundingClientRect();
+          // Touch targeting can prefer nearby buttons even when the center is on
+          // the canvas. Keep the whole gesture and a finger-sized margin clear.
+          for (const fy of [0.45, 0.55, 0.65, 0.35, 0.75])
+            for (const fx of [0.15, 0.85, 0.3, 0.7, 0.5]) {
+              const x = r.x + r.width * fx,
+                y = r.y + r.height * fy;
+              let clear = true;
+              for (const t of [0, 0.5, 1])
+                for (const ox of [-32, 0, 32])
+                  for (const oy of [-32, 0, 32])
+                    if (
+                      document.elementFromPoint(
+                        x + delta.dx * t + ox,
+                        y + delta.dy * t + oy,
+                      ) !== canvas
+                    )
+                      clear = false;
+              if (clear) return { x, y };
+            }
+          throw new Error("No unobstructed canvas gesture location");
+        },
+        { dx, dy },
+      );
       if (cdp) {
         await cdp.send("Input.dispatchTouchEvent", {
           type: "touchStart",
@@ -245,6 +268,10 @@ try {
         await page.mouse.move(point.x + dx, point.y + dy, { steps: 3 });
         await page.mouse.up();
       }
+      // Measure after the browser flushes coalesced pointer input to a frame.
+      await page.evaluate(
+        () => new Promise((resolve) => requestAnimationFrame(() => resolve())),
+      );
     };
     const dragResults = [];
     const selectedBeforeDrag = await page
@@ -254,8 +281,13 @@ try {
       for (let quarter = 0; quarter < 4; quarter++) {
         console.log("CHECK", name, "drag", { quarter, zoomed });
         await page.getByRole("button", { name: "重設鏡頭" }).click();
-        for (let n = 0; n < quarter * 4; n++)
-          await page.getByRole("button", { name: "旋轉鏡頭" }).click();
+        // Configure angles through the same button without rendering every
+        // intermediate angle; the actual rotation control was clicked above.
+        await page
+          .getByRole("button", { name: "旋轉鏡頭" })
+          .evaluate((el, turns) => {
+            for (let n = 0; n < turns; n++) el.click();
+          }, quarter * 4);
         if (zoomed)
           await page.getByRole("button", { name: "放大戰場" }).click();
         const start = await marker();
