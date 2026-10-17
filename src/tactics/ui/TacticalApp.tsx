@@ -362,6 +362,7 @@ export default function TacticalApp() {
       className={`tactical-root ${home ? "t-home" : ""} ${paused ? "t-paused" : ""}`}
       data-tick={s.tick}
       data-paused={paused}
+      data-reduced={snapshot.settings.reduced}
       data-wave={s.wave + 1}
       data-load={burden}
       data-selected={selected}

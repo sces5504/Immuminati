@@ -78,6 +78,8 @@ export class BattleScene {
   private raf = 0;
   private lastRender = 0;
   private frameInterval = 0;
+  private software = false;
+  private pendingFrame: WebGLSync | null = null;
   private observer: ResizeObserver;
   private start = performance.now();
   private now = 0;
@@ -123,13 +125,14 @@ export class BattleScene {
       antialias: true,
       powerPreference: "high-performance",
     });
-    const gl = this.renderer.getContext();
+    const gl = this.renderer.getContext() as WebGL2RenderingContext;
     const debug = gl.getExtension("WEBGL_debug_renderer_info");
     const rendererName = debug
       ? String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL))
       : "";
     const software = /swiftshader|llvmpipe|software/i.test(rendererName);
-    host.closest(".tactical-root")?.classList.toggle("t-software", software);
+    this.software = software;
+    host.dataset.renderer = software ? "software" : "hardware";
     this.frameInterval = software ? 1000 / 10 : 0;
     this.renderer.setPixelRatio(
       software ? 0.6 : Math.min(devicePixelRatio, 1.5),
@@ -706,6 +709,15 @@ export class BattleScene {
     });
   }
   private draw = (stamp: number) => {
+    if (this.software && this.pendingFrame) {
+      const gl = this.renderer.getContext() as WebGL2RenderingContext;
+      if (gl.clientWaitSync(this.pendingFrame, 0, 0) === gl.TIMEOUT_EXPIRED) {
+        this.raf = requestAnimationFrame(this.draw);
+        return;
+      }
+      gl.deleteSync(this.pendingFrame);
+      this.pendingFrame = null;
+    }
     if (stamp - this.lastRender < this.frameInterval) {
       this.raf = requestAnimationFrame(this.draw);
       return;
@@ -793,6 +805,9 @@ export class BattleScene {
       actor.lobes.instanceMatrix.needsUpdate = true;
       actor.granules.rotation.y = live ? Math.sin(phase * 0.6) * 0.06 : 0;
       actor.ring.visible = input.selected === cell.id;
+      actor.ring.scale.setScalar(
+        input.reduced ? 1 : 1 + Math.sin(this.now * 4) * 0.04,
+      );
       const infected = s.internal.some((p) => p.host === cell.id);
       actor.vacuole.visible = infected;
       (actor.shell.material as THREE.MeshPhysicalMaterial).emissive.setHex(
@@ -846,6 +861,11 @@ export class BattleScene {
     } else this.routeGeometry.setDrawRange(0, 0);
     this.animateEffects(input.reduced, input.speed);
     this.renderer.render(this.scene, this.camera);
+    if (this.software) {
+      const gl = this.renderer.getContext() as WebGL2RenderingContext;
+      this.pendingFrame = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
+      gl.flush();
+    }
     if (stamp - this.labelClock > 65) {
       this.labels(s);
       this.labelClock = stamp;
@@ -906,6 +926,8 @@ export class BattleScene {
     );
     this.camera.lookAt(this.pan.x, 0.5, this.pan.z);
     this.camera.updateProjectionMatrix();
+    this.camera.updateMatrixWorld(true);
+    this.labels(this.read().state);
   }
   setZoom(delta: number) {
     this.zoom = Math.max(0.75, Math.min(1.7, this.zoom + delta));
@@ -1036,6 +1058,10 @@ export class BattleScene {
     for (const material of this.ownedMaterials) material.dispose();
     for (const geometry of this.ownedGeometry) geometry.dispose();
     this.texture.dispose();
+    if (this.pendingFrame)
+      (this.renderer.getContext() as WebGL2RenderingContext).deleteSync(
+        this.pendingFrame,
+      );
     this.renderer.dispose();
   }
 }

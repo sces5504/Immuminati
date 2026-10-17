@@ -2171,6 +2171,43 @@
 }
 
 /* Software WebGL also composites CSS blur on the CPU; keep controls responsive. */
-.t-software * {
+.tactical-root:has(.t-scene[data-renderer="software"]) * {
   backdrop-filter: none !important;
+}
+
+@keyframes t-report-enter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 14px)) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes t-stars-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.65);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.t-result {
+  animation: t-report-enter 0.45s ease-out both;
+}
+.t-result-stars {
+  animation: t-stars-enter 0.55s 0.15s ease-out both;
+}
+.tactical-root[data-reduced="true"] .t-result,
+.tactical-root[data-reduced="true"] .t-result-stars {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .t-result,
+  .t-result-stars {
+    animation: none;
+  }
 }
