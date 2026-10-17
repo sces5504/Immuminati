@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { placeFieldLabel } from "./labelLayout";
 import { membraneGeometry, lymphoid } from "./CellGeometry";
 import { buildAnatomy, tissueFloor } from "./Anatomy";
 import type {
@@ -991,31 +992,60 @@ export class BattleScene {
             ]
           : [];
       });
+    const rect = this.host.getBoundingClientRect();
+    const overlays =
+      this.host.parentElement?.querySelectorAll<HTMLElement>(
+        ".t-hud,.t-objective,.t-tactical-hint,.t-field-tools,.t-strategy-tools,.t-arrival-queue,.t-camera-controls,.t-camera-hint,.t-command-dock,.t-order-banner,.t-tutorial:not([hidden]),.t-recruit-card,.t-event-ribbon",
+      ) ?? [];
+    for (const overlay of overlays) {
+      const r = overlay.getBoundingClientRect();
+      if (
+        r.width &&
+        r.height &&
+        r.right > rect.left &&
+        r.left < rect.right &&
+        r.bottom > rect.top &&
+        r.top < rect.bottom
+      )
+        blockers.push({
+          x: r.x - rect.x + r.width / 2,
+          y: r.y - rect.y + r.height / 2,
+          w: r.width,
+          h: r.height,
+        });
+    }
+    // Keep model hit regions available as well as their DOM labels.
+    for (const u of s.cells)
+      blockers.push({ ...this.project(u.position, 1.5), w: 44, h: 44 });
     for (const item of items) {
       const el = this.host.querySelector<HTMLElement>(
         `[data-world-label="${item.id}"]`,
       );
-      if (el) {
-        const p = this.project(item.p, item.y);
-        if (item.id.startsWith("field-")) {
-          p.x = Math.max(
-            el.offsetWidth / 2 + 5,
-            Math.min(this.size.w - el.offsetWidth / 2 - 5, p.x),
-          );
-          for (let n = 0; n < blockers.length; n++) {
-            const hit = blockers.find(
-              (b) =>
-                Math.abs(p.x - b.x) < (el.offsetWidth + b.w) / 2 + 4 &&
-                Math.abs(p.y - b.y) < (el.offsetHeight + b.h) / 2 + 4,
-            );
-            if (!hit) break;
-            const y = hit.y - (el.offsetHeight + hit.h) / 2 - 4;
-            if (y < el.offsetHeight / 2 + 4) break;
-            p.y = y;
-          }
+      if (!el) continue;
+      let p = this.project(item.p, item.y);
+      if (item.id.startsWith("field-")) {
+        const placement = placeFieldLabel(
+          { ...p, w: el.offsetWidth, h: el.offsetHeight },
+          this.size,
+          blockers,
+        );
+        const line = this.host.querySelector<SVGLineElement>(
+          `[data-field-line="${item.id}"]`,
+        );
+        if (line) {
+          line.setAttribute("x1", String(p.x));
+          line.setAttribute("y1", String(p.y));
+          line.setAttribute("x2", String(placement.x));
+          line.setAttribute("y2", String(placement.y));
+          line.style.visibility =
+            Math.hypot(p.x - placement.x, p.y - placement.y) > 5
+              ? "visible"
+              : "hidden";
         }
-        el.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-50%)`;
+        p = placement;
+        blockers.push(placement);
       }
+      el.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-50%)`;
     }
   }
   private resize() {

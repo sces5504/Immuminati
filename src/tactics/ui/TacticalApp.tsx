@@ -459,6 +459,11 @@ export default function TacticalApp() {
         />
         {!home && (
           <div className="t-world-labels">
+            <svg className="t-region-connectors" aria-hidden="true">
+              {content.fields.map((f) => (
+                <line key={f.id} data-field-line={`field-${f.id}`} />
+              ))}
+            </svg>
             {content.fields.map((f) => (
               <button
                 key={f.id}
