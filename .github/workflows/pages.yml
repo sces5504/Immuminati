@@ -20,22 +20,95 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run verify
-      - run: npx playwright install --with-deps chromium
-      - run: npm run test:browser
-      - run: npm run test:animation
-      - run: npm run test:immune
       - uses: actions/upload-artifact@v4
-        if: always()
         with:
-          name: browser-evidence
-          path: docs/evidence/
+          name: production-dist
+          path: dist
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: dist
+  browser:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [desktop, mobile]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+        env:
+          DEVICE: ${{ matrix.device }}
+          EVIDENCE_DIR: ../docs/evidence/ci/tactics-${{ matrix.device }}/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tactics-${{ matrix.device }}-evidence
+          path: docs/evidence/ci/tactics-${{ matrix.device }}/
+  immune:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [desktop, mobile]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:immune
+        env:
+          DEVICE: ${{ matrix.device }}
+          EVIDENCE_DIR: ../docs/evidence/ci/immune-${{ matrix.device }}/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: immune-${{ matrix.device }}-evidence
+          path: docs/evidence/ci/immune-${{ matrix.device }}/
+  animation:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:animation
+        env:
+          EVIDENCE_DIR: ../docs/evidence/ci/animation/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: animation-evidence
+          path: docs/evidence/ci/animation/
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: verify
+    needs: [verify, browser, immune, animation]
     runs-on: ubuntu-latest
     permissions:
       pages: write

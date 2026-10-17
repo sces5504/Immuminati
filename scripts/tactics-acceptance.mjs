@@ -225,23 +225,31 @@ try {
           const r = canvas.getBoundingClientRect();
           // Touch targeting can prefer nearby buttons even when the center is on
           // the canvas. Keep the whole gesture and a finger-sized margin clear.
+          const clearAt = (x, y) => {
+            for (const t of [0, 0.5, 1])
+              for (const ox of [-32, 0, 32])
+                for (const oy of [-32, 0, 32])
+                  if (
+                    document.elementFromPoint(
+                      x + delta.dx * t + ox,
+                      y + delta.dy * t + oy,
+                    ) !== canvas
+                  )
+                    return false;
+            return true;
+          };
           for (const fy of [0.45, 0.55, 0.65, 0.35, 0.75])
             for (const fx of [0.15, 0.85, 0.3, 0.7, 0.5]) {
               const x = r.x + r.width * fx,
                 y = r.y + r.height * fy;
-              let clear = true;
-              for (const t of [0, 0.5, 1])
-                for (const ox of [-32, 0, 32])
-                  for (const oy of [-32, 0, 32])
-                    if (
-                      document.elementFromPoint(
-                        x + delta.dx * t + ox,
-                        y + delta.dy * t + oy,
-                      ) !== canvas
-                    )
-                      clear = false;
-              if (clear) return { x, y };
+              if (clearAt(x, y)) return { x, y };
             }
+          // Labels may relocate around fixed overlays after a forward drag.
+          // Search the remaining canvas without weakening finger clearance or
+          // the actual mouse/touch gesture and world-displacement assertions.
+          for (let y = r.y + 34; y < r.bottom - 34; y += 10)
+            for (let x = r.x + 34; x < r.right - 34; x += 10)
+              if (clearAt(x, y)) return { x, y };
           throw new Error("No unobstructed canvas gesture location");
         },
         { dx, dy },
