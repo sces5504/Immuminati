@@ -200,6 +200,7 @@ export default function TacticalApp() {
         }
         if (steps) {
           const persist =
+            controller.save.state.tick < lastSavedTick ||
             controller.save.state.tick - lastSavedTick >= 25 ||
             !!controller.save.state.result;
           if (persist) lastSavedTick = controller.save.state.tick;

@@ -1,5 +1,7 @@
 # Immuminati 遊戲重建規格 v1.1
 
+> 2026-10-17 重製更新：使用者試玩後選擇「畫面、操作和玩法一起重做」。目前正式入口為 `src/tactics` 的連續立體、可暫停即時戰術 M1；玩法優先見 [TACTICAL-REDESIGN.md](TACTICAL-REDESIGN.md)，實際驗證見 [TACTICAL-VALIDATION.md](TACTICAL-VALIDATION.md)。下方保留首版／開工時文件，回合 4 AP 與舊實作狀態不再代表目前版本。六關生物內容等未被修訂的要求仍保留。
+
 更新日期：2026-10-17（Asia/Taipei）  
 新專案：https://github.com/sces5504/Immuminati  
 文件狀態：玩法規格已確認；使用者於 2026-10-17 選定 C「柔光微觀立體」，並要求待機與動作動畫。本版已納入，供雲端開發直接使用。
