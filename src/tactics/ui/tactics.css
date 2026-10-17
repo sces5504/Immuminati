@@ -2168,3 +2168,8 @@
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+/* Software WebGL also composites CSS blur on the CPU; keep controls responsive. */
+.t-software * {
+  backdrop-filter: none !important;
+}

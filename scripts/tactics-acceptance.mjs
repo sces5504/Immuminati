@@ -46,20 +46,21 @@ try {
   const key = "immuminati:tactics:v2";
   const save = (page) =>
     page.evaluate((key) => JSON.parse(localStorage.getItem(key)), key);
-  const pause = async (page) => {
+  const toggle = async (page, desired) => {
+    if (await page.getByTestId("tactical-result").count()) return;
     if (
-      (await page.locator(".tactical-root").getAttribute("data-paused")) ===
-      "false"
-    )
-      await page.getByTestId("pause-toggle").click();
+      (await page.locator(".tactical-root").getAttribute("data-paused")) !==
+      desired
+    ) {
+      try {
+        await page.getByTestId("pause-toggle").click({ timeout: 5000 });
+      } catch (e) {
+        if (!(await page.getByTestId("tactical-result").count())) throw e;
+      }
+    }
   };
-  const resume = async (page) => {
-    if (
-      (await page.locator(".tactical-root").getAttribute("data-paused")) ===
-      "true"
-    )
-      await page.getByTestId("pause-toggle").click();
-  };
+  const pause = (page) => toggle(page, "true");
+  const resume = (page) => toggle(page, "false");
   const selectColony = async (page, id) => {
     const cell = await page
       .locator(".tactical-root")
@@ -79,7 +80,7 @@ try {
         dir: dir + "raw-tactics",
         size: mobile
           ? { width: 360, height: 800 }
-          : { width: 1440, height: 1000 },
+          : { width: 960, height: 666 },
       },
     });
     await ctx.addInitScript(() =>
@@ -222,6 +223,7 @@ try {
       await page.waitForTimeout(2600);
       if (await page.getByTestId("tactical-result").count()) break;
       await pause(page);
+      if (await page.getByTestId("tactical-result").count()) break;
       let state = (await save(page)).state;
       for (const p of [...state.colonies].sort((a, b) => b.load - a.load)) {
         state = (await save(page)).state;

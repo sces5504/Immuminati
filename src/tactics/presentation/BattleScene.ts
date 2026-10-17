@@ -129,6 +129,7 @@ export class BattleScene {
       ? String(gl.getParameter(debug.UNMASKED_RENDERER_WEBGL))
       : "";
     const software = /swiftshader|llvmpipe|software/i.test(rendererName);
+    host.closest(".tactical-root")?.classList.toggle("t-software", software);
     this.frameInterval = software ? 1000 / 10 : 0;
     this.renderer.setPixelRatio(
       software ? 0.6 : Math.min(devicePixelRatio, 1.5),
