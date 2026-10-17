@@ -1,0 +1,48 @@
+{
+  "current_source": "4836475",
+  "current_evidence": [
+    "desktop-home.png",
+    "mobile-home.png",
+    "desktop-field.png",
+    "mobile-field.png",
+    "desktop-crowded-controlled.png",
+    "mobile-crowded-controlled.png",
+    "desktop-crowd.webm",
+    "mobile-crowd.webm",
+    "current-screen-results.json",
+    "crowd-browser-results.json",
+    "engulf-branches.webm",
+    "animation-results.json",
+    "fast-touch-results.json"
+  ],
+  "desktop_highlights": {
+    "source_commit": "d0ca02f",
+    "duration_seconds": 45.96,
+    "source_ranges_seconds": [
+      [9, 16],
+      [225, 237],
+      [250, 265],
+      [355, 367]
+    ],
+    "source_sha256": "d3558dcafbf688a6f23ff749e0b611c3e7f1e410bb7cf2083011cd6d8bb589a5",
+    "note": "Local gameplay recording before the final map-label and pristine-import UI fixes; same combat rules. Full source retained locally under ignored raw-playthrough. Final full regression evidence is published by CI for 4836475."
+  },
+  "earlier_local_gameplay_results": {
+    "source_commit": "d0ca02f",
+    "desktop": {
+      "type": "victory",
+      "preservation": 86,
+      "stars": 3,
+      "seconds": 76.4
+    },
+    "mobile": {
+      "type": "victory",
+      "preservation": 89,
+      "stars": 3,
+      "seconds": 57.4
+    }
+  },
+  "environment": "Headless Chromium 141.0.7390.37 / SwiftShader; mobile is 360x800 touch emulation, not a physical device",
+  "release_source": "7d9c82c",
+  "fast_touch_source": "7d9c82c"
+}

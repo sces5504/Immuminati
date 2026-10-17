@@ -1,0 +1,22 @@
+{
+  "browser": "141.0.7390.37",
+  "renderer": "Chromium SwiftShader; touch/viewport simulation, not physical mobile",
+  "results": [
+    {
+      "name": "desktop",
+      "passed": true,
+      "logicalCells": 30,
+      "queued": 1,
+      "legacyCombatUnchanged": true,
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "passed": true,
+      "logicalCells": 30,
+      "queued": 1,
+      "legacyCombatUnchanged": true,
+      "errors": []
+    }
+  ]
+}

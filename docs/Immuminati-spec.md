@@ -7,7 +7,7 @@
 ## 1. 明確的保留基準
 
 - 程式基準：`d2c16ab`（立體戰術版發布），連同 `af6bcb3` 的驗證與錄影紀錄。`src/tactics` 是正式入口，沿用既有 TypeScript＋Vite＋React＋Three.js 架構。
-- 2026-10-17 檢查：遠端 `6e1d5f7` 已回退另一次 RTS 重製；其 `src`、`scripts`、`tests`、`public`、套件與 Vite 設定和 `af6bcb3` 一致。此事實不代表後續玩法改進已實作。
+- 2026-10-17 檢查：遠端 `6e1d5f7` 已回退另一次 RTS 重製；其 `src`、`scripts`、`tests`、`public`、套件與 Vite 設定和 `af6bcb3` 一致。這是回退當下的比較；後續在現行 main 延續已完成的 [增量修正](TACTICAL-REFINEMENT.md)，不能把還原基準當成覆蓋新修正的理由。
 - 畫面基準：[桌面](evidence/tactics/desktop-field.png)、[手機](evidence/tactics/mobile-field.png)、[短錄影](evidence/tactics/m1-highlights.webm)。外觀、操作與動作以這個實際版本為準，不再要求換成另一套佔位畫面。
 - C「柔光微觀立體」仍是風格來源；實際已認可的介面、模型、配色、鏡頭構圖與動作需要保留。[美術與展示邊界](art-direction/C-art-and-animation.md) 說明可改與不可改的範圍。
 - 所有歷史重製提案、舊 prompt、模型批評或測試紀錄與本次決策衝突時，以本文件為準。版本號 v2.1 是規格號，不代表程式或存檔 schema 已升版。

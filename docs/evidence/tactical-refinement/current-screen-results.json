@@ -1,0 +1,43 @@
+{
+  "source": "4836475",
+  "browser": "141.0.7390.37",
+  "renderer": "Chromium SwiftShader; touch/viewport simulation, not physical mobile",
+  "results": [
+    {
+      "name": "desktop",
+      "fields": [
+        {
+          "name": "防區肺泡入口",
+          "centerSelectable": true
+        },
+        {
+          "name": "防區深部肺泡",
+          "centerSelectable": true
+        },
+        {
+          "name": "防區微血管防線",
+          "centerSelectable": true
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "mobile",
+      "fields": [
+        {
+          "name": "防區肺泡入口",
+          "centerSelectable": true
+        },
+        {
+          "name": "防區深部肺泡",
+          "centerSelectable": true
+        },
+        {
+          "name": "防區微血管防線",
+          "centerSelectable": true
+        }
+      ],
+      "errors": []
+    }
+  ]
+}

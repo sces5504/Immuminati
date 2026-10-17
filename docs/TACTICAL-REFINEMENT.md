@@ -28,7 +28,15 @@
 
 ## 瀏覽器與部署
 
-桌面與手機操作、鏡頭方向、動作分支及 Pages 的本輪結果待實際完成後補入；不能以舊影片或純規則測試宣稱瀏覽器／公開部署已通過。新的證據獨立放在 `docs/evidence/tactical-refinement/`，不覆寫保留基準。
+本機實測為 Chromium 141.0.7390.37／SwiftShader；桌面 1440×1000，手機 360×800 觸控模擬，非實體手機。
+
+- [最新桌面](evidence/tactical-refinement/desktop-field.png)／[手機](evidence/tactical-refinement/mobile-field.png)：沿用原版場景與介面，三個防區標記中心均可點選，無新增 console 錯誤或橫向溢出。見 [畫面／點按結果](evidence/tactical-refinement/current-screen-results.json)。
+- [密集場景與舊檔結果](evidence/tactical-refinement/crowd-browser-results.json)：桌面／手機各自以真實介面驗證 30 群組的選取、調度／指定目標、募集及續玩；實際匯入原版匯出檔，戰鬥與撤銷快照完全保留。影片：[桌面](evidence/tactical-refinement/desktop-crowd.webm)／[手機](evidence/tactical-refinement/mobile-crowd.webm)。
+- [快速觸控結果](evidence/tactical-refinement/fast-touch-results.json)：四個旋轉方向 × 兩種縮放，正向拖曳投影為 `(24, 18)` CSS px，反向回到原位，權威狀態不變。觸控從保留手指範圍的空白地圖開始，避免瀏覽器把靠近按鈕的觸控派給標記；驗證亦等待實際畫面呈現。
+- [吞噬分支結果](evidence/tactical-refinement/animation-results.json)／[錄影](evidence/tactical-refinement/engulf-branches.webm)：接觸、偽足包覆、吞入，清除後無胞內負荷；存活分支保留囊泡內 3 負荷。受控 dev fixture 不是 M1 病程或 M2 已完成的證據。
+- 首輪同戰鬥規則的本機實戰，桌面 86%、手機 89% 保全，均三星。[約 46 秒桌面剪輯](evidence/tactical-refinement/desktop-highlights.webm) 含原版畫面、鏡頭、吞噬與結算；此剪輯早於最後的標記／零步匯入 UI 修正，不能當作這兩項的驗證。各證據 commit 與剪輯區間見 [來源索引](evidence/tactical-refinement/evidence-index.json)。
+
+證據放在 `docs/evidence/tactical-refinement/`，不覆寫保留基準。最終版本 `7d9c82c` 的 [完整 CI／Pages 流程](https://github.com/sces5504/Immuminati/actions/runs/39013892747) 尚在進行；完整通關回歸與部署結果需待該流程通過後補入，早期失敗不列為通過。
 
 ## 保留的限制與下一步
 
