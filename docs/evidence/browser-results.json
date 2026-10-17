@@ -1,0 +1,135 @@
+{
+  "environment": {
+    "browser": "141.0.7390.37",
+    "platform": "linux",
+    "node": "v24.19.0",
+    "desktop": [
+      1440,
+      1100
+    ],
+    "mobile": [
+      360,
+      800
+    ],
+    "mobileType": "Chromium touch/viewport emulation; not physical hardware",
+    "base": "http://127.0.0.1:4175/Immuminati/"
+  },
+  "results": [
+    {
+      "name": "desktop: independent idle, local deformation, no rule mutation",
+      "status": "passed",
+      "detail": [
+        "-0.73s",
+        "-1.46s",
+        "-2.19s"
+      ]
+    },
+    {
+      "name": "desktop: layout and main hit targets",
+      "status": "passed",
+      "detail": 8
+    },
+    {
+      "name": "desktop: AP, recruitment and first complete resolution",
+      "status": "passed",
+      "detail": 2
+    },
+    {
+      "name": "desktop: full M1 victory via UI",
+      "status": "passed",
+      "detail": {
+        "type": "victory",
+        "reason": "此情境的感染來源已清除",
+        "preservation": 87,
+        "stars": 3,
+        "turn": 3
+      }
+    },
+    {
+      "name": "desktop: encyclopedia search, Escape and reload persistence",
+      "status": "passed"
+    },
+    {
+      "name": "desktop: subpath assets and console",
+      "status": "passed",
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "mobile: independent idle, local deformation, no rule mutation",
+      "status": "passed",
+      "detail": [
+        "-0.73s",
+        "-1.46s",
+        "-2.19s"
+      ]
+    },
+    {
+      "name": "mobile: layout and main hit targets",
+      "status": "passed",
+      "detail": 8
+    },
+    {
+      "name": "mobile: AP, recruitment and first complete resolution",
+      "status": "passed",
+      "detail": 2
+    },
+    {
+      "name": "mobile: full M1 victory via UI",
+      "status": "passed",
+      "detail": {
+        "type": "victory",
+        "reason": "此情境的感染來源已清除",
+        "preservation": 87,
+        "stars": 3,
+        "turn": 3
+      }
+    },
+    {
+      "name": "mobile: encyclopedia search, Escape and reload persistence",
+      "status": "passed"
+    },
+    {
+      "name": "mobile: subpath assets and console",
+      "status": "passed",
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "normal / accelerated / skip / reduced / synthetic hidden playback match exactly",
+      "status": "passed",
+      "detail": [
+        "normal",
+        "accelerated",
+        "skip",
+        "reduced",
+        "hidden"
+      ]
+    },
+    {
+      "name": "undo survives reload and restores AP / supply / history",
+      "status": "passed"
+    },
+    {
+      "name": "export / import roundtrip; malformed import preserves current save",
+      "status": "passed"
+    },
+    {
+      "name": "reload mid-animation resumes committed state without another charge",
+      "status": "passed"
+    },
+    {
+      "name": "storage failure keeps gameplay available and displays export guidance",
+      "status": "passed"
+    },
+    {
+      "name": "scope",
+      "status": "passed",
+      "detail": "M2–M6 are explicitly unavailable. Intracellular rule branch is covered by unit tests, not claimed as a playable M2."
+    }
+  ]
+}

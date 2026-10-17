@@ -1,0 +1,30 @@
+{
+  "browser": "141.0.7390.37",
+  "results": [
+    {
+      "viewport": "1440x1100",
+      "checks": [
+        "final production data-driven title and assets",
+        "dialog keyboard focus containment and Escape",
+        "encyclopedia named button"
+      ],
+      "errors": []
+    },
+    {
+      "viewport": "360x800",
+      "checks": [
+        "final production data-driven title and assets",
+        "dialog keyboard focus containment and Escape",
+        "encyclopedia named button"
+      ],
+      "errors": []
+    },
+    {
+      "check": "125% explicit text style enlargement on mobile: no horizontal overflow, end-turn remains in viewport",
+      "limitation": "Simulated text style enlargement, not an OS accessibility certification"
+    },
+    {
+      "check": "corrupt local save is preserved until explicit new game; new game recovers"
+    }
+  ]
+}

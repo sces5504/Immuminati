@@ -1,0 +1,7 @@
+node_modules/
+dist/
+playwright-report/
+test-results/
+*.local
+docs/evidence/raw*/
+docs/evidence/browser-failure.txt

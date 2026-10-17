@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "rulesVersion": "1.0.0",
+  "contentVersion": "m1.1",
+  "session": {
+    "state": {
+      "scenario": "m1",
+      "seed": 1,
+      "rng": 1,
+      "turn": 1,
+      "ap": 3,
+      "opsonins": 5,
+      "regions": {
+        "a": 100,
+        "b": 100,
+        "c": 100
+      },
+      "units": [
+        {
+          "id": "u1",
+          "kind": "macrophage",
+          "region": "a",
+          "used": false
+        },
+        {
+          "id": "u2",
+          "kind": "neutrophil",
+          "region": "b",
+          "used": false
+        },
+        {
+          "id": "u3",
+          "kind": "dendritic",
+          "region": "c",
+          "used": false
+        }
+      ],
+      "populations": [
+        {
+          "id": "p1",
+          "pathogen": "pneumococcus",
+          "region": "a",
+          "load": 6,
+          "compartment": "extracellular",
+          "opsonin": 3
+        },
+        {
+          "id": "p2",
+          "pathogen": "pneumococcus",
+          "region": "b",
+          "load": 9,
+          "compartment": "extracellular",
+          "opsonin": 0
+        },
+        {
+          "id": "p3",
+          "pathogen": "pneumococcus",
+          "region": "c",
+          "load": 3,
+          "compartment": "extracellular",
+          "opsonin": 0
+        }
+      ],
+      "recruits": [],
+      "nextId": 10,
+      "eventSeq": 1
+    },
+    "turnStart": {
+      "scenario": "m1",
+      "seed": 1,
+      "rng": 1,
+      "turn": 1,
+      "ap": 4,
+      "opsonins": 6,
+      "regions": {
+        "a": 100,
+        "b": 100,
+        "c": 100
+      },
+      "units": [
+        {
+          "id": "u1",
+          "kind": "macrophage",
+          "region": "a",
+          "used": false
+        },
+        {
+          "id": "u2",
+          "kind": "neutrophil",
+          "region": "b",
+          "used": false
+        },
+        {
+          "id": "u3",
+          "kind": "dendritic",
+          "region": "c",
+          "used": false
+        }
+      ],
+      "populations": [
+        {
+          "id": "p1",
+          "pathogen": "pneumococcus",
+          "region": "a",
+          "load": 6,
+          "compartment": "extracellular",
+          "opsonin": 0
+        },
+        {
+          "id": "p2",
+          "pathogen": "pneumococcus",
+          "region": "b",
+          "load": 9,
+          "compartment": "extracellular",
+          "opsonin": 0
+        },
+        {
+          "id": "p3",
+          "pathogen": "pneumococcus",
+          "region": "c",
+          "load": 3,
+          "compartment": "extracellular",
+          "opsonin": 0
+        }
+      ],
+      "recruits": [],
+      "nextId": 10,
+      "eventSeq": 0
+    },
+    "commands": [
+      {
+        "type": "opsonize",
+        "targetId": "p1"
+      }
+    ],
+    "events": [
+      {
+        "id": "e1",
+        "turn": 1,
+        "phase": "command",
+        "type": "OpsoninApplied",
+        "reason": "既存特異性抗體與補體附著：持續 3 次結算；此行動不直接減少負荷。",
+        "target": "p1",
+        "region": "a",
+        "data": {
+          "antigen": "pneumo-capsule",
+          "duration": 3
+        }
+      }
+    ],
+    "turnEventIndex": 0
+  },
+  "progress": {
+    "records": {},
+    "read": [],
+    "revealed": [],
+    "settings": {
+      "speed": 1,
+      "reducedMotion": false,
+      "idle": true,
+      "hints": true
+    }
+  }
+}

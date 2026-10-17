@@ -1,0 +1,53 @@
+{
+  "browser": "141.0.7390.37",
+  "os": "linux",
+  "cpu": "INTEL(R) XEON(R) PLATINUM 8573C",
+  "logicalCpus": 2,
+  "method": "2s requestAnimationFrame callback intervals in headless Chromium, no video recording. Callback cadence does not prove physical device GPU rendering performance.",
+  "samples": [
+    {
+      "viewport": "1440x1100 desktop",
+      "phase": "idle",
+      "units": 3,
+      "extracellularGroups": 3,
+      "samples": 113,
+      "median": 16.699999999999818,
+      "p95": 16.799999999999727,
+      "max": 66.59999999999997,
+      "mean": 17.255752212389375
+    },
+    {
+      "viewport": "1440x1100 desktop",
+      "phase": "engulf + clearance; one foreground clip",
+      "units": 3,
+      "extracellularGroups": 3,
+      "samples": 115,
+      "median": 16.699999999999818,
+      "p95": 16.800000000000182,
+      "max": 50,
+      "mean": 17.534782608695647
+    },
+    {
+      "viewport": "360x800 touch emulation",
+      "phase": "idle",
+      "units": 3,
+      "extracellularGroups": 3,
+      "samples": 119,
+      "median": 16.69999999999999,
+      "p95": 16.700000000000273,
+      "max": 33.299999999999955,
+      "mean": 16.80588235294118
+    },
+    {
+      "viewport": "360x800 touch emulation",
+      "phase": "engulf + clearance; one foreground clip",
+      "units": 3,
+      "extracellularGroups": 3,
+      "samples": 120,
+      "median": 16.699999999999818,
+      "p95": 16.800000000000182,
+      "max": 16.800000000000182,
+      "mean": 16.66528333333333
+    }
+  ]
+}

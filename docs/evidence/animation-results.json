@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "browser": "141.0.7390.37",
+  "fixture": "Development-only abstract population; not a playable M2 or an assertion of M1 intracellular biology",
+  "checks": [
+    "CSS d-path changes during pseudopod wrapping",
+    "clearance leaves no intracellular survival badge",
+    "survival keeps load 3 in a phagosome and visible host badge"
+  ],
+  "viewport": [
+    1000,
+    1000
+  ]
+}
