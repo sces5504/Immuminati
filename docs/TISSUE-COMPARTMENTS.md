@@ -23,11 +23,32 @@ M1 中央空間明示為肺泡腔（胞外）；肺泡壁由可選的第一型�
 
 存檔保留 key `immuminati:tactics:v2`，schema 2，規則 2.3、內容 m1-tactics.4。2.0/.1、2.1/.2、2.2/.3 配對存檔及暫停撤銷快照均可遷移。補上健康組織與既有活菌的吞噬體狀態，不重建舊局過去已完成的吞噬，也不虛構新的病毒感染。首次覆寫前保留原始文字到 `immuminati:tactics:pre-2.3`，舊 pre-2.2 與 v1 紀錄不刪除。新格式缺少區室／組織資訊則拒絕，不默默補成另一種感染。
 
-## 驗證進度
+## 實際驗證與交付
 
-- 本輪新增 9 個組織／區室測試，涵蓋各 profile 健康宿主、合法目標、攝入活負荷守恆與延後殺菌、持續囊泡、健康映射、演練共用組織、舊局／undo 遷移、非法胞內存檔與續玩確定性。
-- 初輪 56 項單元測試通過；型別與 production build 通過。最終結果及瀏覽器證據完成後補記。
-- 桌面／直向手機的實際剖視檢查、M1 原操作／完整策略回歸、吞噬雙分支與 Pages 發布驗證進行中；此段不是完成宣稱。
+程式版本 `942529389658ef0f89b6964e65fe3d525c7aecf4`；[發布前 CI 39037490956](https://github.com/sces5504/Immuminati/actions/runs/39037490956) 的規則、建置、原桌面／手機、免疫桌面／手機、組織桌面／手機、動畫及 deploy 全部成功。公開網址：[GitHub Pages](https://sces5504.github.io/Immuminati/?v=9425293)。
+
+- 59 項單元測試通過，其中本輪新增 9 個組織／區室與 3 個命中優先權測試；型別與 production build 通過。
+- 原操作桌面／手機共 28 項檢查通過，包含八種旋轉／縮放的正反抓取式拖曳、真實觸控單位選取、無名額限制、指令／撤銷、存檔、完整 M1 與資產／執行期錯誤。
+- 新剖視桌面／手機共 10 項檢查通過：真實 canvas 上皮點選、32 個正常宿主、未感染／吞噬體／細胞質視圖、暫停、分開的攝入與殺菌、實際匯出／匯入／續玩，以及演練不改 M1 原局。
+- 免疫教學／適應性支援／NK-CD8 演練／遷移等桌面／手機共 10 項檢查通過；吞噬動畫清除與持續存活雙分支通過。持續存活為抽象測試標本，不冒稱 M1 胞內繁殖。
+- 實際策略結果：原指揮策略桌面 90.8 模擬秒、83% 保全、2 星；手機 69.6 秒、88%、3 星。適應性支援策略桌面／手機均 92.4 秒、53%、1 星。它們為不同 UI 操作時序，不能用來比較裝置效能。
+- 額外使用 repo 前輪保留的真實規則 2.2、tick 20 存檔作瀏覽器續玩：保留時間、單位、路徑、菌群、到場佇列、資源、波次、健康、訊號、事件與 RNG，補上健康組織，`pre-2.3` 原始文字備份完全一致。重現腳本及結果見證據目錄。
+- 公開 HTML 與 4 個資產（主 JS、Three.js、CSS、SVG）皆 HTTP 200，內容與本機 production build 位元組一致；使用正常 TLS 驗證。雲端本機 Chromium 不信任代理 CA，未關閉憑證驗證；真正公開瀏覽器整局回歸由 [CI 39038356284](https://github.com/sces5504/Immuminati/actions/runs/39038356284) 執行，其最終狀態另補記。
+
+### 畫面與錄影
+
+所有下列本輪證據在 [evidence/anatomy/](evidence/anatomy/)；檔案 hash、來源與範圍見 `evidence-index.json`、`recording-provenance.json`，不以舊截圖代替本輪驗證。
+
+- [桌面戰場](evidence/anatomy/desktop-tissue-field.png)、[手機戰場](evidence/anatomy/mobile-tissue-field.png)。
+- [健康上皮剖視](evidence/anatomy/desktop-healthy-cutaway.png)、[手機吞噬體處理](evidence/anatomy/mobile-phagosome-processing.png)、[演練感染宿主](evidence/anatomy/mobile-infected-host-cutaway.png)。
+- [手機剖視操作錄影，53 秒](evidence/anatomy/mobile-anatomy.webm)、[桌面完整剖視操作，126 秒](evidence/anatomy/desktop-anatomy.webm)。
+- [M1 手機短片，42 秒](evidence/anatomy/mobile-m1-highlights.webm)：待機、指揮、吞噬與結算；取自同版 CI 真實 UI 紀錄，僅依時間順序剪輯，沒有改速或修改戰場狀態。原片／片段範圍記在來源 JSON。
+- [包覆吞入與胞內存活分支](evidence/anatomy/engulf-branches.webm)：明確標示的開發 fixture。
+- [桌面結算](evidence/anatomy/desktop-result.png)、[手機結算](evidence/anatomy/mobile-result.png)、[適應性策略結算](evidence/anatomy/desktop-adaptive-result.png)。
+
+本輪瀏覽器均 Chromium 141.0.7390.37／SwiftShader；手機為 360×800 或 390×844 直向觸控模擬。沒有實體 iPhone／Safari／硬體 GPU 效能測試，不能把觸控模擬說成真機認證。
+
+啟動：`npm ci`、`npm run dev`，開啟終端所列網址的 `/Immuminati/`。驗證：`npm run verify`、`npm run test:browser`、`npm run test:immune`、`npm run test:anatomy`、`npm run test:animation`。雲端可指定 `PLAYWRIGHT_BROWSERS_PATH` 與 `DEVICE`；瀏覽器腳本會啟動各自的 production preview／dev fixture，避免共用相同埠並行執行。
 
 ## 開發中發現與修正
 

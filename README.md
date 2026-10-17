@@ -2,16 +2,18 @@
 
 **保留已發布立體戰術版的 UI、畫面、操作與整體風格，並依本輪八項需求改善組織／細胞模型及免疫機制。** 使用者已撤回從頭 RTS 重建與替換佔位模型的安排；`src/tactics` 是正式入口，原版不是待淘汰的畫面。
 
-[線上遊玩](https://sces5504.github.io/Immuminati/)。保留程式基準為 `d2c16ab`，畫面與影片見 `af6bcb3` 的證據；`6e1d5f7` 已回退另一次 RTS 重製。本輪 `814243e` 已發布並完成桌面／手機公開操作與資產驗證；詳見[交付紀錄與畫面／短片](docs/IMMUNE-EXPANSION.md)。
+[線上遊玩](https://sces5504.github.io/Immuminati/)。保留程式基準為 `d2c16ab`，畫面與影片見 `af6bcb3` 的證據；`6e1d5f7` 已回退另一次 RTS 重製。目前 `9425293` 已發布：可選的人體組織細胞、清楚的胞外空間與局部剖視，以及吞入後的胞內殺菌階段；詳見[交付紀錄與畫面／錄影](docs/TISSUE-COMPARTMENTS.md)。前輪免疫擴充見 [v2.2 紀錄](docs/IMMUNE-EXPANSION.md)。
 
 ## 開發入口
 
 1. [開發指引](AGENTS.md)
-2. [現行主規格 v2.2](docs/Immuminati-spec.md)
+2. [現行主規格 v2.3](docs/Immuminati-spec.md)
 3. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)
 4. [交接與下一個 AI 的工作說明](docs/CLOUD-HANDOFF.md)
 
 維持可暫停立體戰術操作。本輪加入自動尋敵、戰場 2×、9 種細胞、PRR／局部訊號、抗原呈遞與適應性抗體流程、Treg 調節，以及十步互動教學。肺泡組織與細胞形態同步改善；[實作、驗證與限制](docs/IMMUNE-EXPANSION.md)。既有[拖曳／無名額修正](docs/TACTICAL-REFINEMENT.md)保留。M2–M6 尚未製作。
+
+新增「組織剖視」：每個器官配置都會生成宿主組織細胞，M1 先實作肺泡上皮與血管內皮；可點選查看健康、感染與胞內位置。剖視時暫停，關閉後自行恢復；保留原指揮與鏡頭。現行規則 2.3 支援舊檔續玩及原文備份，其他器官／病毒完整生命週期仍未完成。
 
 ## 執行與驗證
 
@@ -31,6 +33,7 @@ npx playwright install --with-deps chromium
 npm run test:browser
 npm run test:animation
 npm run test:immune
+npm run test:anatomy
 ```
 
 Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試覆蓋既有立體戰術版；改規則時同步更新相應斷言，並保留其餘回歸檢查。手機瀏覽器腳本是 viewport／touch 模擬，不等同真機測試。

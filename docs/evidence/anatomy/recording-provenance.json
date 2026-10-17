@@ -1,0 +1,53 @@
+{
+  "source": "942529389658ef0f89b6964e65fe3d525c7aecf4",
+  "ciRun": 39037490956,
+  "mobileAnatomy": {
+    "file": "mobile-anatomy.webm",
+    "seconds": 53.24,
+    "sourceArtifact": 12102314270,
+    "editing": "none"
+  },
+  "desktopAnatomy": {
+    "file": "desktop-anatomy.webm",
+    "seconds": 125.68,
+    "sourceArtifact": 12102334299,
+    "editing": "none"
+  },
+  "mobileM1Highlights": {
+    "file": "mobile-m1-highlights.webm",
+    "sourceArtifact": 12102414204,
+    "sourceFile": "mobile-m1.webm",
+    "sourceSha256": "8d6d9a61988b4533792abe9a3952b892f1f34893a85dec2bf3de6bc42d36151c",
+    "sourceSeconds": 218.68,
+    "segmentsSeconds": [
+      [
+        10,
+        14
+      ],
+      [
+        110,
+        122
+      ],
+      [
+        130,
+        146
+      ],
+      [
+        188,
+        198
+      ]
+    ],
+    "editing": "chronological cuts only; no speed changes or state edits",
+    "result": {
+      "preservation": 88,
+      "stars": 3,
+      "simulationSeconds": 69.6
+    }
+  },
+  "engulfBranches": {
+    "file": "engulf-branches.webm",
+    "sourceArtifact": 12103145397,
+    "scope": "explicit abstract development fixture; persistent survival does not claim M1 pneumococcus intracellular replication"
+  },
+  "limitations": "Headless Chromium 141 / SwiftShader; mobile touch emulation, not physical iPhone/Safari."
+}

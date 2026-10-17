@@ -1,0 +1,27 @@
+{
+  "source": "942529389658ef0f89b6964e65fe3d525c7aecf4",
+  "fixture": "docs/evidence/immune-regression/save-v2.json",
+  "fixtureSha256": "069790226d0f6db748286bd6e580662d5ca98102ad2204fd90b20936c75d187e",
+  "originalRules": "2.2",
+  "originalTick": 20,
+  "newRules": "2.3",
+  "tissueCells": 32,
+  "preserved": [
+    "time",
+    "cells",
+    "orders/paths",
+    "colonies",
+    "internal sources",
+    "arrivals",
+    "energy",
+    "support",
+    "waves",
+    "health",
+    "immunity",
+    "events",
+    "RNG"
+  ],
+  "exactOriginalBackup": true,
+  "browser": "141.0.7390.37",
+  "passed": true
+}

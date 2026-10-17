@@ -1,0 +1,257 @@
+{
+  "source": "942529389658ef0f89b6964e65fe3d525c7aecf4",
+  "ciRun": 39037490956,
+  "artifactScope": "Current production code: consistent tissue, phagosomal handling and preserved tactical input. Raw earlier attempts are ignored and excluded.",
+  "files": [
+    {
+      "file": "animation-results.json",
+      "bytes": 360,
+      "sha256": "617d2d4e6251bac619400e16a96dc82bfbe9a6e821a847efeaa2e631aab961f1"
+    },
+    {
+      "file": "ci-summary.json",
+      "bytes": 10698,
+      "sha256": "01458a82f4e33858c9b0f615622103f2251d0c0dd03a86848924879f1a76dcbe"
+    },
+    {
+      "file": "desktop-adaptive-result.png",
+      "bytes": 821831,
+      "sha256": "c0c865e2fc06b142b0479e7ecba769bc6a2654107df5aae8705159e93a577e76"
+    },
+    {
+      "file": "desktop-anatomy-results.json",
+      "bytes": 1073,
+      "sha256": "a6f46333828fba01d48ec5d8db86f6307e1b5326ae5540a00f4cc283eabfee2b"
+    },
+    {
+      "file": "desktop-anatomy.webm",
+      "bytes": 6705726,
+      "sha256": "c5272189bc7298b8ad22d93be9fda94a4b2167e67c6dab6e41c310ff6f3eba70"
+    },
+    {
+      "file": "desktop-crowded-controlled.png",
+      "bytes": 836393,
+      "sha256": "e5fc34550ff33ea5887ad06f2d25a794985d7022c35f2fdd7c5f84e7cf6e317f"
+    },
+    {
+      "file": "desktop-cytotoxic-result.png",
+      "bytes": 841183,
+      "sha256": "740830bab10162d989d51f1a6ba72b58db38c9dd5372a8253e65bf7797102897"
+    },
+    {
+      "file": "desktop-engulf.png",
+      "bytes": 815126,
+      "sha256": "5a18679c3a9e70732f02a48aa7842f21deeb2153db0346caad34c482530d7e52"
+    },
+    {
+      "file": "desktop-field.png",
+      "bytes": 820775,
+      "sha256": "20793ef377b4842402837260366491af63e10091467b1e276264b27570e1cfb1"
+    },
+    {
+      "file": "desktop-healthy-cutaway.png",
+      "bytes": 379903,
+      "sha256": "c2d9b45ff6634b262da83065dff2a3355cbb3190df65c35ac7e91e1d0da186a7"
+    },
+    {
+      "file": "desktop-home.png",
+      "bytes": 997178,
+      "sha256": "7c3b893618128d7d14994672c6dd5eaa493f83123629cba0bea5b2d50eddf5a2"
+    },
+    {
+      "file": "desktop-immune-results.json",
+      "bytes": 1236,
+      "sha256": "31cdccf50b70196f82ee575cdeeb71ee79fec51a7063226329693a90ea2582de"
+    },
+    {
+      "file": "desktop-infected-host-cutaway.png",
+      "bytes": 408531,
+      "sha256": "7720239e1265908d431e3bb4ca3cbda27b5d18cf3a4099c4aaac6b23d042cebb"
+    },
+    {
+      "file": "desktop-mechanisms.png",
+      "bytes": 406366,
+      "sha256": "7b9b27361c63d0d288abecf93efcfe7a82f3b5e74fe7cc5570ae7f2580b1aef9"
+    },
+    {
+      "file": "desktop-migrated-2.2.png",
+      "bytes": 368488,
+      "sha256": "d06d06c38cd8467026938db9d2795a5a9f4809bfb9d2b5d7feedc162d9ec2d94"
+    },
+    {
+      "file": "desktop-phagosome-processing.png",
+      "bytes": 383174,
+      "sha256": "22b3db49cb51916e2c3fac7b0daf910945aaf4ba8e179ddeccb5ab0653ebd95f"
+    },
+    {
+      "file": "desktop-practice-start.png",
+      "bytes": 846075,
+      "sha256": "d725e5ebc970cec6f353dce1d7242599432881c771fe50bfc9b471011c2188de"
+    },
+    {
+      "file": "desktop-result.png",
+      "bytes": 815358,
+      "sha256": "a24b7d47e5709ef88d1891a77232e23592dd7cf63b50702ac7dca5883e8869ae"
+    },
+    {
+      "file": "desktop-selected-epithelium.png",
+      "bytes": 820370,
+      "sha256": "78be181103189a43f395b0ab0683537a898089d856c0ddf7d705ae3519c91fe2"
+    },
+    {
+      "file": "desktop-tactics-results.json",
+      "bytes": 3259,
+      "sha256": "b0dce884cc7bfcf4a901b096646cccd68dbf1cad52e66bb9b0f631cca501b5fa"
+    },
+    {
+      "file": "desktop-tissue-field.png",
+      "bytes": 820347,
+      "sha256": "8a017eecd523f37218a39e9044eedbab35dcf785630cddb4609e9d7edaa8f3ea"
+    },
+    {
+      "file": "desktop-tutorial.png",
+      "bytes": 822832,
+      "sha256": "d1af909a1f97919ea61dd38111fb9fb2ffb3eebb1228bae4a96759bd7b96ba65"
+    },
+    {
+      "file": "engulf-branches.webm",
+      "bytes": 1217825,
+      "sha256": "f6c5cb2a5c6fc2ec61f66ede60a402879d7e773bd2328a99e0e40eb8c2c1834d"
+    },
+    {
+      "file": "engulf-clear.png",
+      "bytes": 302829,
+      "sha256": "16af40c2b16defdf228f9a3bdcedd1622335b47076569c48157699f7c4e5d657"
+    },
+    {
+      "file": "engulf-survival.png",
+      "bytes": 302929,
+      "sha256": "2af33c9ca202c1585f0b9ee0d340aa555ab93210a55fd6b8c267251bc7b38947"
+    },
+    {
+      "file": "migration-check.mjs",
+      "bytes": 3723,
+      "sha256": "11614eda032998216fdcfc6f45375c72f51bbcae8daff08bcf8f3a3b5e5d3796"
+    },
+    {
+      "file": "migration-results.json",
+      "bytes": 595,
+      "sha256": "6443b843cfd5f707e120016ad927bf9831da58467289036e7b98cb904addf7c4"
+    },
+    {
+      "file": "mobile-adaptive-result.png",
+      "bytes": 193390,
+      "sha256": "374383b38dc47f730b8a05e90f8c87dcefa592044f0fca783d8385effe396d8d"
+    },
+    {
+      "file": "mobile-anatomy-results.json",
+      "bytes": 1068,
+      "sha256": "976c0632ab49e258aec82092a761b3672b19cc5579f5850b08635708ab757e85"
+    },
+    {
+      "file": "mobile-anatomy.webm",
+      "bytes": 2931725,
+      "sha256": "414d3f8cfc8ebc766f8160f1ecaff7a82c9ddf7717a5497881e426abdd0e6adf"
+    },
+    {
+      "file": "mobile-crowded-controlled.png",
+      "bytes": 213038,
+      "sha256": "cb6148b605c9ae63b63895e39d4d2f2f3b3a41710366889d30be6a9f68d68565"
+    },
+    {
+      "file": "mobile-cytotoxic-result.png",
+      "bytes": 239810,
+      "sha256": "9122a2a87d63961e724e3255c6a488e329e406d8ed384d17e6984e6808868793"
+    },
+    {
+      "file": "mobile-engulf.png",
+      "bytes": 213988,
+      "sha256": "d9d5e1223b25c2e165e66ae99e15992f7c73882d63504842c1abaaca5ba8af0b"
+    },
+    {
+      "file": "mobile-field.png",
+      "bytes": 210297,
+      "sha256": "1d7df7e36e857d65d690f6b008386d71223d7e04a022585fb31cd884bf45eb4a"
+    },
+    {
+      "file": "mobile-healthy-cutaway.png",
+      "bytes": 118907,
+      "sha256": "a3131d3a81b41e23a90a7e607dc14bd117026b186b47dd591ba0c42ae11ee579"
+    },
+    {
+      "file": "mobile-home.png",
+      "bytes": 249233,
+      "sha256": "f8dff2aaaca91476b26bce0cc5e042f17774bbf32fb1c3e88fc78e5a8010671b"
+    },
+    {
+      "file": "mobile-immune-results.json",
+      "bytes": 1231,
+      "sha256": "59a3f1ae66647a8dcbc10961d899cb4fe1e5791c9ecd83f74e2071d93e45294b"
+    },
+    {
+      "file": "mobile-infected-host-cutaway.png",
+      "bytes": 113408,
+      "sha256": "2e69568efe3fe2dd6a4eb2751017590964995b7e66f4a672497e2efccd38878a"
+    },
+    {
+      "file": "mobile-m1-highlights.webm",
+      "bytes": 534374,
+      "sha256": "e715d07db75a10180af51f50e75e59dae160aa3db3f0cf197162829b2aef21d1"
+    },
+    {
+      "file": "mobile-mechanisms.png",
+      "bytes": 102915,
+      "sha256": "8e37c1e29f76e074d713f583bf21b6040777988197b11f6ab557e405fe7be7bc"
+    },
+    {
+      "file": "mobile-phagosome-processing.png",
+      "bytes": 120893,
+      "sha256": "63747c2ee9fb2069068e19f7eb5a0325348394519842801a8506729de10dd70a"
+    },
+    {
+      "file": "mobile-practice-start.png",
+      "bytes": 238806,
+      "sha256": "1d0bb62a467f534d9d9e5b7a73a2ce06abf185dace44237508a1eb3bdfce2e3f"
+    },
+    {
+      "file": "mobile-result.png",
+      "bytes": 199702,
+      "sha256": "c20942eaeea03722912dcc7257f41143f7c8a80896ac8eba58a838fd32bda6b8"
+    },
+    {
+      "file": "mobile-selected-epithelium.png",
+      "bytes": 236513,
+      "sha256": "37ecc76319549b9383ea86dba5afde28068b8540d5362be9a1978f4a84c88d39"
+    },
+    {
+      "file": "mobile-tactics-results.json",
+      "bytes": 3306,
+      "sha256": "6fc130bc1c0fca31eeb3538d72dedaef133ecb2916dc75aa2ace0e4fb60ef7c9"
+    },
+    {
+      "file": "mobile-tissue-field.png",
+      "bytes": 237084,
+      "sha256": "d99e932caf63d5916c25d7a12a22082d544ba4b882ec2a72b21a7c64e7f690ed"
+    },
+    {
+      "file": "mobile-tutorial.png",
+      "bytes": 219956,
+      "sha256": "da4ef2880aced856b87f795ceb519360e3e2e01d84caa50e30b330ad1b6e4ee2"
+    },
+    {
+      "file": "public-assets.json",
+      "bytes": 1065,
+      "sha256": "d90a9ed85f8f460e210005af558d2bd09506fc5f8ff5b78bac33fd7ddcbb1e76"
+    },
+    {
+      "file": "recording-provenance.json",
+      "bytes": 1334,
+      "sha256": "68f3908e54ca5a83a3bc20c4fa435992a81b15abfa95d855d35c791c65483c14"
+    },
+    {
+      "file": "tactics-results.json",
+      "bytes": 6210,
+      "sha256": "9d18f2f9a9ac525ee6d19e9249198852282669ee6b1d9732a2b6f5d2f1098147"
+    }
+  ]
+}

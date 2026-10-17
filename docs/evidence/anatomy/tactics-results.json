@@ -1,0 +1,271 @@
+{
+  "source": "942529389658ef0f89b6964e65fe3d525c7aecf4",
+  "results": [
+    {
+      "name": "desktop: zero-tick legacy imports can resume without restarting",
+      "passed": true
+    },
+    {
+      "name": "desktop: independent 3D idle without rule mutation",
+      "passed": true
+    },
+    {
+      "name": "desktop: 44px primary controls and no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "desktop: marking, duplicate input, delayed recruitment and planning undo",
+      "passed": true
+    },
+    {
+      "name": "desktop: grab-map drag follows mouse/touch across rotation and zoom without issuing orders",
+      "passed": true,
+      "detail": [
+        {
+          "quarter": 0,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 1,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 2,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 3,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 0,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 1,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 2,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 3,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        }
+      ]
+    },
+    {
+      "name": "desktop: camera independent of rules, pointer picking, spatial order and undo",
+      "passed": true
+    },
+    {
+      "name": "desktop: real UI completes three-wave tactical M1",
+      "passed": true,
+      "detail": {
+        "type": "victory",
+        "reason": "3 \u6ce2\u611f\u67d3\u4f86\u6e90\u5747\u5df2\u6e05\u9664",
+        "preservation": 83,
+        "stars": 2,
+        "seconds": 90.80000000000001
+      }
+    },
+    {
+      "name": "desktop: stable reload and legacy save retained",
+      "passed": true
+    },
+    {
+      "name": "desktop: controlled 30-cell fixture supports crowded deployment, recruitment and reload",
+      "passed": true
+    },
+    {
+      "name": "desktop: WebGL, assets and page console",
+      "passed": true,
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "reload preserves paused plan undo",
+      "passed": true
+    },
+    {
+      "name": "encyclopedia pauses real time and supports search/return",
+      "passed": true
+    },
+    {
+      "name": "hidden page safely pauses instead of catching up damage",
+      "passed": true
+    },
+    {
+      "name": "versioned export/import and invalid import preservation",
+      "passed": true
+    },
+    {
+      "name": "mobile: zero-tick legacy imports can resume without restarting",
+      "passed": true
+    },
+    {
+      "name": "mobile: independent 3D idle without rule mutation",
+      "passed": true
+    },
+    {
+      "name": "mobile: 44px primary controls and no horizontal overflow",
+      "passed": true
+    },
+    {
+      "name": "mobile: marking, duplicate input, delayed recruitment and planning undo",
+      "passed": true
+    },
+    {
+      "name": "mobile: grab-map drag follows mouse/touch across rotation and zoom without issuing orders",
+      "passed": true,
+      "detail": [
+        {
+          "quarter": 0,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 1,
+          "zoomed": false,
+          "delta": {
+            "x": 24.00000000000003,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 2,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18.00000000000003
+          }
+        },
+        {
+          "quarter": 3,
+          "zoomed": false,
+          "delta": {
+            "x": 24,
+            "y": 18.00000000000003
+          }
+        },
+        {
+          "quarter": 0,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 1,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 2,
+          "zoomed": true,
+          "delta": {
+            "x": 23.99999999999997,
+            "y": 18
+          }
+        },
+        {
+          "quarter": 3,
+          "zoomed": true,
+          "delta": {
+            "x": 24,
+            "y": 18
+          }
+        }
+      ]
+    },
+    {
+      "name": "mobile: camera independent of rules, pointer picking, spatial order and undo",
+      "passed": true
+    },
+    {
+      "name": "mobile: real UI completes three-wave tactical M1",
+      "passed": true,
+      "detail": {
+        "type": "victory",
+        "reason": "3 \u6ce2\u611f\u67d3\u4f86\u6e90\u5747\u5df2\u6e05\u9664",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 69.60000000000001
+      }
+    },
+    {
+      "name": "mobile: stable reload and legacy save retained",
+      "passed": true
+    },
+    {
+      "name": "mobile: controlled 30-cell fixture supports crowded deployment, recruitment and reload",
+      "passed": true
+    },
+    {
+      "name": "mobile: WebGL, assets and page console",
+      "passed": true,
+      "detail": {
+        "pageErrors": 0,
+        "httpErrors": 0
+      }
+    },
+    {
+      "name": "reload preserves paused plan undo",
+      "passed": true
+    },
+    {
+      "name": "encyclopedia pauses real time and supports search/return",
+      "passed": true
+    },
+    {
+      "name": "hidden page safely pauses instead of catching up damage",
+      "passed": true
+    },
+    {
+      "name": "versioned export/import and invalid import preservation",
+      "passed": true
+    }
+  ]
+}

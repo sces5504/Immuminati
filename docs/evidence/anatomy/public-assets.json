@@ -1,0 +1,36 @@
+{
+  "source": "942529389658ef0f89b6964e65fe3d525c7aecf4",
+  "url": "https://sces5504.github.io/Immuminati/",
+  "htmlMatchesProductionBuild": true,
+  "assets": [
+    {
+      "asset": "assets/mark.svg",
+      "status": 200,
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86",
+      "bytes": 504,
+      "matchesProductionBuild": true
+    },
+    {
+      "asset": "assets/index-uOIgM8LZ.js",
+      "status": 200,
+      "sha256": "89094c5220104514035e80f24dab269b57308c6eb1528446da450ec4317ccebe",
+      "bytes": 380714,
+      "matchesProductionBuild": true
+    },
+    {
+      "asset": "assets/three-BDVKo4pw.js",
+      "status": 200,
+      "sha256": "d4a0018979a7e912206d013606a41cdda6f583c543a64fae6df443dea5b66d6a",
+      "bytes": 505589,
+      "matchesProductionBuild": true
+    },
+    {
+      "asset": "assets/index-B3nFlzOX.css",
+      "status": 200,
+      "sha256": "24b0af0f8107cd3dbb21c994fbacc3fcd0365dd3d90d0085ccdd1d6089d9302e",
+      "bytes": 87040,
+      "matchesProductionBuild": true
+    }
+  ],
+  "tlsVerification": true
+}
