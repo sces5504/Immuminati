@@ -55,7 +55,12 @@ try {
       try {
         await page.getByTestId("pause-toggle").click({ timeout: 5000 });
       } catch (e) {
-        if (!(await page.getByTestId("tactical-result").count())) throw e;
+        // A software renderer can acknowledge an already-applied click late.
+        const applied =
+          (await page.locator(".tactical-root").getAttribute("data-paused")) ===
+          desired;
+        if (!applied && !(await page.getByTestId("tactical-result").count()))
+          throw e;
       }
     }
   };
@@ -68,7 +73,13 @@ try {
     if (cell?.startsWith("u")) await page.keyboard.press("Escape");
     await page.locator(`[data-colony="${id}"]`).click();
   };
-  for (const mobile of [false, true]) {
+  const modes =
+    process.env.DEVICE === "mobile"
+      ? [true]
+      : process.env.DEVICE === "desktop"
+        ? [false]
+        : [false, true];
+  for (const mobile of modes) {
     const name = mobile ? "mobile" : "desktop";
     const ctx = await browser.newContext({
       viewport: mobile
@@ -343,12 +354,20 @@ try {
   record("versioned export/import and invalid import preservation");
   await ctx.close();
   await writeFile(
-    dir + "browser-results.json",
+    dir +
+      (process.env.DEVICE
+        ? `${process.env.DEVICE}-results.json`
+        : "browser-results.json"),
     JSON.stringify(
       {
         browser: browser.version(),
         url,
-        viewports: { desktop: [1440, 1000], mobile: [360, 800] },
+        viewports: Object.fromEntries(
+          modes.map((mobile) => [
+            mobile ? "mobile" : "desktop",
+            mobile ? [360, 800] : [1440, 1000],
+          ]),
+        ),
         renderer:
           "Headless Chromium WebGL / SwiftShader; not physical mobile GPU",
         results,
