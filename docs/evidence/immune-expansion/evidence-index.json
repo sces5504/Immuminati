@@ -269,6 +269,12 @@
       "file": "docs/evidence/immune-regression/save-v2.json",
       "bytes": 7446,
       "sha256": "069790226d0f6db748286bd6e580662d5ca98102ad2204fd90b20936c75d187e"
+    },
+    {
+      "file": "docs/evidence/immune-expansion/live-ci-summary.json",
+      "bytes": 220,
+      "sha256": "17ab94f4c9199bd9cdadb5790cda9cf165529c43ab7806ae9943d12a4c15a62b"
     }
-  ]
+  ],
+  "publicFullRun": "https://github.com/sces5504/Immuminati/actions/runs/39028429845"
 }

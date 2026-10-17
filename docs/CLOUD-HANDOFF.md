@@ -40,7 +40,7 @@ CD4 支援族群聚合 Th1／Tfh 功能；訊號採防區濃度，不是擴散 P
 
 ## 本輪已交付
 
-程式 `814243e` 已通過 [CI 39027769861](https://github.com/sces5504/Immuminati/actions/runs/39027769861) 的47項測試、建置、桌面／手機各14項原操作、新功能10項、吞噬雙分支與部署。公開桌面／手機 smoke 亦通過，資產內容與本機建置一致。37秒桌面／32秒直向手機短片、截圖、來源／時間紀錄與限制都在 [實作紀錄](IMMUNE-EXPANSION.md)／`docs/evidence/immune-expansion/evidence-index.json`；不要沿用更早失敗或部分完成的數字。
+程式 `814243e` 已通過 [CI 39027769861](https://github.com/sces5504/Immuminati/actions/runs/39027769861) 的47項測試、建置、桌面／手機各14項原操作、新功能10項、吞噬雙分支與部署。部署後公開桌面／手機整局 CI 與 smoke 亦通過，資產內容與本機建置一致。37秒桌面／32秒直向手機短片、截圖、來源／時間紀錄與限制都在 [實作紀錄](IMMUNE-EXPANSION.md)／`docs/evidence/immune-expansion/evidence-index.json`；不要沿用更早失敗或部分完成的數字。
 
 CI 共用 `production-dist`，平行產生 `tactics-{device}-evidence`、`immune-{device}-evidence` 與 `animation-evidence`；部署仍依賴全部成功。額外自動公開整局回歸另見實作紀錄，其狀態不應混入發布前測試。
 

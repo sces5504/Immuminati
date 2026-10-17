@@ -55,7 +55,7 @@ schema 仍 2；規則 `2.2`、內容 `m1-tactics.3`。配對的 2.0／.1、2.1�
 - 新功能：1440×1000 桌面、390×844 直向觸控模擬，共 **10 項**通過。十步實際操作教學、尋敵／手動優先、2×、DC→CD4→B／漿細胞→抗體、NK／CD8 合法宿主與返回原局、真實舊格式升版／原文備份、續玩與資產。適應性策略兩邊皆 **84.4 秒、60%、二星**。[結果](evidence/immune-expansion/immune-results.json)。
 - 吞噬包覆／吞入及清除／胞內存活兩分支通過，短片與結果見下方；胞內分支是抽象開發夾具，不是假稱 M1 肺炎鏈球菌在本案例內存活。
 - 公開版 [Pages `?v=814243e`](https://sces5504.github.io/Immuminati/?v=814243e)：實際 Chromium 桌面／直向手機操作通過。新控制均 ≥44×44 px；尋敵、2×、教學、機制面板、8種可募集角色可操作；無資產／runtime 錯誤。[公開驗證](evidence/immune-expansion/public-smoke.json)。JS／CSS／Three／mark.svg 皆 HTTP200，且內容位元組與本機正式建置一致，[資產指紋](evidence/immune-expansion/public-assets.json)。
-- 額外的自動公開整局回歸 [39028429845](https://github.com/sces5504/Immuminati/actions/runs/39028429845) 由部署後自動觸發；本次紀錄當下仍執行中，不混入上述已通過數字。公開手動 smoke 與發布前完整通關檢查已通過。
+- 部署後的自動公開整局回歸 [39028429845](https://github.com/sces5504/Immuminati/actions/runs/39028429845) 亦已成功：直接在 Pages 跑桌面／手機完整 M1、鏡頭、存檔與生命週期檢查。[公開 CI 摘要](evidence/immune-expansion/live-ci-summary.json)。這是額外公開驗證，不混算發布前的28次檢查。
 
 `test:immune` 自啟 production preview4179，也可 `TARGET_URL=...` 指向指定網址；`test:browser` 自啟4175，支援 `BASE_URL`；`test:animation` 自啟4176。先建置；`DEVICE=desktop|mobile` 可單獨執行，`EVIDENCE_DIR` 相對 scripts。CI共用同一正式建置，平行跑各裝置／動畫；部署依賴全部成功，不移除斷言。公開回歸的軟體繪圖預算由15調為30分鐘，並非真機效能認證。
 
