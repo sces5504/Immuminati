@@ -1,5 +1,7 @@
 # M1 驗證與交付紀錄
 
+> 2026-10-17 重製更新：使用者試玩後選擇「畫面、操作和玩法一起重做」。目前正式入口為 `src/tactics` 的連續立體、可暫停即時戰術 M1；玩法優先見 [TACTICAL-REDESIGN.md](TACTICAL-REDESIGN.md)，實際驗證見 [TACTICAL-VALIDATION.md](TACTICAL-VALIDATION.md)。下方保留首版／開工時文件，回合 4 AP 與舊實作狀態不再代表目前版本。六關生物內容等未被修訂的要求仍保留。
+
 日期：2026-10-17（Asia/Taipei）。本文件僅列本次實際執行結果；M1 可玩與六關全數完成分開驗收。
 
 ## 環境與命令

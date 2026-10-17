@@ -1,9 +1,9 @@
 import { createRoot } from "react-dom/client";
-import App from "./ui/App";
+import TacticalApp from "./tactics/ui/TacticalApp";
 import "./styles/main.css";
 const root = createRoot(document.getElementById("root")!);
 if (import.meta.env.DEV && location.hash === "#animation-lab") {
-  void import("./dev/AnimationLab").then(({ default: Lab }) =>
+  void import("./tactics/dev/AnimationLab").then(({ default: Lab }) =>
     root.render(<Lab />),
   );
-} else root.render(<App />);
+} else root.render(<TacticalApp />);

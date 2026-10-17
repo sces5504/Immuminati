@@ -1,3 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-export default defineConfig({ base: "/Immuminati/", plugins: [react()] });
+export default defineConfig({
+  base: "/Immuminati/",
+  plugins: [react()],
+  build: { rollupOptions: { output: { manualChunks: { three: ["three"] } } } },
+});

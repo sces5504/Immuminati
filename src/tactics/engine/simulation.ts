@@ -1,0 +1,492 @@
+import type {
+  Cell,
+  Colony,
+  Order,
+  TacticalCommand,
+  TacticalContent,
+  TacticalEvent,
+  TacticalState,
+  Vec,
+} from "../domain/model";
+import { STEP_SECONDS } from "../domain/model";
+export const copy = <T>(value: T): T => structuredClone(value);
+export const distance = (a: Vec, b: Vec) => Math.hypot(a.x - b.x, a.z - b.z);
+export const fieldOf = (point: Vec, c: TacticalContent) =>
+  [...c.fields].sort(
+    (a, b) => distance(point, a.center) - distance(point, b.center),
+  )[0];
+export const occupied = (s: TacticalState, region: string) =>
+  s.cells.filter((x) => x.region === region).length +
+  s.arrivals.filter((x) => x.region === region).length;
+export const loadOf = (s: TacticalState) =>
+  s.colonies.reduce((n, p) => n + p.load, 0) +
+  s.internal.reduce((n, p) => n + p.load, 0);
+export const preservation = (s: TacticalState) =>
+  Math.round(
+    Object.values(s.health).reduce((a, n) => a + n, 0) /
+      Object.keys(s.health).length,
+  );
+export function walkable(point: Vec, c: TacticalContent): Vec {
+  const field = fieldOf(point, c);
+  const d = distance(point, field.center);
+  if (d <= field.radius - 1) return { ...point };
+  // Corridors connect all field centers; project onto their navigable ribbon.
+  let nearest = { point: field.center, distance: d };
+  for (let i = 0; i < c.fields.length; i++)
+    for (let j = i + 1; j < c.fields.length; j++) {
+      const a = c.fields[i].center,
+        b = c.fields[j].center,
+        dx = b.x - a.x,
+        dz = b.z - a.z;
+      const t = Math.max(
+        0,
+        Math.min(
+          1,
+          ((point.x - a.x) * dx + (point.z - a.z) * dz) / (dx * dx + dz * dz),
+        ),
+      );
+      const q = { x: a.x + dx * t, z: a.z + dz * t };
+      const dd = distance(point, q);
+      if (dd < nearest.distance) nearest = { point: q, distance: dd };
+    }
+  if (nearest.distance <= 2.6) return { ...point };
+  return {
+    x: field.center.x + ((point.x - field.center.x) / d) * (field.radius - 1),
+    z: field.center.z + ((point.z - field.center.z) / d) * (field.radius - 1),
+  };
+}
+function emit(
+  s: TacticalState,
+  type: TacticalEvent["type"],
+  position: Vec,
+  message: string,
+  amount = 0,
+  extra: Partial<TacticalEvent> = {},
+) {
+  s.events.push({
+    id: ++s.eventId,
+    tick: s.tick,
+    type,
+    position: { ...position },
+    message,
+    amount,
+    ...extra,
+  });
+  if (s.events.length > 400) s.events.shift();
+}
+function wave(s: TacticalState, c: TacticalContent) {
+  const def = c.waves[s.wave + 1];
+  if (!def) return;
+  s.wave++;
+  for (const group of def.groups) {
+    const f = c.fields.find((r) => r.id === group.region)!;
+    const jitter = ((s.seed % 3) - 1) * 0.6;
+    const pos = {
+      x: f.center.x + group.offset.x + jitter,
+      z: f.center.z + group.offset.z,
+    };
+    s.colonies.push({
+      id: `p${s.serial++}`,
+      region: f.id,
+      position: pos,
+      load: group.load,
+      markedUntil: 0,
+      pathogen: c.pathogen.id,
+    });
+  }
+  s.nextWaveAt = c.waves[s.wave + 1]
+    ? s.tick + c.waves[s.wave + 1].after - def.after
+    : c.limit;
+  emit(
+    s,
+    "wave",
+    c.fields[s.wave % c.fields.length].center,
+    `第 ${s.wave + 1} 波：${def.label}。感染入口與負荷已標示。`,
+    s.wave + 1,
+  );
+}
+export function createTactical(c: TacticalContent, seed = 1): TacticalState {
+  const s: TacticalState = {
+    version: 2,
+    scenario: c.id,
+    seed: seed >>> 0 || 1,
+    rng: seed >>> 0 || 1,
+    tick: 0,
+    energy: 5,
+    support: 6,
+    wave: -1,
+    nextWaveAt: 0,
+    health: Object.fromEntries(c.fields.map((f) => [f.id, 100])),
+    cells: [],
+    colonies: [],
+    arrivals: [],
+    internal: [],
+    serial: 1,
+    eventId: 0,
+    events: [],
+  };
+  for (const init of c.initial) {
+    const f = c.fields.find((f) => f.id === init.region)!;
+    const position = {
+      x: f.center.x + init.offset.x,
+      z: f.center.z + init.offset.z,
+    };
+    s.cells.push({
+      id: `u${s.serial++}`,
+      kind: init.kind,
+      position,
+      region: f.id,
+      order: { type: "guard", point: { ...position } },
+      path: [],
+      readyAt: 0,
+    });
+  }
+  wave(s, c);
+  return s;
+}
+function pathTo(cell: Cell, point: Vec, c: TacticalContent) {
+  const from = fieldOf(cell.position, c),
+    to = fieldOf(point, c);
+  cell.path =
+    from.id === to.id ? [point] : [{ ...from.center }, { ...to.center }, point];
+}
+export function validateTactical(
+  s: TacticalState,
+  cmd: TacticalCommand,
+  c: TacticalContent,
+): string | undefined {
+  if (s.result) return "此局已結算，請重試。";
+  if (cmd.type === "mark") {
+    const p = s.colonies.find((p) => p.id === cmd.target && p.load > 0);
+    if (!p) return "此菌群已清除。";
+    if (p.markedUntil > s.tick) return "調理仍有效，請支援其他菌群。";
+    if (!s.support) return "本案例的既存調理支援已用盡。";
+    if (s.energy < c.markCost) return "反應資源不足，稍後會恢復。";
+  } else if (cmd.type === "recruit") {
+    const f = c.fields.find((f) => f.id === cmd.region);
+    if (!f) return "目標區不存在。";
+    if (cmd.kind === "dendritic") return "M1 不募集新的樹突細胞。";
+    if (s.energy < c.cells[cmd.kind].cost)
+      return `需要 ${c.cells[cmd.kind].cost} 反應資源。`;
+    if (s.cells.length + s.arrivals.length >= c.maxCells)
+      return `全場最多 ${c.maxCells} 個細胞族群。`;
+    if (occupied(s, f.id) >= f.capacity) return "此區駐守與預留容量已滿。";
+    if (s.health[f.id] <= 0) return "此區已失守。";
+  } else if (cmd.type === "advance") {
+    if (loadOf(s) > 0) return "先處理目前所有感染來源。";
+    if (s.wave >= c.waves.length - 1) return "已是最後一波。";
+  } else {
+    const cell = s.cells.find((u) => u.id === cmd.cell);
+    if (!cell) return "單位不存在。";
+    if (
+      cmd.type === "attack" &&
+      !s.colonies.some((p) => p.id === cmd.target && p.load > 0)
+    )
+      return "目標菌群已清除。";
+    if (cmd.type === "move") {
+      if (
+        !Number.isFinite(cmd.point.x) ||
+        !Number.isFinite(cmd.point.z) ||
+        Math.abs(cmd.point.x) > 30 ||
+        Math.abs(cmd.point.z) > 30
+      )
+        return "目的地超出戰場。";
+      const f = fieldOf(walkable(cmd.point, c), c);
+      if (f.id !== cell.region && occupied(s, f.id) >= f.capacity)
+        return "目的區駐守與預留容量已滿。";
+    }
+    if (cmd.type === "attack") {
+      const target = s.colonies.find((p) => p.id === cmd.target)!;
+      if (
+        target.region !== cell.region &&
+        occupied(s, target.region) >=
+          c.fields.find((f) => f.id === target.region)!.capacity
+      )
+        return "目標區駐守與預留容量已滿。";
+    }
+  }
+}
+export function commandTactical(
+  before: TacticalState,
+  cmd: TacticalCommand,
+  c: TacticalContent,
+): { state: TacticalState; error?: string } {
+  const error = validateTactical(before, cmd, c);
+  if (error) return { state: before, error };
+  const s = copy(before);
+  if (cmd.type === "mark") {
+    const p = s.colonies.find((p) => p.id === cmd.target)!;
+    s.energy -= c.markCost;
+    s.support--;
+    p.markedUntil = s.tick + c.markDuration;
+    emit(
+      s,
+      "mark",
+      p.position,
+      "既存特異性抗體／補體已附著；標記提高吞噬效率，不直接殺菌。",
+      c.markDuration,
+      { target: p.id },
+    );
+  } else if (cmd.type === "recruit") {
+    const f = c.fields.find((f) => f.id === cmd.region)!;
+    s.energy -= c.cells[cmd.kind].cost;
+    s.arrivals.push({
+      id: `q${s.serial++}`,
+      kind: cmd.kind,
+      region: f.id,
+      at: s.tick + c.cells[cmd.kind].delay,
+    });
+    emit(
+      s,
+      "request",
+      c.portal,
+      `${c.cells[cmd.kind].name}向${f.name}集結，已預留容量，${c.cells[cmd.kind].delay * STEP_SECONDS} 秒後到場。`,
+      1,
+    );
+  } else if (cmd.type === "advance") {
+    wave(s, c);
+    s.energy = Math.min(c.energyMax, s.energy + 1);
+  } else {
+    const cell = s.cells.find((u) => u.id === cmd.cell)!;
+    let order: Order;
+    if (cmd.type === "move") {
+      const point = walkable(cmd.point, c);
+      order = { type: "move", point };
+      cell.region = fieldOf(point, c).id;
+      pathTo(cell, point, c);
+    } else if (cmd.type === "attack") {
+      const p = s.colonies.find((p) => p.id === cmd.target)!;
+      order = { type: "attack", target: p.id };
+      cell.region = p.region;
+      pathTo(cell, p.position, c);
+    } else {
+      order = { type: "guard", point: { ...cell.position } };
+      cell.path = [];
+    }
+    cell.order = order;
+    emit(
+      s,
+      "move",
+      cmd.type === "move" ? walkable(cmd.point, c) : cell.position,
+      cmd.type === "move"
+        ? "已指定防守位置。沿組織通道移動，抵達後自動處理附近病原。"
+        : cmd.type === "attack"
+          ? "已指定菌群；細胞將靠近後吞噬。"
+          : "恢復就地巡防；自動選擇同區附近菌群。",
+      0,
+      { actor: cell.id, from: { ...cell.position } },
+    );
+  }
+  return { state: s };
+}
+function walk(cell: Cell, speed: number) {
+  let left = speed * STEP_SECONDS;
+  while (left > 0 && cell.path.length) {
+    const p = cell.path[0],
+      d = distance(cell.position, p);
+    if (d <= left) {
+      cell.position = { ...p };
+      cell.path.shift();
+      left -= d;
+    } else {
+      cell.position.x += ((p.x - cell.position.x) / d) * left;
+      cell.position.z += ((p.z - cell.position.z) / d) * left;
+      left = 0;
+    }
+  }
+}
+export function stepTactical(
+  before: TacticalState,
+  c: TacticalContent,
+): TacticalState {
+  if (before.result) return before;
+  const s = copy(before);
+  s.tick++;
+  if (s.tick % c.energyEvery === 0)
+    s.energy = Math.min(c.energyMax, s.energy + 1);
+  if (s.wave < c.waves.length - 1 && s.tick >= s.nextWaveAt) wave(s, c);
+  for (const cell of s.cells) {
+    const spec = c.cells[cell.kind];
+    if (s.tick < cell.readyAt - spec.cooldown + 6) continue;
+    let target: Colony | undefined;
+    if (cell.order.type === "attack")
+      target = s.colonies.find(
+        (p) => p.id === (cell.order as { target: string }).target && p.load > 0,
+      );
+    if (!target && cell.order.type !== "move")
+      target = s.colonies
+        .filter(
+          (p) =>
+            p.load > 0 &&
+            p.region === cell.region &&
+            distance(cell.position, p.position) < 8,
+        )
+        .sort(
+          (a, b) =>
+            distance(cell.position, a.position) -
+              distance(cell.position, b.position) || a.id.localeCompare(b.id),
+        )[0];
+    if (target) {
+      if (distance(cell.position, target.position) > spec.range) {
+        if (
+          !cell.path.length ||
+          distance(cell.path[cell.path.length - 1], target.position) > 0.1
+        )
+          pathTo(cell, target.position, c);
+        walk(cell, spec.speed);
+      }
+      if (
+        distance(cell.position, target.position) <= spec.range &&
+        s.tick >= cell.readyAt
+      ) {
+        cell.path = [];
+        const n = Math.min(
+          target.load,
+          spec.power + (target.markedUntil > s.tick ? spec.markedBonus : 0),
+        );
+        target.load -= n;
+        cell.readyAt = s.tick + spec.cooldown;
+        if (c.pathogen.survives) {
+          let internal = s.internal.find((p) => p.host === cell.id);
+          if (internal) internal.load += n;
+          else
+            s.internal.push({
+              id: `i${s.serial++}`,
+              host: cell.id,
+              pathogen: c.pathogen.id,
+              load: n,
+            });
+        }
+        emit(
+          s,
+          "engulf",
+          target.position,
+          `${spec.name}吞入 ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : "（莢膜限制效率）"}${c.pathogen.survives ? "，囊泡內仍有活菌。" : "，完成清除。"}`,
+          n,
+          {
+            actor: cell.id,
+            target: target.id,
+            from: { ...cell.position },
+            survives: c.pathogen.survives,
+          },
+        );
+        if (target.load === 0)
+          emit(s, "clear", target.position, "此胞外菌群已清除。", n, {
+            target: target.id,
+          });
+      }
+    } else if (cell.path.length) {
+      walk(cell, spec.speed);
+      if (!cell.path.length && cell.order.type === "move")
+        cell.order = { type: "guard", point: { ...cell.position } };
+    } else if (cell.order.type === "attack")
+      cell.order = { type: "guard", point: { ...cell.position } };
+  }
+  s.colonies = s.colonies.filter((p) => p.load > 0);
+  if (s.tick % c.growEvery === 0) {
+    const spreading: Colony[] = [];
+    for (const p of s.colonies) {
+      p.load += c.growth;
+      emit(s, "grow", p.position, `殘餘菌群繁殖 +${c.growth}。`, c.growth, {
+        target: p.id,
+      });
+      if (p.load >= c.spreadAt) {
+        s.rng = (Math.imul(s.rng, 1664525) + 1013904223) >>> 0;
+        const fields = c.fields.filter((f) => f.id !== p.region);
+        const f = fields[s.rng % fields.length];
+        p.load -= 2;
+        let to = s.colonies.find(
+          (x) => x.region === f.id && x.markedUntil <= s.tick,
+        );
+        if (to) to.load += 2;
+        else {
+          to = {
+            ...p,
+            id: `p${s.serial++}`,
+            region: f.id,
+            position: { x: f.center.x + 2, z: f.center.z - 2 },
+            load: 2,
+            markedUntil: 0,
+          };
+          spreading.push(to);
+        }
+        emit(s, "spread", to.position, "高負荷菌群向相鄰組織擴散 2 負荷。", 2, {
+          target: to.id,
+          from: p.position,
+        });
+      }
+    }
+    s.colonies.push(...spreading);
+  }
+  if (s.tick % c.damageEvery === 0)
+    for (const f of c.fields) {
+      const load =
+        s.colonies
+          .filter((p) => p.region === f.id)
+          .reduce((a, p) => a + p.load, 0) +
+        s.internal
+          .filter((p) => s.cells.find((u) => u.id === p.host)?.region === f.id)
+          .reduce((a, p) => a + p.load, 0);
+      if (load) {
+        const damage = load * c.damagePerLoad;
+        s.health[f.id] = Math.max(0, s.health[f.id] - damage);
+        if (s.tick % 25 === 0)
+          emit(
+            s,
+            "damage",
+            f.center,
+            `${f.name}殘餘感染造成組織損傷。`,
+            Math.round(damage),
+          );
+      }
+    }
+  for (const arrival of [...s.arrivals])
+    if (arrival.at <= s.tick) {
+      const f = c.fields.find((f) => f.id === arrival.region)!;
+      const cell: Cell = {
+        id: `u${s.serial++}`,
+        kind: arrival.kind,
+        position: { ...c.portal },
+        region: f.id,
+        order: { type: "move", point: { ...f.center } },
+        path: [],
+        readyAt: s.tick,
+      };
+      pathTo(cell, f.center, c);
+      s.cells.push(cell);
+      s.arrivals = s.arrivals.filter((a) => a.id !== arrival.id);
+      emit(
+        s,
+        "arrive",
+        c.portal,
+        `${c.cells[cell.kind].name}由微血管抵達，正前往${f.name}。`,
+        1,
+        { actor: cell.id },
+      );
+    }
+  const lost = Object.values(s.health).some((h) => h <= 0),
+    won = s.wave === c.waves.length - 1 && loadOf(s) === 0;
+  if (lost || won || s.tick >= c.limit) {
+    const rate = preservation(s);
+    s.result = {
+      type: !lost && won ? "victory" : "defeat",
+      reason: lost
+        ? "必要組織失守"
+        : won
+          ? `${c.waves.length} 波感染來源均已清除`
+          : "防禦時間內未能控制感染",
+      preservation: rate,
+      stars:
+        !lost && won
+          ? rate >= c.stars[0]
+            ? 3
+            : rate >= c.stars[1]
+              ? 2
+              : 1
+          : 0,
+      seconds: s.tick * STEP_SECONDS,
+    };
+    emit(s, "result", { x: 0, z: 0 }, s.result.reason, s.result.stars);
+  }
+  return s;
+}
