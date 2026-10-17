@@ -118,6 +118,21 @@ try {
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
     await expect(page.locator(".t-colony-label")).toHaveCount(3);
     assert.equal((await save(page)).paused, true);
+    const pristine = {
+      ...(await save(page)),
+      rules: "2.0",
+      content: "m1-tactics.1",
+    };
+    await page.getByRole("button", { name: "設定與存檔" }).click();
+    await page.getByLabel("新版存檔檔案").setInputFiles({
+      name: "pristine-legacy.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(pristine)),
+    });
+    await page.getByRole("button", { name: "繼續防線 →" }).click();
+    assert.deepEqual((await save(page)).state, pristine.state);
+    assert.equal((await save(page)).rules, "2.1");
+    record(name + ": zero-tick legacy imports can resume without restarting");
     await page.screenshot({ path: dir + name + "-field.png" });
     console.log("CHECK", name, "idle capture");
     const still = (await save(page)).state;

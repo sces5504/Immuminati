@@ -10,7 +10,7 @@
 
 Repo 為 sces5504/Immuminati，預期 `/workspace/Immuminati`，開工仍須確認 Git／環境。正式入口是 `src/tactics`，TypeScript＋Vite＋React＋Three.js，既有 package scripts 繼續使用。
 
-保留基準為 `d2c16ab` 的發布程式及 `af6bcb3` 的證據。遠端 `6e1d5f7` 已回退另一個 AI 的 RTS 重製；已確認程式／測試／套件等與基準一致，無須再刪檔或 hard reset。現有 M1 已可玩；不要把另造一個遊戲當作本次目標。
+保留基準為 `d2c16ab` 的發布程式及 `af6bcb3` 的證據。遠端 `6e1d5f7` 已回退另一個 AI 的 RTS 重製；回退當下曾確認程式／測試／套件等與基準一致，無須再刪檔或 hard reset；其後的增量修正見 [本輪紀錄](TACTICAL-REFINEMENT.md)，開工延續最新版，不能為還原基準而覆蓋已完成修正。現有 M1 已可玩；不要把另造一個遊戲當作本次目標。
 
 [Pages](https://sces5504.github.io/Immuminati/) 是正式遊玩網址；公開內容是否已完成最新部署需另驗，不能只憑 repo 推論。歷史 [戰術規則](TACTICAL-REDESIGN.md) 與 [實測紀錄](TACTICAL-VALIDATION.md) 可解釋基準，後續變更以主規格與實際程式為準。
 

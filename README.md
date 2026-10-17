@@ -11,7 +11,7 @@
 3. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)
 4. [交接與下一個 AI 的工作說明](docs/CLOUD-HANDOFF.md)
 
-維持現有立體戰場與可暫停即時戰術操作；玩法改進針對具體問題逐項實作。拖曳反向與同區單位上限是已提出的優化項，尚未因本次文件更新自動修好。不重新設計首頁、HUD、指揮列、模型或手機布局。
+維持現有立體戰場與可暫停即時戰術操作；玩法改進針對具體問題逐項實作。本輪修正拖曳反向、取消名額、改善重疊防區標記與零步匯入續玩，實作及檢查狀態見 [增量修正紀錄](docs/TACTICAL-REFINEMENT.md)。不重新設計首頁、HUD、指揮列、模型或手機布局。
 
 ## 執行與驗證
 
@@ -36,10 +36,10 @@ Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試覆�
 
 ## 歷史資料與相容性
 
-- [舊即時戰術原型決策](docs/TACTICAL-REDESIGN.md)／[其實作與驗證](docs/TACTICAL-VALIDATION.md)
+- [立體戰術基準決策](docs/TACTICAL-REDESIGN.md)／[其實作與驗證](docs/TACTICAL-VALIDATION.md)
 - [首版實作](docs/IMPLEMENTATION.md)／[首版驗證](docs/VALIDATION.md)
 - [ImmuneQuest 截圖參考觀察](docs/art-direction/ImmuneQuest-reference-review.md)
-- [舊原型桌面](docs/evidence/tactics/desktop-field.png)／[手機](docs/evidence/tactics/mobile-field.png)／[舊短剪輯](docs/evidence/tactics/m1-highlights.webm)
+- [基準桌面](docs/evidence/tactics/desktop-field.png)／[手機](docs/evidence/tactics/mobile-field.png)／[基準短剪輯](docs/evidence/tactics/m1-highlights.webm)
 
 基準截圖與影片用於確認原體驗保留；歷史測試結果不能作後續改動已通過的證據。舊存檔 `immuminati:save:v1` 與 `immuminati:tactics:v2` 必須保留；玩法改動先確認相容性，不靜默轉換或覆寫不同規則的存檔。
 

@@ -79,6 +79,7 @@ export default function TacticalApp() {
   const [unavailable, setUnavailable] = useState("");
   const [notice, setNotice] = useState(boot.error ?? "");
   const [storage, setStorage] = useState(boot.save ? "已載入存檔" : "本機存檔");
+  const [imported, setImported] = useState(false);
   const [sceneError, setSceneError] = useState("");
   const [cameraHint, setCameraHint] = useState(true);
   const [menu, setMenu] = useState(false);
@@ -333,6 +334,7 @@ export default function TacticalApp() {
       setModal(null);
       setSelected(undefined);
       setRegion((nextContent ?? content).fields[0].id);
+      setImported(true);
       setNotice("已匯入新版存檔，繼續遊玩時先維持戰術暫停。");
     } catch (e) {
       setNotice((e as Error).message);
@@ -490,7 +492,7 @@ export default function TacticalApp() {
               >
                 開始 M1 <span>↗</span>
               </button>
-              {boot.save || s.tick > 0 || s.eventId > 1 ? (
+              {boot.save || imported || s.tick > 0 || s.eventId > 1 ? (
                 <button className="t-outline" onClick={() => start(false)}>
                   繼續防線 →
                 </button>

@@ -890,17 +890,47 @@ export class BattleScene {
       })),
       { id: "portal", p: this.content.portal, y: 1 },
     ];
+    // Keep field controls clear of the existing unit/colony hit targets.
+    // Only labels move; terrain, models, camera and authority stay unchanged.
+    const blockers = items
+      .filter((item) => !item.id.startsWith("field-") && item.id !== "portal")
+      .flatMap((item) => {
+        const el = this.host.querySelector<HTMLElement>(
+          `[data-world-label="${item.id}"]`,
+        );
+        return el
+          ? [
+              {
+                ...this.project(item.p, item.y),
+                w: el.offsetWidth,
+                h: el.offsetHeight,
+              },
+            ]
+          : [];
+      });
     for (const item of items) {
       const el = this.host.querySelector<HTMLElement>(
         `[data-world-label="${item.id}"]`,
       );
       if (el) {
         const p = this.project(item.p, item.y);
-        if (item.id.startsWith("field-"))
+        if (item.id.startsWith("field-")) {
           p.x = Math.max(
             el.offsetWidth / 2 + 5,
             Math.min(this.size.w - el.offsetWidth / 2 - 5, p.x),
           );
+          for (let n = 0; n < blockers.length; n++) {
+            const hit = blockers.find(
+              (b) =>
+                Math.abs(p.x - b.x) < (el.offsetWidth + b.w) / 2 + 4 &&
+                Math.abs(p.y - b.y) < (el.offsetHeight + b.h) / 2 + 4,
+            );
+            if (!hit) break;
+            const y = hit.y - (el.offsetHeight + hit.h) / 2 - 4;
+            if (y < el.offsetHeight / 2 + 4) break;
+            p.y = y;
+          }
+        }
         el.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-50%)`;
       }
     }
