@@ -1,0 +1,12 @@
+{
+  "source": "addcee90afdea82c3c9e4d866f5b89d56600c15c",
+  "browser": "141.0.7390.37",
+  "fixture": "Imported valid M1 snapshot with two seeded antibodies; boundary/UI test only, not evidence of B-cell production. Natural DC/CD4/B/plasma production is covered separately by immune acceptance.",
+  "checks": [
+    "enabled priority antibody action consumes one existing antibody, no energy/support/load change",
+    "C3b and Ig coexist and show separate remaining times",
+    "duplicate target does not charge or mutate",
+    "undo restores pool, coating, event and authority"
+  ],
+  "passed": true
+}

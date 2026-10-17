@@ -1,0 +1,38 @@
+{
+  "browser": "141.0.7390.37",
+  "checks": [
+    {
+      "device": "desktop",
+      "check": "10-step tutorial driven by actual selection, movement, auto seek, opsonization, recruitment, phagocytosis, speed and mechanism panel",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "check": "real UI adaptive-support strategy completes M1; DC -> CD4 T -> B -> plasma -> antibodies",
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 53,
+        "stars": 1,
+        "seconds": 92.4
+      },
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "check": "NK/CD8 kill only eligible hosts; healthy and mismatched hosts survive; M1 save unchanged through practice",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "check": "real pre-2.4 save migration preserves original text backup and starts new immunity explicitly inactive",
+      "passed": true
+    },
+    {
+      "device": "desktop",
+      "check": "reload, portrait layout, assets and runtime errors",
+      "passed": true
+    }
+  ],
+  "limitations": "Headless Chromium / SwiftShader; portrait touch emulation, not physical phone or GPU performance certification."
+}

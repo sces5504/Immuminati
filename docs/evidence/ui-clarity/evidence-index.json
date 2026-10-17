@@ -1,0 +1,250 @@
+{
+  "source": "addcee90afdea82c3c9e4d866f5b89d56600c15c",
+  "releaseCI": 39044481225,
+  "publishedCI": 39045223717,
+  "generatedAt": "2026-10-17T15:35:06.067987+00:00",
+  "browser": "Headless Chromium 141 / SwiftShader, mobile viewport and touch emulation; physical Safari not tested",
+  "checks": {
+    "unit": 64,
+    "predeployClassicBrowser": 28,
+    "clarityGroups": 12,
+    "immuneGroups": 10,
+    "anatomyGroups": 10,
+    "engulfBranches": [
+      "clearance",
+      "persistent phagosome"
+    ],
+    "publishedClarityGroups": 12,
+    "publishedClassicBrowser": "running; update before final handoff"
+  },
+  "artifacts": {
+    "clarityMobile": 12105397088,
+    "clarityDesktop": 12104389718,
+    "tacticsMobile": 12105417227,
+    "tacticsDesktop": 12105128944,
+    "immuneMobile": 12105516083,
+    "immuneDesktop": 12104979664,
+    "anatomyMobile": 12105103029,
+    "anatomyDesktop": 12105451183,
+    "animation": 12105386929,
+    "publishedClarity": 12105970770
+  },
+  "provenance": "recording-provenance.json; manual-fixture is explicitly seeded stock, separate from naturally generated antibodies",
+  "files": [
+    {
+      "file": "anatomy/desktop-anatomy-results.json",
+      "bytes": 1073,
+      "sha256": "a6f46333828fba01d48ec5d8db86f6307e1b5326ae5540a00f4cc283eabfee2b"
+    },
+    {
+      "file": "anatomy/desktop-desktop-save.json",
+      "bytes": 33373,
+      "sha256": "ca82ee75a4642cc45d6afdce65597bb1438bd31989bce30994ca242c372583d7"
+    },
+    {
+      "file": "anatomy/mobile-anatomy-results.json",
+      "bytes": 1068,
+      "sha256": "976c0632ab49e258aec82092a761b3672b19cc5579f5850b08635708ab757e85"
+    },
+    {
+      "file": "anatomy/mobile-mobile-save.json",
+      "bytes": 31437,
+      "sha256": "c287e7d254753fbea4530806a97cf0f369a92b4181903a99356a6975a3d2cdd3"
+    },
+    {
+      "file": "animation/animation-results.json",
+      "bytes": 360,
+      "sha256": "617d2d4e6251bac619400e16a96dc82bfbe9a6e821a847efeaa2e631aab961f1"
+    },
+    {
+      "file": "animation/engulf-branches.webm",
+      "bytes": 1058652,
+      "sha256": "7907c0a533faa32163aae69d96404baa9d0db84c89b7bab781cdb3f994c59021"
+    },
+    {
+      "file": "animation/engulf-clear.png",
+      "bytes": 302026,
+      "sha256": "a6f0fc0ad62d62a4bc6d51cb4f1fca5d0203ed5e1e162ad8350c15e8f87eca62"
+    },
+    {
+      "file": "animation/engulf-survival.png",
+      "bytes": 303359,
+      "sha256": "f511b0dd348bf1f51a71eefe8f2b4d83b1c3d72fa99fe59b3ee410eb0b5cbd31"
+    },
+    {
+      "file": "desktop-action.png",
+      "bytes": 798642,
+      "sha256": "e4d493660bc32cc0155bd63ea39dfe2c9211529b9b232c8f07f92e69a20b3428"
+    },
+    {
+      "file": "desktop-b-antibody.png",
+      "bytes": 74774,
+      "sha256": "f8f874cc510e77b7e9e596d3057a8d29a5d08c26321716dd982130bc9f4a6d15"
+    },
+    {
+      "file": "desktop-objective-expanded.png",
+      "bytes": 809469,
+      "sha256": "960f1211e84515f9446a61e5035ad3175ef72a66f988d891c0d9cc080f0c1e76"
+    },
+    {
+      "file": "desktop-quiet-field.png",
+      "bytes": 802214,
+      "sha256": "2ccc5deaf7314660fc920506dbdd5d2eb9726c2f6420d1805b009ffc3e37671f"
+    },
+    {
+      "file": "desktop-ui-clarity.webm",
+      "bytes": 5374072,
+      "sha256": "d2e0abdbc7d0c4016287a1e46b3c06cb445da072249dbb5906102b3bcb95a61b"
+    },
+    {
+      "file": "desktop-vessel-angle-0.png",
+      "bytes": 825227,
+      "sha256": "aa1e92d609a6c67716e21cbe2317cdcd0f96e76c1932345ab7166b6271bb25f3"
+    },
+    {
+      "file": "desktop-vessel-angle-1.png",
+      "bytes": 833066,
+      "sha256": "7585db5d5c5b158636968620b2af6e968826c58cab5381fcbe405d12f440b099"
+    },
+    {
+      "file": "desktop-vessel-angle-2.png",
+      "bytes": 830768,
+      "sha256": "a9ce1a9385bd37f9e3f20a088d573f833531a393a83472f32140b594b6dbe7ba"
+    },
+    {
+      "file": "immune/desktop-adaptive-result.png",
+      "bytes": 809069,
+      "sha256": "a7b1fc53b1d98ac70b2f8f66d80ac3c1c5635e233fe9d70f2050e2ee6159e07c"
+    },
+    {
+      "file": "immune/desktop-immune-results.json",
+      "bytes": 1236,
+      "sha256": "10f8845c6786d74ec2884d0f6de601493581be0d781aec55df07ca989e4f06b6"
+    },
+    {
+      "file": "immune/immune-results.json",
+      "bytes": 1231,
+      "sha256": "de386e96aec1e4585e156f0a2188dbbfa010740f844c85103e14485947265d08"
+    },
+    {
+      "file": "immune/mobile-adaptive-result.png",
+      "bytes": 185937,
+      "sha256": "f4bb5745394384d97e0bf9ab2f013a512c50f6d81b6f0499817ab544fe10f240"
+    },
+    {
+      "file": "manual-fixture/manual-antibody-result.json",
+      "bytes": 600,
+      "sha256": "c9bd3ee0b82cc46f9c69a739cf7cb0b3a6e9631285571f0f20129bc0502013d8"
+    },
+    {
+      "file": "manual-fixture/mobile-dual-coating-fixture.png",
+      "bytes": 239916,
+      "sha256": "cf4e52deedae5a7ba83b506e02393faf4f545d957e3883059c9026a6179449c7"
+    },
+    {
+      "file": "mobile-action.png",
+      "bytes": 203309,
+      "sha256": "4a57939258cf85ae6598434a2b5a3369ea8dec1ad1b57c440ee43de16874ef8b"
+    },
+    {
+      "file": "mobile-b-antibody.png",
+      "bytes": 181271,
+      "sha256": "1feca0f6f8685ae9351b4f325c40cfaea5a4d0217acc3b5524637a1b279816dc"
+    },
+    {
+      "file": "mobile-m1-highlights.webm",
+      "bytes": 466774,
+      "sha256": "b467bf9a89fe588c4d45e6236bf890713cd806c12ef903c8d8abe49ce4856451"
+    },
+    {
+      "file": "mobile-objective-expanded.png",
+      "bytes": 197046,
+      "sha256": "a83875f67787f6fe6cf7052aa8d0da9e76da248015c58e67a6a616deb6703714"
+    },
+    {
+      "file": "mobile-quiet-field.png",
+      "bytes": 203467,
+      "sha256": "e424bdbf37680f80c7af5858187e2e73ea362339db285e8154640804d7d7a7cb"
+    },
+    {
+      "file": "mobile-ui-clarity.webm",
+      "bytes": 2619144,
+      "sha256": "b4c62abd2213883ef09838621d6020f485778f8f41de7866e1259b7bbbbe8b52"
+    },
+    {
+      "file": "mobile-vessel-angle-0.png",
+      "bytes": 202972,
+      "sha256": "93303e23db63fb93f4918c6f4c89cff77f2a7c903b85bab95771e25e681ed7f6"
+    },
+    {
+      "file": "mobile-vessel-angle-1.png",
+      "bytes": 203405,
+      "sha256": "45f35975ab80f9b434d009eef619d3add877fbf80a4a8de6640c898a070c7419"
+    },
+    {
+      "file": "mobile-vessel-angle-2.png",
+      "bytes": 201982,
+      "sha256": "88abe247b6647b3e81fef638fea50bd2f5105ad87d7dee1266f14317f7ac1833"
+    },
+    {
+      "file": "public/desktop-quiet-field.png",
+      "bytes": 802316,
+      "sha256": "3751eebfca1c28d1178330844eb319c75c13d78e2740e157407707b7741836cd"
+    },
+    {
+      "file": "public/mobile-quiet-field.png",
+      "bytes": 203410,
+      "sha256": "5553494efbbfb63df8ce0e112ca41140ad19b9f445127852fb90c3d095d801ff"
+    },
+    {
+      "file": "public/ui-results.json",
+      "bytes": 2019,
+      "sha256": "0d237a13c311f9d0896d50096938c8d1316016965383d8f9c3c6a0a93de50c24"
+    },
+    {
+      "file": "public-assets.json",
+      "bytes": 1375,
+      "sha256": "ff8f5be05ecdc8b1ccdf70079e07511156428841bca75ce6b7cf96033c51c734"
+    },
+    {
+      "file": "recording-provenance.json",
+      "bytes": 1839,
+      "sha256": "27b78626f5efe930bcaab53a8407ee9e8539a35f5b14b241bd8cf8791bd5bed0"
+    },
+    {
+      "file": "tactics/desktop-result.png",
+      "bytes": 802229,
+      "sha256": "6878cc186ba7fc15c4fab69aa0b2622b2a5b9e6c4469f09e63f5bd002634a1a7"
+    },
+    {
+      "file": "tactics/desktop-results.json",
+      "bytes": 3244,
+      "sha256": "36e4e619f2f07b260f16715047248831b0449181ab9289d1c79fa662790d63cb"
+    },
+    {
+      "file": "tactics/mobile-result.png",
+      "bytes": 195537,
+      "sha256": "034d2f8ae7e7ff72c2268574d5e96822019967324a155b718091a47865d41b11"
+    },
+    {
+      "file": "tactics/mobile-results.json",
+      "bytes": 3306,
+      "sha256": "f9bfc896ee284d09f8cce16cb395fbb5cd88c00ea749a69b8bb9037a6fabf538"
+    },
+    {
+      "file": "tactics/save-v2.json",
+      "bytes": 23406,
+      "sha256": "0908274567a8f4df44f4d95dbe9658807eebfc9ec0471471fbab2e7651fe5901"
+    },
+    {
+      "file": "ui-results-desktop.json",
+      "bytes": 1058,
+      "sha256": "075431cd81b510b325fccbf21840a146927f00f32e357404a0e84abf84b35e7f"
+    },
+    {
+      "file": "ui-results-mobile.json",
+      "bytes": 1052,
+      "sha256": "187c001551162d7695b6f111542554de49aa634a3cbd84d698120b724351d5b8"
+    }
+  ]
+}

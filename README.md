@@ -1,10 +1,10 @@
 # Immuminati · 微觀防線
 
-**保留已發布立體戰術版的 UI、畫面、操作與整體風格，並依本輪八項需求改善組織／細胞模型及免疫機制。** 使用者已撤回從頭 RTS 重建與替換佔位模型的安排；`src/tactics` 是正式入口，原版不是待淘汰的畫面。
+**保留已發布立體戰術版的 UI、畫面、操作與整體風格，並依已確認需求改善組織／細胞模型及免疫機制。** 使用者已撤回從頭 RTS 重建與替換佔位模型的安排；`src/tactics` 是正式入口，原版不是待淘汰的畫面。
 
-[線上遊玩](https://sces5504.github.io/Immuminati/)。保留程式基準為 `d2c16ab`，畫面與影片見 `af6bcb3` 的證據；`6e1d5f7` 已回退另一次 RTS 重製。目前 `9425293` 已發布：可選的人體組織細胞、清楚的胞外空間與局部剖視，以及吞入後的胞內殺菌階段；詳見[交付紀錄與畫面／錄影](docs/TISSUE-COMPARTMENTS.md)。前輪免疫擴充見 [v2.2 紀錄](docs/IMMUNE-EXPANSION.md)。
+[線上遊玩更新版](https://sces5504.github.io/Immuminati/?v=addcee9)。目前已發布程式 `addcee9`（v2.4）：精簡地圖標籤與任務卡、分開補體／B 抗體入口、新局預設自動尋敵、修正血管貼地、提示移右，以及增援點外部關閉。[本輪實作、驗證與交接](docs/UI-CLARITY.md)包含最新畫面、錄影、來源與限制。
 
-最新 v2.4：精簡地圖標籤與任務卡、分開補體／B 抗體入口、新局預設自動尋敵、修正血管貼地及增援點外部關閉。實際驗證與發布狀態見 [UI 精簡與交接紀錄](docs/UI-CLARITY.md)。前述 9425293 為上一輪已發布來源。
+上一輪 `9425293` 的[組織／胞內區室](docs/TISSUE-COMPARTMENTS.md)及更早 [v2.2 免疫擴充](docs/IMMUNE-EXPANSION.md)均保留。原立體程式基準 `d2c16ab`、證據 `af6bcb3`；`6e1d5f7` 已回退另一次 RTS 重製，這些皆為歷史來源。
 
 ## 開發入口
 
@@ -36,6 +36,7 @@ npm run test:browser
 npm run test:animation
 npm run test:immune
 npm run test:anatomy
+npm run test:clarity
 ```
 
 Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試覆蓋既有立體戰術版；改規則時同步更新相應斷言，並保留其餘回歸檢查。手機瀏覽器腳本是 viewport／touch 模擬，不等同真機測試。

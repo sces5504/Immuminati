@@ -40,7 +40,7 @@ key `immuminati:tactics:v2` 不變，schema 2、規則 **2.4**、內容 **m1-tac
 
 本機透過代理連公開頁的 Chromium 曾遇憑證錯誤，不關閉 TLS；以正常 TLS 的 curl 比對公開資產，公開瀏覽器回歸使用 Actions 的正常網路。CLI artifact blob 403 可改用 GitHub 連接工具取檔案參照，不能把短效簽名 URL 或憑證寫入 repo。
 
-本輪實測、部署狀態、來源與剩餘項目以 [UI-CLARITY.md](UI-CLARITY.md) 為準。真機 Safari／效能尚未驗證，不用觸控 Chrome 模擬冒充。模型仍為程序教學模型，沒有醫學精模／真實尺度宣稱。
+本輪程式 `addcee9` 已通過完整發布 CI 39044481225 並部署；主 JS／Three.js／CSS／mark.svg 及無版本參數的 HTML 與本機正式建置一致，公開新增 UI 的 12 組檢查通過。完整公開站回歸的最新狀態、來源與剩餘項目以 [UI-CLARITY.md](UI-CLARITY.md) 為準。真機 Safari／效能尚未驗證，不用觸控 Chrome 模擬冒充。模型仍為程序教學模型，沒有醫學精模／真實尺度宣稱。
 
 ## 歷史資料（保留背景，不代表現行版本）
 

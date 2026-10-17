@@ -1,0 +1,60 @@
+{
+  "source": "addcee90afdea82c3c9e4d866f5b89d56600c15c",
+  "ciRun": 39044481225,
+  "mobileM1Highlights": {
+    "file": "mobile-m1-highlights.webm",
+    "sourceArtifact": 12105417227,
+    "sourceFile": "mobile-m1.webm",
+    "sourceSha256": "d87e060b1420c42f0ff4917ab4b0f2d1acaac2fe305a4964ba7b575a0bdc2585",
+    "sourceSeconds": 204.4,
+    "segmentsSeconds": [
+      [
+        4,
+        8
+      ],
+      [
+        88,
+        100
+      ],
+      [
+        106,
+        118
+      ],
+      [
+        168,
+        180
+      ]
+    ],
+    "editing": "Chronological cuts only; no speed changes or state edits. Covers paused idle, deployment/movement, phagocytosis and final clearance/victory. The original recording is retained in the CI artifact."
+  },
+  "uiRecordings": {
+    "mobile": {
+      "artifact": 12105397088,
+      "file": "mobile-ui-clarity.webm",
+      "seconds": 75.76,
+      "editing": "none"
+    },
+    "desktop": {
+      "artifact": 12104389718,
+      "file": "desktop-ui-clarity.webm",
+      "seconds": 95.84,
+      "editing": "none"
+    }
+  },
+  "engulfBranches": {
+    "artifact": 12105386929,
+    "file": "animation/engulf-branches.webm",
+    "fixture": "Explicit dev-only clearance/persistent-phagosome samples, not another completed level"
+  },
+  "manualAntibodyFixture": {
+    "file": "manual-fixture/manual-antibody-result.json",
+    "note": "Two antibody stocks were seeded in an imported legal snapshot for UI boundary checks; not evidence of natural B-cell production. Natural production is separately covered by immune acceptance."
+  },
+  "publishedUI": {
+    "artifact": 12105970770,
+    "ciRun": 39045223717,
+    "resultsFile": "public/ui-results.json",
+    "url": "https://sces5504.github.io/Immuminati/",
+    "note": "Published site, normal TLS, both desktop and touch-mobile; 12 grouped clarity checks."
+  }
+}

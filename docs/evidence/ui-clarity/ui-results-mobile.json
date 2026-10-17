@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:4184/Immuminati/",
+  "browser": "141.0.7390.37",
+  "checks": [
+    {
+      "device": "mobile",
+      "check": "new game seeks by default; compact objective, right-side help and minimal 44px map targets",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "outside tap dismisses recruitment without issuing a command or spending resources",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "independent C3b and B/antibody entries; absent antibody stock cannot be used; C3b charges only once",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "three rendered camera angles captured for conforming vessel inspection",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "label choice persists through reload; autonomous movement and phagocytosis continue at 2x",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "no runtime or asset errors and no horizontal overflow",
+      "passed": true
+    }
+  ]
+}

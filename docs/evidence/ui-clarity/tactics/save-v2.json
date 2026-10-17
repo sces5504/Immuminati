@@ -1,0 +1,999 @@
+{
+  "schema": 2,
+  "rules": "2.4",
+  "content": "m1-tactics.5",
+  "state": {
+    "version": 2,
+    "scenario": "m1",
+    "seed": 2,
+    "rng": 2,
+    "tick": 14,
+    "energy": 5,
+    "support": 6,
+    "wave": 0,
+    "nextWaveAt": 175,
+    "health": {
+      "a": 98.68,
+      "b": 98.92,
+      "c": 99.64
+    },
+    "cells": [
+      {
+        "id": "u1",
+        "kind": "macrophage",
+        "position": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -11,
+            "z": -4
+          }
+        },
+        "path": [],
+        "readyAt": 19,
+        "recognized": true
+      },
+      {
+        "id": "u2",
+        "kind": "neutrophil",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "region": "b",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 10,
+            "z": -3
+          }
+        },
+        "path": [],
+        "readyAt": 22,
+        "recognized": true
+      },
+      {
+        "id": "u3",
+        "kind": "dendritic",
+        "position": {
+          "x": -2.04919161490608,
+          "z": 11.043598439929806
+        },
+        "region": "c",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -3,
+            "z": 9
+          }
+        },
+        "path": [
+          {
+            "x": -5,
+            "z": 18
+          }
+        ],
+        "readyAt": 26,
+        "recognized": true,
+        "antigen": "pneumococcus:protein"
+      }
+    ],
+    "colonies": [
+      {
+        "id": "p4",
+        "region": "a",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "load": 11,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "pneumococcus"
+      },
+      {
+        "id": "p5",
+        "region": "b",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "load": 8,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "pneumococcus"
+      },
+      {
+        "id": "p6",
+        "region": "c",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "load": 3,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "pneumococcus"
+      }
+    ],
+    "arrivals": [],
+    "internal": [
+      {
+        "id": "i40",
+        "host": "u1",
+        "pathogen": "pneumococcus",
+        "load": 1,
+        "compartment": "phagosome",
+        "stage": "processing",
+        "clearAt": 19
+      },
+      {
+        "id": "i41",
+        "host": "u3",
+        "pathogen": "pneumococcus",
+        "load": 1,
+        "compartment": "phagosome",
+        "stage": "processing",
+        "clearAt": 21
+      },
+      {
+        "id": "i42",
+        "host": "u2",
+        "pathogen": "pneumococcus",
+        "load": 1,
+        "compartment": "phagosome",
+        "stage": "processing",
+        "clearAt": 22
+      }
+    ],
+    "immunity": {
+      "autoSeek": true,
+      "signals": {
+        "a": {
+          "cxcl8": 15,
+          "il12": 10,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 4.5
+        },
+        "b": {
+          "cxcl8": 15,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 4.5
+        },
+        "c": {
+          "cxcl8": 15,
+          "il12": 10,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 4.5
+        }
+      },
+      "node": {
+        "stage": "migrating",
+        "antigen": "pneumococcus:protein",
+        "until": 0
+      },
+      "antibodies": 0
+    },
+    "hosts": [
+      {
+        "id": "h7",
+        "region": "a",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 1.5707963267948966,
+          "radius": 7.549985807166464,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h8",
+        "region": "a",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 2.019595277307724,
+          "radius": 7.436883897803397,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h9",
+        "region": "a",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 2.4683942278205517,
+          "radius": 8.51944059323194,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h10",
+        "region": "a",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 2.9171931783333793,
+          "radius": 8.37223644998041,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h11",
+        "region": "a",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 3.365992128846207,
+          "radius": 8.1049202508056,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h12",
+        "region": "a",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 3.814791079359034,
+          "radius": 7.776966192595207,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h13",
+        "region": "a",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 4.263590029871862,
+          "radius": 7.461739889175007,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h14",
+        "region": "a",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.550014192833535,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h15",
+        "region": "a",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 5.161187930897517,
+          "radius": 8.663116102196605,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h16",
+        "region": "a",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.68,
+        "wall": {
+          "angle": 5.609986881410345,
+          "radius": 7.580559406768061,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h17",
+        "region": "b",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 0.2243994752564138,
+          "radius": 8.612016482800392,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h18",
+        "region": "b",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 0.6731984257692414,
+          "radius": 7.9806597501067325,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h19",
+        "region": "b",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 1.121997376282069,
+          "radius": 7.868952587234249,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h20",
+        "region": "b",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 1.5707963267948966,
+          "radius": 7.549985807166464,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h21",
+        "region": "b",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 3.814791079359034,
+          "radius": 8.11934024989327,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h22",
+        "region": "b",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 4.263590029871862,
+          "radius": 8.231047412765752,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h23",
+        "region": "b",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.550014192833535,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h24",
+        "region": "b",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 5.161187930897517,
+          "radius": 7.893808578605861,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h25",
+        "region": "b",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 5.609986881410345,
+          "radius": 7.2381853494699975,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h26",
+        "region": "b",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 98.92,
+        "wall": {
+          "angle": 6.058785831923172,
+          "radius": 8.344700283625581,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h27",
+        "region": "c",
+        "position": {
+          "x": 8.1967583526948,
+          "z": 9.870856605155543
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 0.2243994752564138,
+          "radius": 8.407553266529217,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h28",
+        "region": "c",
+        "position": {
+          "x": 6.490873310335829,
+          "z": 13.176298735599861
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 0.6731984257692414,
+          "radius": 8.3021385757528,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h29",
+        "region": "c",
+        "position": {
+          "x": -6.912109135641785,
+          "z": 13.512223096725279
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 2.4683942278205517,
+          "radius": 8.840919418878007,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h30",
+        "region": "c",
+        "position": {
+          "x": -7.9629901059147254,
+          "z": 9.817500528308365
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 2.9171931783333793,
+          "radius": 8.167773233709234,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h31",
+        "region": "c",
+        "position": {
+          "x": -7.49958103343256,
+          "z": 6.288269568458882
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 3.365992128846207,
+          "radius": 7.692446733470783,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h32",
+        "region": "c",
+        "position": {
+          "x": -1.6012548675897756e-15,
+          "z": -0.7168255026925952
+        },
+        "antigen": "self",
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.716825502692595,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h33",
+        "region": "c",
+        "position": {
+          "x": 7.733349280212635,
+          "z": 6.234913491611701
+        },
+        "antigen": "self",
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "health": 99.64,
+        "wall": {
+          "angle": 6.058785831923172,
+          "radius": 7.932226766290767,
+          "arc": 0.43982297150257105
+        },
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h34",
+        "region": "c",
+        "position": {
+          "x": -6,
+          "z": 18.8
+        },
+        "antigen": "self",
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.64,
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h35",
+        "region": "c",
+        "position": {
+          "x": -3,
+          "z": 18.8
+        },
+        "antigen": "self",
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.64,
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h36",
+        "region": "c",
+        "position": {
+          "x": 0,
+          "z": 18.8
+        },
+        "antigen": "self",
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.64,
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h37",
+        "region": "c",
+        "position": {
+          "x": 3,
+          "z": 18.8
+        },
+        "antigen": "self",
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.64,
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h38",
+        "region": "c",
+        "position": {
+          "x": 6,
+          "z": 18.8
+        },
+        "antigen": "self",
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 99.64,
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      }
+    ],
+    "serial": 43,
+    "eventId": 10,
+    "events": [
+      {
+        "id": 1,
+        "tick": 0,
+        "type": "wave",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "amount": 1,
+        "message": "第 1 波：前緣接觸。感染入口與負荷已標示。"
+      },
+      {
+        "id": 2,
+        "tick": 2,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p5",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 3,
+        "tick": 4,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u1",
+        "target": "p4",
+        "from": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "survives": false
+      },
+      {
+        "id": 4,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -9.822825162713904,
+          "z": -5.811038211209375
+        },
+        "message": "巨噬細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u1"
+      },
+      {
+        "id": 5,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u2"
+      },
+      {
+        "id": 6,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -1.324778806322772,
+          "z": 7.907464438906154
+        },
+        "message": "樹突細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u3"
+      },
+      {
+        "id": 7,
+        "tick": 6,
+        "type": "present",
+        "position": {
+          "x": -0.48716820948415757,
+          "z": 7.3611966583592325
+        },
+        "message": "樹突細胞已捕捉蛋白抗原，成熟後將由淋巴引流至淋巴結；吞入病原不等於直接活化所有淋巴球。",
+        "amount": 1,
+        "actor": "u3"
+      },
+      {
+        "id": 8,
+        "tick": 6,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "樹突細胞吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u3",
+        "target": "p6",
+        "from": {
+          "x": -0.48716820948415757,
+          "z": 7.3611966583592325
+        },
+        "survives": false
+      },
+      {
+        "id": 9,
+        "tick": 12,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "i39"
+      },
+      {
+        "id": 10,
+        "tick": 12,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u2",
+        "target": "p5",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      }
+    ]
+  },
+  "paused": true,
+  "undo": [],
+  "settings": {
+    "speed": 1,
+    "reduced": false,
+    "idle": true,
+    "hints": true,
+    "labels": false
+  },
+  "read": [
+    "th1"
+  ],
+  "records": {}
+}

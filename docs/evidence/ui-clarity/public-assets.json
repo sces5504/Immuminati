@@ -1,0 +1,43 @@
+{
+  "checkedAt": "2026-10-17T15:29:54.702442+00:00",
+  "url": "https://sces5504.github.io/Immuminati/?v=addcee9",
+  "source": "addcee90afdea82c3c9e4d866f5b89d56600c15c",
+  "htmlStatus": 200,
+  "assets": [
+    {
+      "path": "/Immuminati/assets/index-CjeVkYQA.css",
+      "status": 200,
+      "bytes": 91295,
+      "sha256": "958c83b5b9709ff74c8a9621abe8f6f8a4f56ac0a0c7f6cdf289e08d3f84b2d5",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/index-cbsmD0uA.js",
+      "status": 200,
+      "bytes": 386025,
+      "sha256": "675d457d48e41217cc16da9247144c351e5d15a7a464ceb9ea6d5e3d5ddd020e",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/mark.svg",
+      "status": 200,
+      "bytes": 504,
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/three-BCKxn2e5.js",
+      "status": 200,
+      "bytes": 505589,
+      "sha256": "ba530ac1d4b54cb3d3926eda7f47e13eff94042ffb1d4f467a86b00bf95e46e6",
+      "matchesLocalBuild": true
+    }
+  ],
+  "tls": "normal certificate validation; no TLS bypass",
+  "unversionedHtml": {
+    "url": "https://sces5504.github.io/Immuminati/",
+    "status": 200,
+    "sha256": "3935503c2f03445ae62ad9d20f698ef85d007a53ed4eaf06b2fbccd840f78b64",
+    "matchesLocalBuild": true
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "browser": "141.0.7390.37",
+  "results": [
+    {
+      "device": "mobile",
+      "check": "all M1 host cells present; 3D epithelium selection, healthy cutaway and safe pause",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "actual M1 ingestion transfers live load to phagosome; inspection reads authority; later killing is a separate event",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "export, reload and actual file import preserve tissue identities, damage and intracellular state",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "same host anatomy/cutaway in infection practice; cytosolic specimen distinct from phagosome; M1 save unchanged",
+      "passed": true
+    },
+    {
+      "device": "mobile",
+      "check": "portrait layout, runtime and subpath assets",
+      "passed": true
+    }
+  ],
+  "limitations": "Headless Chromium/SwiftShader; mobile touch emulation, not physical Safari/iPhone. Anatomy is a teaching abstraction, not a full organ or viral life cycle."
+}
