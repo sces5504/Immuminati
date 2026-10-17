@@ -1,3 +1,4 @@
+import { populateTissue, syncTissueHealth } from "../content/anatomy";
 import type {
   Cell,
   Colony,
@@ -134,6 +135,7 @@ export function createTactical(c: TacticalContent, seed = 1): TacticalState {
     });
   }
   wave(s, c);
+  populateTissue(s, c);
   return s;
 }
 function pathTo(cell: Cell, point: Vec, c: TacticalContent) {
@@ -316,6 +318,21 @@ export function stepTactical(
   if (s.tick % c.energyEvery === 0)
     s.energy = Math.min(c.energyMax, s.energy + 1);
   if (s.wave < c.waves.length - 1 && s.tick >= s.nextWaveAt) wave(s, c);
+  for (const internal of s.internal) {
+    if (internal.stage === "processing" && s.tick >= internal.clearAt) {
+      const host = s.cells.find((u) => u.id === internal.host);
+      emit(
+        s,
+        "clear",
+        host?.position ?? c.fields[0].center,
+        `吞噬體完成殺菌，清除 ${internal.load} 活負荷；吞入與死亡分開結算。`,
+        internal.load,
+        { actor: internal.host, target: internal.id },
+      );
+      internal.load = 0;
+    }
+  }
+  s.internal = s.internal.filter((p) => p.load > 0);
   updateImmunity(s, c);
   for (const cell of s.cells) {
     const spec = c.cells[cell.kind];
@@ -398,22 +415,22 @@ export function stepTactical(
           );
         }
         cell.readyAt = s.tick + spec.cooldown;
-        if (c.pathogen.survives) {
-          let internal = s.internal.find((p) => p.host === cell.id);
-          if (internal) internal.load += n;
-          else
-            s.internal.push({
-              id: `i${s.serial++}`,
-              host: cell.id,
-              pathogen: c.pathogen.id,
-              load: n,
-            });
-        }
+        s.internal.push({
+          id: `i${s.serial++}`,
+          host: cell.id,
+          pathogen: c.pathogen.id,
+          load: n,
+          compartment: "phagosome",
+          stage: c.pathogen.survives ? "persistent" : "processing",
+          clearAt: c.pathogen.survives
+            ? 0
+            : s.tick + (cell.kind === "neutrophil" ? 10 : 15),
+        });
         emit(
           s,
           "engulf",
           target.position,
-          `${spec.name}吞入 ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : "（莢膜限制效率）"}${c.pathogen.survives ? "，囊泡內仍有活菌。" : "，完成清除。"}`,
+          `${spec.name}吞入 ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : "（莢膜限制效率）"}${c.pathogen.survives ? "，囊泡內仍有活菌。" : "，進入吞噬體，等待胞內殺菌。"}`,
           n,
           {
             actor: cell.id,
@@ -423,9 +440,16 @@ export function stepTactical(
           },
         );
         if (target.load === 0)
-          emit(s, "clear", target.position, "此胞外菌群已清除。", n, {
-            target: target.id,
-          });
+          emit(
+            s,
+            "clear",
+            target.position,
+            "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+            n,
+            {
+              target: target.id,
+            },
+          );
       }
     } else if (cell.path.length) {
       walk(cell, spec.speed);
@@ -475,7 +499,11 @@ export function stepTactical(
           .filter((p) => p.region === f.id)
           .reduce((a, p) => a + p.load, 0) +
         s.internal
-          .filter((p) => s.cells.find((u) => u.id === p.host)?.region === f.id)
+          .filter(
+            (p) =>
+              p.stage === "persistent" &&
+              s.cells.find((u) => u.id === p.host)?.region === f.id,
+          )
           .reduce((a, p) => a + p.load, 0);
       if (load || s.immunity.signals[f.id].inflammation > 60) {
         const damage =
@@ -520,6 +548,7 @@ export function stepTactical(
         { actor: cell.id },
       );
     }
+  syncTissueHealth(s);
   if (c.practice) return s;
   const lost = Object.values(s.health).some((h) => h <= 0),
     won = s.wave === c.waves.length - 1 && loadOf(s) === 0;

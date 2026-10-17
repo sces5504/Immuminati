@@ -1,3 +1,5 @@
+import { AnatomyPanel } from "./AnatomyPanel";
+import { hostStatus, tissueCellCatalog } from "../content/anatomy";
 import { useEffect, useRef, useState } from "react";
 import type {
   CellType,
@@ -38,6 +40,7 @@ import { ImmunePanel, cellActivity } from "./ImmunePanel";
 import { practiceContent, createPractice } from "../content/practice";
 import { Tutorial } from "./Tutorial";
 type Modal =
+  | "anatomy"
   | "immune"
   | "help"
   | "settings"
@@ -85,7 +88,7 @@ export default function TacticalApp() {
   const [notice, setNotice] = useState(
     boot.error ??
       (boot.migrated
-        ? "已升級至免疫規則 2.2：保留原局時間與指令，新免疫反應由未啟動開始；首次儲存另留原始備份。"
+        ? "已升級至免疫規則 2.3：保留原局時間與指令，補上組織細胞與明確胞內區室；首次儲存另留原始備份。"
         : ""),
   );
   const [storage, setStorage] = useState(boot.save ? "已載入存檔" : "本機存檔");
@@ -103,6 +106,7 @@ export default function TacticalApp() {
   const input = useRef<SceneInput>({
     state: snapshot.state,
     selected,
+    inspect: modal === "anatomy",
     reduced: snapshot.settings.reduced,
     idle: snapshot.settings.idle,
     speed: snapshot.settings.speed,
@@ -111,6 +115,7 @@ export default function TacticalApp() {
   input.current = {
     state: controller.save.state,
     selected,
+    inspect: modal === "anatomy",
     reduced: snapshot.settings.reduced,
     idle: snapshot.settings.idle,
     speed: snapshot.settings.speed,
@@ -142,16 +147,20 @@ export default function TacticalApp() {
     } else if (pick.type === "host") {
       const h = s.hosts.find((h) => h.id === pick.id);
       if (!h) return;
-      if (selected && s.cells.some((u) => u.id === selected))
+      if (
+        selected &&
+        h.load > 0 &&
+        s.cells.some(
+          (u) => u.id === selected && ["nk", "cytotoxicT"].includes(u.kind),
+        )
+      )
         command({ type: "attack", cell: selected, target: h.id });
       else {
         setSelected(h.id);
+        setRegion(h.region);
+        setMode("command");
         setNotice(
-          h.apoptoticAt > 0
-            ? "此宿主已進入凋亡。"
-            : h.antigen === "self"
-              ? "健康宿主：保留 MHC-I、無感染抗原，不可攻擊。"
-              : `宿主抗原 ${h.antigen}，MHC-I ${h.mhc1 ? "保留" : "降低"}，壓力訊號 ${h.stressed ? "高" : "低"}。`,
+          `${tissueCellCatalog[h.kind].name} · ${hostStatus(h)}。按「局部剖視」查看細胞內部。`,
         );
       }
     } else if (pick.type === "colony") {
@@ -359,6 +368,11 @@ export default function TacticalApp() {
     setMenu(false);
     setSelected(undefined);
   }
+  function openAnatomy() {
+    controller.pause(true);
+    update(true);
+    setModal("anatomy");
+  }
   function togglePause() {
     controller.pause(!controller.save.paused);
     update(true);
@@ -404,8 +418,8 @@ export default function TacticalApp() {
       setRegion((nextContent ?? content).fields[0].id);
       setImported(true);
       setNotice(
-        JSON.parse(text).rules !== "2.2"
-          ? "已匯入並升級至規則 2.2；保留原局時間與指令，新免疫狀態由未啟動開始。"
+        JSON.parse(text).rules !== "2.3"
+          ? "已匯入並升級至規則 2.3；保留原局時間與指令，補上組織細胞；舊局不追算過去吞入的病原。"
           : "已匯入新版存檔，繼續遊玩時先維持戰術暫停。",
       );
     } catch (e) {
@@ -415,6 +429,7 @@ export default function TacticalApp() {
   const s = snapshot.state,
     cell = s.cells.find((u) => u.id === selected),
     colony = s.colonies.find((p) => p.id === selected),
+    tissueCell = s.hosts.find((h) => h.id === selected),
     field = content.fields.find((f) => f.id === region) ?? content.fields[0];
   const paused = snapshot.paused,
     result = s.result,
@@ -451,6 +466,7 @@ export default function TacticalApp() {
       data-selected={selected}
       data-autoseek={s.immunity.autoSeek}
       data-speed={snapshot.settings.speed}
+      data-internal-load={s.internal.reduce((n, p) => n + p.load, 0)}
     >
       <div className="t-scene" ref={host} data-testid="tactical-scene">
         <canvas
@@ -500,29 +516,45 @@ export default function TacticalApp() {
                   {selected === u.id ? content.cells[u.kind].name : "◇"}
                 </span>
                 {s.internal.some((p) => p.host === u.id) && (
-                  <small>胞內存活</small>
+                  <small>
+                    {s.internal.some(
+                      (p) => p.host === u.id && p.stage === "persistent",
+                    )
+                      ? "胞內存活"
+                      : "胞內處理"}
+                  </small>
                 )}
               </button>
             ))}
-            {s.hosts.map((h) => (
-              <button
-                key={h.id}
-                data-world-label={h.id}
-                data-host={h.id}
-                className="t-host-label"
-                onClick={() => pick({ type: "host", id: h.id })}
-              >
-                {h.apoptoticAt > 0
-                  ? "凋亡"
-                  : h.antigen === "self"
-                    ? "健康宿主"
-                    : !h.mhc1
-                      ? "MHC-I↓／壓力↑"
-                      : h.antigen === "viral-peptide-A"
-                        ? "相符抗原／MHC-I"
-                        : "不相符抗原／MHC-I"}
-              </button>
-            ))}
+            {s.hosts
+              .filter(
+                (h) =>
+                  h.load > 0 ||
+                  h.apoptoticAt > 0 ||
+                  h.id === selected ||
+                  (content.practice && !h.wall && h.kind !== "endothelial"),
+              )
+              .map((h) => (
+                <button
+                  key={h.id}
+                  data-world-label={h.id}
+                  data-host={h.id}
+                  className="t-host-label"
+                  onClick={() => pick({ type: "host", id: h.id })}
+                >
+                  {h.apoptoticAt > 0
+                    ? "凋亡"
+                    : h.antigen === "self"
+                      ? content.practice && !h.wall
+                        ? "健康宿主"
+                        : tissueCellCatalog[h.kind].name
+                      : !h.mhc1
+                        ? "MHC-I↓／壓力↑"
+                        : h.antigen === "viral-peptide-A"
+                          ? "相符抗原／MHC-I"
+                          : "不相符抗原／MHC-I"}
+                </button>
+              ))}
             {s.colonies.map((p) => (
               <button
                 key={p.id}
@@ -547,11 +579,11 @@ export default function TacticalApp() {
                 className="t-portal-label t-lymph-label"
                 data-world-label="lymph"
               >
-                淋巴引流 · 結內流程
+                組織側淋巴引流
               </span>
             )}
             <span className="t-portal-label" data-world-label="portal">
-              微血管增援入口
+              組織側 · 跨屏障增援
             </span>
           </div>
         )}
@@ -799,7 +831,18 @@ export default function TacticalApp() {
               ☷ <span>因果紀錄</span>
             </button>
           </div>
+          <button
+            className="t-space-caption"
+            data-testid="space-caption"
+            onClick={openAnatomy}
+          >
+            {content.tissue === "lung" ? "肺泡腔" : "黏膜腔面"} · 細胞外{" "}
+            <span>上皮／血管剖面 ↗</span>
+          </button>
           <div className="t-strategy-tools" aria-label="戰術輔助">
+            <button data-testid="anatomy-panel" onClick={openAnatomy}>
+              組織剖視
+            </button>
             <button
               data-testid="autoseek"
               aria-pressed={s.immunity.autoSeek}
@@ -898,7 +941,7 @@ export default function TacticalApp() {
                 );
               })}
               <small>
-                抵達後會由微血管沿通道走向防區。等待只在行動時推進。
+                由組織側微血管經跨屏障入口進入腔面；各層穿越採時間壓縮。等待只在行動時推進。
               </small>
             </section>
           )}
@@ -990,6 +1033,12 @@ export default function TacticalApp() {
                   </div>
                   <div className="t-context-actions">
                     <button
+                      onClick={openAnatomy}
+                      data-testid="inspect-selected"
+                    >
+                      ◉ <span>局部剖視</span>
+                    </button>
+                    <button
                       className={mode === "move" ? "active" : ""}
                       onClick={() =>
                         setMode(mode === "move" ? "command" : "move")
@@ -1010,6 +1059,37 @@ export default function TacticalApp() {
                       aria-label="所選細胞百科"
                     >
                       i
+                    </button>
+                  </div>
+                </>
+              ) : tissueCell ? (
+                <>
+                  <div className="t-dock-emblem">◎</div>
+                  <div className="t-selection-info">
+                    <small>
+                      {field.name} ·{" "}
+                      {tissueCell.layer === "vascular" ? "血管壁" : "上皮屏障"}
+                    </small>
+                    <h2>{tissueCellCatalog[tissueCell.kind].name}</h2>
+                    <p>
+                      {hostStatus(tissueCell)} · 健康{" "}
+                      {Math.round(tissueCell.health)}%
+                    </p>
+                  </div>
+                  <div className="t-context-actions">
+                    <button
+                      onClick={openAnatomy}
+                      data-testid="inspect-selected"
+                    >
+                      ◉ <span>局部剖視</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        setSelected(undefined);
+                        setNotice("");
+                      }}
+                    >
+                      取消選取
                     </button>
                   </div>
                 </>
@@ -1088,7 +1168,7 @@ export default function TacticalApp() {
                       {field.name} · {occupied(s, region)} 族群（含待到場）
                     </small>
                     <h2>選擇你的防線</h2>
-                    <p>點場上的細胞或菌群，直接下達指令。</p>
+                    <p>點免疫細胞下令；點組織細胞查看健康與內部。</p>
                   </div>
                   <div className="t-context-actions">
                     <button onClick={() => setModal("help")}>
@@ -1152,7 +1232,7 @@ export default function TacticalApp() {
               <b>協作提示</b>
               <p>
                 {s.tick < 20
-                  ? "先調理入口與深部菌群，再調入嗜中性球支援微血管防區。調理不直接殺菌，需要吞噬者接近。"
+                  ? "先調理入口與深部菌群，再調入嗜中性球支援肺泡壁前緣。調理不直接殺菌，需要吞噬者接近。"
                   : burden === 0
                     ? "防線清場了。可以等待資源與增援，或提前迎擊換取額外資源。"
                     : s.immunity.node.stage === "primed" &&
@@ -1258,6 +1338,22 @@ export default function TacticalApp() {
           }}
         />
       )}
+      {modal === "anatomy" && (
+        <Dialog title="人體組織與細胞剖視" wide onClose={() => setModal(null)}>
+          <AnatomyPanel
+            state={s}
+            content={content}
+            selected={selected}
+            onSelect={(id) => {
+              setSelected(id);
+              const h = s.hosts.find((h) => h.id === id);
+              if (h) setRegion(h.region);
+              setMode("command");
+              setNotice("");
+            }}
+          />
+        </Dialog>
+      )}
       {modal === "immune" && (
         <Dialog title="免疫反應與機制" onClose={() => setModal(null)} wide>
           <ImmunePanel
@@ -1359,8 +1455,9 @@ export default function TacticalApp() {
             <h3>防線備份</h3>
             <p>
               規則
-              2.2：舊戰術存檔會保留時間、單位及指令，新增免疫狀態從未啟動開始，自動尋敵預設關閉。第一次覆寫前，原始資料備份在本機
-              pre-2.2 key。
+              2.3：保留舊局時間、單位與指令，補上健康組織細胞及胞內區室；不追算已結束的吞噬。2.0／2.1
+              的免疫狀態由未啟動開始。第一次覆寫前，原始資料備份於本機 pre-2.3
+              key。
             </p>
             <p>
               {storage}

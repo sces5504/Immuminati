@@ -84,6 +84,19 @@ export const sources: Record<string, { name: string; url: string }> = {
 };
 export const entries: Entry[] = [
   {
+    id: "compartments",
+    name: "組織與胞內／胞外區室",
+    english: "Tissue and pathogen compartments",
+    keywords: "肺泡 上皮 內皮 細胞內 細胞外 吞噬體 細胞質 宿主 血管",
+    summary:
+      "肺泡腔、組織間質與血管腔都在細胞膜外；彼此由上皮或內皮屏障區隔。肺泡壁不是單一巨大細胞。",
+    mechanism:
+      "病原由胞外被吞噬後，先進入宿主膜內的吞噬體；攝入與殺死是兩個步驟。囊泡內存活與逃入細胞質需要不同機制，不能以模型重疊判定。抗原呈現、活病原與宿主健康也分別記錄。抗體／補體通常在胞外作用；NK／CD8 的合法目標是符合辨識條件的宿主細胞。",
+    scope:
+      "M1 以可選取肺泡上皮／血管內皮、區域健康與吞噬體處理呈現。組織剖視讀取權威狀態，圖像不按真實比例。病毒複製、釋放、胞內菌逃逸與單顆組織細胞修復尚未實作。",
+    sources: ["B5", "B11"],
+  },
+  {
     id: "prr",
     name: "模式辨識與 TLR",
     english: "Pattern recognition receptors · TLRs",

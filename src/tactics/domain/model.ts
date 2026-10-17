@@ -37,7 +37,21 @@ export interface Immunity {
   };
   antibodies: number;
 }
+export type TissueCellKind =
+  | "alveolarI"
+  | "alveolarII"
+  | "endothelial"
+  | "mucosal";
+export type IntracellularCompartment = "phagosome" | "cytosol" | "nucleus";
 export interface HostCell {
+  kind: TissueCellKind;
+  layer: "epithelium" | "vascular";
+  health: number;
+  wall?: { angle: number; radius: number; arc: number };
+  infection?: {
+    pathogen: string;
+    compartment: Exclude<IntracellularCompartment, "phagosome">;
+  };
   id: string;
   region: string;
   position: Vec;
@@ -80,6 +94,9 @@ export interface Arrival {
   at: number;
 }
 export interface Internal {
+  compartment: "phagosome" | "cytosol";
+  stage: "processing" | "persistent";
+  clearAt: number;
   id: string;
   host: string;
   load: number;
@@ -213,8 +230,8 @@ export interface TacticalSettings {
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "2.2";
-  content: "m1-tactics.3";
+  rules: "2.3";
+  content: "m1-tactics.4";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];

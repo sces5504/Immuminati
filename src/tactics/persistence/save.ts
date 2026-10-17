@@ -1,3 +1,4 @@
+import { populateTissue } from "../content/anatomy";
 import { z } from "zod";
 import type {
   TacticalContent,
@@ -87,7 +88,17 @@ const battle = z
       .max(1000),
     internal: z
       .array(
-        z.object({ id, host: id, load: integer(1000), pathogen: id }).strict(),
+        z
+          .object({
+            id,
+            host: id,
+            load: integer(1000),
+            pathogen: id,
+            compartment: z.enum(["phagosome", "cytosol"]).optional(),
+            stage: z.enum(["processing", "persistent"]).optional(),
+            clearAt: integer(10000).optional(),
+          })
+          .strict(),
       )
       .max(1000),
     immunity: z
@@ -124,6 +135,22 @@ const battle = z
             region: id,
             position: vec,
             antigen: id,
+            kind: z
+              .enum(["alveolarI", "alveolarII", "endothelial", "mucosal"])
+              .optional(),
+            layer: z.enum(["epithelium", "vascular"]).optional(),
+            health: num(100).optional(),
+            wall: z
+              .object({ angle: num(7), radius: num(15), arc: num(2) })
+              .strict()
+              .optional(),
+            infection: z
+              .object({
+                pathogen: id,
+                compartment: z.enum(["cytosol", "nucleus"]),
+              })
+              .strict()
+              .optional(),
             mhc1: z.boolean(),
             stressed: z.boolean(),
             load: integer(1000),
@@ -179,8 +206,13 @@ const battle = z
 const schema = z
   .object({
     schema: z.literal(2),
-    rules: z.enum(["2.0", "2.1", "2.2"]),
-    content: z.enum(["m1-tactics.1", "m1-tactics.2", "m1-tactics.3"]),
+    rules: z.enum(["2.0", "2.1", "2.2", "2.3"]),
+    content: z.enum([
+      "m1-tactics.1",
+      "m1-tactics.2",
+      "m1-tactics.3",
+      "m1-tactics.4",
+    ]),
     state: battle,
     paused: z.boolean(),
     undo: z.array(battle).max(10),
@@ -236,7 +268,24 @@ function check(s: TacticalState, c: TacticalContent) {
     fields.some((id) => !s.immunity.signals[id])
   )
     throw new Error("訊號區域資料不完整。");
-  if (!c.practice && s.hosts.length)
+  for (const p of s.internal) {
+    if (
+      p.stage === "processing" &&
+      (p.clearAt <= s.tick || p.compartment !== "phagosome")
+    )
+      throw new Error("胞內處理時間或區室不合法。");
+    if (p.stage === "persistent" && p.clearAt !== 0)
+      throw new Error("胞內存活狀態不合法。");
+  }
+  if (
+    s.hosts.some(
+      (h) =>
+        (h.load > 0 && !h.infection) ||
+        h.health !== (h.apoptoticAt ? 0 : s.health[h.region]),
+    )
+  )
+    throw new Error("宿主感染或組織健康資料不一致。");
+  if (!c.practice && s.hosts.some((h) => h.load > 0 || h.infection))
     throw new Error("此肺炎鏈球菌案例沒有病毒感染宿主。");
   if (s.immunity.node.stage !== "idle" && !s.immunity.node.antigen)
     throw new Error("呈遞缺少抗原。");
@@ -270,22 +319,60 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     "2.0": "m1-tactics.1",
     "2.1": "m1-tactics.2",
     "2.2": "m1-tactics.3",
+    "2.3": "m1-tactics.4",
   };
   if (versions[data.rules] !== data.content)
     throw new Error("規則與內容版本不一致。");
   const migrate = (state: typeof data.state): TacticalState => {
-    if (data.rules === "2.2" && (!state.immunity || !state.hosts))
+    if (
+      ["2.2", "2.3"].includes(data.rules) &&
+      (!state.immunity || !state.hosts)
+    )
       throw new Error("新版免疫狀態不完整。");
-    return {
+    if (
+      data.rules === "2.3" &&
+      (!state.hosts?.length ||
+        state.hosts.some(
+          (h) =>
+            !h.kind ||
+            !h.layer ||
+            h.health === undefined ||
+            (h.load > 0 && !h.infection),
+        ) ||
+        state.internal.some(
+          (p) => !p.compartment || !p.stage || p.clearAt === undefined,
+        ))
+    )
+      throw new Error("新版組織／區室狀態不完整。");
+    const migrated: TacticalState = {
       ...state,
       immunity: state.immunity ?? initialImmunity(c),
-      hosts: state.hosts ?? [],
+      hosts: (state.hosts ?? []).map((h) => ({
+        ...h,
+        kind: h.kind ?? "alveolarII",
+        layer: h.layer ?? "epithelium",
+        health: h.health ?? (h.apoptoticAt ? 0 : state.health[h.region]),
+        infection:
+          h.infection ??
+          (h.load > 0
+            ? { pathogen: "teaching-virus", compartment: "cytosol" }
+            : undefined),
+      })),
+      internal: state.internal.map((p) => ({
+        ...p,
+        compartment: p.compartment ?? "phagosome",
+        stage: p.stage ?? "persistent",
+        clearAt: p.clearAt ?? 0,
+      })),
     };
+    if (data.rules !== "2.3" && !migrated.hosts.some((h) => h.wall))
+      populateTissue(migrated, c);
+    return migrated;
   };
   const save: TacticalSave = {
     ...data,
-    rules: "2.2",
-    content: "m1-tactics.3",
+    rules: "2.3",
+    content: "m1-tactics.4",
     state: migrate(data.state),
     undo: data.undo.map(migrate),
   };
@@ -314,7 +401,7 @@ export function readTactical(c: TacticalContent): {
     return value
       ? {
           save: parseTactical(value, c),
-          migrated: JSON.parse(value).rules !== "2.2",
+          migrated: JSON.parse(value).rules !== "2.3",
         }
       : {};
   } catch (e) {
@@ -332,10 +419,10 @@ export function writeTactical(save: TacticalSave) {
     }
     if (
       previous &&
-      previousRules !== "2.2" &&
-      !localStorage.getItem("immuminati:tactics:pre-2.2")
+      previousRules !== "2.3" &&
+      !localStorage.getItem("immuminati:tactics:pre-2.3")
     )
-      localStorage.setItem("immuminati:tactics:pre-2.2", previous);
+      localStorage.setItem("immuminati:tactics:pre-2.3", previous);
     localStorage.setItem(TACTICS_KEY, JSON.stringify(save));
     return "已儲存";
   } catch {

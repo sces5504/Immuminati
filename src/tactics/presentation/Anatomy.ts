@@ -21,7 +21,7 @@ const adjacentSacs = [
   [-21, 19, 6, 6],
   [-28, 5, 6, 6],
 ];
-function height(x: number, z: number, c: TacticalContent) {
+export function anatomyHeight(x: number, z: number, c: TacticalContent) {
   let h = tissueFloor(x, z) - 0.22;
   if (c.tissue !== "lung") return h;
   let septaPower = 0;
@@ -96,7 +96,7 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i),
       z = pos.getZ(i),
-      h = height(x, z, c);
+      h = anatomyHeight(x, z, c);
     pos.setY(i, h);
     const inField = Math.min(
       ...c.fields.map(
@@ -172,19 +172,9 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
               0.3 * Math.cos(a * 5 + 0.4);
           const x = f.center.x + Math.cos(a) * r,
             z = f.center.z + Math.sin(a) * r;
-          pts.push(new THREE.Vector3(x, height(x, z, c) - 0.015, z));
+          pts.push(new THREE.Vector3(x, anatomyHeight(x, z, c) - 0.015, z));
         }
         tube(pts, 0.04, vesselMat, true);
-      }
-      for (let j = 0; j < 12; j++) {
-        const a = (j / 12) * Math.PI * 2 + 0.1,
-          r = f.radius + 1;
-        const x = f.center.x + Math.cos(a) * r,
-          z = f.center.z + Math.sin(a) * r;
-        const nucleus = own(new THREE.SphereGeometry(1, 12, 8), nuclei);
-        nucleus.position.set(x, height(x, z, c) + 0.025, z);
-        nucleus.scale.set(0.29, 0.045, 0.14);
-        nucleus.rotation.y = -a;
       }
     }
   }
@@ -210,8 +200,8 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
             x2 = cx + edge * Math.cos(b),
             z2 = cz + edge * Math.sin(b);
           vertices.push(
-            new THREE.Vector3(x1, height(x1, z1, c) + 0.025, z1),
-            new THREE.Vector3(x2, height(x2, z2, c) + 0.025, z2),
+            new THREE.Vector3(x1, anatomyHeight(x1, z1, c) + 0.025, z1),
+            new THREE.Vector3(x2, anatomyHeight(x2, z2, c) + 0.025, z2),
           );
         }
       }
@@ -236,14 +226,37 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
       villus.scale.set(1.1, 2.8, 1.1);
     }
   }
-  // The vascular entry is a living endothelial tube with an identifiable lumen and junctions.
+  // A visible tissue-side strip separates vascular/lymph access from the air-facing lumen.
+  const stripMat = new THREE.MeshStandardMaterial({
+    color: 0xb7a0ba,
+    roughness: 0.7,
+  });
+  const strip = own(new THREE.PlaneGeometry(24, 4.2), stripMat);
+  strip.rotation.x = -Math.PI / 2;
+  strip.position.set(0, 0.06, c.portal.z + 0.25);
+  const borderMat = new THREE.MeshStandardMaterial({
+    color: 0xe6cad7,
+    roughness: 0.5,
+  });
+  tube(
+    [
+      new THREE.Vector3(-11, 0.25, 16.5),
+      new THREE.Vector3(-3, 0.25, 16.5),
+      new THREE.Vector3(3, 0.25, 16.5),
+      new THREE.Vector3(11, 0.25, 16.5),
+    ],
+    0.1,
+    borderMat,
+  );
+  // The vascular entry is on the tissue side; entry through barriers is compressed, not an open airway.
+
   const vesselPoints = [
-    [-23, 18],
-    [-13, 16.8],
-    [-3, 16],
-    [4, 16],
-    [13, 18],
-    [24, 17],
+    [-23, 20],
+    [-13, 19.4],
+    [-3, 18.8],
+    [4, 18.8],
+    [13, 20],
+    [24, 20],
   ].map(([x, z]) => new THREE.Vector3(x, 0.32, z));
   tube(vesselPoints, 0.55, vesselMat);
   tube(vesselPoints, 0.64, endothelium);

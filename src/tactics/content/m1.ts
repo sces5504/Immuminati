@@ -20,13 +20,13 @@ export const m1: TacticalContent = {
     },
     {
       id: "c",
-      name: "微血管防線",
+      name: "肺泡壁前緣",
       center: { x: 0, z: 8 },
       radius: 7.8,
     },
   ],
-  portal: { x: 0, z: 15 },
-  lymphExit: { x: -4, z: 12 },
+  portal: { x: 0, z: 18 },
+  lymphExit: { x: -5, z: 18 },
   cells: cellCatalog,
   initial: [
     { kind: "macrophage", region: "a", offset: { x: -1, z: 3 } },

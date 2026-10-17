@@ -18,8 +18,8 @@ export class TacticalController {
   ) {
     this.save = save ?? {
       schema: 2,
-      rules: "2.2",
-      content: "m1-tactics.3",
+      rules: "2.3",
+      content: "m1-tactics.4",
       state: createTactical(content, 1),
       paused: true,
       undo: [],

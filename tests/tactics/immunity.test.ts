@@ -219,6 +219,9 @@ describe("immune roles and causal prerequisites", () => {
         host: s.cells[0].id,
         load: 3,
         pathogen: m1.pathogen.id,
+        compartment: "phagosome",
+        stage: "persistent",
+        clearAt: 0,
       },
     ];
     s.colonies = [];
@@ -240,7 +243,7 @@ describe("immune roles and causal prerequisites", () => {
       delete s.hosts;
     }
     const migrated = parseTactical(JSON.stringify(raw), m1);
-    expect(migrated.rules).toBe("2.2");
+    expect(migrated.rules).toBe("2.3");
     expect(migrated.state.immunity.autoSeek).toBe(false);
     expect(migrated.state.energy).toBe(4);
     expect(migrated.undo[0].energy).toBe(5);

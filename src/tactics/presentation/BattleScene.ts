@@ -1,7 +1,12 @@
+import {
+  makeTissueActor,
+  updateTissueActor,
+  disposeTissueActor,
+} from "./TissueGeometry";
 import * as THREE from "three";
 import { placeFieldLabel } from "./labelLayout";
 import { membraneGeometry, lymphoid } from "./CellGeometry";
-import { buildAnatomy, tissueFloor } from "./Anatomy";
+import { buildAnatomy, tissueFloor, anatomyHeight } from "./Anatomy";
 import type {
   Cell,
   Colony,
@@ -13,6 +18,7 @@ import type {
 export interface SceneInput {
   state: TacticalState;
   selected?: string;
+  inspect?: boolean;
   reduced: boolean;
   idle: boolean;
   speed: number;
@@ -848,76 +854,23 @@ export class BattleScene {
     for (const [id, root] of this.hosts)
       if (!s.hosts.some((h) => h.id === id)) {
         this.scene.remove(root);
+        disposeTissueActor(root);
         this.hosts.delete(id);
       }
     for (const host of s.hosts) {
       let root = this.hosts.get(host.id);
       if (!root) {
-        root = new THREE.Group();
-        const mat = new THREE.MeshPhysicalMaterial({
-          color: host.antigen === "self" ? 0xd5a8b4 : 0xba8ca8,
-          roughness: 0.5,
-          transparent: true,
-          opacity: 0.75,
-          clearcoat: 0.2,
-        });
-        const shell = mesh(
-          sphere,
-          mat,
-          new THREE.Vector3(0, 0.8, 0),
-          new THREE.Vector3(1.65, 0.75, 1.3),
-        );
-        root.add(shell);
-        const nuc = material(0x86668e);
-        root.add(
-          mesh(
-            sphere,
-            nuc,
-            new THREE.Vector3(-0.3, 0.95, 0),
-            new THREE.Vector3(0.5, 0.4, 0.5),
-          ),
-        );
-        const fragmentMat = material(0x9c718e);
-        for (let i = 0; i < 6; i++) {
-          const a = (i / 6) * Math.PI * 2;
-          const fragment = mesh(
-            smallSphere,
-            fragmentMat,
-            new THREE.Vector3(Math.cos(a), 0.6, Math.sin(a)),
-            new THREE.Vector3(0.33, 0.3, 0.33),
-          );
-          fragment.name = "fragment";
-          fragment.visible = false;
-          root.add(fragment);
-        }
-        this.ownedMaterials.push(mat, nuc, fragmentMat);
+        root = makeTissueActor(host, this.content);
         this.scene.add(root);
         this.hosts.set(host.id, root);
       }
-      root.position.set(
-        host.position.x,
-        terrain(host.position.x, host.position.z),
-        host.position.z,
+      updateTissueActor(
+        root,
+        host,
+        s.tick,
+        input.selected === host.id,
+        !!input.inspect && input.selected === host.id,
       );
-      const dying = host.apoptoticAt > 0,
-        p = dying ? Math.min(1, (s.tick - host.apoptoticAt) / 12) : 0;
-      root.children[0].scale.set(
-        1.65 * (1 - p * 0.55),
-        0.75 * (1 - p * 0.6),
-        1.3 * (1 - p * 0.55),
-      );
-      root.children.forEach((child) => {
-        if (child.name === "fragment") {
-          child.visible = p > 0.3;
-          child.scale.setScalar(0.3 + Math.sin(p * Math.PI) * 0.1);
-        }
-      });
-      (
-        root.children[0] as THREE.Mesh<
-          THREE.BufferGeometry,
-          THREE.MeshPhysicalMaterial
-        >
-      ).material.opacity = 0.75 - p * 0.45;
     }
     for (const f of this.content.fields) {
       const m = this.fields.get(f.id)!;
@@ -963,7 +916,11 @@ export class BattleScene {
     const items = [
       ...s.cells.map((u) => ({ id: u.id, p: u.position, y: 3.1 })),
       ...s.colonies.map((p) => ({ id: p.id, p: p.position, y: 1 })),
-      ...s.hosts.map((h) => ({ id: h.id, p: h.position, y: 2.5 })),
+      ...s.hosts.map((h) => ({
+        id: h.id,
+        p: h.position,
+        y: anatomyHeight(h.position.x, h.position.z, this.content) + 0.65,
+      })),
       ...this.content.fields.map((f) => ({
         id: `field-${f.id}`,
         p: { x: f.center.x, z: f.center.z - 5.8 },
@@ -995,7 +952,7 @@ export class BattleScene {
     const rect = this.host.getBoundingClientRect();
     const overlays =
       this.host.parentElement?.querySelectorAll<HTMLElement>(
-        ".t-hud,.t-objective,.t-tactical-hint,.t-field-tools,.t-strategy-tools,.t-arrival-queue,.t-camera-controls,.t-camera-hint,.t-command-dock,.t-order-banner,.t-tutorial:not([hidden]),.t-recruit-card,.t-event-ribbon",
+        ".t-hud,.t-objective,.t-tactical-hint,.t-field-tools,.t-strategy-tools,.t-arrival-queue,.t-camera-controls,.t-camera-hint,.t-command-dock,.t-order-banner,.t-tutorial:not([hidden]),.t-recruit-card,.t-event-ribbon,.t-space-caption",
       ) ?? [];
     for (const overlay of overlays) {
       const r = overlay.getBoundingClientRect();
@@ -1160,7 +1117,7 @@ export class BattleScene {
         type: "host" as const,
         id: h.id,
         point: h.position,
-        y: 1,
+        y: anatomyHeight(h.position.x, h.position.z, this.content) + 0.35,
       })),
       ...s.colonies.map((u) => ({
         type: "colony" as const,
@@ -1203,6 +1160,7 @@ export class BattleScene {
       a.lobes.dispose();
       a.granules.dispose();
     }
+    for (const h of this.hosts.values()) disposeTissueActor(h);
     for (const b of this.bacteria.values()) {
       b.core.dispose();
       b.capsule.dispose();

@@ -1,8 +1,18 @@
-# Immuminati 開發交接 v2.2
+# Immuminati 開發交接 v2.3
 
 先讀 [AGENTS.md](../AGENTS.md)、[主規格](Immuminati-spec.md)、[美術與動畫](art-direction/C-art-and-animation.md)，實際檢視 C 圖與本輪截圖。最新八項任務保留立體戰術 UI／操作與柔光風格，但明確要求改善組織／細胞模型，並增加免疫機制與教學；優先於 v2.1「模型不改」限制。禁止整套 RTS 重製或退回佔位球體。
 
 Repo `sces5504/Immuminati`，通常 `/workspace/Immuminati`，開工確認 Git／環境與當次使用者要求。正式入口 `src/tactics`；延續 main，不 hard reset 回舊美術基準。已完成的抓取式拖曳與無區域／全場名額限制不可回退。
+
+## 最新接續：組織與區室 v2.3
+
+使用者要求每關一致顯示宿主人體細胞，避免把肺泡腔誤認成細胞內。最新實作／證據見 [TISSUE-COMPARTMENTS.md](TISSUE-COMPARTMENTS.md)，以其完成狀態為準，以下 v2.2 已交付段落為歷史。
+
+新增 `content/anatomy.ts` 共用健康組織、區室名稱與健康映射；`presentation/TissueGeometry.ts` 對應每顆宿主；`ui/AnatomyPanel.tsx` 為解剖剖面、可選人體／免疫細胞與權威局部剖視。所有器官都產生組織細胞，但其他器官只是架構／基本 adapter，沒有新增關卡。
+
+M1 吞入後建立 `internal` 的 phagosome／processing／clearAt；到期才殺菌並減少總活負荷。`persistent` 不自動清除，IFN-γ 只支援巨噬的持續吞噬體來源。HostCell 含種類、層次、區域健康及可選 infection 的 cytosol／nucleus；M1 不容許病毒宿主。普通肺泡上皮與血管內皮均 load=0、self 抗原，不能受 NK／CD8 攻擊。
+
+存檔目前規則 2.3／內容 m1-tactics.4；原 key 不變。接受原有配對 2.0/.1、2.1/.2、2.2/.3，顯式補上健康組織／現存胞內來源區室，不追算過去吞噬；state 與 undo 都遷移，原始文字另留 `pre-2.3`（舊 `pre-2.2` 保留）。
 
 ## 本輪架構
 

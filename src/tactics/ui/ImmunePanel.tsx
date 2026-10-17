@@ -117,7 +117,9 @@ export function ImmunePanel({
       <section>
         <h3>胞外與胞內，目標不同</h3>
         <p>
-          M1：莢膜肺炎鏈球菌在胞外；C3b／抗體改善吞噬，厚細胞壁使終末補體膜攻擊複合體不能當成通用清菌技。吞入後本案例可清除；囊泡存活病原需要額外活化。NK／CD8
+          M1：莢膜肺炎鏈球菌在胞外；C3b／抗體改善吞噬，厚細胞壁使終末補體膜攻擊複合體不能當成通用清菌技。吞入後先進入吞噬體，嗜中性球
+          2 秒、巨噬／樹突細胞 3
+          秒後才完成本案例殺菌（教學壓縮時間），處理前仍計入活負荷；囊泡存活病原需要額外活化。NK／CD8
           則以感染宿主為目標，形成免疫突觸、穿孔素協助顆粒酶進入並誘導凋亡。
         </p>
         <button onClick={onPractice}>進入 NK／CD8 機制演練</button>
@@ -128,6 +130,7 @@ export function ImmunePanel({
       </section>
       <div className="t-immune-links">
         {[
+          ["compartments", "胞內／胞外與組織"],
           ["prr", "PRR／TLR"],
           ["cytokines", "細胞激素"],
           ["opsonization", "補體與調理"],

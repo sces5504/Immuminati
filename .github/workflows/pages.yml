@@ -86,6 +86,35 @@ jobs:
         with:
           name: immune-${{ matrix.device }}-evidence
           path: docs/evidence/ci/immune-${{ matrix.device }}/
+  anatomy:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [desktop, mobile]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:anatomy
+        env:
+          DEVICE: ${{ matrix.device }}
+          EVIDENCE_DIR: ../docs/evidence/ci/anatomy-${{ matrix.device }}/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: anatomy-${{ matrix.device }}-evidence
+          path: docs/evidence/ci/anatomy-${{ matrix.device }}/
   animation:
     needs: verify
     runs-on: ubuntu-latest
@@ -108,7 +137,7 @@ jobs:
           path: docs/evidence/ci/animation/
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [verify, browser, immune, animation]
+    needs: [verify, browser, immune, anatomy, animation]
     runs-on: ubuntu-latest
     permissions:
       pages: write

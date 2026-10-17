@@ -124,7 +124,13 @@ export function updateImmunity(s: TacticalState, c: TacticalContent) {
       dist(cell.position, a.center) < dist(cell.position, b.center) ? a : b,
     ).id;
     if (s.immunity.signals[region].ifng >= 20) {
-      const internal = s.internal.find((p) => p.host === cell.id && p.load > 0);
+      const internal = s.internal.find(
+        (p) =>
+          p.host === cell.id &&
+          p.load > 0 &&
+          p.stage === "persistent" &&
+          p.compartment === "phagosome",
+      );
       if (internal && s.tick % 15 === 0) {
         internal.load--;
         emit(

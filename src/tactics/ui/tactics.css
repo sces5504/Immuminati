@@ -2468,3 +2468,200 @@
   visibility: hidden;
   pointer-events: none;
 }
+
+/* Anatomy stays part of the original scene and selection vocabulary. */
+.t-space-caption {
+  position: absolute;
+  left: 22px;
+  bottom: 230px;
+  z-index: 15;
+  min-height: 44px;
+  max-width: 260px;
+  text-align: left;
+  padding: 8px 12px;
+  border: 1px solid #c9e2df66;
+  border-radius: 8px;
+  background: #243b50e8;
+  color: #d9edeb;
+  font-size: 12px;
+}
+.t-space-caption span {
+  display: block;
+  font-size: 10px;
+  color: #b0cece;
+  margin-top: 3px;
+}
+.t-anatomy-panel {
+  padding: 0 22px 24px;
+  color: #d5e2ed;
+}
+.t-anatomy-panel p {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.t-anatomy-panel h3 {
+  font-size: 15px;
+  color: #d9ede8;
+  margin: 18px 0 10px;
+}
+.t-anatomy-intro {
+  margin-top: 0;
+}
+.t-anatomy-section {
+  width: 100%;
+  max-height: 270px;
+  display: block;
+}
+.t-anatomy-section text {
+  font-size: 15px;
+  font-family: inherit;
+}
+.t-anatomy-section .t-svg-small,
+.t-cutaway .t-svg-small {
+  font-size: 11px;
+}
+.t-anatomy-note {
+  color: #aabfcf;
+  font-size: 11px !important;
+}
+.t-anatomy-columns {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 20px;
+}
+.t-tissue-list {
+  max-height: 260px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #a5c5cb33;
+  border-radius: 8px;
+}
+.t-tissue-list button {
+  width: 100%;
+  min-height: 58px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+  padding: 9px 10px;
+  background: #23384b;
+  color: #d6e5ee;
+  border: 0;
+  border-bottom: 1px solid #a5c5cb22;
+}
+.t-tissue-list small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+  color: #a6c1c9;
+  margin-top: 4px;
+}
+.t-tissue-list b {
+  text-align: right;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.t-tissue-list [aria-pressed="true"],
+.t-inspect-immune [aria-pressed="true"] {
+  background: #3b5a64;
+  outline: 1px solid #b6eadd;
+  outline-offset: -2px;
+}
+.t-inspect-immune {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.t-inspect-immune button {
+  min-height: 44px;
+  padding: 6px 10px;
+  font-size: 11px;
+  background: #293e53;
+  border: 1px solid #bdd9eb44;
+  border-radius: 6px;
+  color: #d5e5eb;
+}
+.t-cutaway svg {
+  width: 100%;
+  display: block;
+}
+.t-cutaway text {
+  font-size: 14px;
+  font-family: inherit;
+}
+.t-cutaway p {
+  padding: 10px;
+  border-left: 2px solid #afdcd3;
+  background: #24394b;
+}
+.t-anatomy-panel details {
+  padding-top: 14px;
+  font-size: 12px;
+}
+.t-anatomy-panel summary {
+  min-height: 44px;
+  padding-top: 12px;
+  cursor: pointer;
+}
+@media (max-width: 760px) {
+  .t-space-caption {
+    left: 10px;
+    bottom: 202px;
+    max-width: 190px;
+    min-height: 44px;
+    font-size: 10px;
+  }
+  .t-space-caption span {
+    font-size: 9px;
+  }
+  .t-anatomy-panel {
+    padding: 0 12px 18px;
+  }
+  .t-anatomy-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .t-anatomy-panel p {
+    font-size: 12px;
+  }
+  .t-tissue-list {
+    max-height: 180px;
+  }
+  .t-strategy-tools button {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+}
+/* The inherited dialog is light: retain readable text and explicit selected states. */
+.t-anatomy-panel {
+  color: #354d65;
+}
+.t-anatomy-panel h3 {
+  color: #305269;
+}
+.t-anatomy-panel .t-anatomy-note {
+  color: #5e718a;
+}
+.tactical-root dialog .t-tissue-list button,
+.tactical-root dialog .t-inspect-immune button {
+  color: #dbe8ef;
+}
+.tactical-root dialog .t-tissue-list button[aria-pressed="true"],
+.tactical-root dialog .t-inspect-immune button[aria-pressed="true"],
+.tactical-root dialog .t-tissue-list button:hover,
+.tactical-root dialog .t-inspect-immune button:hover {
+  background: #3b5a64;
+  color: #effdf8;
+}
+.t-cutaway p {
+  color: #d9e9eb;
+}
+.t-context-actions button[data-testid="inspect-selected"] {
+  min-width: 44px;
+  min-height: 44px;
+}
+@media (max-width: 760px) {
+  .t-space-caption {
+    bottom: 286px;
+  }
+}

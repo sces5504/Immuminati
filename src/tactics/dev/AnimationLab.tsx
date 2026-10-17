@@ -50,9 +50,14 @@ export default function AnimationLab() {
     const fixture = sample(survives);
     fixture.s.eventId = current.current.eventId + 10;
     fixture.s.events = [];
-    setState(stepTactical(fixture.s, fixture.c));
+    let resolved = stepTactical(fixture.s, fixture.c);
+    setState(resolved);
     setBusy(true);
-    timer.current = setTimeout(() => setBusy(false), 2800);
+    timer.current = setTimeout(() => {
+      for (let i = 0; i < 15; i++) resolved = stepTactical(resolved, fixture.c);
+      setState(resolved);
+      setBusy(false);
+    }, 2800);
   }
   const internal = state.internal.reduce((n, p) => n + p.load, 0);
   return (

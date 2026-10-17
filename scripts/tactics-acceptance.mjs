@@ -131,7 +131,7 @@ try {
     });
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.deepEqual((await save(page)).state, pristine.state);
-    assert.equal((await save(page)).rules, "2.2");
+    assert.equal((await save(page)).rules, "2.3");
     record(name + ": zero-tick legacy imports can resume without restarting");
     await page.screenshot({ path: dir + name + "-field.png" });
     console.log("CHECK", name, "idle capture");
