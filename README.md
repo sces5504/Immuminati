@@ -1,43 +1,47 @@
-# Immuminati
+# Immuminati · 微觀防線
 
-可玩 M1（肺炎鏈球菌，佔位美術）的混合型 RTS＋可暫停即時戰略。
+**下一版改為「混合型 RTS ＋ 可暫停即時戰略」。** 2026-10-17 本次先更新規格，供另一個 AI 從頭重建；新玩法尚未實作。C「柔光微觀立體」保留為最終方向；先用簡單、可替換模型完成可玩版本，之後由另一個美術 agent 精修。地圖拖曳需修正，區域單位上限取消。
 
-[直接遊玩 GitHub Pages](https://sces5504.github.io/Immuminati/) · [主規格 v2.0](docs/Immuminati-spec.md) · [實作與驗證紀錄](docs/RTS-M1-DELIVERY.md) · [素材替換交接](docs/RTS-ART-HANDOFF.md)
+## 新版開工入口
 
-細胞自主偵測、移動、接觸與吞噬。玩家隨時暫停，安排調理、募集、位置／目標及反應政策。CXCL8 擴散場影響趨化，內皮決定募集啟動；蛋白抗原 DC→T→B→抗體經多階段與交通延遲支援。沒有回合 AP 或同區單位名額。
+1. [開發指引 AGENTS.md](AGENTS.md)
+2. [唯一現行玩法規格 v2.0](docs/Immuminati-spec.md)
+3. [C 美術、建模改善與動畫規格 v2.0](docs/art-direction/C-art-and-animation.md)
+4. [交接與可直接貼給新 AI 的開工 prompt](docs/CLOUD-HANDOFF.md)
+5. 實際檢視 [C 參考圖](docs/art-direction/c-soft-micro-3d.png)；圖中的回合／AP 介面不是新規則。
 
-## 啟動
+新版目標是自主細胞 AI、訊號場與趨化、延遲募集、發炎取捨、連動淋巴結，以及隨時暫停與 1×／2×／4×。玩家協調反應，也能指揮關鍵單位；沒有同區格位或容量預留。先交付完整可玩的 M1，再擴充指定六關；最終全部開場可選，沒有永久戰力升級或裝備。
 
-Node 24（已實測），npm lockfile 固定依賴。
+## 目前公開版本是舊原型
+
+[GitHub Pages 舊原型](https://sces5504.github.io/Immuminati/) 仍可開啟。它的 `src/tactics`、每區／全場名額、模型、速度與流程不符合 v2.0，不代表新的 RTS 已完成；新規格不會因本次文件修改自動出現在網頁。
+
+現有專案以 Node 24、package-lock.json 鎖定依賴：
 
 ```sh
 npm ci
 npm run dev
-# http://localhost:5173/Immuminati/
+```
+
+開啟 `http://localhost:5173/Immuminati/`。目前驗證與預覽命令：
+
+```sh
 npm run verify
+npm run preview
 npx playwright install --with-deps chromium
 npm run test:browser
 npm run test:animation
-npm run build
-npm run preview
-# http://localhost:4173/Immuminati/
 ```
 
-獨立素材預覽：`/Immuminati/#visual-lab`，或 `npm run preview:art`。可單步看包覆／吞入／清除與受控胞內存活、調整速度／動態及切換替換 provider。
+Production preview 預設 `http://localhost:4173/Immuminati/`。這些測試目前驗證舊原型，重建時需依 v2.0 更新，不以保住舊容量斷言為目標。手機瀏覽器腳本是 viewport／touch 模擬，不等同真機測試。
 
-## 操作
+## 歷史資料與相容性
 
-- 點選細胞或使用「細胞名單」明確選取密集對象。選細胞後「移動到此」，再點戰場；拖曳只平移，不下令。
-- 拖右時地形也向右；桌面與觸控共用相同螢幕座標。按鈕可放大、縮小及重設。
-- 點選病原使用有限補體調理；其表面標記與後續吞噬分開。募集先選支援位置，再等待活化內皮、血管動員與到場。
-- 暫停時可規劃多指令、撤銷；恢復時依序提交。速度 1×／2×／4×，百科等遮擋面板與背景切換安全暫停。
-- 淋巴結查看抗原與各階段等待。支援不能跳過成熟、遷移、活化、分化或交通。
-- 本機自動續玩、JSON 匯入／匯出；新 key 為 `immuminati:rts:v3`，保留舊 v1／tactics v2，不轉換不同規則的舊局。
+- [舊即時戰術原型決策](docs/TACTICAL-REDESIGN.md)／[其實作與驗證](docs/TACTICAL-VALIDATION.md)
+- [首版實作](docs/IMPLEMENTATION.md)／[首版驗證](docs/VALIDATION.md)
+- [ImmuneQuest 截圖參考觀察](docs/art-direction/ImmuneQuest-reference-review.md)
+- [舊原型桌面](docs/evidence/tactics/desktop-field.png)／[手機](docs/evidence/tactics/mobile-field.png)／[舊短剪輯](docs/evidence/tactics/m1-highlights.webm)
 
-## 範圍與架構
+歷史截圖、影片及測試結果不作新版品質或完成證據。舊存檔 `immuminati:save:v1` 與 `immuminati:tactics:v2` 必須保留；新規則採獨立 schema／key，不靜默轉換或覆寫。
 
-`src/rts/{domain,content,engine,application,presentation,ui,persistence}` 分離。引擎固定 0.2 秒、明確種子與帶步號指令；動畫不決定規則結果。第一階段使用原創 SVG 2.5D 可替換佔位，精緻 C 美術由後續 agent 接手，核心動作已在本階段實作。
-
-M1 可玩；M2–M6 題材／百科開場可查，入口明示開發中。舊 `src/tactics`、舊測試與歷史證據保留，不是新規格完成證據。`npm test` 僅執行新的 RTS 測試，舊測試保留為 `npm run test:legacy`。
-
-CI 在 main 驗證後部署至 Pages `/Immuminati/`，另跑公開頁面操作檢查。實際執行環境、畫面／影片、測試結果與限制見本次交付紀錄；觸控模擬不是實體手機驗證。
+Pages base 維持 `/Immuminati/`。重建後需驗證資產、重新整理及公開網址；本次只有文件變更。

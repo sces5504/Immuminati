@@ -1,21 +1,18 @@
 {
   "name": "immuminati",
-  "version": "0.3.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run tests/rts",
+    "test": "vitest run",
     "build": "npm run typecheck && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "verify": "npm run test && npm run build",
-    "test:browser": "node scripts/rts-acceptance.mjs",
-    "test:animation": "node scripts/rts-animation.mjs",
-    "test:legacy-browser": "node scripts/acceptance.mjs",
-    "test:legacy": "vitest run tests --exclude tests/rts/**",
-    "preview:art": "vite --host 0.0.0.0 --open /Immuminati/#visual-lab",
-    "test:extra": "node scripts/rts-extra-checks.mjs"
+    "test:browser": "node scripts/tactics-acceptance.mjs",
+    "test:animation": "node scripts/tactics-animation.mjs",
+    "test:legacy-browser": "node scripts/acceptance.mjs"
   },
   "dependencies": {
     "react": "19.2.0",

@@ -22,7 +22,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Play published RTS M1 on desktop and mobile
+      - name: Play published tactical M1 on desktop and mobile
         run: npm run test:browser
         env:
           BASE_URL: https://sces5504.github.io/Immuminati/
@@ -30,4 +30,4 @@ jobs:
         if: always()
         with:
           name: live-pages-evidence
-          path: docs/evidence/rts/
+          path: docs/evidence/tactics/
