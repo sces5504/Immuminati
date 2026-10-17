@@ -93,16 +93,23 @@ try {
       page.setDefaultTimeout(30000);
       const errors = [],
         bad = [];
-      page.on("pageerror", (e) => errors.push(e.message));
+      page.on("pageerror", (e) => {
+        errors.push(e.message);
+        void log("PAGEERROR", device, id, e.stack);
+      });
       page.on("response", (r) => {
         if (r.status() >= 400) bad.push([r.status(), r.url()]);
       });
       await page.clock.install({ time: new Date("2030-01-01T00:00:00Z") });
+      // Pause the empty document before navigation: no live RAF can race the clock handoff.
+      await page.clock.pauseAt(new Date("2030-01-01T00:01:00Z"));
       await page.goto(target);
+      await page.clock.runFor(200);
       await page
         .locator(".t-case-cards button")
         .nth(Number(id.slice(1)) - 1)
         .click();
+      await page.clock.runFor(200);
       const read = () =>
         page.evaluate(() =>
           JSON.parse(localStorage.getItem("immuminati:tactics:v2")),
@@ -155,7 +162,7 @@ try {
       await page.getByRole("button", { name: "關閉視窗", exact: true }).click();
       await page.getByTestId("speed-toggle").click();
       // Controlled browser clock drives the actual production RAF controller. No rule state injection.
-      await page.clock.pauseAt(new Date("2030-01-01T01:00:00Z"));
+      // The document has used the paused clock since bootstrap.
       const tick = async () =>
         Number(await page.locator(".tactical-root").getAttribute("data-tick"));
       const click = async (locator) => locator.evaluate((el) => el.click());
