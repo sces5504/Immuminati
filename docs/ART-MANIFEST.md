@@ -1,6 +1,6 @@
 # M1 素材與動畫交付
 
-> **歷史首版素材清單。** 本檔不代表新 RTS 的素材或品質已驗收；目前模型需依 [C 美術規格 v2.0](art-direction/C-art-and-animation.md) 改善。現行玩法見 [主規格](Immuminati-spec.md)，重建後另記實際素材與缺項，不沿用以下容量／回合事件。
+> **歷史首版 SVG 素材清單。** 正式保留基準是 src/tactics 的立體戰術版，不是本檔記錄的更早回合版；見 [展示保留規格](art-direction/C-art-and-animation.md) 與 [主規格 v2.1](Immuminati-spec.md)。本檔不代表後續新增功能已完成。
 
 已實際檢視 `art-direction/c-soft-micro-3d.png`。遊戲使用冷白／海軍藍介面、亮藍指令、玫瑰粉紫組織、半透明紫藍細胞膜、帶體積高光的細胞核與顆粒，沒有把參考圖切成背景或點擊熱區。
 
