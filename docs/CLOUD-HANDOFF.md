@@ -8,7 +8,7 @@ Repo `sces5504/Immuminati`，通常 `/workspace/Immuminati`，開工確認 Git�
 
 使用者要求每關一致顯示宿主人體細胞，避免把肺泡腔誤認成細胞內。最新實作／證據見 [TISSUE-COMPARTMENTS.md](TISSUE-COMPARTMENTS.md)，以其完成狀態為準，以下 v2.2 已交付段落為歷史。
 
-v2.3 程式 `9425293` 已通過 [CI 39037490956](https://github.com/sces5504/Immuminati/actions/runs/39037490956) 並部署 Pages：59 項單元測試、原操作 28 項、剖視 10 項、免疫流程 10 項及吞噬雙分支成功。公開 HTML／4 個資產與 production build 完全一致；真實 2.2 舊檔續玩與原文備份亦通過。公開版額外整局回歸狀態以實作紀錄為準。
+v2.3 程式 `9425293` 已通過 [CI 39037490956](https://github.com/sces5504/Immuminati/actions/runs/39037490956) 並部署 Pages：59 項單元測試、原操作 28 項、剖視 10 項、免疫流程 10 項及吞噬雙分支成功。公開 HTML／4 個資產與 production build 完全一致；真實 2.2 舊檔續玩與原文備份亦通過。部署後公開桌面／手機整局 [CI 39038356284](https://github.com/sces5504/Immuminati/actions/runs/39038356284) 亦全部成功。
 
 新增 `content/anatomy.ts` 共用健康組織、區室名稱與健康映射；`presentation/TissueGeometry.ts` 對應每顆宿主；`ui/AnatomyPanel.tsx` 為解剖剖面、可選人體／免疫細胞與權威局部剖視。所有器官都產生組織細胞，但其他器官只是架構／基本 adapter，沒有新增關卡。
 

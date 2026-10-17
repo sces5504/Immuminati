@@ -129,6 +129,11 @@
       "sha256": "2af33c9ca202c1585f0b9ee0d340aa555ab93210a55fd6b8c267251bc7b38947"
     },
     {
+      "file": "live-ci-summary.json",
+      "bytes": 1374,
+      "sha256": "d0d1ce35cb9fefe39aa8f144916f6faea4ccf8152f3c80fac63d48c648fac7cc"
+    },
+    {
       "file": "migration-check.mjs",
       "bytes": 3723,
       "sha256": "11614eda032998216fdcfc6f45375c72f51bbcae8daff08bcf8f3a3b5e5d3796"
@@ -244,6 +249,11 @@
       "sha256": "d90a9ed85f8f460e210005af558d2bd09506fc5f8ff5b78bac33fd7ddcbb1e76"
     },
     {
+      "file": "public-browser-results.json",
+      "bytes": 4168,
+      "sha256": "7d51115fcb19f7753288b24f230d5bff7a5636d54f3fbcd023bfc44901cb752a"
+    },
+    {
       "file": "recording-provenance.json",
       "bytes": 1334,
       "sha256": "68f3908e54ca5a83a3bc20c4fa435992a81b15abfa95d855d35c791c65483c14"
@@ -253,5 +263,7 @@
       "bytes": 6210,
       "sha256": "9d18f2f9a9ac525ee6d19e9249198852282669ee6b1d9732a2b6f5d2f1098147"
     }
-  ]
+  ],
+  "publicRun": 39038356284,
+  "publicConclusion": "success"
 }
