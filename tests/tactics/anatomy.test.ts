@@ -138,7 +138,7 @@ describe("consistent host anatomy and explicit pathogen compartments", () => {
     raw.content = "m1-tactics.3";
     for (const state of [raw.state, ...raw.undo]) state.hosts = [];
     const next = parseTactical(JSON.stringify(raw), m1);
-    expect(next.rules).toBe("2.4");
+    expect(next.rules).toBe("3.0");
     expect(next.state.tick).toBe(raw.state.tick);
     expect(next.state.energy).toBe(4);
     expect(next.undo[0].energy).toBe(5);

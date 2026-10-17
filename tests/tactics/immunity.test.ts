@@ -113,7 +113,7 @@ describe("immune roles and causal prerequisites", () => {
     expect(s.cells[0].antigen).toBe("pneumococcus:protein");
     expect(s.immunity.node.stage).toBe("migrating");
     expect(s.immunity.antibodies).toBe(0);
-    s = step(s, 230);
+    s = step(s, 270);
     expect(s.immunity.node.stage).toBe("primed");
     expect(
       s.cells.some((u) => u.kind === "helperT" && u.activation === "effector"),
@@ -196,6 +196,9 @@ describe("immune roles and causal prerequisites", () => {
       ifng: 50,
       il10: 0,
       inflammation: 90,
+      ifni: 0,
+      il17: 0,
+      il22: 0,
     };
     s.health.a = 80;
     s = step(s, 5);
@@ -243,7 +246,7 @@ describe("immune roles and causal prerequisites", () => {
       delete s.hosts;
     }
     const migrated = parseTactical(JSON.stringify(raw), m1);
-    expect(migrated.rules).toBe("2.4");
+    expect(migrated.rules).toBe("3.0");
     expect(migrated.state.immunity.autoSeek).toBe(false);
     expect(migrated.state.energy).toBe(4);
     expect(migrated.undo[0].energy).toBe(5);

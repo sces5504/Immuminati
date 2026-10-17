@@ -24,6 +24,7 @@ import {
   TACTICS_KEY,
   exportTactical,
   parseTactical,
+  backupTacticalImport,
   readTactical,
   writeTactical,
 } from "../persistence/save";
@@ -92,7 +93,7 @@ export default function TacticalApp() {
   const [notice, setNotice] = useState(
     boot.error ??
       (boot.migrated
-        ? "已升級至規則 2.4：保留原局與自動尋敵選擇，分開記錄補體與抗體；首次儲存另留原始備份。"
+        ? "已升級至規則 3.0：保留原局與自動尋敵選擇，分開記錄補體與抗體；首次儲存另留原始備份。"
         : ""),
   );
   const [storage, setStorage] = useState(boot.save ? "已載入存檔" : "本機存檔");
@@ -300,6 +301,28 @@ export default function TacticalApp() {
       update(true);
     }
   }, [modal, controller]);
+  useEffect(() => {
+    if (
+      home ||
+      modal ||
+      controller.save.state.result?.type !== "limited" ||
+      document.visibilityState !== "visible"
+    )
+      return;
+    let second = 0;
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => {
+        if (document.visibilityState === "visible" && !homeRef.current) {
+          controller.acknowledgeResult();
+          update(true);
+        }
+      });
+    });
+    return () => {
+      cancelAnimationFrame(first);
+      cancelAnimationFrame(second);
+    };
+  }, [home, modal, controller, snapshot.state.result?.type]);
   function start(fresh = true, id = content.id) {
     const nextContent = tacticalScenarios[id];
     if (!nextContent) return;
@@ -308,6 +331,7 @@ export default function TacticalApp() {
       next.save.settings = { ...controller.save.settings };
       next.save.read = [...controller.save.read];
       next.save.records = structuredClone(controller.save.records);
+      next.save.revealed = [...controller.save.revealed];
       setController(next);
       setSnapshot(next.snapshot());
       setStorage(writeTactical(next.save));
@@ -352,7 +376,7 @@ export default function TacticalApp() {
     setAntibodyMenu(false);
     setModal(null);
     setTutorial(false);
-    setStorage("機制演練 · 不覆寫 M1 存檔");
+    setStorage("機制演練 · 不覆寫關卡存檔");
   }
   function endPractice() {
     const previous = practiceReturn.current;
@@ -365,7 +389,7 @@ export default function TacticalApp() {
     setMenu(false);
     setAntibodyMenu(false);
     setModal(null);
-    setStorage("已返回 M1，保持暫停");
+    setStorage("已返回原關卡，保持暫停");
     practiceReturn.current = undefined;
   }
   function back() {
@@ -415,7 +439,9 @@ export default function TacticalApp() {
       }
       const nextContent = id ? tacticalScenarios[id] : undefined;
       const save = parseTactical(text, nextContent ?? content);
+      backupTacticalImport(text);
       save.paused = true;
+      save.revealed = [...controller.save.revealed]; // An imported ending must not pre-reveal the case.
       if (nextContent && nextContent.id !== content.id) {
         const next = new TacticalController(nextContent, save);
         setController(next);
@@ -432,8 +458,8 @@ export default function TacticalApp() {
       setRegion((nextContent ?? content).fields[0].id);
       setImported(true);
       setNotice(
-        JSON.parse(text).rules !== "2.4"
-          ? "已匯入並升級至規則 2.4；保留原局與尋敵選擇，分開補體／抗體期限，不追算過去免疫反應。"
+        JSON.parse(text).rules !== "3.0"
+          ? "已匯入並升級至規則 3.0；保留原局與尋敵選擇，分開補體／抗體期限，不追算過去免疫反應。"
           : "已匯入新版存檔，繼續遊玩時先維持戰術暫停。",
       );
     } catch (e) {
@@ -500,7 +526,7 @@ export default function TacticalApp() {
       <div className="t-scene" ref={host} data-testid="tactical-scene">
         <canvas
           ref={canvas}
-          aria-label="可操作的立體肺部戰場，點細胞後再點菌群或地面；也可使用下方單位按鈕"
+          aria-label={`可操作的立體${content.tissue === "lung" ? "肺部" : content.tissue === "oral" ? "口腔黏膜" : content.tissue === "intestinal" ? "腸黏膜" : "淋巴組織"}戰場，點細胞後再點病原或地面；也可使用下方單位按鈕`}
         />
         {!home && (
           <div
@@ -584,7 +610,9 @@ export default function TacticalApp() {
                         ? "MHC-I↓／壓力↑"
                         : h.antigen === "viral-peptide-A"
                           ? "相符抗原／MHC-I"
-                          : "不相符抗原／MHC-I"}
+                          : h.antigen === content.pathogen.antigen
+                            ? "病毒肽／MHC-I"
+                            : "不相符抗原／MHC-I"}
                 </button>
               ))}
             {s.colonies.map((p) => (
@@ -597,9 +625,12 @@ export default function TacticalApp() {
                 aria-label={`菌群 ${p.id} 負荷 ${p.load}`}
               >
                 <span>
-                  {p.markedUntil > s.tick
-                    ? `${coatings(p, s.tick).complement ? "C3 " : ""}${coatings(p, s.tick).antibody ? "Ig " : ""}`
-                    : ""}
+                  {coatings(p, s.tick).complement && (
+                    <b className="t-c3-symbol">C3b </b>
+                  )}
+                  {coatings(p, s.tick).antibody && (
+                    <b className="t-ig-symbol">Y </b>
+                  )}
                   {p.load}
                 </span>
               </button>
@@ -631,6 +662,11 @@ export default function TacticalApp() {
           </span>
         </button>
         <div className="t-top-links">
+          {!home && (
+            <button className="t-home-link" onClick={back} aria-label="回主頁">
+              ⌂ <span>回主頁</span>
+            </button>
+          )}
           <button onClick={() => encyclopedia()} aria-label="開啟百科">
             ▤ <span>百科</span>
           </button>
@@ -668,7 +704,7 @@ export default function TacticalApp() {
               <button
                 className="t-primary"
                 aria-label="開始 M1"
-                onClick={() => start(true)}
+                onClick={() => start(true, "m1")}
                 disabled={!!sceneError}
               >
                 開始 M1 <span>↗</span>
@@ -711,7 +747,10 @@ export default function TacticalApp() {
                   </small>
                   <b>{c.name}</b>
                   <span>
-                    {c.subtitle} {tacticalScenarios[c.id] ? "↗" : "→"}
+                    {c.id === "m6" && !snapshot.revealed.includes("m6")
+                      ? "免疫支援與病毒感染"
+                      : c.subtitle}{" "}
+                    {tacticalScenarios[c.id] ? "↗" : "→"}
                   </span>
                 </button>
               ))}
@@ -784,7 +823,12 @@ export default function TacticalApp() {
               onClick={() => setObjectiveExpanded(!objectiveExpanded)}
             >
               <span data-testid="space-caption">
-                {content.tissue === "lung" ? "肺泡腔" : "黏膜腔面"} · 細胞外
+                {content.tissue === "lung"
+                  ? "肺泡腔"
+                  : content.tissue === "lymphoid"
+                    ? "淋巴組織間隙"
+                    : "黏膜腔面"}{" "}
+                · 細胞外
               </span>
               <small>
                 第 {s.wave + 1}/{content.waves.length} 波 · 負荷 {burden}　
@@ -798,12 +842,31 @@ export default function TacticalApp() {
               <h2>
                 {content.practice
                   ? "演練 · 感染宿主辨識"
-                  : "守住組織，清除 " + content.waves.length + " 波感染。"}
+                  : (content.objective ??
+                    "守住組織，清除 " + content.waves.length + " 波感染。")}
               </h2>
+              {content.briefing && <p>{content.briefing}</p>}
+              {s.campaign && (
+                <p data-testid="campaign-status">
+                  {content.mechanics === "containment"
+                    ? `圍堵 ${Object.values(s.campaign.containment)
+                        .map((n) => Math.round(n) + "%")
+                        .join(
+                          " / ",
+                        )} · 穩定 ${Math.floor(s.campaign.stable * 0.2)}/20 秒`
+                    : content.mechanics === "retroviral"
+                      ? `功能性 CD4 ${Math.round(s.campaign.cd4)}% · 潛伏宿主 ${s.hosts.filter((h) => h.infection?.phase === "latent").length}`
+                      : content.mechanics === "fungal"
+                        ? `上皮防禦 ${Object.values(s.campaign.barrier)
+                            .map((n) => Math.round(n) + "%")
+                            .join(" / ")}`
+                        : `胞內負荷 ${s.internal.reduce((n, p) => n + p.load, 0) + s.hosts.reduce((n, h) => n + h.load, 0)}`}
+                </p>
+              )}
               {content.practice && (
                 <>
                   <button className="t-practice-back" onClick={endPractice}>
-                    結束演練，返回 M1
+                    結束演練，返回原關卡
                   </button>
                   <details className="t-practice-notes">
                     <summary>目標與限制</summary>
@@ -827,7 +890,13 @@ export default function TacticalApp() {
               </div>
               <button
                 className="t-objective-detail"
-                onClick={() => encyclopedia(content.pathogen.id)}
+                onClick={() =>
+                  encyclopedia(
+                    content.pathogen.id === "influenza-a"
+                      ? "influenza"
+                      : content.pathogen.id,
+                  )
+                }
               >
                 案例與機制 ↗
               </button>
@@ -849,7 +918,11 @@ export default function TacticalApp() {
               <p>
                 {s.wave < content.waves.length - 1
                   ? `下一波約 ${remainingWave} 秒 · ${content.waves[s.wave + 1].label}`
-                  : "最後一波 · 處理所有活感染來源"}
+                  : content.mechanics === "containment"
+                    ? "建立圍堵並維持穩定"
+                    : content.mechanics === "retroviral"
+                      ? "維持功能性 CD4 支援"
+                      : "最後一波 · 處理所有活感染來源"}
               </p>
             )}
           </div>
@@ -871,16 +944,30 @@ export default function TacticalApp() {
             <button
               data-testid="antibody-tool"
               onClick={() => {
-                setAntibodyMenu(!antibodyMenu);
+                if (s.immunity.antibodies > 0 && !result) {
+                  setMode(mode === "antibody" ? "command" : "antibody");
+                  setSelected(undefined);
+                  setAntibodyMenu(false);
+                } else setAntibodyMenu(!antibodyMenu);
                 setMenu(false);
               }}
-              className={antibodyMenu ? "active" : ""}
+              className={antibodyMenu || mode === "antibody" ? "active" : ""}
             >
               <b>Y</b>
               <span>
                 B／抗體
                 <small>抗體 {s.immunity.antibodies}</small>
               </span>
+            </button>
+            <button
+              className="t-antibody-explain"
+              data-testid="antibody-explain"
+              onClick={() => {
+                setAntibodyMenu(true);
+                setMenu(false);
+              }}
+            >
+              抗體流程 ⓘ
             </button>
             <button
               data-testid="recruit-tool"
@@ -919,6 +1006,13 @@ export default function TacticalApp() {
               }
             >
               {snapshot.settings.speed}×
+            </button>
+            <button
+              className="t-skip-effects"
+              data-testid="skip-effects"
+              onClick={() => scene.current?.skipEffects()}
+            >
+              略過動畫
             </button>
             <button
               data-testid="immune-panel"
@@ -1199,7 +1293,14 @@ export default function TacticalApp() {
                           ]
                             .filter(Boolean)
                             .join(" · ")
-                        : "莢膜保護 · 吞噬效率受限"}
+                        : content.id === "m1"
+                          ? "莢膜保護 · 吞噬效率受限"
+                          : content.mechanics === "viral" ||
+                              content.mechanics === "retroviral"
+                            ? "胞外病毒 · 中和或吞噬"
+                            : colony.form === "hypha"
+                              ? "菌絲 · 顆粒防禦"
+                              : "胞外病原 · 待處理"}
                     </p>
                   </div>
                   <div className="t-context-actions">
@@ -1220,7 +1321,9 @@ export default function TacticalApp() {
                     </button>
                     <button
                       onClick={() => {
-                        setAntibodyMenu(true);
+                        if (s.immunity.antibodies > 0)
+                          command({ type: "antibody", target: colony.id });
+                        else setAntibodyMenu(true);
                         setMenu(false);
                       }}
                       data-testid="colony-antibody"
@@ -1376,7 +1479,9 @@ export default function TacticalApp() {
               <h1>
                 {result.type === "victory"
                   ? "防線，守住了。"
-                  : "防線需要重新部署。"}
+                  : result.type === "limited"
+                    ? "支援時間，已留下紀錄。"
+                    : "防線需要重新部署。"}
               </h1>
               <p>{result.reason}。</p>
               <div className="t-result-metrics">
@@ -1387,8 +1492,20 @@ export default function TacticalApp() {
                   <b>{Math.round(result.seconds)} 秒</b>防禦時間
                 </span>
               </div>
+              {result.type === "limited" && (
+                <p data-testid="hiv-explanation">
+                  這是未使用治療的有限教學情境，並非一般勝敗或星等關卡。免疫反應可限制產毒與延長支援，但無法清除不表達抗原的
+                  HIV
+                  潛伏庫；功能障礙持續累積。現實中的抗反轉錄病毒治療（ART）可有效控制
+                  HIV。
+                </p>
+              )}
               <small>
-                三星 ≥{content.stars[0]}% · 二星 ≥{content.stars[1]}%
+                {result.type !== "limited" && (
+                  <>
+                    三星 ≥{content.stars[0]}% · 二星 ≥{content.stars[1]}%
+                  </>
+                )}
                 <br />
                 此為教學情境結果，不代表臨床治癒。
               </small>
@@ -1578,8 +1695,8 @@ export default function TacticalApp() {
             <h3>防線備份</h3>
             <p>
               規則
-              2.4：保留舊局時間、指令與自動尋敵選擇；分開記錄補體與抗體。新局預設開啟自動尋敵，地圖標籤預設精簡。第一次覆寫舊版本前另存
-              pre-2.4 備份；更早備份仍保留。
+              3.0：六關規則分開，保留舊局時間、指令與自動尋敵選擇；分開記錄補體與抗體。新局預設開啟自動尋敵，地圖標籤預設精簡。第一次覆寫舊版本前另存
+              pre-3.0 備份；更早備份仍保留。
             </p>
             <p>
               {storage}

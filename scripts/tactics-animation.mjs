@@ -71,6 +71,28 @@ try {
   assert.notDeepEqual(cleared, survived);
   assert.deepEqual(errors, []);
   await page.waitForTimeout(500);
+  for (const [name, label, expected] of [
+    ["complement", "播放補體灑落", "C3b 黃色三葉沉積"],
+    ["antibody", "播放抗體移近", "綠色 Y 形抗體附著"],
+  ]) {
+    await page.getByRole("button", { name: label, exact: true }).click();
+    await page.waitForTimeout(1200);
+    const flight = await page.screenshot({
+      path: dir + name + "-flight.png",
+      clip: await page.locator("canvas").boundingBox(),
+    });
+    await expect(page.getByTestId("lab-result")).toContainText(expected, {
+      timeout: 15000,
+    });
+    const attached = await page.screenshot({
+      path: dir + name + "-attached.png",
+      clip: await page.locator("canvas").boundingBox(),
+    });
+    assert.notDeepEqual(flight, attached);
+    await expect(page.getByTestId("lab-result")).toContainText(
+      "胞外負荷仍為 3，沒有直接殺菌",
+    );
+  }
   const video = page.video();
   await ctx.close();
   await video.saveAs(dir + "engulf-branches.webm");
@@ -87,6 +109,7 @@ try {
           "3D contact, pseudopod wrapping and ingestion recording",
           "clearance has no intracellular load",
           "survival retains phagosomal load 3 and a distinct visible vacuole",
+          "C3b globular deposition and green Y antibody travel before attachment, no direct killing",
           "no runtime errors",
         ],
       },

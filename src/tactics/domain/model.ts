@@ -9,6 +9,11 @@ export const CELL_TYPES = [
   "plasma",
   "nk",
   "treg",
+  "th1",
+  "tfh",
+  "th17",
+  "pdc",
+  "ilc3",
 ] as const;
 export type CellType = (typeof CELL_TYPES)[number];
 export type CellRole =
@@ -26,6 +31,9 @@ export interface Signals {
   ifng: number;
   il10: number;
   inflammation: number;
+  ifni: number;
+  il17: number;
+  il22: number;
 }
 export interface Immunity {
   autoSeek: boolean;
@@ -34,6 +42,7 @@ export interface Immunity {
     stage: "idle" | "migrating" | "presenting" | "primed";
     antigen: string;
     until: number;
+    crossPresented?: boolean;
   };
   antibodies: number;
 }
@@ -41,16 +50,22 @@ export type TissueCellKind =
   | "alveolarI"
   | "alveolarII"
   | "endothelial"
-  | "mucosal";
+  | "mucosal"
+  | "enterocyte"
+  | "goblet"
+  | "cd4host"
+  | "stromal";
 export type IntracellularCompartment = "phagosome" | "cytosol" | "nucleus";
 export interface HostCell {
   kind: TissueCellKind;
-  layer: "epithelium" | "vascular";
+  layer: "epithelium" | "vascular" | "lymphoid";
   health: number;
   wall?: { angle: number; radius: number; arc: number };
   infection?: {
     pathogen: string;
     compartment: Exclude<IntracellularCompartment, "phagosome">;
+    phase?: "eclipse" | "productive" | "latent";
+    since?: number;
   };
   id: string;
   region: string;
@@ -77,6 +92,8 @@ export interface Cell {
   antigen?: string;
   activation?: "resting" | "activating" | "effector";
   activationAt?: number;
+  partner?: string;
+  dockAt?: number;
 }
 export interface Colony {
   id: string;
@@ -84,6 +101,7 @@ export interface Colony {
   position: Vec;
   load: number;
   markedUntil: number;
+  form?: "yeast" | "hypha";
   opsonin?: "c3b" | "antibody";
   complementUntil?: number;
   antibodyUntil?: number;
@@ -126,7 +144,13 @@ export interface TacticalEvent {
     | "activate"
     | "antibody"
     | "regulate"
-    | "cytotoxic";
+    | "cytotoxic"
+    | "dock"
+    | "infect"
+    | "release"
+    | "degranulate"
+    | "contain"
+    | "barrier";
   actor?: string;
   target?: string;
   position: Vec;
@@ -134,9 +158,10 @@ export interface TacticalEvent {
   amount: number;
   message: string;
   survives?: boolean;
+  opsonin?: "c3b" | "antibody";
 }
 export interface Result {
-  type: "victory" | "defeat";
+  type: "victory" | "defeat" | "limited";
   reason: string;
   preservation: number;
   stars: number;
@@ -163,6 +188,13 @@ export interface TacticalState {
   eventId: number;
   events: TacticalEvent[];
   result?: Result;
+  campaign?: {
+    containment: Record<string, number>;
+    stable: number;
+    barrier: Record<string, number>;
+    cd4: number;
+    impairment: number;
+  };
 }
 export interface Field {
   id: string;
@@ -195,8 +227,23 @@ export interface Wave {
 export interface TacticalContent {
   id: string;
   title: string;
-  pathogen: { id: string; name: string; survives: boolean; antigen?: string };
-  tissue: "lung" | "oral" | "intestinal";
+  pathogen: {
+    id: string;
+    name: string;
+    survives: boolean;
+    antigen?: string;
+    shape?: "coccus" | "rod" | "acidfast" | "virus" | "fungus" | "retrovirus";
+  };
+  mechanics?:
+    | "intravesicular"
+    | "containment"
+    | "viral"
+    | "fungal"
+    | "retroviral";
+  briefing?: string;
+  objective?: string;
+  allowed?: CellType[];
+  tissue: "lung" | "oral" | "intestinal" | "lymphoid";
   practice?: boolean;
   fields: Field[];
   portal: Vec;
@@ -234,13 +281,14 @@ export interface TacticalSettings {
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "2.4";
-  content: "m1-tactics.5";
+  rules: "3.0";
+  content: "campaign.1";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];
   settings: TacticalSettings;
   read: string[];
   records: Record<string, Result>;
+  revealed: string[];
 }
 export const STEP_SECONDS = 0.2;

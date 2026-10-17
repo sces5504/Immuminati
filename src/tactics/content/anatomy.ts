@@ -9,6 +9,26 @@ export const tissueCellCatalog: Record<
   TissueCellKind,
   { name: string; function: string; color: number }
 > = {
+  enterocyte: {
+    name: "腸吸收上皮細胞",
+    function: "柱狀上皮與刷狀緣構成腸黏膜屏障。",
+    color: 0xe4b1a8,
+  },
+  goblet: {
+    name: "杯狀細胞",
+    function: "分泌黏液，協助限制病原接近上皮。",
+    color: 0xbacfd0,
+  },
+  cd4host: {
+    name: "CD4 T 宿主細胞",
+    function: "具 CD4 與共受體的易感宿主；潛伏與產毒是不同狀態。",
+    color: 0x9cc0b7,
+  },
+  stromal: {
+    name: "淋巴網狀基質細胞",
+    function: "支持淋巴組織的結構與免疫細胞互動。",
+    color: 0xc3a9c6,
+  },
   alveolarI: {
     name: "第一型肺泡上皮細胞",
     function: "薄而展開，構成主要氣體交換表面與上皮屏障。",
@@ -77,9 +97,20 @@ export function populateTissue(s: TacticalState, c: TacticalContent) {
             ? i % 5 === 0
               ? "alveolarII"
               : "alveolarI"
-            : "mucosal",
-        layer: "epithelium",
-        wall: { angle, radius, arc: ((Math.PI * 2) / 14) * 0.98 },
+            : c.tissue === "intestinal"
+              ? i % 5 === 0
+                ? "goblet"
+                : "enterocyte"
+              : c.tissue === "lymphoid"
+                ? i % 3 === 0
+                  ? "stromal"
+                  : "cd4host"
+                : "mucosal",
+        layer: c.tissue === "lymphoid" ? "lymphoid" : "epithelium",
+        wall:
+          c.tissue === "lung"
+            ? { angle, radius, arc: ((Math.PI * 2) / 14) * 0.98 }
+            : undefined,
         health: s.health[f.id],
         antigen: "self",
         mhc1: true,
@@ -119,6 +150,6 @@ export function hostStatus(host: HostCell) {
   return host.apoptoticAt
     ? "已凋亡"
     : host.load > 0
-      ? `${compartmentNames[host.infection?.compartment ?? "cytosol"]}感染 · 活負荷 ${host.load}`
+      ? `${compartmentNames[host.infection?.compartment ?? "cytosol"]} · ${host.infection?.phase === "latent" ? "潛伏（未呈遞病毒肽）" : host.infection?.phase === "eclipse" ? "感染建立中" : "感染"} · 活負荷 ${host.load}`
       : "未感染";
 }

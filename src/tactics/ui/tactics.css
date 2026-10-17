@@ -2917,3 +2917,192 @@
     white-space: nowrap;
   }
 }
+/* v3: constrain flex children, rather than hiding overflowing information. */
+.t-next-wave {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  min-height: 44px;
+  padding: 7px 8px;
+  font-size: 11px;
+}
+.t-next-wave b {
+  flex: 0 0 auto;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.t-selection-info,
+.t-context-actions,
+.t-top-links,
+.t-brand {
+  min-width: 0;
+}
+.t-context-actions button {
+  box-sizing: border-box;
+}
+.t-command-dock.is-empty .t-context-actions button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  white-space: nowrap;
+}
+.t-command-dock.is-empty .t-context-actions button span {
+  display: inline;
+  margin: 0;
+}
+.t-home-link {
+  white-space: nowrap;
+}
+.t-ig-symbol,
+.t-field-tools button[data-testid="antibody-tool"] b,
+.t-context-actions button[data-testid="colony-antibody"] {
+  color: #9be7b0;
+}
+.t-c3-symbol {
+  color: #ffdd72;
+}
+.t-field-tools .t-antibody-explain {
+  min-height: 32px;
+  padding: 3px 8px;
+  font-size: 11px;
+  color: #b9eaca;
+}
+.t-antibody-card {
+  box-sizing: border-box;
+  width: 320px;
+  max-width: calc(100vw - 24px);
+  max-height: none;
+  overflow: visible;
+  padding: 12px 14px;
+}
+.t-antibody-card .t-card-heading h3 {
+  margin: 0;
+}
+.t-antibody-card p {
+  margin: 7px 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.t-antibody-card > button {
+  margin-bottom: 6px;
+}
+.t-antibody-recruit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.t-antibody-recruit b {
+  font-size: 11px;
+}
+.t-antibody-card > small {
+  font-size: 11px;
+  line-height: 1.5;
+}
+@media (max-width: 760px) {
+  .t-topbar {
+    gap: 4px;
+  }
+  .t-brand {
+    flex: 1;
+  }
+  .t-brand span {
+    font-size: 13px;
+    letter-spacing: 1.4px;
+  }
+  .t-top-links {
+    gap: 0;
+    flex: 0 0 auto;
+  }
+  .t-top-links > button {
+    min-width: 36px;
+    width: 36px;
+    padding: 4px;
+  }
+  .t-top-links .t-home-link {
+    width: 54px;
+    min-width: 54px;
+    font-size: 11px;
+  }
+  .t-top-links .t-home-link span {
+    display: inline;
+    font-size: 10px;
+  }
+  .t-command-dock.is-empty .t-dock-main {
+    grid-template-columns: 24px minmax(0, 1fr) 76px 27px;
+  }
+  .t-command-dock.is-empty .t-context-actions button {
+    font-size: 10px;
+  }
+  .t-antibody-card {
+    position: fixed;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 320px;
+  }
+  .t-antibody-card p {
+    font-size: 12px;
+  }
+  .t-antibody-recruit {
+    font-size: 13px;
+    min-height: 44px;
+  }
+  .t-next-wave {
+    font-size: 10px;
+    gap: 3px;
+  }
+  .t-next-wave b {
+    font-size: 9px;
+  }
+}
+@media (max-height: 600px) and (max-width: 760px) {
+  .t-antibody-card {
+    padding: 8px 12px;
+  }
+  .t-antibody-card p {
+    margin: 3px 0;
+  }
+  .t-antibody-card .t-antibody-route {
+    display: none;
+  }
+}
+.t-field-tools .t-antibody-explain {
+  min-height: 44px;
+}
+@media (max-width: 760px) {
+  .t-strategy-tools {
+    gap: 3px;
+  }
+  .t-strategy-tools > button {
+    font-size: 10px;
+    padding: 5px 6px;
+  }
+  .t-strategy-tools .t-skip-effects {
+    font-size: 9px;
+  }
+}
+.t-antibody-card .t-card-heading > button {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+}
+.t-colony-label.is-marked > span {
+  background: #263d56;
+  color: #dce8f0;
+}
+.t-colony-label b.t-c3-symbol {
+  color: #ffdd72;
+}
+.t-colony-label b.t-ig-symbol {
+  color: #9be7b0;
+}

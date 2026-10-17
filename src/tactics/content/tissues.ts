@@ -1,5 +1,13 @@
 /** Anatomy is independent of wave/immune rules. These profiles are not extra playable levels. */
 export const tissueProfiles = {
+  lymphoid: {
+    name: "引流淋巴組織",
+    structure: "濾泡、旁皮質與網狀基質；CD4 淋巴球位於組織間隙",
+    floor: 0xc3a3ba,
+    wall: 0xd8bacd,
+    vessel: 0xa16c8b,
+    pattern: "follicles",
+  },
   lung: {
     name: "肺泡組織",
     structure: "相通肺泡腔、薄肺泡隔與沿隔微血管網",

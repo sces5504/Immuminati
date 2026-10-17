@@ -1,3 +1,4 @@
+import { victoryCondition, limitedCondition } from "../engine/goals";
 import { coatings } from "../engine/opsonization";
 import { populateTissue } from "../content/anatomy";
 import { z } from "zod";
@@ -8,7 +9,7 @@ import type {
 } from "../domain/model";
 import { CELL_TYPES } from "../domain/model";
 import { initialImmunity } from "../engine/immunity";
-import { preservation, loadOf } from "../engine/simulation";
+import { preservation } from "../engine/simulation";
 import { tacticalScenarios } from "../content/m1";
 import { entries } from "../../content/encyclopedia";
 export const TACTICS_KEY = "immuminati:tactics:v2";
@@ -29,7 +30,7 @@ const order = z.discriminatedUnion("type", [
 ]);
 const result = z
   .object({
-    type: z.enum(["victory", "defeat"]),
+    type: z.enum(["victory", "defeat", "limited"]),
     reason: z.string().max(300),
     preservation: integer(100),
     stars: integer(3),
@@ -65,6 +66,8 @@ const battle = z
               .enum(["resting", "activating", "effector"])
               .optional(),
             activationAt: integer(10000).optional(),
+            partner: id.optional(),
+            dockAt: integer(10000).optional(),
           })
           .strict(),
       )
@@ -78,6 +81,7 @@ const battle = z
             position: vec,
             load: integer(1000),
             markedUntil: integer(10000),
+            form: z.enum(["yeast", "hypha"]).optional(),
             opsonin: z.enum(["c3b", "antibody"]).optional(),
             complementUntil: integer(10000).optional(),
             antibodyUntil: integer(10000).optional(),
@@ -116,6 +120,9 @@ const battle = z
               ifng: num(100),
               il10: num(100),
               inflammation: num(100),
+              ifni: num(100).optional(),
+              il17: num(100).optional(),
+              il22: num(100).optional(),
             })
             .strict(),
         ),
@@ -124,6 +131,7 @@ const battle = z
             stage: z.enum(["idle", "migrating", "presenting", "primed"]),
             antigen: z.string().max(50),
             until: integer(10000),
+            crossPresented: z.boolean().optional(),
           })
           .strict(),
         antibodies: num(100),
@@ -139,9 +147,18 @@ const battle = z
             position: vec,
             antigen: id,
             kind: z
-              .enum(["alveolarI", "alveolarII", "endothelial", "mucosal"])
+              .enum([
+                "alveolarI",
+                "alveolarII",
+                "endothelial",
+                "mucosal",
+                "enterocyte",
+                "goblet",
+                "cd4host",
+                "stromal",
+              ])
               .optional(),
-            layer: z.enum(["epithelium", "vascular"]).optional(),
+            layer: z.enum(["epithelium", "vascular", "lymphoid"]).optional(),
             health: num(100).optional(),
             wall: z
               .object({ angle: num(7), radius: num(15), arc: num(2) })
@@ -151,6 +168,8 @@ const battle = z
               .object({
                 pathogen: id,
                 compartment: z.enum(["cytosol", "nucleus"]),
+                phase: z.enum(["eclipse", "productive", "latent"]).optional(),
+                since: integer(10000).optional(),
               })
               .strict()
               .optional(),
@@ -191,6 +210,12 @@ const battle = z
               "antibody",
               "regulate",
               "cytotoxic",
+              "dock",
+              "infect",
+              "release",
+              "degranulate",
+              "contain",
+              "barrier",
             ]),
             actor: id.optional(),
             target: id.optional(),
@@ -199,23 +224,35 @@ const battle = z
             amount: num(10000),
             message: z.string().max(1000),
             survives: z.boolean().optional(),
+            opsonin: z.enum(["c3b", "antibody"]).optional(),
           })
           .strict(),
       )
       .max(400),
     result: result.optional(),
+    campaign: z
+      .object({
+        containment: z.record(id, num(100)),
+        barrier: z.record(id, num(100)),
+        stable: integer(10000),
+        cd4: num(100),
+        impairment: num(100),
+      })
+      .strict()
+      .optional(),
   })
   .strict();
 const schema = z
   .object({
     schema: z.literal(2),
-    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4"]),
+    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4", "3.0"]),
     content: z.enum([
       "m1-tactics.1",
       "m1-tactics.2",
       "m1-tactics.3",
       "m1-tactics.4",
       "m1-tactics.5",
+      "campaign.1",
     ]),
     state: battle,
     paused: z.boolean(),
@@ -231,10 +268,23 @@ const schema = z
       .strict(),
     read: z.array(id).max(200),
     records: z.record(id, result),
+    revealed: z.array(z.literal("m6")).max(1).default([]),
   })
   .strict();
 function check(s: TacticalState, c: TacticalContent) {
+  if (c.mechanics && !s.campaign) throw new Error("缺少關卡機制狀態。");
+  if (s.result?.type === "limited" && c.mechanics !== "retroviral")
+    throw new Error("特殊結局不屬於此關。");
   const fields = c.fields.map((f) => f.id);
+  if (
+    s.campaign &&
+    [s.campaign.barrier, s.campaign.containment].some(
+      (values) =>
+        Object.keys(values).length !== fields.length ||
+        fields.some((id) => values[id] === undefined),
+    )
+  )
+    throw new Error("關卡組織狀態不完整。");
   if (
     s.scenario !== c.id ||
     s.tick > c.limit ||
@@ -280,6 +330,29 @@ function check(s: TacticalState, c: TacticalContent) {
     fields.some((id) => !s.immunity.signals[id])
   )
     throw new Error("訊號區域資料不完整。");
+  if (
+    !c.practice &&
+    !c.mechanics &&
+    s.hosts.some((h) => h.load > 0 || h.infection)
+  )
+    throw new Error("此肺炎鏈球菌案例沒有病毒感染宿主。");
+  for (const h of s.hosts) {
+    if (
+      h.infection &&
+      !c.practice &&
+      (h.infection.pathogen !== c.pathogen.id ||
+        !["viral", "retroviral"].includes(c.mechanics ?? "") ||
+        !h.infection.phase ||
+        h.infection.since === undefined ||
+        h.infection.since > s.tick)
+    )
+      throw new Error("宿主感染來源或階段不合法。");
+    if (
+      h.infection?.phase === "latent" &&
+      (c.mechanics !== "retroviral" || h.antigen !== "self")
+    )
+      throw new Error("潛伏宿主不可自動取得病毒肽。");
+  }
   for (const p of s.internal) {
     if (
       p.stage === "processing" &&
@@ -297,7 +370,11 @@ function check(s: TacticalState, c: TacticalContent) {
     )
   )
     throw new Error("宿主感染或組織健康資料不一致。");
-  if (!c.practice && s.hosts.some((h) => h.load > 0 || h.infection))
+  if (
+    !c.practice &&
+    !c.mechanics &&
+    s.hosts.some((h) => h.load > 0 || h.infection)
+  )
     throw new Error("此肺炎鏈球菌案例沒有病毒感染宿主。");
   if (s.immunity.node.stage !== "idle" && !s.immunity.node.antigen)
     throw new Error("呈遞缺少抗原。");
@@ -305,13 +382,13 @@ function check(s: TacticalState, c: TacticalContent) {
     const rate = preservation(s);
     if (s.result.preservation !== rate || s.result.seconds !== s.tick * 0.2)
       throw new Error("結算資料不一致。");
-    if (
-      s.result.type === "victory" &&
-      (loadOf(s) > 0 ||
-        s.wave !== c.waves.length - 1 ||
-        Object.values(s.health).some((h) => h <= 0))
-    )
+    if (s.result.type === "victory" && !victoryCondition(s, c))
       throw new Error("勝利條件不成立。");
+    if (
+      s.result.type === "limited" &&
+      (!limitedCondition(s, c) || s.result.stars !== 0)
+    )
+      throw new Error("有限結局條件不成立。");
   }
 }
 export function parseTactical(text: string, c: TacticalContent): TacticalSave {
@@ -333,17 +410,30 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     "2.2": "m1-tactics.3",
     "2.3": "m1-tactics.4",
     "2.4": "m1-tactics.5",
+    "3.0": "campaign.1",
   };
   if (versions[data.rules] !== data.content)
     throw new Error("規則與內容版本不一致。");
   const migrate = (state: typeof data.state): TacticalState => {
     if (
-      ["2.2", "2.3", "2.4"].includes(data.rules) &&
+      data.rules === "3.0" &&
+      (!state.immunity ||
+        !state.hosts?.length ||
+        Object.values(state.immunity.signals).some(
+          (s) =>
+            s.ifni === undefined ||
+            s.il17 === undefined ||
+            s.il22 === undefined,
+        ))
+    )
+      throw new Error("新版免疫／組織狀態不完整。");
+    if (
+      ["2.2", "2.3", "2.4", "3.0"].includes(data.rules) &&
       (!state.immunity || !state.hosts)
     )
       throw new Error("新版免疫狀態不完整。");
     if (
-      ["2.3", "2.4"].includes(data.rules) &&
+      ["2.3", "2.4", "3.0"].includes(data.rules) &&
       (!state.hosts?.length ||
         state.hosts.some(
           (h) =>
@@ -359,7 +449,14 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
       throw new Error("新版組織／區室狀態不完整。");
     const migrated: TacticalState = {
       ...state,
-      immunity: state.immunity ?? initialImmunity(c, false),
+      immunity: {
+        ...(state.immunity ?? initialImmunity(c, false)),
+        signals: Object.fromEntries(
+          Object.entries(
+            state.immunity?.signals ?? initialImmunity(c, false).signals,
+          ).map(([id, s]) => [id, { ifni: 0, il17: 0, il22: 0, ...s }]),
+        ),
+      },
       hosts: (state.hosts ?? []).map((h) => ({
         ...h,
         kind: h.kind ?? "alveolarII",
@@ -378,14 +475,14 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
         clearAt: p.clearAt ?? 0,
       })),
     };
-    if (data.rules !== "2.4")
+    if (!["2.4", "3.0"].includes(data.rules))
       for (const p of migrated.colonies) {
         const previous = coatings(p, 0);
         p.complementUntil = previous.complementUntil;
         p.antibodyUntil = previous.antibodyUntil;
       }
     if (
-      !["2.3", "2.4"].includes(data.rules) &&
+      !["2.3", "2.4", "3.0"].includes(data.rules) &&
       !migrated.hosts.some((h) => h.wall)
     )
       populateTissue(migrated, c);
@@ -393,8 +490,8 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
   };
   const save: TacticalSave = {
     ...data,
-    rules: "2.4",
-    content: "m1-tactics.5",
+    rules: "3.0",
+    content: "campaign.1",
     state: migrate(data.state),
     undo: data.undo.map(migrate),
   };
@@ -405,6 +502,8 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
       throw new Error("暫停指令快照不一致。");
   }
   if (
+    !!save.records.m6 ||
+    Object.values(save.records).some((r) => r.type !== "victory") ||
     save.read.some((id) => !entries.some((e) => e.id === id)) ||
     Object.keys(save.records).some(
       (id) => id !== c.id && !tacticalScenarios[id],
@@ -423,7 +522,7 @@ export function readTactical(c: TacticalContent): {
     return value
       ? {
           save: parseTactical(value, c),
-          migrated: JSON.parse(value).rules !== "2.4",
+          migrated: JSON.parse(value).rules !== "3.0",
         }
       : {};
   } catch (e) {
@@ -441,10 +540,10 @@ export function writeTactical(save: TacticalSave) {
     }
     if (
       previous &&
-      previousRules !== "2.4" &&
-      !localStorage.getItem("immuminati:tactics:pre-2.4")
+      previousRules !== "3.0" &&
+      !localStorage.getItem("immuminati:tactics:pre-3.0")
     )
-      localStorage.setItem("immuminati:tactics:pre-2.4", previous);
+      localStorage.setItem("immuminati:tactics:pre-3.0", previous);
     localStorage.setItem(TACTICS_KEY, JSON.stringify(save));
     return "已儲存";
   } catch {
@@ -460,4 +559,10 @@ export function exportTactical(save: TacticalSave) {
   a.download = "immuminati-tactics-v2.json";
   a.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+/** Preserve the imported original before any format migration is committed. */
+export function backupTacticalImport(text: string) {
+  if (JSON.parse(text).rules === "3.0") return;
+  localStorage.setItem(`immuminati:tactics:import-pre-3.0:${Date.now()}`, text);
 }

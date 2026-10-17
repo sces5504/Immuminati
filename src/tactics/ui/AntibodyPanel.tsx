@@ -21,22 +21,24 @@ export function AntibodyPanel({
       aria-label="B 細胞與抗體"
     >
       <div className="t-card-heading">
-        <h3>B 細胞 → 抗體</h3>
+        <h3>
+          <span className="t-ig-symbol">Y</span> B → 抗體
+        </h3>
         <button onClick={onClose} aria-label="關閉抗體面板">
           ×
         </button>
       </div>
-      <p>
-        樹突細胞攜帶抗原 → 淋巴結呈遞 → CD4 T 輔助 → B 細胞活化 →
-        漿細胞分泌抗體。
+      <p className="t-antibody-route">
+        DC 呈遞 → CD4 活化 → T–B 同源對接 → 漿細胞
       </p>
       <p data-testid="antibody-stock">
-        現有抗體：<b>{s.immunity.antibodies}</b> · 漿細胞：
-        {s.cells.filter((u) => u.kind === "plasma").length}
+        現有抗體：<b>{s.immunity.antibodies}</b> · 漿細胞{" "}
+        {s.cells.filter((u) => u.kind === "plasma").length} · 對接{" "}
+        {s.cells.filter((u) => u.kind === "bcell" && u.partner).length}
       </p>
       <p>
-        募集 B 細胞不會立即得到抗體，需符合抗原與 T
-        細胞協助，並等待分化。產生後會自動調理；也能指定優先目標。
+        蛋白抗原：B 呈遞 MHC-II 肽，接受 T 的
+        CD40L／細胞激素幫助，再等待分化；對接在淋巴組織。
       </p>
       {(["helperT", "bcell"] as const).map((kind) => {
         const error = validateTactical(
@@ -52,7 +54,8 @@ export function AntibodyPanel({
             title={error}
             onClick={() => onRecruit(kind)}
           >
-            募集 {content.cells[kind].name} · {content.cells[kind].cost} 資源
+            <span>募集{content.cells[kind].name}</span>
+            <b>{content.cells[kind].cost} 資源</b>
           </button>
         );
       })}
@@ -62,11 +65,12 @@ export function AntibodyPanel({
         disabled={s.immunity.antibodies < 1 || !!s.result}
         onClick={onTarget}
       >
-        指定抗體調理（1 抗體）
+        指定目標 · 1 抗體
       </button>
       <small>
-        抗體的 Fc 部分協助吞噬者辨識；不直接射殺細菌。C3b
-        補體使用另一個按鈕，兩者可同時附著。
+        <span className="t-ig-symbol">Y 抗體</span>：調理／中和胞外病毒。
+        <span className="t-c3-symbol">● C3b</span>
+        ：補體。兩者不是胞內殺菌。多醣亦可有 T 非依賴反應，本局未模擬。
       </small>
     </section>
   );

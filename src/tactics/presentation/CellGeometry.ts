@@ -3,7 +3,7 @@ import type { CellType } from "../domain/model";
 export function membraneGeometry(kind: CellType) {
   const geo = new THREE.SphereGeometry(1, 64, 28),
     pos = geo.attributes.position;
-  const branch = kind === "dendritic",
+  const branch = kind === "dendritic" || kind === "pdc",
     amoeba = kind === "macrophage",
     count = branch ? 8 : 7;
   const target = new Float32Array(pos.array.length);
@@ -37,4 +37,4 @@ export function membraneGeometry(kind: CellType) {
   return geo;
 }
 export const lymphoid = (kind: string) =>
-  !["macrophage", "neutrophil", "dendritic"].includes(kind);
+  !["macrophage", "neutrophil", "dendritic", "pdc"].includes(kind);

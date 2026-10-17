@@ -135,6 +135,10 @@ jobs:
           name: production-dist
           path: dist
       - run: npx playwright install --with-deps chromium
+      - run: npm run test:campaign-ui
+        env:
+          DEVICE: ${{ matrix.device }}
+          EVIDENCE_DIR: ../docs/evidence/ci/clarity-${{ matrix.device }}/campaign-ui/
       - run: npm run test:clarity
         env:
           DEVICE: ${{ matrix.device }}
@@ -164,9 +168,40 @@ jobs:
         with:
           name: animation-evidence
           path: docs/evidence/ci/animation/
+  campaign:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [desktop, mobile]
+        case: [m1, m2, m3, m4, m5, m6]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:campaign
+        env:
+          DEVICE: ${{ matrix.device }}
+          CASE: ${{ matrix.case }}
+          EVIDENCE_DIR: ../docs/evidence/ci/campaign-${{ matrix.device }}-${{ matrix.case }}/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign-${{ matrix.device }}-${{ matrix.case }}-evidence
+          path: docs/evidence/ci/campaign-${{ matrix.device }}-${{ matrix.case }}/
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [verify, browser, immune, anatomy, clarity, animation]
+    needs: [verify, browser, immune, anatomy, clarity, animation, campaign]
     runs-on: ubuntu-latest
     permissions:
       pages: write

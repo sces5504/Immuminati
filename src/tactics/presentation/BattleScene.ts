@@ -1,3 +1,8 @@
+import {
+  antibodyModel,
+  complementModel,
+  pathogenGeometry,
+} from "./MolecularModels";
 import { coatings } from "../engine/opsonization";
 import { chooseEntity } from "./selection";
 import {
@@ -49,6 +54,7 @@ interface Bacteria {
   marks: THREE.Group;
   ring: THREE.Mesh;
   signature: string;
+  form?: string;
   phase: number;
 }
 interface Effect {
@@ -87,6 +93,7 @@ export class BattleScene {
   private bacteria = new Map<string, Bacteria>();
   private effects: Effect[] = [];
   private fields = new Map<string, THREE.Mesh>();
+  private containment = new Map<string, THREE.Group>();
   private raf = 0;
   private lastRender = 0;
   private frameInterval = 0;
@@ -346,6 +353,30 @@ export class BattleScene {
       granules.setMatrixAt(i, dummy.matrix);
     }
     body.add(granules);
+    if (["th1", "tfh", "th17", "ilc3"].includes(cell.kind)) {
+      const receptor = material(
+        cell.kind === "th17" ? 0xf2d5ad : 0xbae5d1,
+        0.45,
+      );
+      this.ownedMaterials.push(receptor);
+      const n =
+        cell.kind === "tfh"
+          ? 6
+          : cell.kind === "th1"
+            ? 3
+            : cell.kind === "th17"
+              ? 4
+              : 8;
+      for (let i = 0; i < n; i++) {
+        const a = (i / n) * Math.PI * 2;
+        const g = new THREE.TorusGeometry(0.12, 0.035, 5, 10);
+        const m = new THREE.Mesh(g, receptor);
+        m.position.set(Math.cos(a) * 1.1, 1.6, Math.sin(a) * 1.1);
+        m.rotation.y = -a;
+        body.add(m);
+        this.ownedGeometry.push(g);
+      }
+    }
     if (cell.kind === "plasma") {
       const roughER = material(0xa58ab2, 0.5);
       this.ownedMaterials.push(roughER);
@@ -460,36 +491,44 @@ export class BattleScene {
       roughness: 0.12,
       clearcoat: 1,
     });
-    const core = new THREE.InstancedMesh(smallSphere, coreMat, 100),
-      capsule = new THREE.InstancedMesh(smallSphere, capMat, 100);
+    const core: THREE.InstancedMesh = new THREE.InstancedMesh(
+        smallSphere,
+        coreMat,
+        100,
+      ),
+      capsule: THREE.InstancedMesh = new THREE.InstancedMesh(
+        smallSphere,
+        capMat,
+        100,
+      );
     root.add(core, capsule);
     const marks = new THREE.Group();
-    const markMat = new THREE.LineBasicMaterial({ color: 0xffdd72 });
+    const markMat = material(0xffdd72, 0.28),
+      igMat = material(0x84df9e, 0.25);
+    const ownModel = (g: THREE.Group) => {
+      g.traverse((o) => {
+        if (o instanceof THREE.Mesh) this.ownedGeometry.push(o.geometry);
+      });
+      return g;
+    };
     for (let i = 0; i < 6; i++) {
       const a = (i / 6) * Math.PI * 2;
-      const group = new THREE.Group();
-      group.position.set(Math.cos(a) * 1.8, 0.5, Math.sin(a) * 1.8);
-      const geometry = new THREE.BufferGeometry().setFromPoints([
-        new THREE.Vector3(0, 0, 0),
-        new THREE.Vector3(0, 0.55, 0),
-        new THREE.Vector3(-0.23, 0.8, 0),
-        new THREE.Vector3(0, 0.55, 0),
-        new THREE.Vector3(0.23, 0.8, 0),
-      ]);
-      group.add(new THREE.Line(geometry, markMat));
-      group.rotation.y = -a;
-      group.name = "antibody";
-      marks.add(group);
-      const deposit = mesh(
-        smallSphere,
-        markMat,
-        new THREE.Vector3(Math.cos(a) * 1.7, 0.45, Math.sin(a) * 1.7),
-        new THREE.Vector3(0.13, 0.13, 0.13),
-      );
-      deposit.name = "c3b";
-      marks.add(deposit);
-      this.ownedGeometry.push(geometry);
+      const ig = ownModel(antibodyModel(igMat));
+      ig.position.set(Math.cos(a) * 1.6, 0.25, Math.sin(a) * 1.6);
+      ig.rotation.y = -a;
+      marks.add(ig);
+      const c3 = ownModel(complementModel(markMat));
+      c3.position.set(Math.cos(a + 0.3) * 1.5, 0.45, Math.sin(a + 0.3) * 1.5);
+      marks.add(c3);
     }
+    this.ownedMaterials.push(igMat);
+    const pg = pathogenGeometry(
+      this.content.pathogen.shape ?? "coccus",
+      p.form === "hypha",
+    );
+    core.geometry = pg;
+    capsule.geometry = pg;
+    this.ownedGeometry.push(pg);
     root.add(marks);
     const ringMat = new THREE.MeshBasicMaterial({
       color: 0xffd580,
@@ -514,16 +553,39 @@ export class BattleScene {
       marks,
       ring,
       signature: "",
+      form: p.form,
       phase: Number(p.id.slice(1)),
     };
   }
   private updateBacteria(p: Colony, b: Bacteria, tick: number) {
     const active = coatings(p, tick),
       marked = active.complement || active.antibody;
-    const signature = `${p.load}:${active.complement}:${active.antibody}`;
+    const pending = (kind: string) =>
+      !this.read().reduced &&
+      this.effects.some(
+        (f) =>
+          f.event.type === "mark" &&
+          f.event.target === p.id &&
+          f.event.opsonin === kind &&
+          (this.now - f.start) * this.read().speed < 1.05,
+      );
+    const showC3 = active.complement && !pending("c3b"),
+      showIg = active.antibody && !pending("antibody");
+    const signature = `${p.load}:${showC3}:${showIg}:${p.form}`;
+    if (b.form !== p.form) {
+      const g = pathogenGeometry(
+        this.content.pathogen.shape ?? "coccus",
+        p.form === "hypha",
+      );
+      b.core.geometry = g;
+      b.capsule.geometry = g;
+      this.ownedGeometry.push(g);
+      b.form = p.form;
+    }
+
     if (signature === b.signature) return;
     b.signature = signature;
-    const count = Math.min(p.load, 50);
+    const count = Math.min(p.load, p.form === "hypha" ? 9 : 50);
     b.core.count = b.capsule.count = count * 2;
     for (let i = 0; i < count; i++) {
       const a = i * 2.39996;
@@ -535,10 +597,25 @@ export class BattleScene {
           Math.sin(a) * r,
         );
         dummy.rotation.set(0.08 * Math.sin(i), a, 0.2);
-        dummy.scale.set(0.26, 0.31, 0.26);
+        const shape = this.content.pathogen.shape;
+        const scale =
+          p.form === "hypha"
+            ? 0.6
+            : shape === "fungus"
+              ? 0.4
+              : shape === "virus" || shape === "retrovirus"
+                ? 0.31
+                : 0.26;
+        dummy.scale.set(
+          scale,
+          scale * (shape === "rod" || shape === "acidfast" ? 1.05 : 1.2),
+          scale,
+        );
         dummy.updateMatrix();
         b.core.setMatrixAt(i * 2 + pair, dummy.matrix);
-        dummy.scale.set(0.34, 0.38, 0.32);
+        dummy.scale.multiplyScalar(
+          this.content.pathogen.shape === "acidfast" ? 1.06 : 1.2,
+        );
         dummy.updateMatrix();
         b.capsule.setMatrixAt(i * 2 + pair, dummy.matrix);
       }
@@ -547,12 +624,20 @@ export class BattleScene {
     b.capsule.instanceMatrix.needsUpdate = true;
     b.marks.visible = marked;
     b.marks.children.forEach(
-      (child) =>
-        (child.visible =
-          child.name === "c3b" ? active.complement : active.antibody),
+      (child) => (child.visible = child.name === "c3b" ? showC3 : showIg),
     );
     (b.core.material as THREE.MeshStandardMaterial).color.setHex(
-      marked ? 0x7291b2 : 0x536eaa,
+      this.content.pathogen.shape === "fungus"
+        ? 0xdbbda8
+        : this.content.pathogen.shape === "acidfast"
+          ? 0xc28c87
+          : this.content.pathogen.shape === "rod"
+            ? 0x7ea7aa
+            : this.content.pathogen.shape === "retrovirus"
+              ? 0xb077af
+              : marked
+                ? 0x7291b2
+                : 0x536eaa,
     );
   }
   private effect(event: TacticalEvent) {
@@ -566,6 +651,12 @@ export class BattleScene {
         "clear",
         "move",
         "cytotoxic",
+        "dock",
+        "degranulate",
+        "infect",
+        "release",
+        "barrier",
+        "contain",
       ].includes(event.type)
     )
       return;
@@ -573,7 +664,40 @@ export class BattleScene {
     let arms: THREE.InstancedMesh | undefined,
       ghost: THREE.Group | undefined,
       ring: THREE.Mesh | undefined;
-    if (event.type === "cytotoxic") {
+    if (event.type === "mark") {
+      ghost = new THREE.Group();
+      const gm = material(
+        event.opsonin === "antibody" ? 0x84df9e : 0xffdd72,
+        0.25,
+      );
+      for (let i = 0; i < 9; i++) {
+        const g =
+          event.opsonin === "antibody"
+            ? antibodyModel(gm)
+            : complementModel(gm);
+        g.scale.setScalar(event.opsonin === "antibody" ? 0.58 : 1);
+        g.traverse((o) => {
+          if (o instanceof THREE.Mesh) this.ownedGeometry.push(o.geometry);
+        });
+        ghost.add(g);
+      }
+      root.add(ghost);
+      this.ownedMaterials.push(gm);
+    } else if (event.type === "dock") {
+      ghost = new THREE.Group();
+      const gm = material(0xc4f1d0, 0.3);
+      for (let i = 0; i < 5; i++)
+        ghost.add(
+          mesh(
+            smallSphere,
+            gm,
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(0.12, 0.12, 0.12),
+          ),
+        );
+      root.add(ghost);
+      this.ownedMaterials.push(gm);
+    } else if (event.type === "cytotoxic" || event.type === "degranulate") {
       ghost = new THREE.Group();
       const gm = material(0xf3b2ca, 0.28);
       for (let i = 0; i < 8; i++) {
@@ -601,10 +725,15 @@ export class BattleScene {
       this.ownedMaterials.push(mat);
       ghost = new THREE.Group();
       const gm = material(event.survives ? 0xe9b958 : 0x7593c9, 0.28);
-      for (const x of [-0.2, 0.2])
+      const pg = pathogenGeometry(this.content.pathogen.shape ?? "coccus");
+      this.ownedGeometry.push(pg);
+      for (const x of this.content.pathogen.shape &&
+      this.content.pathogen.shape !== "coccus"
+        ? [0]
+        : [-0.2, 0.2])
         ghost.add(
           mesh(
-            smallSphere,
+            pg,
             gm,
             new THREE.Vector3(x, 0, 0),
             new THREE.Vector3(0.27, 0.34, 0.27),
@@ -628,13 +757,11 @@ export class BattleScene {
     } else {
       const gm = new THREE.MeshBasicMaterial({
         color:
-          event.type === "mark"
-            ? 0xffda78
-            : event.type === "arrive"
-              ? 0x87ebff
-              : event.type === "clear"
-                ? 0xd5efe6
-                : 0xf6b8ac,
+          event.type === "arrive"
+            ? 0x87ebff
+            : event.type === "clear"
+              ? 0xd5efe6
+              : 0xf6b8ac,
         transparent: true,
         opacity: 0.7,
         depthWrite: false,
@@ -649,9 +776,26 @@ export class BattleScene {
     this.scene.add(root);
     this.effects.push({ event, start: this.now, root, arms, ghost, ring });
   }
+  skipEffects() {
+    for (const fx of this.effects) {
+      this.scene.remove(fx.root);
+      fx.root.traverse((o) => {
+        if (o instanceof THREE.InstancedMesh) o.dispose();
+      });
+    }
+    this.effects = [];
+    for (const b of this.bacteria.values()) b.signature = "";
+  }
   private animateEffects(reduced: boolean, speed: number) {
     this.effects = this.effects.filter((f) => {
-      const duration = (f.event.type === "engulf" ? 1.1 : 0.95) / speed;
+      const duration =
+        (f.event.type === "engulf"
+          ? 1.1
+          : f.event.type === "mark"
+            ? 1.35
+            : f.event.type === "dock"
+              ? 3
+              : 0.95) / speed;
       const p = (this.now - f.start) / duration;
       if (p >= 1) {
         this.scene.remove(f.root);
@@ -665,7 +809,36 @@ export class BattleScene {
         f.root.visible = false;
         return true;
       }
-      if (e.type === "cytotoxic" && f.ghost && e.from) {
+      if (e.type === "mark" && f.ghost) {
+        const from = vector(e.from ?? this.content.portal, 2),
+          to = vector(e.position, 0.5);
+        f.ghost.children.forEach((g, i) => {
+          const delay = i * 0.017,
+            t = Math.max(0, Math.min(1, (p - delay) / 0.68));
+          const a = i * 2.39996,
+            r = ((e.opsonin === "antibody" ? 0.9 : 1.5) * (i + 1)) / 9;
+          const landing = to
+            .clone()
+            .add(new THREE.Vector3(Math.cos(a) * r, 0.15, Math.sin(a) * r));
+          g.position.copy(from.clone().lerp(landing, t));
+          g.position.y +=
+            Math.sin(t * Math.PI) * (e.opsonin === "antibody" ? 1.4 : 4.8);
+          g.rotation.set(e.opsonin === "antibody" ? 0 : p * 3, a + p * 0.7, 0);
+          g.visible = t < 1 || p < 0.88;
+        });
+      } else if (e.type === "dock" && f.ghost && e.from) {
+        const from = vector(e.from, 1.4),
+          to = vector(e.position, 1.4);
+        f.ghost.children.forEach((g, i) =>
+          g.position
+            .copy(from.clone().lerp(to, (i + 0.5) / 5))
+            .add(new THREE.Vector3(0, Math.sin(p * 12 + i) * 0.08, 0)),
+        );
+      } else if (
+        (e.type === "cytotoxic" || e.type === "degranulate") &&
+        f.ghost &&
+        e.from
+      ) {
         const from = vector(e.from, 1),
           to = vector(e.position, 1);
         f.ghost.position.copy(from.lerp(to, Math.min(1, p / 0.55)));
@@ -837,6 +1010,34 @@ export class BattleScene {
       (actor.shell.material as THREE.MeshPhysicalMaterial).emissiveIntensity =
         infected ? 0.4 : 0.1;
     }
+    if (s.campaign && this.content.mechanics === "containment")
+      for (const field of this.content.fields) {
+        const progress = s.campaign.containment[field.id];
+        let wall = this.containment.get(field.id);
+        if (!wall) {
+          wall = new THREE.Group();
+          const mat = material(0xc7b4c5, 0.8);
+          this.ownedMaterials.push(mat);
+          for (let i = 0; i < 18; i++) {
+            const a = (i / 18) * Math.PI * 2;
+            const g = new THREE.CapsuleGeometry(0.08, 0.75, 3, 6);
+            const fibre = new THREE.Mesh(g, mat);
+            fibre.position.set(Math.cos(a) * 4, 0.2, Math.sin(a) * 4);
+            fibre.rotation.set(Math.PI / 2, 0, -a);
+            wall.add(fibre);
+            this.ownedGeometry.push(g);
+          }
+          this.scene.add(wall);
+          this.containment.set(field.id, wall);
+        }
+        const focus = s.cells.find(
+          (u) =>
+            u.region === field.id && s.internal.some((p) => p.host === u.id),
+        );
+        wall.visible = !!focus && progress > 5;
+        if (focus) wall.position.copy(vector(focus.position, 0.15));
+        wall.children.forEach((f, i) => (f.visible = i / 18 < progress / 100));
+      }
     for (const [id, b] of this.bacteria)
       if (!s.colonies.some((p) => p.id === id)) {
         this.scene.remove(b.root);

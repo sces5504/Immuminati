@@ -9,6 +9,22 @@ export interface Entry {
   sources: string[];
 }
 export const sources: Record<string, { name: string; url: string }> = {
+  B23: {
+    name: "Gladiator 等 · 口腔 ILC 的 IL-17（小鼠研究）",
+    url: "https://pubmed.ncbi.nlm.nih.gov/23255360/",
+  },
+  B24: {
+    name: "Conti 等 · 口腔 resident Th17／γδ T 的 IL-17（小鼠研究）",
+    url: "https://pubmed.ncbi.nlm.nih.gov/25200028/",
+  },
+  B21: {
+    name: "肺部 DC 交叉呈遞與第一型 IFN（原始研究）",
+    url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3484433/",
+  },
+  B22: {
+    name: "NIH · HIV 治療基礎與 ART",
+    url: "https://hivinfo.nih.gov/understanding-hiv/fact-sheets/hiv-treatment-basics",
+  },
   B17: {
     name: "Rubtsov 等 · Treg 衍生 IL-10 限制屏障發炎（小鼠）",
     url: "https://pubmed.ncbi.nlm.nih.gov/18387831/",
@@ -84,6 +100,30 @@ export const sources: Record<string, { name: string; url: string }> = {
 };
 export const entries: Entry[] = [
   {
+    id: "pdc",
+    name: "漿細胞樣樹突細胞",
+    english: "Plasmacytoid dendritic cell",
+    keywords: "pDC IFN I 抗病毒 TLR7",
+    summary: "先天病毒核酸辨識後的重要第一型干擾素來源。",
+    mechanism:
+      "TLR7 等感知病毒核酸後，產生 IFN-I，使鄰近宿主建立抗病毒狀態；不是直接清場傷害。",
+    scope:
+      "M4／M6 降低防區內新宿主感染與產毒。與負責交叉呈遞的常規 DC 分別建模；未細分全部 DC 亞群或病毒逃避訊號。",
+    sources: ["B21"],
+  },
+  {
+    id: "ilc3",
+    name: "第三型先天淋巴細胞",
+    english: "Type 3 innate lymphoid cell",
+    keywords: "ILC3 IL17 IL22 黏膜 先天",
+    summary: "可提供 type-17 細胞激素的先天淋巴族群。",
+    mechanism:
+      "IL-17／IL-22 經上皮組織影響防禦；不需要初始 T 細胞的傳統 MHC 活化流程。",
+    scope:
+      "本版用作黏膜早期 type-17 支援示例，並非宣稱人類口腔必由 ILC3 主導。口腔早期來源因研究模型而異，亦有 resident Th17 與 γδ T 的證據；這些族群未全部獨立建模。",
+    sources: ["B23", "B24", "B7"],
+  },
+  {
     id: "compartments",
     name: "組織與胞內／胞外區室",
     english: "Tissue and pathogen compartments",
@@ -93,7 +133,7 @@ export const entries: Entry[] = [
     mechanism:
       "病原由胞外被吞噬後，先進入宿主膜內的吞噬體；攝入與殺死是兩個步驟。囊泡內存活與逃入細胞質需要不同機制，不能以模型重疊判定。抗原呈現、活病原與宿主健康也分別記錄。抗體／補體通常在胞外作用；NK／CD8 的合法目標是符合辨識條件的宿主細胞。",
     scope:
-      "M1 以可選取肺泡上皮／血管內皮、區域健康與吞噬體處理呈現。組織剖視讀取權威狀態，圖像不按真實比例。病毒複製、釋放、胞內菌逃逸與單顆組織細胞修復尚未實作。",
+      "M1 以可選取肺泡上皮／血管內皮、區域健康與吞噬體處理呈現。組織剖視讀取權威狀態，圖像不按真實比例。M2 囊泡內存活／再播散、M3 圍堵、M4／M6 宿主感染與釋出、M5 菌絲／上皮防禦分別實作；未模擬囊泡逃入細胞質或組織再生。",
     sources: ["B5", "B11"],
   },
   {
@@ -213,7 +253,7 @@ export const entries: Entry[] = [
     mechanism:
       "需要相應啟動、抗原呈遞與合法目標條件。殺死感染宿主後，殘餘感染的去向仍須依病原機制處理。",
     scope:
-      "M1 可募集、調度初始 CD8，但 MHC-II 呈遞不會活化它，也沒有合適的感染宿主。機制演練使用預先活化且已知抗原的 CD8，示範相符 MHC-I 肽、穿孔素／顆粒酶與宿主凋亡；不相符與健康宿主保留。完整初始 CD8 活化及 HIV 潛伏機制未實作。",
+      "M1 可募集、調度初始 CD8，但 MHC-II 呈遞不會活化它，也沒有合適的感染宿主。機制演練使用預先活化且已知抗原的 CD8，示範相符 MHC-I 肽、穿孔素／顆粒酶與宿主凋亡；不相符與健康宿主保留。M4／M6 由 DC 交叉呈遞 MHC-I、共刺激與等待啟動 CD8；M6 不表達病毒肽的潛伏宿主不是合法目標。",
     sources: ["B19", "B20", "B11"],
   },
   {
@@ -225,7 +265,7 @@ export const entries: Entry[] = [
     mechanism:
       "Th1 的協作作用需要有效來源及合法接收細胞；訊號是細胞間協作，不是對病原直接發射傷害。",
     scope:
-      "本輪 CD4 支援族群聚合 Th1／Tfh 功能：完成 MHC-II 活化後，調度至組織可提供 IFN-γ。M1 無持續胞內活菌；囊泡內清除規則可供後續內容使用，M2／M3 尚不可玩。",
+      "可獨立募集 Th1；完成 MHC-II 活化後，自動靠近感染巨噬細胞並提供 IFN-γ。M2 增強囊泡內清除；M3 協助組織圍堵，成功仍可保留活菌。",
     sources: ["B4", "B11"],
   },
   {
@@ -236,7 +276,8 @@ export const entries: Entry[] = [
     summary: "參與特定部位的黏膜與上皮防禦。",
     mechanism:
       "口腔情境的 IL-17 相關作用包含上皮反應及抗菌胜肽，也可影響募集；不能簡化為直接殺菌或只增加嗜中性球。",
-    scope: "M5 以口腔黏膜為案例；目前僅百科，尚無可玩規則與動畫。",
+    scope:
+      "M5 口腔黏膜：Th17／ILC3 的 IL-17／IL-22 提高上皮防禦與趨化，限制酵母及菌絲；嗜中性球對長菌絲使用接觸性顆粒防禦。",
     sources: ["B7", "B8"],
   },
   {
@@ -248,7 +289,7 @@ export const entries: Entry[] = [
     mechanism:
       "協助相應的 B 細胞反應。並非所有抗體反應都必須依賴 Tfh；親和力成熟是特定反應的選擇過程。",
     scope:
-      "本輪蛋白抗原呈遞就緒後，CD4 T 需 8 模擬秒活化，再在抽象淋巴結向相符 B 細胞提供幫助。Tfh／Th1 以一個族群聚合；未模擬濾泡微結構、胚中心或親和力選擇。",
+      "本輪蛋白抗原呈遞就緒後，CD4 T 需 8 模擬秒活化，再在抽象淋巴結向相符 B 細胞提供幫助。可獨立募集 Tfh、Th1、Th17；B 呈遞同源肽後，Tfh 近距離 CD40L／CD40 對接 3 秒，再分化等待。並非 T helper 回感染腔面才能幫助 B；未模擬濾泡微結構、胚中心或親和力選擇。",
     sources: ["B1", "B10"],
   },
   {
@@ -272,7 +313,7 @@ export const entries: Entry[] = [
     mechanism:
       "胞外來源與吞噬囊泡內活菌需要分開保存與處理，經適當訊號支援改善胞內處理。",
     scope:
-      "局部人體巨噬細胞教學模型，不代表所有沙門氏菌或傷寒病程。M2 開發中。",
+      "M2 是腸黏膜／局部巨噬細胞感染模型，不代表所有沙門氏菌或傷寒病程。胞外及囊泡來源分開，Th1 支援缺乏時可增殖及再播散。",
     sources: ["B4S", "B11"],
   },
   {
@@ -283,7 +324,8 @@ export const entries: Entry[] = [
     summary: "限制感染灶與擴散，不等同完全滅菌或臨床治癒。",
     mechanism:
       "巨噬細胞與 Th1 協作可限制感染，也可能伴隨活菌存留與局部損傷；感染灶控制不是永久無敵屏障。",
-    scope: "M3 選定肺部防禦片段，以控制穩定及組織保全評價。開發中。",
+    scope:
+      "M3 肺部防禦片段：感染巨噬與 Th1／IFN-γ 建立圍堵，負荷與播散受控並維持 20 模擬秒才成功；不是臨床治癒。",
     sources: ["B4", "B12"],
   },
   {
@@ -294,8 +336,9 @@ export const entries: Entry[] = [
     summary: "游離病毒與感染宿主細胞是不同目標。",
     mechanism:
       "中和有助阻斷合適游離病毒；清除感染宿主需要其他辨識及作用路徑，不能由抗體中和直接視為已治好宿主。",
-    scope: "M4 將明示案例初始免疫背景並分階段介紹反應。開發中。",
-    sources: ["B5", "B10"],
+    scope:
+      "M4 由未活化 CD8 開始。pDC／感染上皮的 IFN-I 降低傳播，DC 交叉呈遞後啟動特異 CD8；抗體中和胞外病毒，不消除核內複製材料。",
+    sources: ["B5", "B10", "B21"],
   },
   {
     id: "candida",
@@ -305,7 +348,8 @@ export const entries: Entry[] = [
     summary: "酵母與菌絲的形態差異會改變合理防禦方式。",
     mechanism:
       "口腔上皮屏障與 Th17 相關作用很重要，真菌大小及形態也影響嗜中性球的反應。",
-    scope: "M5 是獨立口腔黏膜案例，不作 HIV 關的替代主對手。開發中。",
+    scope:
+      "M5 為獨立口腔黏膜案例，有出芽酵母與分枝菌絲模型及不同合法免疫效應，不作 HIV 關替代主對手。",
     sources: ["B7", "B8"],
   },
   {
@@ -317,8 +361,8 @@ export const entries: Entry[] = [
     mechanism:
       "HIV 可損害 CD4 支援，也能感染其他合適宿主。活躍與潛伏感染需區分，免疫辨識並非能看見所有潛伏來源。",
     scope:
-      "遊戲時間與負荷不代表現實病程。現代抗反轉錄病毒治療能有效抑制 HIV，讓人長期健康生活。M6 開發中。",
-    sources: ["B13", "B14", "B15"],
+      "遊戲時間與負荷不代表現實病程。現代抗反轉錄病毒治療能有效抑制 HIV，讓人長期健康生活。M6 分開易感、感染建立、產毒及潛伏宿主；CD4 功能下降影響新活化、T–B 幫助與訊號支援。",
+    sources: ["B13", "B14", "B15", "B22"],
   },
   {
     id: "rules",

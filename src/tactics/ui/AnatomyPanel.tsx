@@ -11,7 +11,13 @@ import {
 } from "../content/anatomy";
 import { tissueProfiles } from "../content/tissues";
 
-function SectionDiagram({ lung }: { lung: boolean }) {
+function SectionDiagram({
+  lung,
+  lymphoid = false,
+}: {
+  lung: boolean;
+  lymphoid?: boolean;
+}) {
   return (
     <svg
       className="t-anatomy-section"
@@ -26,10 +32,16 @@ function SectionDiagram({ lung }: { lung: boolean }) {
       <rect x="0" y="0" width="560" height="240" rx="16" fill="#263a50" />
       <path d="M18 15H542V92H18Z" fill="#d4e6e5" />
       <text x="32" y="39" fill="#284456">
-        {lung ? "肺泡腔｜細胞外" : "黏膜腔面｜細胞外"}
+        {lung
+          ? "肺泡腔｜細胞外"
+          : lymphoid
+            ? "淋巴組織間隙｜細胞外"
+            : "黏膜腔面｜細胞外"}
       </text>
       <text x="32" y="63" className="t-svg-small" fill="#48626a">
-        細菌與巡防免疫細胞位於腔面；這個空間不是一顆細胞
+        {lymphoid
+          ? "基質與淋巴球之間是胞外；潛伏病毒位於 CD4 宿主細胞核內"
+          : "病原與巡防免疫細胞位於腔面；這個空間不是一顆細胞"}
       </text>
       {[0, 1, 2, 3, 4].map((i) => (
         <g key={i}>
@@ -49,7 +61,9 @@ function SectionDiagram({ lung }: { lung: boolean }) {
         </g>
       ))}
       <text x="32" y="141" fill="#f0d7e2">
-        上皮細胞＋基底膜｜區隔腔面與組織側
+        {lymphoid
+          ? "網狀基質＋淋巴球｜細胞膜內才是胞內"
+          : "上皮細胞＋基底膜｜區隔腔面與組織側"}
       </text>
       <path d="M18 122H542" stroke="#c9cee4" strokeWidth="3" />
       <text x="32" y="168" fill="#cededc">
@@ -163,7 +177,16 @@ function Cutaway({
             const y = 143 + Math.sin(i * 2.4) * 20;
             return (
               <g key={i} fill={processing ? "#668eaa" : "#b55c88"}>
-                {host?.infection ? (
+                {host?.infection?.compartment === "nucleus" ? (
+                  <path
+                    d={`M${x - 7} ${y - 6}L${x + 6} ${y - 3}L${x - 6} ${y}L${x + 7} ${y + 4}L${x - 4} ${y + 7}`}
+                    fill="none"
+                    stroke={
+                      host.infection.phase === "latent" ? "#796783" : "#b55c88"
+                    }
+                    strokeWidth="3"
+                  />
+                ) : host?.infection ? (
                   <g>
                     <circle
                       cx={x}
@@ -210,8 +233,19 @@ function Cutaway({
             ? " · 活病原仍計入感染負荷；位置不由模型重疊判定。"
             : "；沒有感染不代表這顆細胞沒有功能。"}
       </p>
+      {host?.infection && (
+        <p>
+          {hostStatus(host)}
+          。核內線段代表病毒基因組／複製材料，不是成熟病毒顆粒。
+          {host.infection.phase === "latent"
+            ? "潛伏整合 DNA 未表達病毒肽，不能被 CD8 當成產毒宿主。"
+            : `MHC-I ${host.mhc1 ? "保留" : "降低"} · 抗原 ${host.antigen}`}
+        </p>
+      )}
       {host?.apoptoticAt ? (
-        <p>此宿主已凋亡。演練將其病原負荷歸零；釋放／再感染尚未建模。</p>
+        <p>
+          此宿主已凋亡，停止產毒；已釋出的胞外病原仍獨立存在，不隨宿主消失。
+        </p>
       ) : null}
     </div>
   );
@@ -236,7 +270,10 @@ export function AnatomyPanel({
         {c.tissue === "lung" ? "肺泡腔" : "黏膜腔面"}
         的細胞外環境。周圍薄片是宿主上皮細胞，不是包住整個戰場的單一細胞膜。
       </p>
-      <SectionDiagram lung={c.tissue === "lung"} />
+      <SectionDiagram
+        lung={c.tissue === "lung"}
+        lymphoid={c.tissue === "lymphoid"}
+      />
       <p className="t-anatomy-note">
         圖中以放大間距區分各層，非真實厚度。微血管與淋巴引流在組織側；目前募集以等待＋跨屏障入口壓縮呈現，並未完整模擬穿越各層。
       </p>
@@ -291,11 +328,17 @@ export function AnatomyPanel({
                   {tissueCellCatalog[host.kind].function}
                   <br />
                   位於
-                  {host.layer === "vascular" ? "組織側的血管壁" : "上皮屏障"}
+                  {host.layer === "vascular"
+                    ? "組織側的血管壁"
+                    : host.layer === "lymphoid"
+                      ? "淋巴組織間隙中的宿主細胞"
+                      : "上皮屏障"}
                   ；健康 {Math.round(host.health)}% · {hostStatus(host)}。<br />
                   MHC-I {host.mhc1 ? "保留" : "降低"}；
                   {host.antigen === "self"
-                    ? "呈現自身背景抗原，不代表受感染。"
+                    ? host.infection?.phase === "latent"
+                      ? "潛伏感染未表達病毒肽；自身背景抗原不代表已清除。"
+                      : "呈現自身背景抗原，不代表受感染。"
                     : `抗原 ${host.antigen}；抗原呈現與活病原分開記錄。`}
                 </p>
               ) : (
@@ -314,7 +357,10 @@ export function AnatomyPanel({
         <summary>本版已完成與保留空間</summary>
         <p>
           M1
-          顯示健康／受損肺泡上皮、血管內皮，以及吞噬體內的活菌處理。機制演練顯示帶有細胞質感染標記的宿主；這是獨立教學標本。細胞核區室已預留，病毒入侵、複製、釋出與胞內菌逃逸尚未實作，不代表後續關卡已完成。組織細胞健康沿用區域保全數值，未另算單顆細胞損傷或修復。
+          顯示健康／受損肺泡上皮、血管內皮，以及吞噬體內的活菌處理。機制演練顯示帶有細胞質感染標記的宿主；這是獨立教學標本。M2
+          追蹤含菌囊泡與再播散，M3 追蹤圍堵；M4／M6
+          分開胞外病毒、核內基因組與產毒／潛伏宿主，M5
+          有菌絲及上皮防禦。尚未模擬囊泡逃入細胞質。組織細胞健康沿用區域保全數值，未另算單顆細胞損傷或修復。
         </p>
       </details>
     </div>

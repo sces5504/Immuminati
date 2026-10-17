@@ -1,3 +1,10 @@
+import { victoryCondition, limitedCondition } from "./goals";
+import {
+  initialCampaign,
+  campaignStep,
+  viral,
+  phagosomeSurvives,
+} from "./infection";
 import { coat, coatings } from "./opsonization";
 import { populateTissue, syncTissueHealth } from "../content/anatomy";
 import type {
@@ -86,6 +93,9 @@ function wave(s: TacticalState, c: TacticalContent) {
       complementUntil: 0,
       antibodyUntil: 0,
       pathogen: c.pathogen.id,
+      ...(c.mechanics === "fungal"
+        ? { form: group.load >= 9 ? ("hypha" as const) : ("yeast" as const) }
+        : {}),
     });
   }
   s.nextWaveAt = c.waves[s.wave + 1]
@@ -139,6 +149,7 @@ export function createTactical(c: TacticalContent, seed = 1): TacticalState {
   }
   wave(s, c);
   populateTissue(s, c);
+  initialCampaign(s, c);
   return s;
 }
 function pathTo(cell: Cell, point: Vec, c: TacticalContent) {
@@ -224,7 +235,7 @@ export function commandTactical(
       p.position,
       "補體 C3b 已沉積；經補體受體促進吞噬，不直接裂解肺炎鏈球菌。",
       c.markDuration,
-      { target: p.id },
+      { target: p.id, opsonin: "c3b", from: { ...c.portal } },
     );
   } else if (cmd.type === "antibody") {
     const p = s.colonies.find((p) => p.id === cmd.target)!;
@@ -236,7 +247,15 @@ export function commandTactical(
       p.position,
       "已指定漿細胞產生的抗體結合胞外菌，消耗 1 抗體；經 Fc 受體支援吞噬，不直接殺菌。",
       30,
-      { target: p.id },
+      {
+        target: p.id,
+        opsonin: "antibody",
+        from: {
+          ...(s.cells.find((u) => u.kind === "plasma")?.position ??
+            c.lymphExit ??
+            c.portal),
+        },
+      },
     );
   } else if (cmd.type === "recruit") {
     const f = c.fields.find((f) => f.id === cmd.region)!;
@@ -355,6 +374,7 @@ export function stepTactical(
   }
   s.internal = s.internal.filter((p) => p.load > 0);
   updateImmunity(s, c);
+  campaignStep(s, c);
   for (const cell of s.cells) {
     const spec = c.cells[cell.kind];
     if (cell.order.type === "move") {
@@ -365,7 +385,12 @@ export function stepTactical(
     }
     const destination = supportDestination(s, cell, c);
     if (destination) {
-      if (distance(cell.position, destination) > 2) {
+      const approach =
+        ["helper", "bcell", "antibody"].includes(spec.role) ||
+        (spec.role === "cytotoxic" && cell.activation !== "effector")
+          ? 0.5
+          : 2;
+      if (distance(cell.position, destination) > approach) {
         if (
           !cell.path.length ||
           distance(cell.path[cell.path.length - 1], destination) > 0.1
@@ -410,6 +435,26 @@ export function stepTactical(
         s.tick >= cell.readyAt
       ) {
         cell.path = [];
+        if (target.form === "hypha" && cell.kind !== "dendritic") {
+          cell.readyAt = s.tick + spec.cooldown;
+          if (cell.kind === "neutrophil") {
+            const n = Math.min(
+              target.load,
+              (3 + (s.campaign?.barrier[target.region] ?? 0) / 40) | 0,
+            );
+            target.load -= n;
+            emit(
+              s,
+              "degranulate",
+              target.position,
+              "嗜中性球接觸菌絲，局部釋放顆粒破壞真菌膜；長菌絲未被整條吞入。",
+              n,
+              { actor: cell.id, target: target.id, from: { ...cell.position } },
+            );
+          }
+          continue;
+        }
+        const survives = phagosomeSurvives(c, cell);
         const n = Math.min(
           target.load,
           spec.power +
@@ -420,7 +465,7 @@ export function stepTactical(
               : 0),
         );
         target.load -= n;
-        if (cell.kind === "dendritic" && !cell.antigen) {
+        if (spec.role === "presenter" && !cell.antigen) {
           cell.antigen = c.pathogen.antigen ?? `${c.pathogen.id}:protein`;
           if (s.immunity.node.stage === "idle") {
             s.immunity.node.stage = "migrating";
@@ -442,8 +487,8 @@ export function stepTactical(
           pathogen: c.pathogen.id,
           load: n,
           compartment: "phagosome",
-          stage: c.pathogen.survives ? "persistent" : "processing",
-          clearAt: c.pathogen.survives
+          stage: survives ? "persistent" : "processing",
+          clearAt: survives
             ? 0
             : s.tick + (cell.kind === "neutrophil" ? 10 : 15),
         });
@@ -451,13 +496,13 @@ export function stepTactical(
           s,
           "engulf",
           target.position,
-          `${spec.name}吞入 ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : "（莢膜限制效率）"}${c.pathogen.survives ? "，囊泡內仍有活菌。" : "，進入吞噬體，等待胞內殺菌。"}`,
+          `${spec.name}吞入 ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : "（莢膜限制效率）"}${survives ? "，囊泡內仍有活菌。" : "，進入吞噬體，等待胞內殺菌。"}`,
           n,
           {
             actor: cell.id,
             target: target.id,
             from: { ...cell.position },
-            survives: c.pathogen.survives,
+            survives,
           },
         );
         if (target.load === 0)
@@ -478,10 +523,18 @@ export function stepTactical(
       cell.order = { type: "guard", point: { ...cell.position } };
   }
   s.colonies = s.colonies.filter((p) => p.load > 0);
-  if (s.tick % c.growEvery === 0) {
+  if (!viral(c) && s.tick % c.growEvery === 0) {
     const spreading: Colony[] = [];
     for (const p of s.colonies) {
-      p.load += c.growth;
+      if (
+        c.mechanics === "containment" &&
+        (s.campaign?.containment[p.region] ?? 0) >= 60
+      )
+        continue;
+      p.load +=
+        c.mechanics === "fungal" && (s.campaign?.barrier[p.region] ?? 0) >= 40
+          ? 0
+          : c.growth;
       emit(s, "grow", p.position, `殘餘菌群繁殖 +${c.growth}。`, c.growth, {
         target: p.id,
       });
@@ -574,16 +627,21 @@ export function stepTactical(
   syncTissueHealth(s);
   if (c.practice) return s;
   const lost = Object.values(s.health).some((h) => h <= 0),
-    won = s.wave === c.waves.length - 1 && loadOf(s) === 0;
-  if (lost || won || s.tick >= c.limit) {
+    won = victoryCondition(s, c);
+  const limited = limitedCondition(s, c);
+  if (lost || won || limited || s.tick >= c.limit) {
     const rate = preservation(s);
     s.result = {
-      type: !lost && won ? "victory" : "defeat",
-      reason: lost
-        ? "必要組織失守"
-        : won
-          ? `${c.waves.length} 波感染來源均已清除`
-          : "防禦時間內未能控制感染",
+      type: limited ? "limited" : !lost && won ? "victory" : "defeat",
+      reason: limited
+        ? "未治療情境：免疫支援已到本次觀察界限"
+        : lost
+          ? "必要組織失守"
+          : won
+            ? c.mechanics === "containment"
+              ? "感染被穩定圍堵；仍有活菌，並非臨床治癒"
+              : `${c.waves.length} 波感染來源均已清除`
+            : "防禦時間內未能控制感染",
       preservation: rate,
       stars:
         !lost && won

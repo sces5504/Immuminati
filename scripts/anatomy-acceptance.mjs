@@ -76,7 +76,7 @@ try {
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
     await page.waitForTimeout(1200);
     const initial = await saved();
-    assert.equal(initial.rules, "2.4");
+    assert.equal(initial.rules, "3.0");
     assert.equal(initial.state.hosts.length, 32);
     assert.equal(
       await page.evaluate(

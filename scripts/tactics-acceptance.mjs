@@ -131,7 +131,7 @@ try {
     });
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.deepEqual((await save(page)).state, pristine.state);
-    assert.equal((await save(page)).rules, "2.4");
+    assert.equal((await save(page)).rules, "3.0");
     if ((await save(page)).state.immunity.autoSeek)
       await page.getByTestId("autoseek").click();
     record(name + ": zero-tick legacy imports can resume without restarting");

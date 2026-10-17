@@ -1,3 +1,4 @@
+import { tacticalScenarios } from "../content/m1";
 import { useEffect, useState } from "react";
 import type { TacticalSave } from "../domain/model";
 const steps = [
@@ -71,7 +72,30 @@ export function Tutorial({
     [start, setStart] = useState(save.state.eventId);
   const s = save.state,
     events = s.events.filter((e) => e.id > start),
-    item = steps[step];
+    base = steps[step],
+    content = tacticalScenarios[s.scenario],
+    item =
+      content && content.id !== "m1"
+        ? {
+            ...base,
+            text:
+              step === 0
+                ? `保持暫停。${content.briefing}按「組織剖視」區分胞外、細胞膜與胞內。`
+                : step === 1
+                  ? "點下方任一細胞；各細胞的合法目標、活化與功能不同，選取後可查看。"
+                  : step === 2
+                    ? "選取細胞後，點 B 防區地標或地面指定位置；手動移動優先。"
+                    : step === 9
+                      ? (content.objective ?? base.text)
+                      : base.text,
+            target:
+              step === 1
+                ? ".t-roster>button:first-child"
+                : step === 2
+                  ? ".t-field-label:nth-child(2)"
+                  : base.target,
+          }
+        : base;
   const done = [
     save.paused,
     !!selected && s.cells.some((u) => u.id === selected),

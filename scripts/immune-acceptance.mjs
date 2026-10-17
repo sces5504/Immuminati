@@ -229,22 +229,22 @@ try {
     const legacyText = JSON.stringify(legacy);
     await page.evaluate((text) => {
       localStorage.setItem("immuminati:tactics:v2", text);
-      localStorage.removeItem("immuminati:tactics:pre-2.4");
+      localStorage.removeItem("immuminati:tactics:pre-3.0");
     }, legacyText);
     await page.reload();
     await page.getByRole("button", { name: "繼續防線 →", exact: true }).click();
-    assert.equal((await saved(page)).rules, "2.4");
+    assert.equal((await saved(page)).rules, "3.0");
     assert.equal((await saved(page)).state.immunity.autoSeek, false);
     assert.equal(
       await page.evaluate(() =>
-        localStorage.getItem("immuminati:tactics:pre-2.4"),
+        localStorage.getItem("immuminati:tactics:pre-3.0"),
       ),
       legacyText,
     );
     checks.push({
       device,
       check:
-        "real pre-2.4 save migration preserves original text backup and starts new immunity explicitly inactive",
+        "real pre-3.0 save migration preserves original text backup and starts new immunity explicitly inactive",
       passed: true,
     });
     assert.deepEqual(errors, []);

@@ -1,3 +1,4 @@
+import { campaignLevels } from "./campaign";
 import type { TacticalContent } from "../domain/model";
 import { cellCatalog } from "./cells";
 export const m1: TacticalContent = {
@@ -69,4 +70,7 @@ export const m1: TacticalContent = {
   spreadAt: 20,
   stars: [85, 60],
 };
-export const tacticalScenarios: Record<string, TacticalContent> = { m1 };
+export const tacticalScenarios: Record<string, TacticalContent> = {
+  m1,
+  ...campaignLevels(m1),
+};

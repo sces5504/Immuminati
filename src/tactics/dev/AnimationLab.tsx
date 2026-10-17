@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { m1 } from "../content/m1";
-import { copy, createTactical, stepTactical } from "../engine/simulation";
+import {
+  copy,
+  createTactical,
+  stepTactical,
+  commandTactical,
+} from "../engine/simulation";
 import { BattleScene } from "../presentation/BattleScene";
 function sample(survives = false) {
   const c = copy(m1);
@@ -23,6 +28,7 @@ export default function AnimationLab() {
   const current = useRef(state);
   current.current = state;
   const [busy, setBusy] = useState(false);
+  const [coating, setCoating] = useState("");
   const host = useRef<HTMLDivElement>(null),
     canvas = useRef<HTMLCanvasElement>(null),
     view = useRef<BattleScene | null>(null),
@@ -48,6 +54,7 @@ export default function AnimationLab() {
     };
   }, []);
   function play(survives: boolean) {
+    setCoating("");
     const fixture = sample(survives);
     fixture.s.eventId = current.current.eventId + 10;
     fixture.s.events = [];
@@ -59,6 +66,38 @@ export default function AnimationLab() {
       setState(resolved);
       setBusy(false);
     }, 2800);
+  }
+  function playCoating(kind: "mark" | "antibody") {
+    const f = sample();
+    f.s.tick = 0;
+    f.s.events = [];
+    f.s.eventId = current.current.eventId + 10;
+    f.s.colonies[0].markedUntil = 0;
+    f.s.colonies[0].complementUntil = 0;
+    f.s.colonies[0].antibodyUntil = 0;
+    f.s.immunity.antibodies = 1;
+    const plasma = {
+      ...f.s.cells[0],
+      id: `u${f.s.serial++}`,
+      kind: "plasma" as const,
+      position: {
+        x: f.s.colonies[0].position.x + 4,
+        z: f.s.colonies[0].position.z + 2,
+      },
+    };
+    f.s.cells.push(plasma);
+    setState(f.s);
+    setCoating(kind);
+    setBusy(true);
+    timer.current = setTimeout(() => {
+      const resolved = commandTactical(
+        f.s,
+        { type: kind, target: f.s.colonies[0].id },
+        f.c,
+      ).state;
+      setState(resolved);
+      timer.current = setTimeout(() => setBusy(false), 3200);
+    }, 300);
   }
   const internal = state.internal.reduce((n, p) => n + p.load, 0);
   return (
@@ -80,12 +119,20 @@ export default function AnimationLab() {
         這是半速動畫測試群體，沿用雙球字形；不表示 M1
         肺炎鏈球菌會在本案例胞內存活。
       </p>
-      <div style={{ display: "flex", gap: 10, margin: "15px 0" }}>
+      <div
+        style={{ display: "flex", gap: 10, flexWrap: "wrap", margin: "15px 0" }}
+      >
         <button disabled={busy} onClick={() => play(false)}>
           播放清除分支
         </button>
         <button disabled={busy} onClick={() => play(true)}>
           播放胞內存活分支
+        </button>
+        <button disabled={busy} onClick={() => playCoating("mark")}>
+          播放補體灑落
+        </button>
+        <button disabled={busy} onClick={() => playCoating("antibody")}>
+          播放抗體移近
         </button>
       </div>
       <div
@@ -108,11 +155,15 @@ export default function AnimationLab() {
         />
       </div>
       <p data-testid="lab-result" style={{ fontSize: 13, padding: 20 }}>
-        {busy
-          ? "偽足伸展、包覆與吞入中…"
-          : internal
-            ? `胞內存活 ${internal} 負荷；宿主內保留可見囊泡與活菌。`
-            : "已清除；沒有活的胞內來源。"}
+        {coating
+          ? busy
+            ? "分子移近、擴散與附著中…"
+            : `${coating === "mark" ? "C3b 黃色三葉沉積" : "綠色 Y 形抗體附著"}；胞外負荷仍為 ${state.colonies[0]?.load}，沒有直接殺菌。`
+          : busy
+            ? "偽足伸展、包覆與吞入中…"
+            : internal
+              ? `胞內存活 ${internal} 負荷；宿主內保留可見囊泡與活菌。`
+              : "已清除；沒有活的胞內來源。"}
       </p>
     </main>
   );

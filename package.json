@@ -15,7 +15,9 @@
     "test:legacy-browser": "node scripts/acceptance.mjs",
     "test:immune": "node scripts/immune-acceptance.mjs",
     "test:anatomy": "node scripts/anatomy-acceptance.mjs",
-    "test:clarity": "node scripts/ui-clarity-acceptance.mjs"
+    "test:clarity": "node scripts/ui-clarity-acceptance.mjs",
+    "test:campaign": "node scripts/campaign-acceptance.mjs",
+    "test:campaign-ui": "node scripts/campaign-ui-acceptance.mjs"
   },
   "dependencies": {
     "react": "19.2.0",

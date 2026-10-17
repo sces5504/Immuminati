@@ -23,6 +23,17 @@ const adjacentSacs = [
 ];
 export function anatomyHeight(x: number, z: number, c: TacticalContent) {
   let h = tissueFloor(x, z) - 0.22;
+  if (c.tissue === "oral")
+    return h + 0.08 * Math.sin(x * 2.4) * Math.cos(z * 2.1);
+  if (c.tissue === "lymphoid") {
+    for (const f of c.fields)
+      h +=
+        0.32 *
+        Math.exp(
+          -Math.pow(Math.hypot(x - f.center.x, z - f.center.z) / f.radius, 4),
+        );
+    return h;
+  }
   if (c.tissue !== "lung") return h;
   let septaPower = 0;
   for (const f of c.fields) {
@@ -202,7 +213,7 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
     transparent: true,
     opacity: 0.45,
   });
-  if (c.tissue !== "intestinal") {
+  if (c.tissue !== "intestinal" && c.tissue !== "lymphoid") {
     const edge = c.tissue === "oral" ? 2.5 : 3.1;
     const vertices: THREE.Vector3[] = [];
     for (let row = -7; row <= 7; row++)
@@ -233,14 +244,83 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
     root.add(lines);
     geometries.push(lines.geometry);
     materials.push(lines.material, junction);
+  } else if (c.tissue === "lymphoid") {
+    const reticular = new THREE.MeshStandardMaterial({
+      color: 0xe8cbd9,
+      roughness: 0.8,
+    });
+    for (let i = 0; i < 25; i++) {
+      const x = ((i * 13) % 45) - 22,
+        z = ((i * 19) % 43) - 21;
+      tube(
+        [
+          new THREE.Vector3(x, 0.1, z),
+          new THREE.Vector3(x + 2, 0.3, z + 2),
+          new THREE.Vector3(x + 4, 0.1, z - 1),
+        ],
+        0.035,
+        reticular,
+      );
+    }
+    for (const f of c.fields) {
+      const loop = [];
+      for (let j = 0; j < 40; j++) {
+        const a = (j / 40) * Math.PI * 2;
+        loop.push(
+          new THREE.Vector3(
+            f.center.x + Math.cos(a) * f.radius,
+            0.16,
+            f.center.z + Math.sin(a) * f.radius,
+          ),
+        );
+      }
+      tube(loop, 0.07, endothelium, true);
+    }
   } else {
     for (let i = 0; i < 18; i++) {
       const a = (i / 18) * Math.PI * 2,
         x = Math.cos(a) * 23,
         z = Math.sin(a) * 20;
-      const villus = own(new THREE.SphereGeometry(1, 16, 14), endothelium);
-      villus.position.set(x, 1.2, z);
-      villus.scale.set(1.1, 2.8, 1.1);
+      const points = Array.from({ length: 17 }, (_, j) => {
+        const t = j / 16;
+        return new THREE.Vector2(
+          0.1 + 1.1 * Math.sin(t * Math.PI * 0.95),
+          t * 4.4,
+        );
+      });
+      const villus = own(
+        new THREE.LatheGeometry(points, 24),
+        new THREE.MeshStandardMaterial({ color: 0xe4b7ad, roughness: 0.55 }),
+      );
+      villus.position.set(x, -0.2, z);
+      const cap = [];
+      for (let j = 0; j < 24; j++) {
+        const t = j / 23,
+          a = t * Math.PI * 2;
+        cap.push(
+          new THREE.Vector3(
+            x + Math.cos(a) * 0.65,
+            0.3 + 3.3 * Math.sin(t * Math.PI),
+            z + Math.sin(a) * 0.65,
+          ),
+        );
+      }
+      tube(cap, 0.065, vesselMat);
+      for (let j = 0; j < 5; j++) {
+        const a = (j / 5) * Math.PI * 2;
+        const stripe = [];
+        for (let k = 0; k < 12; k++) {
+          const t = k / 11;
+          stripe.push(
+            new THREE.Vector3(
+              x + Math.cos(a) * (1.1 * Math.sin(t * Math.PI * 0.95) + 0.12),
+              t * 4.4 - 0.2,
+              z + Math.sin(a) * (1.1 * Math.sin(t * Math.PI * 0.95) + 0.12),
+            ),
+          );
+        }
+        tube(stripe, 0.025, junction);
+      }
     }
   }
   // All access structures follow the terrain instead of cutting through it.

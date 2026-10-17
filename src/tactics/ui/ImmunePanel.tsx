@@ -13,10 +13,18 @@ export function cellActivity(cell: Cell, s: TacticalState, c: TacticalContent) {
         : "前往淋巴結，等待蛋白抗原與已活化 T 細胞幫助。";
   if (role === "cytotoxic" && c.practice)
     return `預先活化 CD8，辨識 ${cell.antigen}；只對相符 MHC-I 感染宿主作用。`;
+  if (role === "cytotoxic" && c.mechanics)
+    return cell.activation === "effector"
+      ? "辨識相符 MHC-I 病毒肽的產毒宿主；不攻擊潛伏或健康宿主。"
+      : "等待 DC 的 MHC-I 交叉呈遞與共刺激，先在淋巴組織活化。";
   if (role === "cytotoxic")
     return "M1 無相符 MHC-I 感染宿主；不攻擊胞外菌。可至機制演練實作。";
   if (role === "nk" && c.practice)
     return "辨識壓力高且 MHC-I 降低的宿主，形成突觸後誘導凋亡；保留健康宿主。";
+  if (role === "nk" && c.mechanics)
+    return "辨識壓力高且 MHC-I 降低的感染宿主；IL-12 足夠時提供 IFN-γ。";
+  if (cell.kind === "pdc" || cell.kind === "ilc3")
+    return c.cells[cell.kind].description;
   if (role === "nk")
     return "此區 IL-12 足夠時提供 IFN-γ；M1 無適合的感染宿主殺傷目標。";
   if (role === "regulatory")
@@ -47,8 +55,15 @@ export function ImmunePanel({
       <p>
         <b>{tissueProfiles[c.tissue].name}</b> ·{" "}
         {tissueProfiles[c.tissue].structure}
-        。地圖是肺泡腔的開放剖視；單位與距離不按真實比例。
+        。地圖採開放剖視；單位、距離與時間不按真實比例。
       </p>
+      {c.briefing && (
+        <section>
+          <h3>{c.title}</h3>
+          <p>{c.briefing}</p>
+          <b>{c.objective}</b>
+        </section>
+      )}
       <section>
         <h3>先天反應正在爭取時間</h3>
         <p>
@@ -70,6 +85,9 @@ export function ImmunePanel({
                         ifng: "IFN-γ 巨噬活化",
                         il10: "IL-10 調節",
                         inflammation: "發炎程度",
+                        ifni: "第一型 IFN 抗病毒",
+                        il17: "IL-17 上皮防禦",
+                        il22: "IL-22 屏障",
                       } as Record<string, string>
                     )[key]
                   }
@@ -100,7 +118,8 @@ export function ImmunePanel({
           <li>DC 捕捉抗原並遷移</li>
           <li>MHC-II 肽＋共刺激（8 秒）</li>
           <li>CD4 T 活化（8 秒）</li>
-          <li>B 結合蛋白抗原＋T 幫助（10 秒）</li>
+          <li>B 呈遞同源 MHC-II 肽 → T–B 對接（3 秒）</li>
+          <li>CD40L／CD40＋細胞激素 → 分化（10 秒）</li>
           <li>漿細胞 → 特異性抗體 → 調理吞噬</li>
         </ol>
         <p>
@@ -108,9 +127,15 @@ export function ImmunePanel({
           秒補充 10，每次更新一群菌的抗體覆蓋消耗
           1；既有覆蓋仍有效時不重複消耗。所有時間均為教學壓縮，並非真實免疫反應所需秒數。
         </p>
+        {s.immunity.node.crossPresented && (
+          <p>
+            病毒模式：DC 另行交叉呈遞 MHC-I 病毒肽，啟動相符 CD8。MHC-II 的 CD4
+            幫助與此路徑不同。
+          </p>
+        )}
         <p>
-          本案例呈現肺炎鏈球菌<b>蛋白抗原</b>的 T 細胞依賴反應。莢膜多醣亦可走 T
-          非依賴路徑，本局未模擬；CD4 Tfh／Th1 功能聚合於一個支援族群。CD8 的
+          本版呈現<b>蛋白抗原</b>的 T 細胞依賴反應。莢膜多醣亦可走 T
+          非依賴路徑，本版未模擬；可分別募集 Tfh、Th1、Th17 執行各自效應。CD8 的
           MHC-I 活化另有條件，不能從 MHC-II 直接取得資格。
         </p>
       </section>

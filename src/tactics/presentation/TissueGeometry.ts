@@ -48,18 +48,56 @@ export function makeTissueActor(host: HostCell, content: TacticalContent) {
     );
     geometry.setIndex(indices);
     geometry.computeVertexNormals();
-  } else geometry = new THREE.SphereGeometry(1, 20, 12);
+  } else {
+    geometry = new THREE.SphereGeometry(1, 32, 20);
+    const pos = geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      const y = pos.getY(i),
+        a = Math.atan2(pos.getZ(i), pos.getX(i));
+      const r =
+        host.kind === "mucosal"
+          ? 1 + 0.08 * Math.cos(a * 6)
+          : host.kind === "stromal"
+            ? 1 + 0.25 * Math.pow(Math.cos(a * 3), 8) * (1 - y * y)
+            : 1 + 0.02 * Math.sin(a * 7 + y * 4);
+      pos.setXYZ(i, pos.getX(i) * r, y, pos.getZ(i) * r);
+    }
+    geometry.computeVertexNormals();
+  }
   const shell = new THREE.Mesh(geometry, mat);
   shell.name = "membrane";
   if (!host.wall) {
     shell.scale.set(
       host.kind === "endothelial" ? 1.45 : 1.65,
-      host.kind === "endothelial" ? 0.16 : 0.65,
+      host.kind === "endothelial"
+        ? 0.16
+        : host.kind === "enterocyte"
+          ? 1.5
+          : host.kind === "mucosal"
+            ? 0.23
+            : 0.65,
       0.95,
     );
     shell.position.y = base + 0.4;
   }
   root.add(shell);
+  if (host.kind === "enterocyte" || host.kind === "goblet") {
+    const brush = new THREE.Group();
+    const bm = new THREE.MeshStandardMaterial({
+      color: 0xf1d6bb,
+      roughness: 0.7,
+    });
+    for (let i = 0; i < 12; i++) {
+      const m = new THREE.Mesh(
+        new THREE.CapsuleGeometry(0.035, 0.22, 3, 5),
+        bm,
+      );
+      const a = i * 2.39996;
+      m.position.set(Math.cos(a) * 0.75, base + 1.9, Math.sin(a) * 0.65);
+      brush.add(m);
+    }
+    root.add(brush);
+  }
   const outline = new THREE.LineSegments(
     new THREE.EdgesGeometry(geometry, 25),
     new THREE.LineBasicMaterial({
@@ -118,9 +156,9 @@ export function makeTissueActor(host: HostCell, content: TacticalContent) {
       pathogenMat,
     );
     particle.position.set(
-      0.4 + Math.cos(i * 2.4) * 0.35,
+      -0.1 + Math.cos(i * 2.4) * 0.22,
       y + 0.08,
-      Math.sin(i * 2.4) * 0.45,
+      Math.sin(i * 2.4) * 0.22,
     );
     infection.add(particle);
   }
@@ -173,7 +211,20 @@ export function updateTissueActor(
     new THREE.Color(0xa4738f),
     (1 - host.health / 100) * 0.65,
   );
-  root.getObjectByName("infection")!.visible = host.load > 0;
+  const infection = root.getObjectByName("infection")!;
+  infection.visible = host.load > 0;
+  infection.children.forEach((o, i) => {
+    const m = o as THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+    m.material.color.setHex(
+      host.infection?.phase === "latent" ? 0x8e839c : 0xb76488,
+    );
+    m.scale.set(
+      host.infection?.phase === "latent" ? 0.45 : 1,
+      host.infection?.phase === "latent" ? 1.6 : 1,
+      0.7,
+    );
+    if (host.infection?.phase === "latent") m.rotation.z = i * 0.7;
+  });
   root.getObjectByName("selection")!.visible = selected;
   root.getObjectByName("fragments")!.visible = p > 0.3;
   shell.visible = p < 1;
@@ -181,7 +232,14 @@ export function updateTissueActor(
   if (!host.wall)
     shell.scale.set(
       (host.kind === "endothelial" ? 1.45 : 1.65) * (1 - p * 0.55),
-      (host.kind === "endothelial" ? 0.16 : 0.65) * (1 - p * 0.6),
+      (host.kind === "endothelial"
+        ? 0.16
+        : host.kind === "enterocyte"
+          ? 1.5
+          : host.kind === "mucosal"
+            ? 0.23
+            : 0.65) *
+        (1 - p * 0.6),
       0.95 * (1 - p * 0.55),
     );
 }

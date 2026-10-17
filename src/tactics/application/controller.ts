@@ -18,8 +18,8 @@ export class TacticalController {
   ) {
     this.save = save ?? {
       schema: 2,
-      rules: "2.4",
-      content: "m1-tactics.5",
+      rules: "3.0",
+      content: "campaign.1",
       state: createTactical(content, 1),
       paused: true,
       undo: [],
@@ -32,6 +32,7 @@ export class TacticalController {
       },
       read: [],
       records: {},
+      revealed: [],
     };
   }
   command(command: TacticalCommand): string | undefined {
@@ -71,6 +72,14 @@ export class TacticalController {
       paused: true,
       undo: [],
     };
+  }
+  acknowledgeResult() {
+    if (
+      this.content.id === "m6" &&
+      this.save.state.result?.type === "limited" &&
+      !this.save.revealed.includes("m6")
+    )
+      this.save.revealed.push("m6");
   }
   snapshot() {
     return copy(this.save);
