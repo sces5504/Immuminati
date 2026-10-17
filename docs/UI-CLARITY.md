@@ -24,7 +24,7 @@
 
 程式來源 `addcee90afdea82c3c9e4d866f5b89d56600c15c`，已由完整成功的 [CI 39044481225](https://github.com/sces5504/Immuminati/actions/runs/39044481225) 部署至 [Pages 更新版](https://sces5504.github.io/Immuminati/?v=addcee9)。所有 verify、雙平台 browser／clarity／immune／anatomy、animation 及 deploy 均成功。上一輪 9425293 是歷史來源。
 
-公開 HTML、主 JS、Three.js、CSS 與 mark.svg 均正常返回，資產 SHA-256 與本機正式建置一致，記錄在 `public-assets.json`。公開站 Chrome 雙平台新增 UI 的 12 組檢查亦通過，結果與公開站截圖見 `evidence/ui-clarity/public/`。完整通關的額外回歸 [39045223717](https://github.com/sces5504/Immuminati/actions/runs/39045223717) 正在進行；尚未把它計作通過。
+公開 HTML、主 JS、Three.js、CSS 與 mark.svg 均正常返回，資產 SHA-256 與本機正式建置一致，記錄在 `public-assets.json`。公開站 Chrome 雙平台新增 UI 的 12 組檢查亦通過，結果與公開站截圖見 `evidence/ui-clarity/public/`。完整通關的額外回歸 [39045223717](https://github.com/sces5504/Immuminati/actions/runs/39045223717) 亦已成功（2026-10-17 15:44:42 UTC）：公開新增 UI 12 組與原操作／完整通關 24 項，合計 36 組工作日誌 PASS。摘要見 [live-summary.json](evidence/ui-clarity/public/live-summary.json)；完整公開站原片保留在該 CI 的 live-pages-evidence artifact。
 
 - 單元／規則：64 項；型別、正式建置通過。
 - 新介面：桌面 1440×1000、直向 360×800，各 6 組，共 12 組；包含外部觸控收起、標頭點擊收起不穿透，以及所有初始菌群的點擊中心不被遮擋。
@@ -35,7 +35,7 @@
 
 畫面：[手機戰場](evidence/ui-clarity/mobile-quiet-field.png)、[桌面戰場](evidence/ui-clarity/desktop-quiet-field.png)、[B／抗體面板](evidence/ui-clarity/mobile-b-antibody.png)、[任務展開](evidence/ui-clarity/mobile-objective-expanded.png)、[手機通關](evidence/ui-clarity/tactics/mobile-result.png)。
 
-錄影：[40 秒 M1 精華](evidence/ui-clarity/mobile-m1-highlights.webm)（待機、調度、吞噬與結算）、[手機介面操作](evidence/ui-clarity/mobile-ui-clarity.webm)、[桌面介面操作](evidence/ui-clarity/desktop-ui-clarity.webm)、[吞噬雙分支](evidence/ui-clarity/animation/engulf-branches.webm)。精華僅依時間順序剪接，未後製調速或修改狀態（片內使用遊戲原有 2×）；原片仍在對應 CI artifact。來源與剪接秒數見 `recording-provenance.json`；完整檔案來源與 SHA-256 見 `evidence-index.json`。
+錄影：[40 秒 M1 精華](evidence/ui-clarity/mobile-m1-highlights.webm)（待機、調度、吞噬與結算）、[手機介面操作](evidence/ui-clarity/mobile-ui-clarity.webm)、[桌面介面操作](evidence/ui-clarity/desktop-ui-clarity.webm)、[吞噬雙分支](evidence/ui-clarity/animation/engulf-branches.webm)。精華僅依時間順序剪接，未後製調速或修改狀態（片內使用遊戲原有 2×）；原片仍在對應 CI artifact。來源與剪接秒數見 [recording-provenance.json](evidence/ui-clarity/recording-provenance.json)；完整檔案來源與 SHA-256 見 [evidence-index.json](evidence/ui-clarity/evidence-index.json)。
 
 ## 額外抗體操作驗證（明確標示的邊界測試）
 

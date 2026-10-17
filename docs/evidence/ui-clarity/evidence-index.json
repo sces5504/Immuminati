@@ -2,7 +2,7 @@
   "source": "addcee90afdea82c3c9e4d866f5b89d56600c15c",
   "releaseCI": 39044481225,
   "publishedCI": 39045223717,
-  "generatedAt": "2026-10-17T15:35:06.067987+00:00",
+  "generatedAt": "2026-10-17T15:45:59.674820+00:00",
   "browser": "Headless Chromium 141 / SwiftShader, mobile viewport and touch emulation; physical Safari not tested",
   "checks": {
     "unit": 64,
@@ -15,7 +15,8 @@
       "persistent phagosome"
     ],
     "publishedClarityGroups": 12,
-    "publishedClassicBrowser": "running; update before final handoff"
+    "publishedClassicBrowser": 24,
+    "publishedCIConclusion": "success"
   },
   "artifacts": {
     "clarityMobile": 12105397088,
@@ -27,7 +28,8 @@
     "anatomyMobile": 12105103029,
     "anatomyDesktop": 12105451183,
     "animation": 12105386929,
-    "publishedClarity": 12105970770
+    "publishedClarity": 12105970770,
+    "publishedClassic": 12105907609
   },
   "provenance": "recording-provenance.json; manual-fixture is explicitly seeded stock, separate from naturally generated antibodies",
   "files": [
@@ -37,7 +39,7 @@
       "sha256": "a6f46333828fba01d48ec5d8db86f6307e1b5326ae5540a00f4cc283eabfee2b"
     },
     {
-      "file": "anatomy/desktop-desktop-save.json",
+      "file": "anatomy/desktop-save.json",
       "bytes": 33373,
       "sha256": "ca82ee75a4642cc45d6afdce65597bb1438bd31989bce30994ca242c372583d7"
     },
@@ -47,7 +49,7 @@
       "sha256": "976c0632ab49e258aec82092a761b3672b19cc5579f5850b08635708ab757e85"
     },
     {
-      "file": "anatomy/mobile-mobile-save.json",
+      "file": "anatomy/mobile-save.json",
       "bytes": 31437,
       "sha256": "c287e7d254753fbea4530806a97cf0f369a92b4181903a99356a6975a3d2cdd3"
     },
@@ -192,6 +194,11 @@
       "sha256": "3751eebfca1c28d1178330844eb319c75c13d78e2740e157407707b7741836cd"
     },
     {
+      "file": "public/live-summary.json",
+      "bytes": 3629,
+      "sha256": "e5834cd214628574ec7127fd2254254dd4a6134e5db84136b3297116eb94800d"
+    },
+    {
       "file": "public/mobile-quiet-field.png",
       "bytes": 203410,
       "sha256": "5553494efbbfb63df8ce0e112ca41140ad19b9f445127852fb90c3d095d801ff"
@@ -208,8 +215,8 @@
     },
     {
       "file": "recording-provenance.json",
-      "bytes": 1839,
-      "sha256": "27b78626f5efe930bcaab53a8407ee9e8539a35f5b14b241bd8cf8791bd5bed0"
+      "bytes": 2171,
+      "sha256": "9909418087c9c3f5ff744ad1d6a25df0a3ffcfed55b86c63765051abef4cec19"
     },
     {
       "file": "tactics/desktop-result.png",

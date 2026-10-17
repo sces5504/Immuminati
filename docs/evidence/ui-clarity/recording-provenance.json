@@ -56,5 +56,13 @@
     "resultsFile": "public/ui-results.json",
     "url": "https://sces5504.github.io/Immuminati/",
     "note": "Published site, normal TLS, both desktop and touch-mobile; 12 grouped clarity checks."
+  },
+  "publishedCore": {
+    "artifact": 12105907609,
+    "bytes": 41992592,
+    "ciRun": 39045223717,
+    "summaryFile": "public/live-summary.json",
+    "classicChecks": 24,
+    "note": "Complete original public desktop/mobile playthrough recordings remain in the CI artifact. No download through the 32 MiB file-reference tool."
   }
 }

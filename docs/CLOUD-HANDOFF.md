@@ -38,9 +38,9 @@ key `immuminati:tactics:v2` 不變，schema 2、規則 **2.4**、內容 **m1-tac
 
 本環境瀏覽器需授權本機網路／啟動權限；Playwright 路徑 `/workspace/.cache/ms-playwright`。GitHub Actions 每組在獨立 runner 驗證，部署依賴全部成功。正式 [Pages](https://sces5504.github.io/Immuminati/) 的 Vite base 固定 `/Immuminati/`。通過後發布並驗公開版本／資產，純紀錄追加用 `[skip ci]`。
 
-本機透過代理連公開頁的 Chromium 曾遇憑證錯誤，不關閉 TLS；以正常 TLS 的 curl 比對公開資產，公開瀏覽器回歸使用 Actions 的正常網路。CLI artifact blob 403 可改用 GitHub 連接工具取檔案參照，不能把短效簽名 URL 或憑證寫入 repo。
+本機透過代理連公開頁的 Chromium 曾遇憑證錯誤，不關閉 TLS；以正常 TLS 的 curl 比對公開資產，公開瀏覽器回歸使用 Actions 的正常網路。CLI artifact blob 403 可改用 GitHub 連接工具取檔案參照；下載工具單檔上限 32 MiB，本輪約 42 MB 的 live-pages-evidence 留在 CI，repo 保存成功日誌摘要與可下載的新 UI 證據。不能把短效簽名 URL 或憑證寫入 repo。
 
-本輪程式 `addcee9` 已通過完整發布 CI 39044481225 並部署；主 JS／Three.js／CSS／mark.svg 及無版本參數的 HTML 與本機正式建置一致，公開新增 UI 的 12 組檢查通過。完整公開站回歸的最新狀態、來源與剩餘項目以 [UI-CLARITY.md](UI-CLARITY.md) 為準。真機 Safari／效能尚未驗證，不用觸控 Chrome 模擬冒充。模型仍為程序教學模型，沒有醫學精模／真實尺度宣稱。
+本輪程式 `addcee9` 已通過完整發布 CI 39044481225 並部署；主 JS／Three.js／CSS／mark.svg 及無版本參數的 HTML 與本機正式建置一致，公開新增 UI 的 12 組檢查通過。完整公開站回歸 39045223717 亦通過新增 UI 12 組與原操作／通關 24 項。來源與剩餘項目以 [UI-CLARITY.md](UI-CLARITY.md) 為準。真機 Safari／效能尚未驗證，不用觸控 Chrome 模擬冒充。模型仍為程序教學模型，沒有醫學精模／真實尺度宣稱。
 
 ## 歷史資料（保留背景，不代表現行版本）
 
