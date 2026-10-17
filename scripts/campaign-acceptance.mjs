@@ -159,6 +159,13 @@ try {
       const tick = async () =>
         Number(await page.locator(".tactical-root").getAttribute("data-tick"));
       const click = async (locator) => locator.evaluate((el) => el.click());
+      const pause = async (value) => {
+        const root = page.locator(".tactical-root"),
+          want = String(value);
+        if ((await root.getAttribute("data-paused")) !== want)
+          await click(page.getByTestId("pause-toggle"));
+        await expect(root).toHaveAttribute("data-paused", want);
+      };
       const recruit = async (kind, region) => {
         await click(page.getByTestId("recruit-tool"));
         await page
@@ -179,11 +186,7 @@ try {
         n < 180 && !(await page.getByTestId("tactical-result").count());
         n++
       ) {
-        if (
-          (await page.locator(".tactical-root").getAttribute("data-paused")) ===
-          "false"
-        )
-          await click(page.getByTestId("pause-toggle"));
+        await pause(true);
         const now = await tick();
         if (now >= nextMark) {
           const save = await read();
@@ -202,11 +205,7 @@ try {
             await recruit(kind, region);
             done.add(index);
           }
-        if (
-          (await page.locator(".tactical-root").getAttribute("data-paused")) ===
-          "true"
-        )
-          await click(page.getByTestId("pause-toggle"));
+        await pause(false);
         await page.clock.runFor(1000);
         if (n % 15 === 0) await log("PROGRESS", device, id, await tick());
         if (!savedMid && (await tick()) >= 110) {
@@ -223,7 +222,21 @@ try {
           savedMid = true;
         }
         if (n > 5 && (await tick()) === previous)
-          throw new Error("Browser fixed step stopped");
+          throw new Error(
+            "Browser fixed step stopped: " +
+              JSON.stringify(
+                await page.evaluate(() => ({
+                  visibility: document.visibilityState,
+                  paused: document
+                    .querySelector(".tactical-root")
+                    .getAttribute("data-paused"),
+                  saved: JSON.parse(
+                    localStorage.getItem("immuminati:tactics:v2"),
+                  ).paused,
+                  now: performance.now(),
+                })),
+              ),
+          );
         previous = await tick();
       }
       await expect(page.getByTestId("tactical-result")).toBeVisible();

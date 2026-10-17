@@ -19,6 +19,27 @@ export function initialCampaign(s: TacticalState, c: TacticalContent) {
     cd4: 100,
     impairment: 0,
   };
+  if (c.mechanics === "containment") {
+    const host = s.cells.find((u) => u.kind === "macrophage")!;
+    const id = `i${s.serial++}`;
+    s.internal.push({
+      id,
+      host: host.id,
+      pathogen: c.pathogen.id,
+      load: 6,
+      compartment: "phagosome",
+      stage: "persistent",
+      clearAt: 0,
+    });
+    emit(
+      s,
+      "survive",
+      host.position,
+      "開場已有感染巨噬細胞：含菌囊泡內保留活菌；清掉胞外來源仍需控制此感染焦點。",
+      6,
+      { actor: host.id, target: id, survives: true },
+    );
+  }
   if (c.mechanics === "retroviral") {
     // Reservoir exists from the start: it is never synthesized by the ending script.
     const hosts = s.hosts.filter((h) => h.kind === "cd4host");
@@ -31,6 +52,7 @@ function infect(
   h: HostCell,
   c: TacticalContent,
   phase: "eclipse" | "latent" = "eclipse",
+  from?: { x: number; z: number },
 ) {
   h.infection = {
     pathogen: c.pathogen.id,
@@ -50,7 +72,7 @@ function infect(
       ? "病毒基因組整合並潛伏；目前無病毒肽供 CD8 辨識，並非已清除。"
       : `${c.pathogen.name}進入易感宿主，胞內感染建立中；抗體不能進入清除。`,
     1,
-    { target: h.id },
+    { target: h.id, ...(from ? { from: { ...from } } : {}) },
   );
 }
 function release(
@@ -261,7 +283,7 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
           )[0];
         if (h) {
           p.load--;
-          infect(s, h, c);
+          infect(s, h, c, "eclipse", p.position);
         }
       }
     for (const h of s.hosts.filter((h) => h.load > 0 && !h.apoptoticAt)) {

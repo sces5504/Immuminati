@@ -185,7 +185,9 @@ export function updateImmunity(s: TacticalState, c: TacticalContent) {
         s,
         "mark",
         p.position,
-        "新生特異性抗體結合蛋白抗原，經 Fc 受體與補體促進調理；仍須吞噬者接觸清除。",
+        c.mechanics === "viral" || c.mechanics === "retroviral"
+          ? "新生特異性抗體結合胞外病毒，阻斷受體接合；不進入宿主核內清除來源。"
+          : "新生特異性抗體結合蛋白抗原，經 Fc 受體與補體促進調理；仍須吞噬者接觸清除。",
         30,
         {
           target: p.id,
@@ -433,8 +435,8 @@ export function supportCell(
           { actor: cell.id },
         );
       } else if (role === "bcell") {
-        cell.partner = undefined;
-        cell.dockAt = undefined;
+        delete cell.partner;
+        delete cell.dockAt;
       }
     } else if (
       cell.activation === "activating" &&
@@ -488,7 +490,7 @@ export function supportCell(
         s,
         "cytotoxic",
         host.position,
-        `${c.cells[cell.kind].name}形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；胞外菌沒有受到傷害。`,
+        `${c.cells[cell.kind].name}形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；胞外病原仍獨立存在，未被一併清除。`,
         1,
         { actor: cell.id, target: host.id, from: { ...cell.position } },
       );

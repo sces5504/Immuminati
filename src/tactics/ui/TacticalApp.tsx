@@ -230,8 +230,9 @@ export default function TacticalApp() {
       accumulator = 0,
       raf = 0,
       lastSavedTick = controller.save.state.tick;
-    const frame = (now: number) => {
-      const dt = Math.min(0.5, (now - previous) / 1000);
+    const frame = () => {
+      const now = performance.now();
+      const dt = Math.max(0, Math.min(0.5, (now - previous) / 1000));
       previous = now;
       if (
         !homeRef.current &&
@@ -1290,31 +1291,52 @@ export default function TacticalApp() {
               ) : colony ? (
                 <>
                   <div className="t-dock-portrait">
-                    <PathogenArt marked={isMarked} />
+                    <PathogenArt
+                      complement={coating?.complement}
+                      antibody={coating?.antibody}
+                      shape={content.pathogen.shape}
+                      name={content.pathogen.name}
+                      hypha={colony.form === "hypha"}
+                    />
                   </div>
                   <div className="t-selection-info">
                     <small>{field.name} · 胞外菌群</small>
                     <h2>感染負荷 {colony.load}</h2>
                     <p>
-                      {isMarked
-                        ? [
-                            coating?.complement
-                              ? `C3b ${Math.ceil((coating.complementUntil - s.tick) * 0.2)} 秒`
-                              : "",
-                            coating?.antibody
-                              ? `抗體 ${Math.ceil((coating.antibodyUntil - s.tick) * 0.2)} 秒`
-                              : "",
-                          ]
-                            .filter(Boolean)
-                            .join(" · ")
-                        : content.id === "m1"
-                          ? "莢膜保護 · 吞噬效率受限"
-                          : content.mechanics === "viral" ||
-                              content.mechanics === "retroviral"
-                            ? "胞外病毒 · 中和或吞噬"
-                            : colony.form === "hypha"
-                              ? "菌絲 · 顆粒防禦"
-                              : "胞外病原 · 待處理"}
+                      {isMarked ? (
+                        <>
+                          {coating?.complement && (
+                            <span className="t-c3-symbol">
+                              C3b{" "}
+                              {Math.ceil(
+                                (coating.complementUntil - s.tick) * 0.2,
+                              )}{" "}
+                              秒
+                            </span>
+                          )}
+                          {coating?.complement && coating?.antibody
+                            ? " · "
+                            : ""}
+                          {coating?.antibody && (
+                            <span className="t-ig-symbol">
+                              Y 抗體{" "}
+                              {Math.ceil(
+                                (coating.antibodyUntil - s.tick) * 0.2,
+                              )}{" "}
+                              秒
+                            </span>
+                          )}
+                        </>
+                      ) : content.id === "m1" ? (
+                        "莢膜保護 · 吞噬效率受限"
+                      ) : content.mechanics === "viral" ||
+                        content.mechanics === "retroviral" ? (
+                        "胞外病毒 · 中和或吞噬"
+                      ) : colony.form === "hypha" ? (
+                        "菌絲 · 顆粒防禦"
+                      ) : (
+                        "胞外病原 · 待處理"
+                      )}
                     </p>
                   </div>
                   <div className="t-context-actions">

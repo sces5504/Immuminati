@@ -65,7 +65,7 @@ export function campaignLevels(
         shape: "acidfast",
       },
       briefing:
-        "這是肺部防禦片段。以感染巨噬細胞及 Th1 支援建立局部圍堵，限制播散；仍有活菌不等於防禦失敗。",
+        "這是已有感染巨噬細胞的肺部防禦片段。以巨噬細胞及 Th1 支援建立局部圍堵，限制播散；仍有活菌不等於防禦失敗。",
       objective:
         "負荷 ≤ 25、每個感染防區圍堵 ≥ 60%，連續維持 20 秒；各區保全 ≥ 45%。",
       initial: initial("macrophage", "dendritic", "th1", "macrophage"),

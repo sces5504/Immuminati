@@ -30,7 +30,9 @@ export function cellActivity(cell: Cell, s: TacticalState, c: TacticalContent) {
   if (role === "regulatory")
     return "IL-10 調節局部發炎；不回血，也可能減弱促炎防禦。";
   if (role === "antibody")
-    return "持續分泌蛋白抗原特異性抗體，後續調理仍須吞噬者。";
+    return c.mechanics === "viral" || c.mechanics === "retroviral"
+      ? "分泌特異性抗體，中和胞外病毒；不清除胞內基因組。"
+      : "持續分泌蛋白抗原特異性抗體，後續調理仍須吞噬者。";
   return c.cells[cell.kind].description;
 }
 const stages = {

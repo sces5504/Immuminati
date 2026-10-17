@@ -581,6 +581,7 @@ export class BattleScene {
       b.capsule.geometry = g;
       this.ownedGeometry.push(g);
       b.form = p.form;
+      if (p.form === "hypha") b.root.userData.hyphaAt = this.now;
     }
 
     if (signature === b.signature) return;
@@ -683,6 +684,29 @@ export class BattleScene {
       }
       root.add(ghost);
       this.ownedMaterials.push(gm);
+    } else if (
+      (event.type === "infect" || event.type === "release") &&
+      event.from
+    ) {
+      ghost = new THREE.Group();
+      const gm = material(
+        this.content.pathogen.shape === "retrovirus" ? 0xb077af : 0x7084bb,
+        0.3,
+      );
+      const geo = pathogenGeometry(this.content.pathogen.shape ?? "virus");
+      this.ownedGeometry.push(geo);
+      this.ownedMaterials.push(gm);
+      const count = event.type === "release" ? Math.min(4, event.amount) : 1;
+      for (let i = 0; i < count; i++)
+        ghost.add(
+          mesh(
+            geo,
+            gm,
+            new THREE.Vector3((i - (count - 1) / 2) * 0.22, 0, 0),
+            new THREE.Vector3(0.3, 0.3, 0.3),
+          ),
+        );
+      root.add(ghost);
     } else if (event.type === "dock") {
       ghost = new THREE.Group();
       const gm = material(0xc4f1d0, 0.3);
@@ -784,7 +808,10 @@ export class BattleScene {
       });
     }
     this.effects = [];
-    for (const b of this.bacteria.values()) b.signature = "";
+    for (const b of this.bacteria.values()) {
+      b.signature = "";
+      b.root.userData.hyphaAt = -100;
+    }
   }
   private animateEffects(reduced: boolean, speed: number) {
     this.effects = this.effects.filter((f) => {
@@ -826,6 +853,21 @@ export class BattleScene {
           g.rotation.set(e.opsonin === "antibody" ? 0 : p * 3, a + p * 0.7, 0);
           g.visible = t < 1 || p < 0.88;
         });
+      } else if (
+        (e.type === "infect" || e.type === "release") &&
+        f.ghost &&
+        e.from
+      ) {
+        const from = vector(e.from, e.type === "release" ? 1 : 0.6),
+          to = vector(e.position, 0.8);
+        const t = Math.min(1, p / 0.8);
+        f.ghost.position.copy(from.lerp(to, t));
+        f.ghost.position.y += Math.sin(t * Math.PI) * 0.5;
+        f.ghost.scale.setScalar(
+          e.type === "infect"
+            ? 1 - Math.max(0, (p - 0.6) / 0.4) * 0.85
+            : Math.min(1, 0.3 + p * 1.5),
+        );
       } else if (e.type === "dock" && f.ghost && e.from) {
         const from = vector(e.from, 1.4),
           to = vector(e.position, 1.4);
@@ -897,7 +939,8 @@ export class BattleScene {
       return true;
     });
   }
-  private draw = (stamp: number) => {
+  private draw = () => {
+    const stamp = performance.now();
     if (this.software && this.pendingFrame) {
       const gl = this.renderer.getContext() as WebGL2RenderingContext;
       if (gl.clientWaitSync(this.pendingFrame, 0, 0) === gl.TIMEOUT_EXPIRED) {
@@ -913,7 +956,7 @@ export class BattleScene {
     }
     this.lastRender = stamp;
     const elapsed = (stamp - this.start) / 1000,
-      delta = Math.min(0.4, elapsed - this.now);
+      delta = Math.max(0, Math.min(0.4, elapsed - this.now));
     this.now = elapsed;
     const input = this.read(),
       s = input.state;
@@ -1060,6 +1103,17 @@ export class BattleScene {
           : 0;
       b.ring.visible = input.selected === p.id;
       this.updateBacteria(p, b, s.tick);
+      const growth = input.reduced
+        ? 1
+        : Math.max(
+            0.1,
+            Math.min(
+              1,
+              ((this.now - (b.root.userData.hyphaAt ?? -100)) * input.speed) /
+                1.1,
+            ),
+          );
+      b.core.scale.y = b.capsule.scale.y = p.form === "hypha" ? growth : 1;
     }
     for (const [id, root] of this.hosts)
       if (!s.hosts.some((h) => h.id === id)) {
@@ -1081,6 +1135,17 @@ export class BattleScene {
         input.selected === host.id,
         !!input.inspect && input.selected === host.id,
       );
+      if (
+        !input.reduced &&
+        this.effects.some(
+          (f) =>
+            f.event.type === "infect" &&
+            f.event.target === host.id &&
+            f.event.from &&
+            (this.now - f.start) * input.speed < 0.75,
+        )
+      )
+        root.getObjectByName("infection")!.visible = false;
     }
     for (const f of this.content.fields) {
       const m = this.fields.get(f.id)!;

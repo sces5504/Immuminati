@@ -20,14 +20,17 @@ export function CellArt({
   const path =
     kind === "macrophage"
       ? macrophage
-      : kind === "dendritic"
+      : kind === "dendritic" || kind === "pdc"
         ? dendritic
         : "M50 10 C73 7 90 24 91 48 C95 70 77 89 53 91 C31 94 10 79 9 56 C5 30 22 11 50 10Z";
   const pink = kind === "neutrophil";
-  const lymphocyte = !["macrophage", "neutrophil", "dendritic"].includes(kind);
-  const palette =
-    kind === "helperT" || kind === "treg"
-      ? ["#e5fff3", "#8cc9b9", "#5c928d"]
+  const lymphocyte = !["macrophage", "neutrophil", "dendritic", "pdc"].includes(
+    kind,
+  );
+  const palette = ["helperT", "treg", "th1", "tfh"].includes(kind)
+    ? ["#e5fff3", "#8cc9b9", "#5c928d"]
+    : kind === "th17" || kind === "ilc3"
+      ? ["#fff3db", "#d5b992", "#ad8767"]
       : kind === "cytotoxicT"
         ? ["#e5eeff", "#8aaee1", "#5e7bae"]
         : kind === "bcell" || kind === "plasma"
@@ -204,14 +207,163 @@ export function CellArt({
     </svg>
   );
 }
-export function PathogenArt({ marked = false }: { marked?: boolean }) {
+function CoatingGlyphs({
+  complement,
+  antibody,
+}: {
+  complement: boolean;
+  antibody: boolean;
+}) {
+  return (
+    <g>
+      {[0, 60, 120, 180, 240, 300].map((a) => {
+        const x = 50 + 43 * Math.cos((a * Math.PI) / 180),
+          y = 36 + 28 * Math.sin((a * Math.PI) / 180);
+        return (
+          <g key={a} transform={`translate(${x} ${y}) rotate(${a + 90})`}>
+            {complement && (
+              <g fill="#ffe39a" data-molecule="complement">
+                <circle cx="0" cy="-4" r="2.5" />
+                <circle cx="-2" cy="-7" r="2" />
+                <circle cx="2" cy="-7" r="2" />
+              </g>
+            )}
+            {antibody && (
+              <path
+                d="M4 0V-6L0 -10M4 -6L8 -10"
+                stroke="#9be7b0"
+                fill="none"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                data-molecule="antibody"
+              />
+            )}
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+export function PathogenArt({
+  marked = false,
+  complement = marked,
+  antibody = false,
+  shape = "coccus",
+  name = "肺炎鏈球菌",
+  hypha = false,
+}: {
+  marked?: boolean;
+  complement?: boolean;
+  antibody?: boolean;
+  shape?: string;
+  name?: string;
+  hypha?: boolean;
+}) {
   const id = useId().replace(/:/g, "");
+  if (shape !== "coccus")
+    return (
+      <svg
+        viewBox="0 0 100 80"
+        className="pathogen-art"
+        role="img"
+        aria-label={`${complement || antibody ? "已調理的" : ""}${name}${hypha ? "菌絲" : ""}`}
+      >
+        <defs>
+          <radialGradient id={id + "alt"} cx="30%" cy="25%">
+            <stop stopColor="#e3eef3" />
+            <stop
+              offset=".4"
+              stopColor={
+                shape === "fungus"
+                  ? "#d5b69e"
+                  : shape === "retrovirus"
+                    ? "#b88db6"
+                    : "#7fa6b8"
+              }
+            />
+            <stop offset="1" stopColor="#59688d" />
+          </radialGradient>
+        </defs>
+        {shape === "rod" || shape === "acidfast" ? (
+          <g transform="rotate(-30 50 36)">
+            <rect
+              x="12"
+              y="23"
+              width="76"
+              height={shape === "acidfast" ? 15 : 25}
+              rx="12"
+              fill={`url(#${id}alt)`}
+              stroke="#c4dfe5"
+              strokeWidth="2"
+            />
+            <path
+              d="M25 28H64"
+              stroke="#d9e8e9"
+              opacity=".6"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </g>
+        ) : shape === "fungus" ? (
+          hypha ? (
+            <g
+              fill="none"
+              stroke={`url(#${id}alt)`}
+              strokeWidth="10"
+              strokeLinecap="round"
+            >
+              <path d="M17 63Q45 36 67 13M40 39L21 15M50 29L83 35" />
+            </g>
+          ) : (
+            <g fill={`url(#${id}alt)`} stroke="#e7d2c1" strokeWidth="2">
+              <ellipse cx="44" cy="43" rx="24" ry="27" />
+              <ellipse cx="70" cy="21" rx="14" ry="16" />
+            </g>
+          )
+        ) : (
+          <g>
+            <circle
+              cx="50"
+              cy="37"
+              r="26"
+              fill={`url(#${id}alt)`}
+              stroke="#bdcadf"
+              strokeWidth="3"
+            />
+            {Array.from({ length: 12 }, (_, i) => {
+              const a = (i * Math.PI) / 6;
+              return (
+                <path
+                  key={i}
+                  d={`M${50 + Math.cos(a) * 25} ${37 + Math.sin(a) * 25}L${50 + Math.cos(a) * 32} ${37 + Math.sin(a) * 32}`}
+                  stroke="#d2d7e9"
+                  strokeWidth="3"
+                />
+              );
+            })}
+            <path
+              d={
+                shape === "retrovirus"
+                  ? "M34 48L49 19L65 48Z"
+                  : "M35 29L60 33L40 39L61 46"
+              }
+              fill="none"
+              stroke="#e4d8ef"
+              strokeWidth="3"
+            />
+          </g>
+        )}
+        <CoatingGlyphs complement={complement} antibody={antibody} />
+      </svg>
+    );
   return (
     <svg
       viewBox="0 0 100 75"
       className="pathogen-art"
       role="img"
-      aria-label={marked ? "已調理的肺炎鏈球菌" : "莢膜包覆的肺炎鏈球菌"}
+      aria-label={
+        complement || antibody ? `已調理的${name}` : `莢膜包覆的${name}`
+      }
     >
       <defs>
         <radialGradient id={`${id}p`} cx="30%" cy="24%" r="78%">
@@ -272,24 +424,7 @@ export function PathogenArt({ marked = false }: { marked?: boolean }) {
           opacity=".7"
         />
       </g>
-      {marked && (
-        <g
-          className="opsonin-marks"
-          stroke="#ffe39a"
-          fill="none"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-        >
-          {[0, 60, 120, 180, 240, 300].map((a, i) => (
-            <path
-              key={a}
-              d="M0 0 V-6 M0 -6 L-4 -10 M0 -6 L4 -10"
-              transform={`translate(${50 + 45 * Math.cos((a * Math.PI) / 180)} ${36 + 30 * Math.sin((a * Math.PI) / 180)}) rotate(${a + 90})`}
-              data-molecule={i % 2 ? "antibody" : "complement"}
-            />
-          ))}
-        </g>
-      )}
+      <CoatingGlyphs complement={complement} antibody={antibody} />
     </svg>
   );
 }

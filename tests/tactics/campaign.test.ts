@@ -117,6 +117,11 @@ describe("six distinct playable campaigns", () => {
     }
   });
   it("M3 controls living infection instead of requiring eradication; HIV never receives stars", () => {
+    expect(
+      createTactical(tacticalScenarios.m3).internal.some(
+        (p) => p.stage === "persistent" && p.load === 6,
+      ),
+    ).toBe(true);
     const tb = run("m3");
     expect(tb.internal.reduce((n, p) => n + p.load, 0)).toBeGreaterThan(0);
     expect(tb.campaign!.stable).toBeGreaterThanOrEqual(100);

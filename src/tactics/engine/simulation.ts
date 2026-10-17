@@ -233,7 +233,7 @@ export function commandTactical(
       s,
       "mark",
       p.position,
-      "補體 C3b 已沉積；經補體受體促進吞噬，不直接裂解肺炎鏈球菌。",
+      "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
       c.markDuration,
       { target: p.id, opsonin: "c3b", from: { ...c.portal } },
     );
@@ -245,7 +245,9 @@ export function commandTactical(
       s,
       "mark",
       p.position,
-      "已指定漿細胞產生的抗體結合胞外菌，消耗 1 抗體；經 Fc 受體支援吞噬，不直接殺菌。",
+      viral(c)
+        ? "已指定特異性抗體結合胞外病毒，消耗 1 抗體；中和阻止進入宿主，不清除胞內來源。"
+        : "已指定漿細胞產生的抗體結合胞外病原，消耗 1 抗體；經 Fc 受體支援吞噬，不直接殺菌。",
       30,
       {
         target: p.id,
@@ -496,7 +498,7 @@ export function stepTactical(
           s,
           "engulf",
           target.position,
-          `${spec.name}吞入 ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : "（莢膜限制效率）"}${survives ? "，囊泡內仍有活菌。" : "，進入吞噬體，等待胞內殺菌。"}`,
+          `${target.form === "hypha" ? `${spec.name}取樣菌絲局部碎片／抗原，未吞入整條菌絲；攝入` : `${spec.name}吞入`} ${n} 負荷${target.markedUntil > s.tick ? "（調理支援）" : c.id === "m1" ? "（莢膜限制效率）" : "（接觸攝入）"}${survives ? "，囊泡內仍有活菌。" : "，進入吞噬體，等待胞內殺菌。"}`,
           n,
           {
             actor: cell.id,
@@ -639,7 +641,9 @@ export function stepTactical(
           ? "必要組織失守"
           : won
             ? c.mechanics === "containment"
-              ? "感染被穩定圍堵；仍有活菌，並非臨床治癒"
+              ? loadOf(s) > 0
+                ? "感染被穩定圍堵；仍有活菌，並非臨床治癒"
+                : "感染來源已受控；不代表臨床治癒"
               : `${c.waves.length} 波感染來源均已清除`
             : "防禦時間內未能控制感染",
       preservation: rate,
