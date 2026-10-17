@@ -5,3 +5,5 @@ test-results/
 *.local
 docs/evidence/raw*/
 docs/evidence/browser-failure.txt
+docs/evidence/**/raw*/
+docs/evidence/**/failure.txt
