@@ -2751,7 +2751,9 @@
 .t-objective > .t-next-wave {
   margin: 6px 10px 10px;
 }
-.t-panel-dismiss {
+/* This full-screen click catcher must stay transparent under button hover styles. */
+.tactical-root .t-panel-dismiss,
+.tactical-root .t-panel-dismiss:hover:not(:disabled) {
   position: absolute;
   inset: 0;
   z-index: 20;
@@ -2761,6 +2763,8 @@
   padding: 0;
   border-radius: 0;
   background: transparent;
+  box-shadow: none;
+  transition: none;
   cursor: default;
 }
 .t-recruit-card {
