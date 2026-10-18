@@ -1,0 +1,53 @@
+[
+  {
+    "device": "desktop",
+    "raw": "desktop-deployment-gestures.webm",
+    "duration": 287.44,
+    "segments": [
+      [
+        0,
+        8
+      ],
+      [
+        255.44,
+        287.44
+      ]
+    ],
+    "clip": "desktop/deployment-pinch-highlights.webm",
+    "note": "Time edits only; original order/speed, no synthetic frames. Full original film is in the workflow artifact."
+  },
+  {
+    "device": "mobile",
+    "raw": "mobile-deployment-gestures.webm",
+    "duration": 105.72,
+    "segments": [
+      [
+        0,
+        8
+      ],
+      [
+        73.72,
+        105.72
+      ]
+    ],
+    "clip": "mobile/deployment-pinch-highlights.webm",
+    "note": "Time edits only; original order/speed, no synthetic frames. Full original film is in the workflow artifact."
+  },
+  {
+    "device": "narrow",
+    "raw": "narrow-deployment-gestures.webm",
+    "duration": 180.32,
+    "segments": [
+      [
+        0,
+        8
+      ],
+      [
+        148.32,
+        180.32
+      ]
+    ],
+    "clip": "narrow/deployment-pinch-highlights.webm",
+    "note": "Time edits only; original order/speed, no synthetic frames. Full original film is in the workflow artifact."
+  }
+]

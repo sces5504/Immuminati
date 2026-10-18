@@ -1,0 +1,815 @@
+{
+  "date": "2026-10-18T03:29:32.557Z",
+  "note": "Pure-engine legal commands, not browser playthroughs. The legacy-observe factory uses historical preselected teams; new games never use that factory directly.",
+  "results": [
+    {
+      "case": "m1",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "defeat",
+        "reason": "必要組織失守",
+        "preservation": 28,
+        "stars": 0,
+        "seconds": 84
+      },
+      "burden": 82,
+      "commands": []
+    },
+    {
+      "case": "m1",
+      "mode": "kit-observe",
+      "result": {
+        "type": "defeat",
+        "reason": "必要組織失守",
+        "preservation": 26,
+        "stars": 0,
+        "seconds": 84
+      },
+      "burden": 83,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "opsonic"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m1",
+      "mode": "selected-defense",
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 82.80000000000001
+      },
+      "burden": 0,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "opsonic"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "dendritic",
+            "region": "c"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "neutrophil",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 50,
+          "cmd": {
+            "type": "mark",
+            "target": "p2"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 100,
+          "cmd": {
+            "type": "mark",
+            "target": "p3"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 200,
+          "cmd": {
+            "type": "mark",
+            "target": "p63"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 350,
+          "cmd": {
+            "type": "mark",
+            "target": "p82"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m2",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 87
+      },
+      "burden": 0,
+      "commands": []
+    },
+    {
+      "case": "m2",
+      "mode": "kit-observe",
+      "result": {
+        "type": "defeat",
+        "reason": "必要組織失守",
+        "preservation": 41,
+        "stars": 0,
+        "seconds": 106
+      },
+      "burden": 117,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "vesicle"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m2",
+      "mode": "selected-defense",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 89,
+        "stars": 3,
+        "seconds": 99
+      },
+      "burden": 0,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "vesicle"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "dendritic",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "neutrophil",
+            "region": "b"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 50,
+          "cmd": {
+            "type": "mark",
+            "target": "p2"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 100,
+          "cmd": {
+            "type": "recruit",
+            "kind": "macrophage",
+            "region": "b"
+          },
+          "accepted": false,
+          "error": "需要 4 反應資源。"
+        },
+        {
+          "tick": 260,
+          "cmd": {
+            "type": "recruit",
+            "kind": "neutrophil",
+            "region": "c"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 300,
+          "cmd": {
+            "type": "mark",
+            "target": "p47"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m3",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 94,
+        "stars": 3,
+        "seconds": 93.2
+      },
+      "burden": 12,
+      "commands": []
+    },
+    {
+      "case": "m3",
+      "mode": "kit-observe",
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 95,
+        "stars": 3,
+        "seconds": 77.2
+      },
+      "burden": 13,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "contain"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m3",
+      "mode": "selected-defense",
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 96,
+        "stars": 3,
+        "seconds": 75.2
+      },
+      "burden": 12,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "contain"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "macrophage",
+            "region": "b"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "th1",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p2"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 180,
+          "cmd": {
+            "type": "recruit",
+            "kind": "macrophage",
+            "region": "a"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m4",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "defeat",
+        "reason": "必要組織失守",
+        "preservation": 50,
+        "stars": 0,
+        "seconds": 224
+      },
+      "burden": 25,
+      "commands": []
+    },
+    {
+      "case": "m4",
+      "mode": "kit-observe",
+      "result": {
+        "type": "defeat",
+        "reason": "必要組織失守",
+        "preservation": 40,
+        "stars": 0,
+        "seconds": 144
+      },
+      "burden": 208,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "antiviral"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m4",
+      "mode": "selected-defense",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 72,
+        "stars": 2,
+        "seconds": 178.8
+      },
+      "burden": 0,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "antiviral"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "cytotoxicT",
+            "region": "b"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "macrophage",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 100,
+          "cmd": {
+            "type": "mark",
+            "target": "p44"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 160,
+          "cmd": {
+            "type": "recruit",
+            "kind": "pdc",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 200,
+          "cmd": {
+            "type": "mark",
+            "target": "p59"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 250,
+          "cmd": {
+            "type": "mark",
+            "target": "p60"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 300,
+          "cmd": {
+            "type": "recruit",
+            "kind": "helperT",
+            "region": "c"
+          },
+          "accepted": false,
+          "error": "需要 3 反應資源。"
+        },
+        {
+          "tick": 300,
+          "cmd": {
+            "type": "mark",
+            "target": "p59"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 350,
+          "cmd": {
+            "type": "mark",
+            "target": "p60"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 450,
+          "cmd": {
+            "type": "recruit",
+            "kind": "bcell",
+            "region": "c"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m5",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 98,
+        "stars": 3,
+        "seconds": 84.2
+      },
+      "burden": 0,
+      "commands": []
+    },
+    {
+      "case": "m5",
+      "mode": "kit-observe",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 96,
+        "stars": 3,
+        "seconds": 86.2
+      },
+      "burden": 0,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "mucosa"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m5",
+      "mode": "selected-defense",
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 98,
+        "stars": 3,
+        "seconds": 74
+      },
+      "burden": 0,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "mucosa"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "th17",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "neutrophil",
+            "region": "b"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 50,
+          "cmd": {
+            "type": "mark",
+            "target": "p3"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 150,
+          "cmd": {
+            "type": "recruit",
+            "kind": "neutrophil",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 300,
+          "cmd": {
+            "type": "recruit",
+            "kind": "neutrophil",
+            "region": "c"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 350,
+          "cmd": {
+            "type": "mark",
+            "target": "p67"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m6",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 93,
+        "stars": 0,
+        "seconds": 79.80000000000001
+      },
+      "burden": 79,
+      "commands": []
+    },
+    {
+      "case": "m6",
+      "mode": "kit-observe",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 92,
+        "stars": 0,
+        "seconds": 80.80000000000001
+      },
+      "burden": 95,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "support"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m6",
+      "mode": "selected-defense",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：免疫支援已到本次觀察界限",
+        "preservation": 92,
+        "stars": 0,
+        "seconds": 80.80000000000001
+      },
+      "burden": 95,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "support"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "cytotoxicT",
+            "region": "b"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "pdc",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 50,
+          "cmd": {
+            "type": "mark",
+            "target": "p42"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 100,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 150,
+          "cmd": {
+            "type": "recruit",
+            "kind": "pdc",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 150,
+          "cmd": {
+            "type": "mark",
+            "target": "p42"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 200,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 250,
+          "cmd": {
+            "type": "mark",
+            "target": "p42"
+          },
+          "accepted": true
+        }
+      ]
+    }
+  ]
+}

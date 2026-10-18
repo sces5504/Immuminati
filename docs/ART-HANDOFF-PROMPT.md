@@ -18,7 +18,7 @@
 
 技術接點：
 - 正式入口 `src/tactics`，TypeScript＋Vite＋React＋Three.js。`domain`／`content`／`engine`／`application`／`persistence` 保持不變；規則先產生權威事件，展示只能讀取，不從動畫回呼扣資源、殺菌、換區室或決定勝敗。
-- `presentation/CellGeometry.ts`：`membraneGeometry(kind)` 有 position morph target；`BattleScene.ts` 的 Actor 需保留 root/body/shell/lobes/granules/vacuole/ring 與 kind/phase 語意。替換模型時提供 adapter，不能讓動畫找不到部件。
+- `presentation/CellGeometry.ts`：`membraneGeometry(kind)` 有 position morph target；`BattleScene.ts` 的 Actor 需保留 root/body/shell/lobes/granules/vacuole/ring 與 kind/phase 語意。替換模型時提供 adapter，不能讓動畫找不到部件。保留根節點原點、尺度、接觸錨點與選取圈，不能讓模型外觀與權威位置／可點位置脫離。
 - `TissueGeometry.ts`：`makeTissueActor`／`updateTissueActor`／`disposeTissueActor`；子部件 membrane、junction、nucleus、infection、selection、fragments 為現有更新接點，保留或明確轉接。健康宿主不畫假病原。
 - `Anatomy.ts`：`buildAnatomy`／`anatomyHeight`／`tissueFloor`。場景地面、血管、損傷層、宿主高度、投影選取需一致，不能產生血管穿面或遮住可操作模型。
 - `MolecularModels.ts`：`antibodyModel(material)`／`complementModel(material)`／`pathogenGeometry(shape)` 可獨立替換；保留材質控制、命名及清理責任。

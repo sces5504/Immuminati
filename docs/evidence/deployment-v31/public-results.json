@@ -1,0 +1,119 @@
+{
+  "source": "26a26d118b08bd76fa7d77c03cff8103674bf89c",
+  "workflow": "https://github.com/sces5504/Immuminati/actions/runs/39093783396",
+  "checks": [
+    {
+      "job": 117575854778,
+      "lines": [
+        "2026-10-18T03:31:08.7679062Z PASS mobile m1 {\"type\":\"victory\",\"reason\":\"3 波感染來源均已清除\",\"preservation\":88,\"stars\":3,\"seconds\":83}"
+      ]
+    },
+    {
+      "job": 117575854882,
+      "lines": [
+        "2026-10-18T03:32:27.6452978Z PASS desktop m3 {\"type\":\"victory\",\"reason\":\"感染被穩定圍堵；仍有活菌，並非臨床治癒\",\"preservation\":96,\"stars\":3,\"seconds\":75.2}"
+      ]
+    },
+    {
+      "job": 117575854887,
+      "lines": [
+        "2026-10-18T03:31:23.2546929Z PASS mobile m3 {\"type\":\"victory\",\"reason\":\"感染被穩定圍堵；仍有活菌，並非臨床治癒\",\"preservation\":96,\"stars\":3,\"seconds\":75.2}"
+      ]
+    },
+    {
+      "job": 117575854891,
+      "lines": [
+        "2026-10-18T03:30:00.7548740Z PASS desktop new game seeks by default; compact objective, right-side help and minimal 44px map targets",
+        "2026-10-18T03:30:13.6708509Z PASS desktop outside tap dismisses recruitment without issuing a command or spending resources",
+        "2026-10-18T03:30:21.4722117Z PASS desktop independent C3b and B/antibody entries; absent antibody stock cannot be used; C3b charges only once",
+        "2026-10-18T03:30:35.9405790Z PASS desktop three rendered camera angles captured for conforming vessel inspection",
+        "2026-10-18T03:31:03.0367975Z PASS desktop label choice persists through reload; autonomous movement and phagocytosis continue at 2x",
+        "2026-10-18T03:31:03.2740467Z PASS desktop no runtime or asset errors and no horizontal overflow",
+        "2026-10-18T03:31:11.7448928Z PASS mobile new game seeks by default; compact objective, right-side help and minimal 44px map targets",
+        "2026-10-18T03:31:16.3565923Z PASS mobile outside tap dismisses recruitment without issuing a command or spending resources",
+        "2026-10-18T03:31:19.7480999Z PASS mobile independent C3b and B/antibody entries; absent antibody stock cannot be used; C3b charges only once",
+        "2026-10-18T03:31:24.1291901Z PASS mobile three rendered camera angles captured for conforming vessel inspection",
+        "2026-10-18T03:31:40.6452672Z PASS mobile label choice persists through reload; autonomous movement and phagocytosis continue at 2x",
+        "2026-10-18T03:31:40.7410976Z PASS mobile no runtime or asset errors and no horizontal overflow",
+        "2026-10-18T03:32:06.8832826Z PASS desktop: zero-tick legacy imports can resume without restarting ",
+        "2026-10-18T03:32:16.0149798Z PASS desktop: independent 3D idle without rule mutation ",
+        "2026-10-18T03:32:16.7432097Z PASS desktop: 44px primary controls and no horizontal overflow ",
+        "2026-10-18T03:32:40.5209906Z PASS desktop: marking, duplicate input, delayed recruitment and planning undo ",
+        "2026-10-18T03:35:16.1157705Z PASS desktop: grab-map drag follows mouse/touch across rotation and zoom without issuing orders [",
+        "2026-10-18T03:35:24.9669009Z PASS desktop: camera independent of rules, pointer picking, spatial order and undo ",
+        "2026-10-18T03:37:25.1789734Z PASS desktop: real UI completes three-wave tactical M1 {",
+        "2026-10-18T03:37:28.9940358Z PASS desktop: stable reload and legacy save retained ",
+        "2026-10-18T03:38:02.8158386Z PASS desktop: controlled 30-cell fixture supports crowded deployment, recruitment and reload ",
+        "2026-10-18T03:38:02.8173238Z PASS desktop: WebGL, assets and page console { pageErrors: 0, httpErrors: 0 }",
+        "2026-10-18T03:38:14.4789165Z PASS mobile: zero-tick legacy imports can resume without restarting ",
+        "2026-10-18T03:38:18.9318414Z PASS mobile: independent 3D idle without rule mutation ",
+        "2026-10-18T03:38:19.2424458Z PASS mobile: 44px primary controls and no horizontal overflow ",
+        "2026-10-18T03:38:31.6328135Z PASS mobile: marking, duplicate input, delayed recruitment and planning undo ",
+        "2026-10-18T03:39:16.7736364Z PASS mobile: grab-map drag follows mouse/touch across rotation and zoom without issuing orders [",
+        "2026-10-18T03:39:21.7402124Z PASS mobile: camera independent of rules, pointer picking, spatial order and undo ",
+        "2026-10-18T03:40:35.7349164Z PASS mobile: real UI completes three-wave tactical M1 {",
+        "2026-10-18T03:40:38.3793600Z PASS mobile: stable reload and legacy save retained ",
+        "2026-10-18T03:40:58.4249109Z PASS mobile: controlled 30-cell fixture supports crowded deployment, recruitment and reload ",
+        "2026-10-18T03:40:58.4262757Z PASS mobile: WebGL, assets and page console { pageErrors: 0, httpErrors: 0 }",
+        "2026-10-18T03:41:22.2314958Z PASS reload preserves paused plan undo ",
+        "2026-10-18T03:41:30.3078793Z PASS encyclopedia pauses real time and supports search/return ",
+        "2026-10-18T03:41:32.7384959Z PASS hidden page safely pauses instead of catching up damage ",
+        "2026-10-18T03:41:40.5645119Z PASS versioned export/import and invalid import preservation "
+      ]
+    },
+    {
+      "job": 117575854905,
+      "lines": [
+        "2026-10-18T03:31:47.6521526Z PASS mobile m6 {\"type\":\"limited\",\"reason\":\"未治療情境：免疫支援已到本次觀察界限\",\"preservation\":92,\"stars\":0,\"seconds\":80.80000000000001}"
+      ]
+    },
+    {
+      "job": 117575854908,
+      "lines": [
+        "2026-10-18T03:31:31.8442227Z PASS mobile m5 {\"type\":\"victory\",\"reason\":\"2 波感染來源均已清除\",\"preservation\":98,\"stars\":3,\"seconds\":79}"
+      ]
+    },
+    {
+      "job": 117575854915,
+      "lines": [
+        "2026-10-18T03:32:57.4661651Z PASS desktop m2 {\"type\":\"victory\",\"reason\":\"2 波感染來源均已清除\",\"preservation\":88,\"stars\":3,\"seconds\":102}"
+      ]
+    },
+    {
+      "job": 117575854916,
+      "lines": [
+        "2026-10-18T03:32:37.2391262Z PASS desktop m1 {\"type\":\"victory\",\"reason\":\"3 波感染來源均已清除\",\"preservation\":88,\"stars\":3,\"seconds\":83}"
+      ]
+    },
+    {
+      "job": 117575854917,
+      "lines": [
+        "2026-10-18T03:33:46.0083086Z PASS desktop m4 {\"type\":\"victory\",\"reason\":\"2 波感染來源均已清除\",\"preservation\":72,\"stars\":2,\"seconds\":178.8}"
+      ]
+    },
+    {
+      "job": 117575854928,
+      "lines": [
+        "2026-10-18T03:32:29.7891136Z PASS desktop m6 {\"type\":\"limited\",\"reason\":\"未治療情境：免疫支援已到本次觀察界限\",\"preservation\":92,\"stars\":0,\"seconds\":80.80000000000001}"
+      ]
+    },
+    {
+      "job": 117575854939,
+      "lines": [
+        "2026-10-18T03:33:51.4693678Z PASS mobile m4 {\"type\":\"victory\",\"reason\":\"2 波感染來源均已清除\",\"preservation\":72,\"stars\":2,\"seconds\":178.8}"
+      ]
+    },
+    {
+      "job": 117575854943,
+      "lines": [
+        "2026-10-18T03:31:59.2518342Z PASS desktop m5 {\"type\":\"victory\",\"reason\":\"2 波感染來源均已清除\",\"preservation\":98,\"stars\":3,\"seconds\":79}"
+      ]
+    },
+    {
+      "job": 117575854953,
+      "lines": [
+        "2026-10-18T03:31:43.2521199Z PASS mobile m2 {\"type\":\"victory\",\"reason\":\"2 波感染來源均已清除\",\"preservation\":88,\"stars\":3,\"seconds\":102}"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "source": "26a26d118b08bd76fa7d77c03cff8103674bf89c",
+  "workflow": "https://github.com/sces5504/Immuminati/actions/runs/39093196864",
+  "artifacts": [
+    {
+      "device": "desktop",
+      "artifact": 12123866533,
+      "zipSha256": "d172952bdfce2fa89db30019b284215a07b0043edf37a1bfd44b58f3116aebbd"
+    },
+    {
+      "device": "mobile",
+      "artifact": 12123781877,
+      "zipSha256": "32524f07e7ff14be3603cf49f7b6a8ae904f5e2791e37bbb6a4021a297204473"
+    },
+    {
+      "device": "narrow",
+      "artifact": 12123507505,
+      "zipSha256": "b79f66ee7842b67d978340c03782a892aa2e8831e16ba5379d3a55abf0de2421"
+    }
+  ]
+}

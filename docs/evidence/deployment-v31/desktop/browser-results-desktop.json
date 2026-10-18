@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-18T03:25:15.228Z",
+  "checks": [
+    {
+      "device": "desktop",
+      "passed": true,
+      "checks": [
+        "six empty openings and knowledge kits",
+        "draft persists and resumes",
+        "deployment blocks Space/time",
+        "custom M1 deployment",
+        "skip removed and copy updated",
+        "native CDP two-finger spread/pinch clamps",
+        "one-finger release never issues command",
+        "cancel/third-finger recover",
+        "pinch beginning on world-label capture remains responsive",
+        "keyboard selection remains usable after cancellation",
+        "pinch leaves authority/selection/page scale unchanged",
+        "single-finger same-direction drag preserved"
+      ],
+      "errors": [],
+      "bad": []
+    }
+  ]
+}

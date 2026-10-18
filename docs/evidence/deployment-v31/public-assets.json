@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-18T03:30:33.711982+00:00",
+  "source": "26a26d118b08bd76fa7d77c03cff8103674bf89c",
+  "url": "https://sces5504.github.io/Immuminati/?v=26a26d1",
+  "htmlSha256": "2fdf8bf09ccdd09a1ebaadd85bd5b2ab0f0fe4004adf4f54130c0a6067cb1947",
+  "htmlMatchesBuild": true,
+  "assets": [
+    {
+      "path": "/Immuminati/assets/index-CFnhrn-X.js",
+      "bytes": 442451,
+      "sha256": "480ddbbb4609fb3b3e8fcf0db9d0ccba3ff3d83f053adf3d9f7ed20c0e89c2e5",
+      "matchesBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/index-DYdg6L4z.css",
+      "bytes": 97642,
+      "sha256": "6a8de20729607c5ecacd15435de877a62378d9d50b7dc65afc1aa67ec76bff55",
+      "matchesBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/mark.svg",
+      "bytes": 504,
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86",
+      "matchesBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/three-DH6SqBiy.js",
+      "bytes": 527455,
+      "sha256": "7fd6393b3bbde940bab8fd39fc2066eb6d2ec6dd07d26708237487e1f7123def",
+      "matchesBuild": true
+    }
+  ]
+}

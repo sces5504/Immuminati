@@ -1,3 +1,5 @@
+> v3.1 現行追加：[玩家開局部署／知識套組、雙指縮放、移除略過鍵及美術交接](DEPLOYMENT-AND-GESTURES.md)。下方是歷史紀錄，不是當前開局隊伍或本輪測試數字。
+
 > v3.0 追加：本文件保留 v2.4 歷史驗證。當前六關／抗體／手機修正見 [六關實作](CAMPAIGN-IMPLEMENTATION.md) 與 [本輪驗證](CAMPAIGN-VERIFICATION.md)，勿引用下方舊數字當作新測試。
 
 # v2.4 畫面精簡、獨立調理來源與交接
