@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-18 18:03:54 UTC",
+  "run_id": 39151776296,
+  "url": "https://github.com/sces5504/Immuminati/actions/runs/39151776296",
+  "source_commit": "9dd52157b00b3d4473a89f99b06e0be2fddbd85a",
+  "case_matrix_passed": 12,
+  "deployment_matrix_passed": 3,
+  "jobs": [
+    {
+      "id": 117746726580,
+      "name": "deployment (narrow)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746726739,
+      "name": "deployment (mobile)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746726775,
+      "name": "campaign (mobile, m5)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746726867,
+      "name": "smoke",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 117746726893,
+      "name": "campaign (mobile, m1)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746726909,
+      "name": "deployment (desktop)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746726943,
+      "name": "campaign (desktop, m2)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727001,
+      "name": "campaign (mobile, m2)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727015,
+      "name": "campaign (desktop, m6)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727023,
+      "name": "campaign (desktop, m5)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727043,
+      "name": "campaign (desktop, m1)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727062,
+      "name": "campaign (mobile, m6)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727085,
+      "name": "campaign (mobile, m4)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727090,
+      "name": "campaign (mobile, m3)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727203,
+      "name": "campaign (desktop, m3)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117746727247,
+      "name": "campaign (desktop, m4)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "note": "All twelve published case playthroughs and three deployment sizes passed. Additional long smoke job remains in progress; not claimed passed."
+}

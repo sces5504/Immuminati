@@ -27,7 +27,10 @@
   "live_workflow": {
     "id": 39151776296,
     "status": "in_progress at this record",
-    "note": "Separate scheduled public matrix; do not claim completion from this snapshot"
+    "note": "Separate scheduled public matrix; do not claim completion from this snapshot",
+    "case_matrix_passed": 12,
+    "deployment_matrix_passed": 3,
+    "smoke": "in_progress; not claimed passed"
   },
   "limits": [
     "No physical Safari/Android GPU validation or large-unit hardware benchmark",
