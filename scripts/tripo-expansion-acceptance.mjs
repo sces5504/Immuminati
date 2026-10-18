@@ -38,6 +38,15 @@ const browser = await chromium.launch({
   ],
 });
 const results = [];
+const reportName = process.env.REPORT_FILE ?? "results.json";
+async function renderUntil(page, locator, name, value) {
+  for (let i = 0; i < 100; i++) {
+    await page.clock.runFor(150);
+    if ((await locator.getAttribute(name)) === value) return;
+    await new Promise((r) => setTimeout(r, 50));
+  }
+  await expect(locator).toHaveAttribute(name, value);
+}
 const log = (...args) => console.log(new Date().toISOString(), ...args);
 try {
   for (const [device, viewport] of [
@@ -119,8 +128,7 @@ try {
       await page
         .getByRole("button", { name: "關閉視窗", exact: true })
         .evaluate((el) => el.click());
-      await page.clock.runFor(150);
-      await expect(scene).toHaveAttribute("data-art-mode", "original");
+      await renderUntil(page, scene, "data-art-mode", "original");
       await page.clock.runFor(150);
       const original = await stats();
       assert.deepEqual((await read()).state, initial.state);
@@ -131,8 +139,7 @@ try {
       await page
         .getByRole("button", { name: "關閉視窗", exact: true })
         .evaluate((el) => el.click());
-      await page.clock.runFor(150);
-      await expect(scene).toHaveAttribute("data-art-mode", "tripo");
+      await renderUntil(page, scene, "data-art-mode", "tripo");
       assert.deepEqual((await read()).state, initial.state);
       assert.ok(
         +sample.artTriangles < Math.max(+original.artTriangles * 1.65, 320000),
@@ -220,14 +227,14 @@ try {
         ],
       });
       await writeFile(
-        dir + "results.json",
+        dir + reportName,
         JSON.stringify({ date: new Date().toISOString(), results }, null, 2),
       );
       log("PASS", device, id);
     }
   }
   await writeFile(
-    dir + "results.json",
+    dir + reportName,
     JSON.stringify({ date: new Date().toISOString(), results }, null, 2),
   );
 } finally {

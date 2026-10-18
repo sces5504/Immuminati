@@ -1,0 +1,75 @@
+Desktop M1–M5 batch; separate bounded-render recheck for M6; final mobile batch.
+2026-10-18T11:28:29.814Z START desktop m1
+2026-10-18T11:28:33.914Z LOADED desktop m1 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"alveolar-septum,dendritic,diplococcus,epithelial,macrophage,neutrophil","artAssets":"6","artMode":"tripo","artCells":"3","artTriangles":"253782","artDrawCalls":"176","artHosts":"32","artHostDraws":"32","artPathogens":"3","artTissue":"true"}
+2026-10-18T11:28:36.456Z TOGGLE PASS desktop m1
+2026-10-18T11:28:37.273Z MOVE PASS desktop m1
+2026-10-18T11:28:45.785Z MARK PASS desktop m1
+2026-10-18T11:28:53.210Z PASS desktop m1
+2026-10-18T11:28:53.210Z START desktop m2
+2026-10-18T11:28:59.227Z LOADED desktop m2 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"bacillus,dendritic,enterocyte,epithelial,goblet,intestinal-villus,macrophage,neutrophil,t-lymphocyte","artAssets":"9","artMode":"tripo","artCells":"3","artTriangles":"264898","artDrawCalls":"148","artHosts":"32","artHostDraws":"32","artPathogens":"2","artTissue":"true"}
+2026-10-18T11:29:01.338Z TOGGLE PASS desktop m2
+2026-10-18T11:29:02.076Z MOVE PASS desktop m2
+2026-10-18T11:29:11.327Z MARK PASS desktop m2
+2026-10-18T11:29:20.313Z PASS desktop m2
+2026-10-18T11:29:20.313Z START desktop m3
+2026-10-18T11:29:27.016Z LOADED desktop m3 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"alveolar-septum,bacillus,dendritic,epithelial,macrophage,neutrophil,t-lymphocyte","artAssets":"7","artMode":"tripo","artCells":"4","artTriangles":"216638","artDrawCalls":"175","artHosts":"32","artHostDraws":"32","artPathogens":"1","artTissue":"true"}
+2026-10-18T11:29:29.270Z TOGGLE PASS desktop m3
+2026-10-18T11:29:29.448Z MOVE PASS desktop m3
+2026-10-18T11:29:37.642Z MARK PASS desktop m3
+2026-10-18T11:29:44.552Z PASS desktop m3
+2026-10-18T11:29:44.552Z START desktop m4
+2026-10-18T11:29:50.237Z LOADED desktop m4 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"alveolar-septum,dendritic,enveloped-virus,epithelial,macrophage,neutrophil,nk,pdc,t-lymphocyte","artAssets":"9","artMode":"tripo","artCells":"4","artTriangles":"226090","artDrawCalls":"172","artHosts":"32","artHostDraws":"32","artPathogens":"2","artTissue":"true"}
+2026-10-18T11:29:51.967Z TOGGLE PASS desktop m4
+2026-10-18T11:29:52.751Z MOVE PASS desktop m4
+2026-10-18T11:30:01.386Z MARK PASS desktop m4
+2026-10-18T11:30:14.837Z PASS desktop m4
+2026-10-18T11:30:14.837Z START desktop m5
+2026-10-18T11:30:26.562Z LOADED desktop m5 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"dendritic,epithelial,macrophage,neutrophil,nk,oral-mucosa,t-lymphocyte,yeast","artAssets":"8","artMode":"tripo","artCells":"4","artTriangles":"284718","artDrawCalls":"193","artHosts":"47","artHostDraws":"47","artPathogens":"3","artTissue":"true"}
+2026-10-18T11:30:33.546Z TOGGLE PASS desktop m5
+2026-10-18T11:30:33.827Z MOVE PASS desktop m5
+2026-10-18T11:30:53.057Z MARK PASS desktop m5
+2026-10-18T11:31:06.758Z PASS desktop m5
+
+2026-10-18T11:33:07.749Z START desktop m6
+2026-10-18T11:33:13.731Z LOADED desktop m6 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"dendritic,enveloped-virus,epithelial,lymph-reticulum,macrophage,neutrophil,nk,pdc,t-lymphocyte","artAssets":"9","artMode":"tripo","artCells":"4","artTriangles":"291660","artDrawCalls":"148","artHosts":"32","artHostDraws":"32","artPathogens":"2","artTissue":"true"}
+2026-10-18T11:33:16.243Z TOGGLE PASS desktop m6
+2026-10-18T11:33:16.414Z MOVE PASS desktop m6
+2026-10-18T11:33:25.880Z MARK PASS desktop m6
+2026-10-18T11:33:33.584Z PASS desktop m6
+
+2026-10-18T11:33:34.327Z START mobile m1
+2026-10-18T11:33:37.324Z LOADED mobile m1 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"alveolar-septum,dendritic,diplococcus,epithelial,macrophage,neutrophil","artAssets":"6","artMode":"tripo","artCells":"3","artTriangles":"252038","artDrawCalls":"165","artHosts":"32","artHostDraws":"31","artPathogens":"3","artTissue":"true"}
+2026-10-18T11:33:38.825Z TOGGLE PASS mobile m1
+2026-10-18T11:33:38.916Z MOVE PASS mobile m1
+2026-10-18T11:33:43.328Z MARK PASS mobile m1
+2026-10-18T11:33:46.811Z PASS mobile m1
+2026-10-18T11:33:46.811Z START mobile m2
+2026-10-18T11:33:51.285Z LOADED mobile m2 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"bacillus,dendritic,enterocyte,epithelial,goblet,intestinal-villus,macrophage,neutrophil,t-lymphocyte","artAssets":"9","artMode":"tripo","artCells":"3","artTriangles":"258182","artDrawCalls":"136","artHosts":"32","artHostDraws":"30","artPathogens":"2","artTissue":"true"}
+2026-10-18T11:33:53.048Z TOGGLE PASS mobile m2
+2026-10-18T11:33:53.127Z MOVE PASS mobile m2
+2026-10-18T11:33:57.555Z MARK PASS mobile m2
+2026-10-18T11:34:00.876Z PASS mobile m2
+2026-10-18T11:34:00.876Z START mobile m3
+2026-10-18T11:34:05.358Z LOADED mobile m3 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"alveolar-septum,bacillus,dendritic,epithelial,macrophage,neutrophil,t-lymphocyte","artAssets":"7","artMode":"tripo","artCells":"4","artTriangles":"214894","artDrawCalls":"164","artHosts":"32","artHostDraws":"31","artPathogens":"1","artTissue":"true"}
+2026-10-18T11:34:06.867Z TOGGLE PASS mobile m3
+2026-10-18T11:34:06.954Z MOVE PASS mobile m3
+2026-10-18T11:34:10.977Z MARK PASS mobile m3
+2026-10-18T11:34:14.031Z PASS mobile m3
+2026-10-18T11:34:14.031Z START mobile m4
+2026-10-18T11:34:18.358Z LOADED mobile m4 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"alveolar-septum,dendritic,enveloped-virus,epithelial,macrophage,neutrophil,nk,pdc,t-lymphocyte","artAssets":"9","artMode":"tripo","artCells":"4","artTriangles":"224346","artDrawCalls":"161","artHosts":"32","artHostDraws":"31","artPathogens":"2","artTissue":"true"}
+2026-10-18T11:34:19.951Z TOGGLE PASS mobile m4
+2026-10-18T11:34:20.020Z MOVE PASS mobile m4
+2026-10-18T11:34:24.085Z MARK PASS mobile m4
+2026-10-18T11:34:27.106Z PASS mobile m4
+2026-10-18T11:34:27.106Z START mobile m5
+2026-10-18T11:34:31.525Z LOADED mobile m5 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"dendritic,epithelial,macrophage,neutrophil,nk,oral-mucosa,t-lymphocyte,yeast","artAssets":"8","artMode":"tripo","artCells":"4","artTriangles":"284718","artDrawCalls":"193","artHosts":"47","artHostDraws":"47","artPathogens":"3","artTissue":"true"}
+2026-10-18T11:34:33.408Z TOGGLE PASS mobile m5
+2026-10-18T11:34:33.499Z MOVE PASS mobile m5
+2026-10-18T11:34:38.809Z MARK PASS mobile m5
+2026-10-18T11:34:42.709Z PASS mobile m5
+2026-10-18T11:34:42.709Z START mobile m6
+2026-10-18T11:34:47.296Z LOADED mobile m6 {"testid":"tactical-scene","renderer":"software","cameraZoom":"1.0000","artKinds":"dendritic,enveloped-virus,epithelial,lymph-reticulum,macrophage,neutrophil,nk,pdc,t-lymphocyte","artAssets":"9","artMode":"tripo","artCells":"4","artTriangles":"288290","artDrawCalls":"141","artHosts":"32","artHostDraws":"31","artPathogens":"2","artTissue":"true"}
+2026-10-18T11:34:49.082Z TOGGLE PASS mobile m6
+2026-10-18T11:34:49.170Z MOVE PASS mobile m6
+2026-10-18T11:34:54.073Z MARK PASS mobile m6
+2026-10-18T11:34:57.544Z PASS mobile m6

@@ -1,0 +1,17 @@
+
+ RUN  v3.2.4 /workspace/Immuminati
+
+ ✓ tests/tactics/cellLayout.test.ts (8 tests) 78ms
+ ✓ tests/tactics/tripoSamples.test.ts (10 tests) 104ms
+ ✓ tests/tactics/selection.test.ts (3 tests) 3ms
+
+ Test Files  3 passed (3)
+      Tests  21 passed (21)
+   Start at  11:28:25
+   Duration  1.06s (transform 248ms, setup 0ms, collect 369ms, tests 185ms, environment 0ms, prepare 157ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

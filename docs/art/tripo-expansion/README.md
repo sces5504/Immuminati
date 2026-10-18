@@ -2,7 +2,7 @@
 
 使用者已確認前三件遊戲樣本，授權擴充其他免疫細胞、病原、人體宿主與器官組織。沿用 `art/tripo-samples`／[Draft PR #3](https://github.com/sces5504/Immuminati/pull/3)，**不合併 Immuminati main、不發布正式 Pages**。主站來源仍為 `36a1f39`，最後合併另等使用者核准。
 
-同一[私人 Preview](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 沿用獨立 origin／存檔；首頁與設定可切回原模型。只有 `VITE_ART_PREVIEW=tripo` 建置啟用新模型，一般建置保持原版。本輪已成功部署，遊戲來源 `1faa5b3`、託管來源 `6b8c569`；精確版本／部署記在 `preview.json`，不能把上一批的部署當成本輪。
+同一[私人 Preview](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 沿用獨立 origin／存檔；首頁與設定可切回原模型。只有 `VITE_ART_PREVIEW=tripo` 建置啟用新模型，一般建置保持原版。本輪已成功部署，遊戲來源 `bdc98ee`、託管來源 `509ed06`；精確版本／部署記在 `preview.json`，不能把上一批的部署當成本輪。
 
 ## 本輪素材與費用
 

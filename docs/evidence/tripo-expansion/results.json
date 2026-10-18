@@ -1,5 +1,6 @@
 {
-  "date": "2026-10-18T11:22:10.537Z",
+  "gameCommit": "bdc98ee7741572ac56831e74398d5aeda501b687",
+  "batches": "first five desktop cases, bounded-render-wait desktop m6 recheck, all six mobile cases",
   "results": [
     {
       "device": "desktop",
@@ -12,7 +13,7 @@
         "artAssets": "6",
         "artMode": "tripo",
         "artCells": "3",
-        "artTriangles": "266022",
+        "artTriangles": "253782",
         "artDrawCalls": "176",
         "artHosts": "32",
         "artHostDraws": "32",
@@ -145,7 +146,7 @@
         "artAssets": "7",
         "artMode": "tripo",
         "artCells": "4",
-        "artTriangles": "227654",
+        "artTriangles": "216638",
         "artDrawCalls": "175",
         "artHosts": "32",
         "artHostDraws": "32",
@@ -215,7 +216,7 @@
         "artAssets": "9",
         "artMode": "tripo",
         "artCells": "4",
-        "artTriangles": "237106",
+        "artTriangles": "226090",
         "artDrawCalls": "172",
         "artHosts": "32",
         "artHostDraws": "32",
@@ -376,7 +377,7 @@
         "artPathogens": "0",
         "artTissue": "false"
       },
-      "ticks": 10,
+      "ticks": 9,
       "events": [
         "wave",
         "infect",
@@ -423,10 +424,10 @@
         "artAssets": "6",
         "artMode": "tripo",
         "artCells": "3",
-        "artTriangles": "263270",
-        "artDrawCalls": "164",
+        "artTriangles": "252038",
+        "artDrawCalls": "165",
         "artHosts": "32",
-        "artHostDraws": "30",
+        "artHostDraws": "31",
         "artPathogens": "3",
         "artTissue": "true"
       },
@@ -445,7 +446,7 @@
         "artPathogens": "0",
         "artTissue": "false"
       },
-      "ticks": 10,
+      "ticks": 9,
       "events": [
         "wave",
         "mark",
@@ -507,7 +508,7 @@
         "artPathogens": "0",
         "artTissue": "false"
       },
-      "ticks": 10,
+      "ticks": 9,
       "events": [
         "wave",
         "mark",
@@ -556,10 +557,10 @@
         "artAssets": "7",
         "artMode": "tripo",
         "artCells": "4",
-        "artTriangles": "224902",
-        "artDrawCalls": "163",
+        "artTriangles": "214894",
+        "artDrawCalls": "164",
         "artHosts": "32",
-        "artHostDraws": "30",
+        "artHostDraws": "31",
         "artPathogens": "1",
         "artTissue": "true"
       },
@@ -626,10 +627,10 @@
         "artAssets": "9",
         "artMode": "tripo",
         "artCells": "4",
-        "artTriangles": "234354",
-        "artDrawCalls": "160",
+        "artTriangles": "224346",
+        "artDrawCalls": "161",
         "artHosts": "32",
-        "artHostDraws": "30",
+        "artHostDraws": "31",
         "artPathogens": "2",
         "artTissue": "true"
       },
@@ -823,5 +824,6 @@
         "no runtime or asset errors"
       ]
     }
-  ]
+  ],
+  "completedAt": "2026-10-18T11:38:18.046731+00:00"
 }

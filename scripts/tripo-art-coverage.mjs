@@ -36,6 +36,8 @@ try {
   p.setDefaultTimeout(60000);
   const errors = [];
   p.on("pageerror", (e) => errors.push(e.message));
+  await p.clock.install({ time: new Date("2030-01-01T00:00:00Z") });
+  await p.clock.pauseAt(new Date("2030-01-01T00:01:00Z"));
   await p.goto("http://127.0.0.1:24862/Immuminati/");
   await p
     .getByRole("button", { name: "開始 M1", exact: true })
@@ -99,6 +101,15 @@ try {
   await p
     .getByRole("button", { name: "繼續防線 →" })
     .evaluate((el) => el.click());
+  for (let i = 0; i < 100; i++) {
+    await p.clock.runFor(150);
+    if (
+      (await p.getByTestId("tactical-scene").getAttribute("data-art-cells")) ===
+      "14"
+    )
+      break;
+    await new Promise((r) => setTimeout(r, 150));
+  }
   await expect(p.getByTestId("tactical-scene")).toHaveAttribute(
     "data-art-cells",
     "14",
@@ -117,7 +128,7 @@ try {
     .first()
     .evaluate((el) => el.click());
   assert.equal((await read()).state.immunity.antibodies, 1);
-  await p.waitForTimeout(1500);
+  await p.clock.runFor(1500);
   await p.screenshot({ path: dir + "green-antibody-attached-fixture.png" });
   await p.getByTestId("colony-antibody").evaluate((el) => el.click());
   assert.equal((await read()).state.immunity.antibodies, 1);

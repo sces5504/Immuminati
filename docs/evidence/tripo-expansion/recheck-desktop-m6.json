@@ -1,0 +1,74 @@
+{
+  "date": "2026-10-18T11:33:33.584Z",
+  "results": [
+    {
+      "device": "desktop",
+      "id": "m6",
+      "sample": {
+        "testid": "tactical-scene",
+        "renderer": "software",
+        "cameraZoom": "1.0000",
+        "artKinds": "dendritic,enveloped-virus,epithelial,lymph-reticulum,macrophage,neutrophil,nk,pdc,t-lymphocyte",
+        "artAssets": "9",
+        "artMode": "tripo",
+        "artCells": "4",
+        "artTriangles": "291660",
+        "artDrawCalls": "148",
+        "artHosts": "32",
+        "artHostDraws": "32",
+        "artPathogens": "2",
+        "artTissue": "true"
+      },
+      "original": {
+        "testid": "tactical-scene",
+        "renderer": "software",
+        "cameraZoom": "1.0000",
+        "artKinds": "dendritic,enveloped-virus,epithelial,lymph-reticulum,macrophage,neutrophil,nk,pdc,t-lymphocyte",
+        "artAssets": "9",
+        "artMode": "original",
+        "artCells": "0",
+        "artTriangles": "268104",
+        "artDrawCalls": "206",
+        "artHosts": "0",
+        "artHostDraws": "0",
+        "artPathogens": "0",
+        "artTissue": "false"
+      },
+      "ticks": 9,
+      "events": [
+        "wave",
+        "infect",
+        "mark"
+      ],
+      "downloads": [
+        "macrophage.glb",
+        "neutrophil.glb",
+        "alveolar-septum.glb",
+        "diplococcus.glb",
+        "epithelial.glb",
+        "dendritic.glb",
+        "macrophage.glb",
+        "neutrophil.glb",
+        "lymph-reticulum.glb",
+        "enveloped-virus.glb",
+        "t-lymphocyte.glb",
+        "dendritic.glb",
+        "epithelial.glb",
+        "pdc.glb",
+        "nk.glb"
+      ],
+      "errors": [],
+      "bad": [],
+      "checks": [
+        "all deployed immune and host replacements render",
+        "organ-specific batched tissue",
+        "original toggle leaves exact authority unchanged",
+        "selection, move and undo",
+        "compartment inspection",
+        "C3b animation charges once",
+        "2x real gameplay",
+        "no runtime or asset errors"
+      ]
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   {
     "case": "m1",
     "device": "desktop",
-    "triangles": 266022,
+    "triangles": 253782,
     "originalTriangles": 200380,
     "drawCalls": 176,
     "originalDrawCalls": 209,
@@ -20,7 +20,7 @@
   {
     "case": "m3",
     "device": "desktop",
-    "triangles": 227654,
+    "triangles": 216638,
     "originalTriangles": 200044,
     "drawCalls": 175,
     "originalDrawCalls": 208,
@@ -29,7 +29,7 @@
   {
     "case": "m4",
     "device": "desktop",
-    "triangles": 237106,
+    "triangles": 226090,
     "originalTriangles": 213664,
     "drawCalls": 172,
     "originalDrawCalls": 202,
@@ -56,11 +56,11 @@
   {
     "case": "m1",
     "device": "mobile",
-    "triangles": 263270,
+    "triangles": 252038,
     "originalTriangles": 198684,
-    "drawCalls": 164,
+    "drawCalls": 165,
     "originalDrawCalls": 197,
-    "hostDraws": 30
+    "hostDraws": 31
   },
   {
     "case": "m2",
@@ -74,20 +74,20 @@
   {
     "case": "m3",
     "device": "mobile",
-    "triangles": 224902,
+    "triangles": 214894,
     "originalTriangles": 198348,
-    "drawCalls": 163,
+    "drawCalls": 164,
     "originalDrawCalls": 196,
-    "hostDraws": 30
+    "hostDraws": 31
   },
   {
     "case": "m4",
     "device": "mobile",
-    "triangles": 234354,
+    "triangles": 224346,
     "originalTriangles": 211968,
-    "drawCalls": 160,
+    "drawCalls": 161,
     "originalDrawCalls": 190,
-    "hostDraws": 30
+    "hostDraws": 31
   },
   {
     "case": "m5",

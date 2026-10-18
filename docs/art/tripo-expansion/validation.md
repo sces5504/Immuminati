@@ -29,7 +29,7 @@
 - 貼合變形需保留面朝向與重算包圍範圍；補上三區數學檢查。最終逐格檢查另發現，簡化生成薄片在陡峭肺泡隔會跨過曲面；肺泡I／II改用均勻細分曲面膜、保留生成材質與獨立核／胞內部件，新增全部肺泡宿主頂點貼地驗證。
 - 首次相關單元曾遇浮點邊界0.024999999999999994，改為容許1e-10數值誤差，沒有放寬實際貼地要求。
 - 初次14種覆蓋fixture用了不存在的hold指令，被存檔驗證拒絕；已改為合法guard／point。初次5秒素材斷言也不足以等雲端軟體WebGL解碼，改為有界60秒；並非隱藏資產錯誤。最終結果另以成功重跑記錄。
-- 組織末次修整後再跑雙平台六關；中斷的中間批不列為最終通過。
+- 組織末次修整後補跑六關雙平台；中斷的中間批不列為最終通過。軟體GPU fence尚未完成時，受控時鐘單次推進可能沒有繪製，已改用有界時鐘／實際等待輪詢畫面狀態；最後五組桌面、另批桌面M6及六組手機成功結果合併，不將中間超時算成通過。
 
 ## 明確未驗證
 
@@ -37,10 +37,10 @@
 
 ## 最終成功結果
 
-程式來源 `1faa5b3`。21項相關單元、型別、Preview與原版建置成功；六關×雙平台 **12組成功**，所有HTTP資產／JS錯誤列表為空。14種免疫／抗體覆蓋fixture成功；手機M1正常時間的C3b、吞噬／調度、速度／降低動態及全素材失敗回退成功。新證據與記錄均在本輪目錄，不沿用舊批。
+程式來源 `bdc98ee`。21項相關單元、型別、Preview與原版建置成功；六關×雙平台 **12組成功**，所有HTTP資產／JS錯誤列表為空。14種免疫／抗體覆蓋fixture成功；手機M1正常時間的C3b、吞噬／調度、速度／降低動態及全素材失敗回退成功。新證據與記錄均在本輪目錄，不沿用舊批。
 
-開場畫面面數約22.5–29.2萬，draw call 136–193；不同器官／原版的同構圖比較見 `metrics.json`。面數有增有減，所有案例draw call低於原版；這不是密集後期戰場或真機FPS壓力測試。
+開場畫面面數約21.6–29.2萬，draw call 136–193；不同器官／原版的同構圖比較見 `metrics.json`。面數有增有減，所有案例draw call低於原版；這不是密集後期戰場或真機FPS壓力測試。
 
-[私人Preview](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 已由Sites回傳succeeded；部署 `appgdep_6ad4ac3a2504819193efcb6d2cd47a89`，來源與版本見 `preview.json`。正式GitHub Pages與main未變更，等待最終審閱。
+[私人Preview](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 已由Sites回傳succeeded；部署 `appgdep_6ad4ae5fba188191a6dfd100de6872e8`，來源與版本見 `preview.json`。正式GitHub Pages與main未變更，等待最終審閱。
 
 畫面：每關 `desktop-mN-field.png`、`mobile-mN-field.png`，剖面與實際行動各另有截圖。14種覆蓋與抗體fixture在 `coverage/`；M1同構圖原版比較、吞噬後與回退在 `actions/`。影片：`mobile-m1-engulf.webm` 為本輪正常時間實錄剪段；`mobile-m1-art.webm`–`mobile-m6-art.webm` 為受控瀏覽器時鐘的自動化畫面；`antibody-coverage-fixture.webm` 明確是視覺fixture。確切原片SHA、剪段與限制見 `recording-provenance.json`。
