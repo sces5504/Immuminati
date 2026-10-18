@@ -864,7 +864,17 @@ export default function TacticalApp() {
               disabled={!!result}
               data-testid="pause-toggle"
             >
-              {paused ? "▶︎" : "Ⅱ"}{" "}
+              <svg
+                viewBox="0 0 12 12"
+                width="12"
+                height="12"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d={paused ? "M3 1L11 6L3 11Z" : "M2 1H5V11H2ZM7 1H10V11H7Z"}
+                />
+              </svg>
               <span>
                 {paused ? (s.tick === 0 ? "開始行動" : "繼續行動") : "戰術暫停"}
               </span>

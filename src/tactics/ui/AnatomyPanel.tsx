@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { intracellularStatus } from "../application/infectionStatus";
 import type {
   TacticalState,
@@ -343,6 +344,14 @@ export function AnatomyPanel({
 }) {
   const host = s.hosts.find((h) => h.id === selected),
     cell = s.cells.find((u) => u.id === selected);
+  const detail = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!selected || !(host || cell)) return;
+    const frame = requestAnimationFrame(() =>
+      detail.current?.scrollIntoView({ block: "start" }),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [selected]);
   return (
     <div className="t-anatomy-panel">
       <p className="t-anatomy-intro">
@@ -401,7 +410,7 @@ export function AnatomyPanel({
             ))}
           </div>
         </section>
-        <section aria-live="polite">
+        <section aria-live="polite" className="t-anatomy-selected" ref={detail}>
           {host || cell ? (
             <>
               <h3>

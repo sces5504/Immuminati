@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 const dir = new URL("../docs/evidence/core-lifecycle/", import.meta.url)
   .pathname;
 await mkdir(dir + "raw-focus", { recursive: true });
+const inspectionOnly = process.env.INSPECTION_ONLY === "1";
 const browser = await chromium.launch({
   args: [
     "--no-sandbox",
@@ -124,8 +125,20 @@ try {
       await click(page.getByTestId("inspect-selected"));
       await page.clock.runFor(300);
       assert.ok(await page.getByTestId("intracellular-status").count());
+      const cutaway = await page
+        .getByTestId("intracellular-status")
+        .boundingBox();
+      assert.ok(
+        cutaway.y >= 0 && cutaway.y + cutaway.height <= 844,
+        "Local inspection opens on the selected intracellular source",
+      );
       await page.screenshot({ path: dir + "mobile-tb-growing-cutaway.png" });
+      await writeFile(
+        dir + "mobile-tb-growth-save.json",
+        JSON.stringify(await read(), null, 2),
+      );
       await click(page.getByRole("button", { name: "關閉視窗", exact: true }));
+      if (inspectionOnly) break;
     }
     const event = s.events.find(
       (e) =>
@@ -142,14 +155,16 @@ try {
     await click(page.getByTestId("pause-toggle"));
   }
   assert.ok(grown);
-  assert.ok(rupture);
+  if (!inspectionOnly) assert.ok(rupture);
   assert.ok(peak > 6);
   assert.deepEqual(errors, []);
   assert.deepEqual(bad, []);
   await writeFile(
-    dir + "tb-failure-branch.json",
+    dir + (inspectionOnly ? "tb-inspection.json" : "tb-failure-branch.json"),
     JSON.stringify(
       {
+        inspectionOnly,
+        pauseContrast,
         grown,
         peak,
         rupture,
@@ -166,7 +181,12 @@ try {
   );
   const video = page.video();
   await context.close();
-  await video.saveAs(dir + "mobile-tb-failure-raw.webm");
+  await video.saveAs(
+    dir +
+      (inspectionOnly
+        ? "mobile-tb-inspection-raw.webm"
+        : "mobile-tb-failure-raw.webm"),
+  );
 } finally {
   await browser.close();
 }

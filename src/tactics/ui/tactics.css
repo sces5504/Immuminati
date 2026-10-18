@@ -3416,3 +3416,10 @@
   background: #d3edf0;
   color: #16344a !important;
 }
+
+.t-pause > svg {
+  flex-shrink: 0;
+}
+.t-anatomy-selected {
+  scroll-margin-top: 85px;
+}
