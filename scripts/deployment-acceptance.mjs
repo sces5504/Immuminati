@@ -177,6 +177,16 @@ try {
     await touch("touchStart", points(80));
     await touch("touchMove", [...points(110), { x: cx, y: cy + 60, id: 3 }]);
     await touch("touchCancel", []);
+    // Gesture click suppression must not swallow a subsequent keyboard activation.
+    const keyboardCell = page.locator(".t-cell-label").nth(1);
+    const keyboardId = await keyboardCell.getAttribute("data-world-label");
+    await keyboardCell.focus();
+    await page.keyboard.press("Enter");
+    await expect(page.locator(".tactical-root")).toHaveAttribute(
+      "data-selected",
+      keyboardId,
+    );
+    await page.locator(".t-roster>button[data-cell-id]").first().click();
     await touch("touchStart", points(80));
     await touch("touchMove", points(120));
     await touch("touchEnd", []);
@@ -224,6 +234,7 @@ try {
         "one-finger release never issues command",
         "cancel/third-finger recover",
         "pinch beginning on world-label capture remains responsive",
+        "keyboard selection remains usable after cancellation",
         "pinch leaves authority/selection/page scale unchanged",
         "single-finger same-direction drag preserved",
       ],

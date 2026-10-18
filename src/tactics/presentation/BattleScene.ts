@@ -1336,7 +1336,8 @@ export class BattleScene {
     this.updateCamera();
   }
   private guardClick = (e: MouseEvent) => {
-    if (!this.swallowClick) return;
+    // Keyboard/programmatic activation is deliberate, not a synthesized gesture click.
+    if (!this.swallowClick || e.detail === 0) return;
     this.swallowClick = false;
     e.preventDefault();
     e.stopImmediatePropagation();
