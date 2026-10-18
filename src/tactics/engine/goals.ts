@@ -19,9 +19,6 @@ export function victoryCondition(s: TacticalState, c: TacticalContent) {
 }
 export function limitedCondition(s: TacticalState, c: TacticalContent) {
   return (
-    c.mechanics === "retroviral" &&
-    ((s.campaign?.cd4 ?? 100) <= 15 ||
-      s.tick >= c.limit ||
-      Object.values(s.health).some((n) => n <= 0))
+    c.mechanics === "retroviral" && Object.values(s.health).every((n) => n <= 0)
   );
 }

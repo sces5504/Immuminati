@@ -1,0 +1,178 @@
+[
+  {
+    "asset": "dendritic",
+    "faces": 3200,
+    "dimensions": [
+      4.0,
+      3.7,
+      2.35
+    ],
+    "morph": true,
+    "textureSize": 512
+  },
+  {
+    "asset": "t-lymphocyte",
+    "faces": 2400,
+    "dimensions": [
+      2.6,
+      2.5,
+      2.4
+    ],
+    "morph": true,
+    "textureSize": 512
+  },
+  {
+    "asset": "bcell",
+    "faces": 2600,
+    "dimensions": [
+      2.8,
+      2.7,
+      2.35
+    ],
+    "morph": true,
+    "textureSize": 512
+  },
+  {
+    "asset": "plasma",
+    "faces": 2800,
+    "dimensions": [
+      3.1,
+      2.5,
+      2.2
+    ],
+    "morph": true,
+    "textureSize": 512
+  },
+  {
+    "asset": "nk",
+    "faces": 2500,
+    "dimensions": [
+      2.9,
+      2.75,
+      2.35
+    ],
+    "morph": true,
+    "textureSize": 512
+  },
+  {
+    "asset": "pdc",
+    "faces": 2600,
+    "dimensions": [
+      3.0,
+      2.8,
+      2.2
+    ],
+    "morph": true,
+    "textureSize": 512
+  },
+  {
+    "asset": "diplococcus",
+    "faces": 480,
+    "dimensions": [
+      1.6,
+      1.0,
+      1.0
+    ],
+    "morph": false,
+    "textureSize": 256
+  },
+  {
+    "asset": "bacillus",
+    "faces": 480,
+    "dimensions": [
+      0.95,
+      0.95,
+      3.0
+    ],
+    "morph": false,
+    "textureSize": 256
+  },
+  {
+    "asset": "enveloped-virus",
+    "faces": 600,
+    "dimensions": [
+      1.8,
+      1.8,
+      1.8
+    ],
+    "morph": false,
+    "textureSize": 256
+  },
+  {
+    "asset": "yeast",
+    "faces": 600,
+    "dimensions": [
+      1.5,
+      1.2,
+      2.2
+    ],
+    "morph": false,
+    "textureSize": 256
+  },
+  {
+    "asset": "epithelial",
+    "faces": 600,
+    "dimensions": [
+      3.2,
+      2.4,
+      0.5
+    ],
+    "morph": false,
+    "textureSize": 512
+  },
+  {
+    "asset": "enterocyte",
+    "faces": 1800,
+    "dimensions": [
+      1.5,
+      1.3,
+      1.8
+    ],
+    "morph": false,
+    "textureSize": 512
+  },
+  {
+    "asset": "goblet",
+    "faces": 1800,
+    "dimensions": [
+      1.3,
+      1.3,
+      1.9
+    ],
+    "morph": false,
+    "textureSize": 512
+  },
+  {
+    "asset": "intestinal-villus",
+    "faces": 1800,
+    "dimensions": [
+      2.3,
+      2.0,
+      4.4
+    ],
+    "morph": false,
+    "textureSize": 512
+  },
+  {
+    "asset": "oral-mucosa",
+    "faces": 900,
+    "dimensions": [
+      5.0,
+      4.0,
+      0.65
+    ],
+    "morph": false,
+    "textureSize": 512
+  },
+  {
+    "asset": "lymph-reticulum",
+    "faces": 1600,
+    "dimensions": [
+      5.0,
+      4.0,
+      0.8
+    ],
+    "morph": false,
+    "textureSize": 512
+  }
+]

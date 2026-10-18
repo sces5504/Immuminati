@@ -1,0 +1,14 @@
+{
+  "approvedNewTaskCap": 16,
+  "perTaskCredits": 20,
+  "newCreditsConsumed": 320,
+  "previousSampleCredits": 60,
+  "remainingBalance": 620,
+  "frozenBalance": 0,
+  "paidRetries": 0,
+  "rejectedUnacceptedRequests": 6,
+  "rejectionReason": "HTTP 429 concurrent generation limit; no task IDs returned, 10 accepted tasks reconciled as success and balance 740/frozen 0 before submitting the remaining six unique assets",
+  "pricingSource": "https://developers.tripo3d.ai/en/pricing",
+  "model": "v3.1-20260211",
+  "extras": []
+}

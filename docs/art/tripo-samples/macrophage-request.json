@@ -1,0 +1,14 @@
+{
+  "asset": "macrophage",
+  "request": {
+    "prompt": "One isolated macrophage plasma membrane game asset, elegant scientific microscopic 3D, soft lavender pearlescent cytoplasm, broad organic asymmetrical rounded body with six short broad rounded pseudopods smoothly continuous with the membrane, subtle tiny pores and soft granulated surface, low squat profile with flattened underside, readable organic silhouette from elevated isometric view, restrained pastel lilac and mauve, satin wet biological material, softly rounded smooth geometry, no exaggerated spikes. Exterior membrane ONLY, no nucleus and no internal organelles, interior will be rendered separately by the game. Entire single cell centered, no stand, no surrounding objects, clean topology, optimized for a small web strategy game, physically plausible soft surface, not cartoon character, no eyes or face, no baked cast shadow, neutral soft lighting. Roughly width 3 height 2 depth 3. A beautiful tactile biology educational game miniature.",
+    "negative_prompt": "text, letters, labels, base, pedestal, platform, sphere stand, eyes, face, teeth, monster, gore, tentacles, sharp spikes, dramatic lights, scenery, many cells, black cavities, internal nucleus",
+    "model": "v3.1-20260211",
+    "face_limit": 4000,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 550401,
+    "image_seed": 550401,
+    "texture_seed": 550401
+  }
+}

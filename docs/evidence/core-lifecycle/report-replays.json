@@ -1,0 +1,157 @@
+[
+  {
+    "device": "desktop",
+    "id": "m1",
+    "bounds": {
+      "top": 123.0546875,
+      "bottom": 644.9453125,
+      "viewport": 768,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "desktop",
+    "id": "m2",
+    "bounds": {
+      "top": 123.0546875,
+      "bottom": 644.9453125,
+      "viewport": 768,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "desktop",
+    "id": "m3",
+    "bounds": {
+      "top": 123.0546875,
+      "bottom": 644.9453125,
+      "viewport": 768,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "desktop",
+    "id": "m4",
+    "bounds": {
+      "top": 123.0546875,
+      "bottom": 644.9453125,
+      "viewport": 768,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "desktop",
+    "id": "m5",
+    "bounds": {
+      "top": 123.0546875,
+      "bottom": 644.9453125,
+      "viewport": 768,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "desktop",
+    "id": "m6",
+    "bounds": {
+      "top": 83.2734375,
+      "bottom": 684.7265625,
+      "viewport": 768,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m1",
+    "bounds": {
+      "top": 158,
+      "bottom": 610,
+      "viewport": 800,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m2",
+    "bounds": {
+      "top": 158,
+      "bottom": 610,
+      "viewport": 800,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m3",
+    "bounds": {
+      "top": 158,
+      "bottom": 610,
+      "viewport": 800,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m4",
+    "bounds": {
+      "top": 158,
+      "bottom": 610,
+      "viewport": 800,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m5",
+    "bounds": {
+      "top": 158,
+      "bottom": 610,
+      "viewport": 800,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m6",
+    "bounds": {
+      "top": 111.5,
+      "bottom": 656.5,
+      "viewport": 800,
+      "overflow": false,
+      "opacity": "1"
+    },
+    "method": "Native UI import of recorded successful playthrough; no authority editing; report animation allowed to finish."
+  },
+  {
+    "device": "mobile",
+    "id": "m6-legacy",
+    "source": "Actual archived rules3.0 save, 81.4-second low-CD4 ending",
+    "rules": "3.2",
+    "tick": 407,
+    "healthPreserved": true,
+    "originalBackedUp": true,
+    "safelyPaused": true,
+    "canResume": true
+  }
+]

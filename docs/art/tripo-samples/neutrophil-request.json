@@ -1,0 +1,14 @@
+{
+  "asset": "neutrophil",
+  "request": {
+    "prompt": "One isolated neutrophil plasma membrane game asset, elegant scientific microscopic 3D, soft blush ivory pink cytoplasm, compact gently lobulated rounded cell body with three subtle broad surface bulges and a softly irregular membrane edge, fine tiny cytoplasmic granule surface relief, low squat profile with flattened underside, readable restrained silhouette from elevated isometric view. Satin pearlescent wet biological material, pastel cream blush with faint mauve speckling, smooth rounded geometry. Exterior membrane ONLY, no nucleus and no internal organelles, a segmented violet nucleus will be rendered separately inside by the game. Entire single cell centered, no stand, no surrounding objects, clean topology optimized for a small web strategy game, no dramatic protrusions. No eyes or face, no baked cast shadow, neutral soft lighting. Roughly width 3 height 2 depth 3. A beautiful tactile biology educational game miniature matching soft lavender macrophage art direction.",
+    "negative_prompt": "text, labels, pedestal, base, platform, eyes, face, teeth, monster, gore, tentacles, spikes, flowers, scenery, multiple cells, nucleus, dark baked shadows, angular lowpoly",
+    "model": "v3.1-20260211",
+    "face_limit": 4000,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 550402,
+    "image_seed": 550402,
+    "texture_seed": 550402
+  }
+}

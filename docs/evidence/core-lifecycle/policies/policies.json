@@ -1,0 +1,152 @@
+{
+  "date": "2026-10-18T15:00:01.476Z",
+  "note": "Pure-engine legal commands, not browser playthroughs. The legacy-observe factory uses historical preselected teams; new games never use that factory directly.",
+  "results": [
+    {
+      "case": "m6",
+      "mode": "legacy-observe",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：全部防區組織保全耗盡",
+        "preservation": 0,
+        "stars": 0,
+        "seconds": 530
+      },
+      "burden": 0,
+      "commands": []
+    },
+    {
+      "case": "m6",
+      "mode": "kit-observe",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：全部防區組織保全耗盡",
+        "preservation": 0,
+        "stars": 0,
+        "seconds": 430
+      },
+      "burden": 90,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "support"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        }
+      ]
+    },
+    {
+      "case": "m6",
+      "mode": "selected-defense",
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：全部防區組織保全耗盡",
+        "preservation": 0,
+        "stars": 0,
+        "seconds": 436
+      },
+      "burden": 63,
+      "commands": [
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy-kit",
+            "kit": "support"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "deploy",
+            "kind": "cytotoxicT",
+            "region": "b"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "begin"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "recruit",
+            "kind": "pdc",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 0,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 100,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 150,
+          "cmd": {
+            "type": "recruit",
+            "kind": "pdc",
+            "region": "a"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 150,
+          "cmd": {
+            "type": "mark",
+            "target": "p41"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 200,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 250,
+          "cmd": {
+            "type": "mark",
+            "target": "p41"
+          },
+          "accepted": true
+        },
+        {
+          "tick": 300,
+          "cmd": {
+            "type": "mark",
+            "target": "p1"
+          },
+          "accepted": true
+        }
+      ]
+    }
+  ]
+}

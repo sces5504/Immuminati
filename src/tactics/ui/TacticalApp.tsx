@@ -1,3 +1,4 @@
+import { infectionSummary } from "../application/infectionStatus";
 import { DeploymentPanel } from "./DeploymentPanel";
 import { AntibodyPanel } from "./AntibodyPanel";
 import { coatings } from "../engine/opsonization";
@@ -44,6 +45,7 @@ import { recruitableCells } from "../content/cells";
 import { ImmunePanel, cellActivity } from "./ImmunePanel";
 import { practiceContent, createPractice } from "../content/practice";
 import { Tutorial } from "./Tutorial";
+import { ART_PREVIEW } from "../presentation/TripoSamples";
 type Modal =
   | "anatomy"
   | "immune"
@@ -81,6 +83,23 @@ export default function TacticalApp() {
     return ctrl;
   });
   const content = controller.content;
+  const [artSamples, setArtSamples] = useState(ART_PREVIEW);
+  const artControls = ART_PREVIEW ? (
+    <section className="t-art-preview" aria-label="美術樣本比較">
+      <strong>Tripo 六關美術 · 待審閱</strong>
+      <p>
+        六關免疫細胞、病原與宿主，以及肺泡、腸黏膜、口腔與淋巴組織。此預覽獨立存檔，可隨時比較原模型。
+      </p>
+      <button
+        data-testid="art-toggle"
+        aria-pressed={artSamples}
+        onClick={() => setArtSamples(!artSamples)}
+      >
+        {artSamples ? "比較原模型" : "查看 Tripo 樣本"}
+      </button>
+      <small>關卡內可從「設定與存檔」切換比較。</small>
+    </section>
+  ) : null;
   // Landing specimen is visual only; never becomes the player's deployed team.
   const specimen = useMemo(() => createTactical(content, 1), [content]);
   const [snapshot, setSnapshot] = useState(() => controller.snapshot());
@@ -97,7 +116,7 @@ export default function TacticalApp() {
   const [notice, setNotice] = useState(
     boot.error ??
       (boot.migrated
-        ? "已升級至規則 3.1：保留原局與自動尋敵選擇，分開記錄補體與抗體；首次儲存另留原始備份。"
+        ? "已升級至規則 3.2 並暫停：修正胞內增殖與產毒；HIV 可繼續防守。保留隊伍、指令與原檔備份，不追算過去增殖。"
         : ""),
   );
   const [storage, setStorage] = useState(boot.save ? "已載入存檔" : "本機存檔");
@@ -122,6 +141,7 @@ export default function TacticalApp() {
     reduced: snapshot.settings.reduced,
     idle: snapshot.settings.idle,
     speed: snapshot.settings.speed,
+    artSamples,
   });
   const pickRef = useRef<(pick: Pick) => void>(() => {});
   input.current = {
@@ -132,6 +152,7 @@ export default function TacticalApp() {
     reduced: snapshot.settings.reduced,
     idle: snapshot.settings.idle,
     speed: snapshot.settings.speed,
+    artSamples,
   };
   const update = (persist = false) => {
     setSnapshot(controller.snapshot());
@@ -475,8 +496,8 @@ export default function TacticalApp() {
       setRegion((nextContent ?? content).fields[0].id);
       setImported(true);
       setNotice(
-        JSON.parse(text).rules !== "3.1"
-          ? "已匯入並升級至規則 3.1；保留原局與尋敵選擇，分開補體／抗體期限，不追算過去免疫反應。"
+        JSON.parse(text).rules !== "3.2"
+          ? "已匯入並升級至規則 3.2，安全暫停；原局與撤銷已遷移，不追算過去增殖，原檔已備份。"
           : "已匯入新版存檔，繼續遊玩時先維持戰術暫停。",
       );
     } catch (e) {
@@ -495,6 +516,11 @@ export default function TacticalApp() {
       .reverse()
       .find((e) =>
         [
+          "grow",
+          "release",
+          "damage",
+          "contain",
+          "cytotoxic",
           "engulf",
           "mark",
           "arrive",
@@ -595,7 +621,7 @@ export default function TacticalApp() {
                     {s.internal.some(
                       (p) => p.host === u.id && p.stage === "persistent",
                     )
-                      ? "胞內存活"
+                      ? `囊泡活菌 ${s.internal.filter((p) => p.host === u.id && p.stage === "persistent").reduce((n, p) => n + p.load, 0)}`
                       : "胞內處理"}
                   </small>
                 )}
@@ -745,6 +771,7 @@ export default function TacticalApp() {
                 </button>
               ) : null}
             </div>
+            {artControls}
             <div className="t-landing-facts">
               <span>即時行動</span>
               <span>隨時暫停部署</span>
@@ -837,7 +864,17 @@ export default function TacticalApp() {
               disabled={!!result}
               data-testid="pause-toggle"
             >
-              {paused ? "▶" : "Ⅱ"}{" "}
+              <svg
+                viewBox="0 0 12 12"
+                width="12"
+                height="12"
+                aria-hidden="true"
+              >
+                <path
+                  fill="currentColor"
+                  d={paused ? "M3 1L11 6L3 11Z" : "M2 1H5V11H2ZM7 1H10V11H7Z"}
+                />
+              </svg>
               <span>
                 {paused ? (s.tick === 0 ? "開始行動" : "繼續行動") : "戰術暫停"}
               </span>
@@ -895,6 +932,12 @@ export default function TacticalApp() {
                         : `胞內負荷 ${s.internal.reduce((n, p) => n + p.load, 0) + s.hosts.reduce((n, h) => n + h.load, 0)}`}
                 </p>
               )}
+              <p
+                className="t-compartment-summary"
+                data-testid="infection-summary"
+              >
+                {infectionSummary(s, content)}
+              </p>
               {content.practice && (
                 <>
                   <button className="t-practice-back" onClick={endPractice}>
@@ -955,7 +998,7 @@ export default function TacticalApp() {
                   : content.mechanics === "containment"
                     ? "建立圍堵並維持穩定"
                     : content.mechanics === "retroviral"
-                      ? "維持功能性 CD4 支援"
+                      ? `持續防守 · ${Object.values(s.health).filter((n) => n > 0).length}/${content.fields.length} 防區仍在`
                       : "最後一波 · 處理所有活感染來源"}
               </p>
             )}
@@ -1498,23 +1541,35 @@ export default function TacticalApp() {
               </button>
               <b>協作提示</b>
               <p>
-                {s.tick < 20
-                  ? "先調理入口與深部菌群，再調入嗜中性球支援肺泡壁前緣。調理不直接殺菌，需要吞噬者接近。"
-                  : burden === 0
-                    ? "防線清場了。可以等待資源與增援，或提前迎擊換取額外資源。"
-                    : s.immunity.node.stage === "primed" &&
-                        !s.cells.some((u) => u.kind === "helperT")
-                      ? "抗原呈遞已就緒。可募集 CD4 T 接受活化，再透過 B／漿細胞建立抗體支援；先天防線仍須守住組織。"
-                      : s.cells.some(
-                            (u) =>
-                              u.kind === "helperT" &&
-                              u.activation === "effector",
-                          ) &&
-                          !s.cells.some(
-                            (u) => u.kind === "bcell" || u.kind === "plasma",
-                          )
-                        ? "CD4 T 已活化。募集 B 細胞，讓它在淋巴結獲得蛋白抗原與 T 細胞幫助。"
-                        : "點細胞再點菌群可改派吞噬者；免疫機制面板能查看局部訊號與抗原流程。"}
+                {content.mechanics === "containment"
+                  ? "結核菌會在巨噬含菌囊泡內增殖。選取巨噬可看負荷與時鐘；以 DC → 相符 Th1 的局部協作建立圍堵，控制不等於滅菌。"
+                  : content.mechanics === "intravesicular"
+                    ? "吞入不是殺死：沙門氏菌可在含菌囊泡增殖、失控再播散。DC 呈遞 → Th1／IFN-γ 支援巨噬；胞外抗體不能進入囊泡。"
+                    : content.mechanics === "retroviral"
+                      ? "持續防守沒有倒數期限。胞外中和、產毒宿主與潛伏來源分開處理；維持 CD4 支援能降低組織耗損。"
+                      : content.mechanics === "viral"
+                        ? "病毒必須依靠活宿主產毒。pDC／IFN-I 降低傳播；DC 交叉呈遞 → 相符 CD8 清除產毒宿主。抗體只能作用於胞外。"
+                        : content.mechanics === "fungal"
+                          ? "長菌絲需嗜中性球接觸顆粒作用；IL-17／IL-22 經上皮支持防禦。DC 取得局部抗原，不會整條吞掉菌絲。"
+                          : s.tick < 20
+                            ? "先調理入口與深部菌群，再調入嗜中性球支援肺泡壁前緣。調理不直接殺菌，需要吞噬者接近。"
+                            : burden === 0
+                              ? "防線清場了。可以等待資源與增援，或提前迎擊換取額外資源。"
+                              : s.immunity.node.stage === "primed" &&
+                                  !s.cells.some((u) => u.kind === "helperT")
+                                ? "抗原呈遞已就緒。可募集 CD4 T 接受活化，再透過 B／漿細胞建立抗體支援；先天防線仍須守住組織。"
+                                : s.cells.some(
+                                      (u) =>
+                                        u.kind === "helperT" &&
+                                        u.activation === "effector",
+                                    ) &&
+                                    !s.cells.some(
+                                      (u) =>
+                                        u.kind === "bcell" ||
+                                        u.kind === "plasma",
+                                    )
+                                  ? "CD4 T 已活化。募集 B 細胞，讓它在淋巴結獲得蛋白抗原與 T 細胞幫助。"
+                                  : "點細胞再點菌群可改派吞噬者；免疫機制面板能查看局部訊號與抗原流程。"}
               </p>
             </div>
           )}
@@ -1534,7 +1589,7 @@ export default function TacticalApp() {
                 {result.type === "victory"
                   ? "防線，守住了。"
                   : result.type === "limited"
-                    ? "支援時間，已留下紀錄。"
+                    ? "防守至最後一個防區。"
                     : "防線需要重新部署。"}
               </h1>
               <p>{result.reason}。</p>
@@ -1548,9 +1603,9 @@ export default function TacticalApp() {
               </div>
               {result.type === "limited" && (
                 <p data-testid="hiv-explanation">
-                  這是未使用治療的有限教學情境，並非一般勝敗或星等關卡。免疫反應可限制產毒與延長支援，但無法清除不表達抗原的
-                  HIV
-                  潛伏庫；功能障礙持續累積。現實中的抗反轉錄病毒治療（ART）可有效控制
+                  全部防區組織已耗盡。本關持續防守，沒有倒數期限，也不給一般勝利星等。免疫反應可限制產毒，但難以辨識不表達病毒肽的
+                  HIV 潛伏庫。CD4 支援不足造成的組織耗損是遊戲抽象，並非 HIV
+                  直接殺死所有組織或臨床病程預測。現實中的抗反轉錄病毒治療（ART）可有效控制
                   HIV。
                 </p>
               )}
@@ -1701,6 +1756,7 @@ export default function TacticalApp() {
       {modal === "settings" && (
         <Dialog title="設定與存檔" onClose={() => setModal(null)}>
           <div className="t-dialog-content">
+            {artControls}
             <label className="toggle">
               行動速度
               <select
@@ -1750,7 +1806,7 @@ export default function TacticalApp() {
             <p>
               規則
               3.0：六關規則分開，保留舊局時間、指令與自動尋敵選擇；分開記錄補體與抗體。新局預設開啟自動尋敵，地圖標籤預設精簡。第一次覆寫舊版本前另存
-              pre-3.0 備份；更早備份仍保留。
+              pre-3.2 備份；更早備份仍保留。
             </p>
             <p>
               {storage}

@@ -1,0 +1,14 @@
+{
+  "asset": "bcell",
+  "request": {
+    "prompt": "One B lymphocyte membrane, oval rounded cell with many short soft membrane folds and delicate short receptor stalks, pearl lilac, no large protrusions, no baked nucleus or text. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+    "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+    "face_limit": 2600,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 202610182,
+    "image_seed": 202610182,
+    "texture_seed": 202610182,
+    "model": "v3.1-20260211"
+  }
+}

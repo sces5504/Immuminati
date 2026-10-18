@@ -1,7 +1,10 @@
+import { intracellularStatus } from "../application/infectionStatus";
 import type { Cell, TacticalContent, TacticalState } from "../domain/model";
 import { tissueProfiles } from "../content/tissues";
 export function cellActivity(cell: Cell, s: TacticalState, c: TacticalContent) {
   const role = c.cells[cell.kind].role;
+  const intracellular = intracellularStatus(cell, s, c);
+  if (intracellular) return intracellular.text;
   if (cell.order.type === "move") return "手動調度優先，抵達後恢復自主反應。";
   if (role === "presenter" && cell.antigen)
     return "已捕捉蛋白抗原；成熟遷移並在引流淋巴結呈遞。";

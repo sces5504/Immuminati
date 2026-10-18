@@ -66,6 +66,8 @@ export interface HostCell {
     compartment: Exclude<IntracellularCompartment, "phagosome">;
     phase?: "eclipse" | "productive" | "latent";
     since?: number;
+    /** Completed production cycles; independent of animation and global phase. */
+    cycles?: number;
   };
   id: string;
   region: string;
@@ -73,7 +75,9 @@ export interface HostCell {
   antigen: string;
   mhc1: boolean;
   stressed: boolean;
+  /** Viable infected-source groups, not the number of intracellular virions. */
   load: number;
+  /** Death/nonfunctional time; legacy save field name, not all causes are apoptosis. */
   apoptoticAt: number;
 }
 export type Order =
@@ -89,6 +93,8 @@ export interface Cell {
   path: Vec[];
   readyAt: number;
   recognized?: boolean;
+  /** One intracellular replication clock per host, never per swallowed batch. */
+  replicateAt?: number;
   antigen?: string;
   activation?: "resting" | "activating" | "effector";
   activationAt?: number;
@@ -241,6 +247,11 @@ export interface TacticalContent {
     | "viral"
     | "fungal"
     | "retroviral";
+  /** Teaching-time parameters, not clinical seconds or individual bacterial counts. */
+  lifecycle?: {
+    intracellular?: { every: number; fraction: number; ruptureAt: number };
+    virus?: { eclipse: number; every: number; lifespan: number };
+  };
   briefing?: string;
   objective?: string;
   allowed?: CellType[];
@@ -286,8 +297,8 @@ export interface TacticalSettings {
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "3.1";
-  content: "campaign.2";
+  rules: "3.2";
+  content: "campaign.3";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];

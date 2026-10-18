@@ -1,0 +1,134 @@
+{
+  "inspectionOnly": true,
+  "pauseContrast": {
+    "background": "rgb(211, 237, 240)",
+    "color": "rgb(22, 52, 74)",
+    "text": "開始行動",
+    "hover": true
+  },
+  "grown": 76,
+  "peak": 15,
+  "elapsed": 0,
+  "timeline": [
+    {
+      "tick": 2,
+      "load": 7,
+      "health": {
+        "a": 100,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 22,
+      "load": 8,
+      "health": {
+        "a": 99.19999999999999,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 42,
+      "load": 9,
+      "health": {
+        "a": 98.39999999999998,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 62,
+      "load": 11,
+      "health": {
+        "a": 97.59999999999997,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 71,
+      "load": 11,
+      "health": {
+        "a": 97.19999999999996,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 72,
+      "load": 11,
+      "health": {
+        "a": 97.19999999999996,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 73,
+      "load": 11,
+      "health": {
+        "a": 97.19999999999996,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 74,
+      "load": 11,
+      "health": {
+        "a": 97.19999999999996,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    },
+    {
+      "tick": 76,
+      "load": 15,
+      "health": {
+        "a": 97.19999999999996,
+        "b": 100,
+        "c": 100
+      },
+      "hosts": [
+        "u1",
+        "u36"
+      ]
+    }
+  ],
+  "errors": [],
+  "bad": [],
+  "method": "Visible fresh TB deployment, no Th1, normal motion near divisions. No state injection."
+}

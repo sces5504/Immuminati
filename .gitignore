@@ -1,4 +1,9 @@
 node_modules/
+.art-source/
+.art-work/
+docs/evidence/tripo-samples/*-raw.webm
+.env*
+!.env.example
 dist/
 playwright-report/
 test-results/
@@ -7,3 +12,25 @@ docs/evidence/raw*/
 docs/evidence/browser-failure.txt
 docs/evidence/**/raw*/
 docs/evidence/**/failure.txt
+
+docs/evidence/tripo-expansion/*-raw.webm
+
+__pycache__/
+
+docs/evidence/tripo-expansion/**/*-raw.webm
+
+docs/evidence/core-lifecycle/*-raw.webm
+
+docs/evidence/core-lifecycle/*-start.png
+docs/evidence/core-lifecycle/*-action.png
+docs/evidence/core-lifecycle/*-anatomy.png
+docs/evidence/core-lifecycle/*-antibody-panel.png
+docs/evidence/core-lifecycle/*-result.png
+docs/evidence/core-lifecycle/*-intracellular-growth.png
+docs/evidence/core-lifecycle/mobile-tb-growing-selected.png
+
+# Release diagnostic originals; curated screenshots and JSON remain tracked.
+docs/evidence/main-release/raw-focus/
+docs/evidence/main-release/mobile-tb-untreated-start.png
+docs/evidence/main-release/*-raw.webm
+docs/evidence/main-release/mobile-tb-growing-selected.png

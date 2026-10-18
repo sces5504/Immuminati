@@ -1,0 +1,16 @@
+{
+  "project_id": "appgprj_6ad46cbb5b84819195ddcb9d47ccc99b",
+  "url": "https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site",
+  "status": "succeeded-awaiting-final-art-review",
+  "github_branch": "art/tripo-samples",
+  "pull_request": "https://github.com/sces5504/Immuminati/pull/3",
+  "game_commit": "bdc98ee7741572ac56831e74398d5aeda501b687",
+  "hosted_source_commit": "509ed0647c7eabde6c4e3bc2ac6ff75bed5c463e",
+  "deployment_id": "appgdep_6ad4ae5fba188191a6dfd100de6872e8",
+  "version_id": "appgprj_6ad46cbb5b84819195ddcb9d47ccc99b~appgver_85ea9d12e4dc8191bbc1ab937b966aa3",
+  "access": "owner-private, existing audience preserved",
+  "production_main_unchanged": "36a1f39af9dd29410c93fcce1016ecace3fc6852",
+  "new_api_credits": 320,
+  "credits_remaining": 620,
+  "github_deployment_card": "Integration returned 403 in initial batch; preview linked in PR instead; not retried"
+}

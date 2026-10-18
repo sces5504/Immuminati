@@ -23,6 +23,14 @@ const cell = (
   readyAt: 0,
 });
 describe("bounded presentation-only immune cell spacing", () => {
+  it("allows replacement models to reserve their own visual envelope", () => {
+    const layout = layoutCells([cell("one"), cell("two")], m1, undefined, {
+      macrophage: 1.9,
+    });
+    expect(
+      distance(layout.get("one")!, layout.get("two")!),
+    ).toBeGreaterThanOrEqual(3.8);
+  });
   it("leaves isolated cells at the commanded position", () => {
     const units = [cell("one"), cell("two", m1.fields[1].center)];
     const layout = layoutCells(units, m1);

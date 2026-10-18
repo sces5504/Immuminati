@@ -1,0 +1,338 @@
+[
+  {
+    "asset": "dendritic",
+    "request": {
+      "prompt": "One dendritic immune cell exterior membrane, eight delicate tapering branched dendrites, soft blue lavender translucent looking cytoplasm. Flattened organic star silhouette, no sharp spikes, no nucleus baked on exterior. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 3200,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610180,
+      "image_seed": 202610180,
+      "texture_seed": 202610180,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "c850788f-ebe2-49ca-bc46-9855aedb06df",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:00.896754Z",
+    "completed_at": "2026-10-18T10:46:22.754383Z"
+  },
+  {
+    "asset": "t-lymphocyte",
+    "request": {
+      "prompt": "One T lymphocyte exterior membrane, rounded asymmetrical body with gentle ruffled folds and tiny microvilli, soft mint pearl, visible smooth translucent looking cytoplasm, no baked nucleus or labels. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 2400,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610181,
+      "image_seed": 202610181,
+      "texture_seed": 202610181,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "89ce3d94-7578-4c6a-aad7-102179c13602",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:04.778066Z",
+    "completed_at": "2026-10-18T10:46:08.900920Z"
+  },
+  {
+    "asset": "bcell",
+    "request": {
+      "prompt": "One B lymphocyte membrane, oval rounded cell with many short soft membrane folds and delicate short receptor stalks, pearl lilac, no large protrusions, no baked nucleus or text. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 2600,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610182,
+      "image_seed": 202610182,
+      "texture_seed": 202610182,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "9661df68-41bc-4f7f-81b8-bd3e93b5b160",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:10.212102Z",
+    "completed_at": "2026-10-18T10:46:15.443587Z"
+  },
+  {
+    "asset": "plasma",
+    "request": {
+      "prompt": "One plasma immune cell outer membrane, smooth oval asymmetric secretory body with gentle folds and shallow grooves, pearlescent dusty rose, eccentric broad end. No nucleus baked on shell, no weapons or face. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 2800,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610183,
+      "image_seed": 202610183,
+      "texture_seed": 202610183,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "0f8dfb5f-9890-44e1-bfb7-682a4d406d22",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:15.560426Z",
+    "completed_at": "2026-10-18T10:46:11.036988Z"
+  },
+  {
+    "asset": "nk",
+    "request": {
+      "prompt": "One natural killer lymphocyte exterior membrane, broad rounded body with folded lacy ruffles and short blunt microvilli, pearl violet, no baked nucleus. Distinct thick irregular rim, no sharp spikes. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 2500,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610184,
+      "image_seed": 202610184,
+      "texture_seed": 202610184,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "52cd6606-907c-4ca1-b940-e5c787aaf44f",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:20.643481Z",
+    "completed_at": "2026-10-18T10:46:29.910173Z"
+  },
+  {
+    "asset": "pdc",
+    "request": {
+      "prompt": "One plasmacytoid dendritic immune cell exterior membrane, oval body with only four short rounded branching processes, pearl periwinkle, no long classical dendritic arms, no baked nucleus. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 2600,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610185,
+      "image_seed": 202610185,
+      "texture_seed": 202610185,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "17359b4c-1f89-4a94-9f55-79bd26045137",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:21.976856Z",
+    "completed_at": "2026-10-18T10:46:17.474341Z"
+  },
+  {
+    "asset": "diplococcus",
+    "request": {
+      "prompt": "One pair of pneumococcus bacteria, two connected smooth lancet shaped blue ovoids with gentle central constriction, slightly pointed outer ends, smooth delicate capsule surface, powder blue and indigo. No spikes or flagella. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1000,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610186,
+      "image_seed": 202610186,
+      "texture_seed": 202610186,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "d0c449b4-14eb-4ce5-8905-cfaf95fdb948",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:31.111794Z",
+    "completed_at": "2026-10-18T10:46:28.952823Z"
+  },
+  {
+    "asset": "bacillus",
+    "request": {
+      "prompt": "One Salmonella bacterium, single softly rounded capsule rod with subtle wavy membrane texture and four very short thin curved flagella, muted teal blue, realistic microscopic proportions, no face. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1000,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610187,
+      "image_seed": 202610187,
+      "texture_seed": 202610187,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "91245aea-ff92-4402-9a3e-825c97c508a4",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:36.729219Z",
+    "completed_at": "2026-10-18T10:46:26.674973Z"
+  },
+  {
+    "asset": "enveloped-virus",
+    "request": {
+      "prompt": "One enveloped influenza virus particle, spherical pastel blue violet lipid envelope with evenly spaced short round-tipped club glycoprotein spikes, about 20 spikes. Smooth scientific toy-like microscopic asset, not coronavirus crown, no text. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1200,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610188,
+      "image_seed": 202610188,
+      "texture_seed": 202610188,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "0166442c-8a6f-4f27-ab42-77a0da7432f5",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:38.197185Z",
+    "completed_at": "2026-10-18T10:46:45.477970Z"
+  },
+  {
+    "asset": "yeast",
+    "request": {
+      "prompt": "One Candida albicans budding yeast pair, ivory peach oval parent with one smaller attached daughter bud and a clear bud neck. Smooth soft cell wall, tiny natural dimples, no mushrooms, no plant leaves. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1400,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610189,
+      "image_seed": 202610189,
+      "texture_seed": 202610189,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "7f8991a2-5174-4a0e-8ef0-2f26ba662b76",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:44:39.097570Z",
+    "completed_at": "2026-10-18T10:46:29.686295Z"
+  },
+  {
+    "asset": "epithelial",
+    "request": {
+      "prompt": "One human squamous epithelial cell membrane only, flattened irregular softly rounded polygonal tile, slightly raised smooth rim and translucent looking pink cytoplasm. No solid nucleus baked into surface, no pedestal, no surrounding cells. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1800,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610190,
+      "image_seed": 202610190,
+      "texture_seed": 202610190,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "240a2dc4-c3cc-48fd-8bf7-fe9fc7e7eea6",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:47:35.759059Z",
+    "completed_at": "2026-10-18T10:49:18.575992Z"
+  },
+  {
+    "asset": "enterocyte",
+    "request": {
+      "prompt": "One intestinal enterocyte, single tall gently rounded columnar cell with a dense short velvet brush border only on its apical top surface, rose peach translucent looking membrane. No cutaway, no nucleus painted on exterior, no surrounding cells. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1800,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610191,
+      "image_seed": 202610191,
+      "texture_seed": 202610191,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "083e3147-1b36-4d16-b938-dc5f6561277b",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:47:36.612995Z",
+    "completed_at": "2026-10-18T10:49:31.112566Z"
+  },
+  {
+    "asset": "goblet",
+    "request": {
+      "prompt": "One intestinal goblet cell, narrow tapered basal stem widening to a smooth rounded cup shaped apical end with small pearlescent pale aqua mucus droplets inside the cup. Pink and pale aqua translucent looking membrane, single cell, no surrounding tissue. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1800,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610192,
+      "image_seed": 202610192,
+      "texture_seed": 202610192,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "83e000e0-1e21-4ead-a2d2-2de1152e1af3",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:47:37.489491Z",
+    "completed_at": "2026-10-18T10:49:19.702018Z"
+  },
+  {
+    "asset": "intestinal-villus",
+    "request": {
+      "prompt": "One small intestinal villus tissue module, single tapered finger shaped projection with gently rounded tip, continuous peach epithelial surface with fine short brush texture, shallow cell junction seams, visible subtle pink capillary under surface. No base slab, no surrounding villi. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1800,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610193,
+      "image_seed": 202610193,
+      "texture_seed": 202610193,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "d3a3164f-dc26-4ded-80e4-98ed2e827491",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:47:38.622323Z",
+    "completed_at": "2026-10-18T10:49:11.904408Z"
+  },
+  {
+    "asset": "oral-mucosa",
+    "request": {
+      "prompt": "One reusable oral mucosal tissue patch, low relief tightly packed irregular flattened squamous epithelial tiles with rounded borders and delicate pink cell seams, soft pearlescent blush surface, thin shallow layered edge. No gums teeth tongue, no floating cubes, no tall lumps. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1800,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610194,
+      "image_seed": 202610194,
+      "texture_seed": 202610194,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "a6ad1b8e-05bf-4b81-a9e6-1fe0066bacca",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:47:40.110323Z",
+    "completed_at": "2026-10-18T10:49:53.253499Z"
+  },
+  {
+    "asset": "lymph-reticulum",
+    "request": {
+      "prompt": "One reusable lymph node stromal tissue module, delicate softly curved branching reticular fibers forming an open irregular mesh with small soft junctions, pearl rose lavender translucent looking biological fibers, flat horizontal low relief, no cells or beads, no solid platform. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+      "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+      "face_limit": 1600,
+      "texture": true,
+      "pbr": true,
+      "model_seed": 202610195,
+      "image_seed": 202610195,
+      "texture_seed": 202610195,
+      "model": "v3.1-20260211"
+    },
+    "task_id": "b411ac5f-1e1e-4650-bacf-a347f4107441",
+    "status": "success",
+    "estimated_credits": 20,
+    "progress": 100,
+    "credits_consumed": 20.0,
+    "created_at": "2026-10-18T10:47:41.426472Z",
+    "completed_at": "2026-10-18T10:49:52.276227Z"
+  }
+]

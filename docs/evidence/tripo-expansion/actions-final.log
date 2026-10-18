@@ -1,0 +1,2 @@
+PASS mobile {"sample":{"assets":"6","cells":"3","triangles":252038,"drawCalls":165},"original":{"assets":"6","cells":"0","triangles":198684,"drawCalls":197}}
+PASS asset failure fallback

@@ -151,13 +151,18 @@ export function populateTissue(s: TacticalState, c: TacticalContent) {
 }
 /** Tissue health is the regional aggregate, not extra damage counted per visible cell. */
 export function syncTissueHealth(s: TacticalState) {
-  for (const host of s.hosts)
+  for (const host of s.hosts) {
+    if (s.health[host.region] <= 0 && !host.apoptoticAt) {
+      host.apoptoticAt = Math.max(1, s.tick);
+      host.load = 0;
+    }
     host.health = host.apoptoticAt ? 0 : s.health[host.region];
+  }
 }
 export function hostStatus(host: HostCell) {
   return host.apoptoticAt
-    ? "已凋亡"
+    ? "宿主已死亡"
     : host.load > 0
-      ? `${compartmentNames[host.infection?.compartment ?? "cytosol"]}${host.infection?.phase === "latent" ? " · 潛伏（未呈遞病毒肽）" : host.infection?.phase === "eclipse" ? " · 感染建立中" : "感染"} · 活負荷 ${host.load}`
+      ? `${compartmentNames[host.infection?.compartment ?? "cytosol"]}${host.infection?.phase === "latent" ? " · 潛伏（未呈遞病毒肽）" : host.infection?.phase === "eclipse" ? " · 感染建立中" : "感染"} · 感染來源 ${host.load}`
       : "未感染";
 }

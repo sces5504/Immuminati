@@ -1,0 +1,14 @@
+{
+  "asset": "epithelial",
+  "request": {
+    "prompt": "One human squamous epithelial cell membrane only, flattened irregular softly rounded polygonal tile, slightly raised smooth rim and translucent looking pink cytoplasm. No solid nucleus baked into surface, no pedestal, no surrounding cells. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+    "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+    "face_limit": 1800,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 202610190,
+    "image_seed": 202610190,
+    "texture_seed": 202610190,
+    "model": "v3.1-20260211"
+  }
+}

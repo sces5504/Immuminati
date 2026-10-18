@@ -1,0 +1,31 @@
+[
+  {
+    "device": "mobile",
+    "sample": {
+      "assets": "6",
+      "cells": "3",
+      "triangles": 252038,
+      "drawCalls": 165
+    },
+    "original": {
+      "assets": "6",
+      "cells": "0",
+      "triangles": 198684,
+      "drawCalls": 197
+    },
+    "requests": 6,
+    "actionStart": 122.42,
+    "checks": [
+      "real GLB render with independent cells and terrain-fitted batched tissue",
+      "toggle retains exact paused authority",
+      "selection, move, C3b, engulf, pause, 2x and reduced motion",
+      "no runtime errors"
+    ]
+  },
+  {
+    "device": "mobile",
+    "checks": [
+      "all assets unavailable: originals render and remain selectable without runtime error"
+    ]
+  }
+]

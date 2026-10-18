@@ -1,0 +1,461 @@
+{
+  "source": "TripoAI v3.1; approved samples plus capped sixteen-asset expansion; offline material, geometry, size and morph adapters",
+  "assets": [
+    {
+      "asset": "macrophage",
+      "triangles": 3918,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_d4b52970-9bcb-4edc-8750-547d4123eaa8",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_d4b52970-9bcb-4edc-8750-547d4123eaa8",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.6,
+        3.3,
+        2.2
+      ],
+      "bytes": 504264,
+      "morphTargets": 1
+    },
+    {
+      "asset": "neutrophil",
+      "triangles": 3860,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_3ea5f0d1-06c4-474d-9d6c-4c2b6e7be2ae",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_3ea5f0d1-06c4-474d-9d6c-4c2b6e7be2ae",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.0,
+        2.85,
+        2.25
+      ],
+      "bytes": 497260,
+      "morphTargets": 1
+    },
+    {
+      "asset": "dendritic",
+      "triangles": 3108,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_c850788f-ebe2-49ca-bc46-9855aedb06df",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_c850788f-ebe2-49ca-bc46-9855aedb06df",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        4.0,
+        3.7,
+        2.35
+      ],
+      "bytes": 510032,
+      "morphTargets": 1
+    },
+    {
+      "asset": "t-lymphocyte",
+      "triangles": 2218,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_89ce3d94-7578-4c6a-aad7-102179c13602",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_89ce3d94-7578-4c6a-aad7-102179c13602",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        2.6,
+        2.5,
+        2.4
+      ],
+      "bytes": 398980,
+      "morphTargets": 1
+    },
+    {
+      "asset": "bcell",
+      "triangles": 2458,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_9661df68-41bc-4f7f-81b8-bd3e93b5b160",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_9661df68-41bc-4f7f-81b8-bd3e93b5b160",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        2.8,
+        2.7,
+        2.35
+      ],
+      "bytes": 562604,
+      "morphTargets": 1
+    },
+    {
+      "asset": "plasma",
+      "triangles": 2612,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_0f8dfb5f-9890-44e1-bfb7-682a4d406d22",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_0f8dfb5f-9890-44e1-bfb7-682a4d406d22",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.1,
+        2.5,
+        2.2
+      ],
+      "bytes": 374824,
+      "morphTargets": 1
+    },
+    {
+      "asset": "nk",
+      "triangles": 2366,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_52cd6606-907c-4ca1-b940-e5c787aaf44f",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_52cd6606-907c-4ca1-b940-e5c787aaf44f",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        2.9,
+        2.75,
+        2.35
+      ],
+      "bytes": 580048,
+      "morphTargets": 1
+    },
+    {
+      "asset": "pdc",
+      "triangles": 2462,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_17359b4c-1f89-4a94-9f55-79bd26045137",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_17359b4c-1f89-4a94-9f55-79bd26045137",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.0,
+        2.8,
+        2.2
+      ],
+      "bytes": 453088,
+      "morphTargets": 1
+    },
+    {
+      "asset": "enterocyte",
+      "triangles": 1702,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_083e3147-1b36-4d16-b938-dc5f6561277b",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_083e3147-1b36-4d16-b938-dc5f6561277b",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        1.5,
+        1.3,
+        1.8
+      ],
+      "bytes": 557804,
+      "morphTargets": 0
+    },
+    {
+      "asset": "goblet",
+      "triangles": 1678,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_83e000e0-1e21-4ead-a2d2-2de1152e1af3",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_83e000e0-1e21-4ead-a2d2-2de1152e1af3",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        1.3,
+        1.3,
+        1.9
+      ],
+      "bytes": 415728,
+      "morphTargets": 0
+    },
+    {
+      "asset": "diplococcus",
+      "triangles": 479,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_d0c449b4-14eb-4ce5-8905-cfaf95fdb948",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "NormalGL_d0c449b4-14eb-4ce5-8905-cfaf95fdb948",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "dimensionsXYZ": [
+        1.6,
+        1.0,
+        1.0
+      ],
+      "bytes": 115480,
+      "morphTargets": 0
+    },
+    {
+      "asset": "bacillus",
+      "triangles": 478,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_91245aea-ff92-4402-9a3e-825c97c508a4",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "NormalGL_91245aea-ff92-4402-9a3e-825c97c508a4",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "dimensionsXYZ": [
+        0.95,
+        0.95,
+        3.0
+      ],
+      "bytes": 149764,
+      "morphTargets": 0
+    },
+    {
+      "asset": "enveloped-virus",
+      "triangles": 600,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_0166442c-8a6f-4f27-ab42-77a0da7432f5",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "NormalGL_0166442c-8a6f-4f27-ab42-77a0da7432f5",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "dimensionsXYZ": [
+        1.8,
+        1.8,
+        1.8
+      ],
+      "bytes": 135396,
+      "morphTargets": 0
+    },
+    {
+      "asset": "yeast",
+      "triangles": 600,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_7f8991a2-5174-4a0e-8ef0-2f26ba662b76",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "NormalGL_7f8991a2-5174-4a0e-8ef0-2f26ba662b76",
+          "width": 256,
+          "height": 256
+        }
+      ],
+      "dimensionsXYZ": [
+        1.5,
+        1.2,
+        2.2
+      ],
+      "bytes": 102584,
+      "morphTargets": 0
+    },
+    {
+      "asset": "epithelial",
+      "triangles": 600,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_240a2dc4-c3cc-48fd-8bf7-fe9fc7e7eea6",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_240a2dc4-c3cc-48fd-8bf7-fe9fc7e7eea6",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.2,
+        2.4,
+        0.5
+      ],
+      "bytes": 353684,
+      "morphTargets": 0
+    },
+    {
+      "asset": "alveolar-septum",
+      "triangles": 1200,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_f9fdc4cf-65d6-41fd-9030-8943dc57e487",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_f9fdc4cf-65d6-41fd-9030-8943dc57e487",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        4.2,
+        1.15,
+        1.0
+      ],
+      "bytes": 636100,
+      "morphTargets": 0
+    },
+    {
+      "asset": "intestinal-villus",
+      "triangles": 1732,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_d3a3164f-dc26-4ded-80e4-98ed2e827491",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_d3a3164f-dc26-4ded-80e4-98ed2e827491",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        2.3,
+        2.0,
+        4.4
+      ],
+      "bytes": 309100,
+      "morphTargets": 0
+    },
+    {
+      "asset": "oral-mucosa",
+      "triangles": 898,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_a6ad1b8e-05bf-4b81-a9e6-1fe0066bacca",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_a6ad1b8e-05bf-4b81-a9e6-1fe0066bacca",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        5.0,
+        4.0,
+        0.65
+      ],
+      "bytes": 401732,
+      "morphTargets": 0
+    },
+    {
+      "asset": "lymph-reticulum",
+      "triangles": 936,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_b411ac5f-1e1e-4650-bacf-a347f4107441",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_b411ac5f-1e1e-4650-bacf-a347f4107441",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        5.0,
+        4.0,
+        0.8
+      ],
+      "bytes": 343740,
+      "morphTargets": 0
+    }
+  ]
+}

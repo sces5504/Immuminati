@@ -1,0 +1,291 @@
+{
+  "message": "locator.getAttribute: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('.tactical-root')\u001b[22m\n",
+  "stack": "locator.getAttribute: Target page, context or browser has been closed\nCall log:\n\u001b[2m  - waiting for locator('.tactical-root')\u001b[22m\n\n    at tick (/workspace/Immuminati/scripts/core-lifecycle-acceptance.mjs:206:53)\n    at /workspace/Immuminati/scripts/core-lifecycle-acceptance.mjs:312:26",
+  "checks": [
+    {
+      "device": "desktop",
+      "case": "m1",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "3 波感染來源均已清除",
+        "preservation": 88,
+        "stars": 3,
+        "seconds": 83
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 19
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "recognize",
+        "present",
+        "clear",
+        "arrive",
+        "grow",
+        "damage",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m2",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 90,
+        "stars": 3,
+        "seconds": 70.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 19
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "engulf",
+        "present",
+        "recognize",
+        "arrive",
+        "clear",
+        "grow",
+        "damage",
+        "activate",
+        "release",
+        "signal",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m3",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "感染被穩定圍堵；仍有活菌，並非臨床治癒",
+        "preservation": 89,
+        "stars": 3,
+        "seconds": 75.2
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 19
+      },
+      "events": [
+        "wave",
+        "survive",
+        "mark",
+        "request",
+        "engulf",
+        "present",
+        "recognize",
+        "clear",
+        "arrive",
+        "damage",
+        "grow",
+        "activate",
+        "signal",
+        "contain",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m4",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 75,
+        "stars": 2,
+        "seconds": 168.20000000000002
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 19
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "infect",
+        "arrive",
+        "present",
+        "damage",
+        "cytotoxic",
+        "recognize",
+        "release",
+        "engulf",
+        "clear",
+        "signal",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    },
+    {
+      "device": "desktop",
+      "case": "m5",
+      "passed": true,
+      "result": {
+        "type": "victory",
+        "reason": "2 波感染來源均已清除",
+        "preservation": 98,
+        "stars": 3,
+        "seconds": 74
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 19
+      },
+      "events": [
+        "wave",
+        "mark",
+        "request",
+        "degranulate",
+        "present",
+        "engulf",
+        "recognize",
+        "clear",
+        "arrive",
+        "barrier",
+        "grow",
+        "damage",
+        "activate",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    }
+  ],
+  "acceptance": false,
+  "note": "Diagnostic attempt explicitly stopped after discovering the DC route conflict. Superseded by final 12-case results.json."
+}

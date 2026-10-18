@@ -328,6 +328,13 @@ export function commandTactical(
   } else {
     const cell = s.cells.find((u) => u.id === cmd.cell)!;
     let order: Order;
+    if (
+      cmd.type === "attack" &&
+      cell.order.type === "attack" &&
+      cell.order.target === cmd.target &&
+      cell.path.length
+    )
+      return { state: s };
     if (cmd.type === "move") {
       const point = walkable(cmd.point, c);
       order = { type: "move", point };
@@ -401,6 +408,8 @@ export function stepTactical(
     }
   }
   s.internal = s.internal.filter((p) => p.load > 0);
+  // Orders describe intent; biological effects follow the cell's current location.
+  for (const u of s.cells) u.region = fieldOf(u.position, c).id;
   updateImmunity(s, c);
   campaignStep(s, c);
   for (const cell of s.cells) {
@@ -428,6 +437,8 @@ export function stepTactical(
       } else cell.path = [];
     }
     if (supportCell(s, cell, c)) continue;
+    // A dedicated support journey owns locomotion this step (e.g. DC tissue sampling).
+    if (destination) continue;
     if (s.tick < cell.readyAt - spec.cooldown + 6) continue;
     let target: Colony | undefined;
     if (cell.order.type === "attack")
@@ -485,12 +496,14 @@ export function stepTactical(
         const survives = phagosomeSurvives(c, cell);
         const n = Math.min(
           target.load,
-          spec.power +
-            (target.markedUntil > s.tick ? spec.markedBonus : 0) +
-            (cell.kind === "macrophage" &&
-            s.immunity.signals[target.region].ifng >= 20
-              ? 1
-              : 0),
+          target.form === "hypha"
+            ? 1
+            : spec.power +
+                (target.markedUntil > s.tick ? spec.markedBonus : 0) +
+                (cell.kind === "macrophage" &&
+                s.immunity.signals[target.region].ifng >= 20
+                  ? 1
+                  : 0),
         );
         target.load -= n;
         if (spec.role === "presenter" && !cell.antigen) {
@@ -509,6 +522,8 @@ export function stepTactical(
           );
         }
         cell.readyAt = s.tick + spec.cooldown;
+        if (survives && c.lifecycle?.intracellular)
+          cell.replicateAt ??= s.tick + c.lifecycle.intracellular.every;
         s.internal.push({
           id: `i${s.serial++}`,
           host: cell.id,
@@ -652,17 +667,25 @@ export function stepTactical(
         { actor: cell.id },
       );
     }
+  for (const u of s.cells) u.region = fieldOf(u.position, c).id;
   syncTissueHealth(s);
   if (c.practice) return s;
-  const lost = Object.values(s.health).some((h) => h <= 0),
+  const lost =
+      c.mechanics !== "retroviral" &&
+      Object.values(s.health).some((h) => h <= 0),
     won = victoryCondition(s, c);
   const limited = limitedCondition(s, c);
-  if (lost || won || limited || s.tick >= c.limit) {
+  if (
+    lost ||
+    won ||
+    limited ||
+    (c.mechanics !== "retroviral" && s.tick >= c.limit)
+  ) {
     const rate = preservation(s);
     s.result = {
       type: limited ? "limited" : !lost && won ? "victory" : "defeat",
       reason: limited
-        ? "未治療情境：免疫支援已到本次觀察界限"
+        ? "未治療情境：全部防區組織保全耗盡"
         : lost
           ? "必要組織失守"
           : won

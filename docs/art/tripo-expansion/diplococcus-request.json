@@ -1,0 +1,14 @@
+{
+  "asset": "diplococcus",
+  "request": {
+    "prompt": "One pair of pneumococcus bacteria, two connected smooth lancet shaped blue ovoids with gentle central constriction, slightly pointed outer ends, smooth delicate capsule surface, powder blue and indigo. No spikes or flagella. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+    "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+    "face_limit": 1000,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 202610186,
+    "image_seed": 202610186,
+    "texture_seed": 202610186,
+    "model": "v3.1-20260211"
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "source": "actions/mobile-raw.webm",
+    "sourceSha256": "c8702fea7eacc7cb2192c4c9b81a49a5c2c03731182f7da68a1a4b1e4e87fb62",
+    "sourceDuration": 146.64,
+    "clip": "mobile-m1-engulf.webm",
+    "clipSha256": "46897dc05cda95da1219370792641d8a0708bbcf3666a4d763064b87749115f3",
+    "start": 118.42,
+    "duration": 20,
+    "note": "Actual real-time UI test; original video playback rate, no authority injection. C3b, independent idle, movement and engulf; software WebGL capture is not device FPS."
+  },
+  {
+    "source": "mobile-m1-raw.webm",
+    "sourceSha256": "eb9c2c4a38c626c032b12115ce62d583ec85b94faf6682eb651ad9824d9d3df0",
+    "sourceDuration": 13.0,
+    "clip": "mobile-m1-art.webm",
+    "clipSha256": "b3f0a5aa0f6049ee3291483e25cf18190b6c7bc6d3b71b5ee255aaddff464f17",
+    "start": 1.0,
+    "duration": 12,
+    "note": "Real game UI orders, controlled browser clock for bounded visual checks; not real-time performance measurement or proof of victory."
+  },
+  {
+    "source": "mobile-m2-raw.webm",
+    "sourceSha256": "932963c0c960ef3c0f3fad45e644eb26ec99b80d7bf67cf414db6372fe7a7c9e",
+    "sourceDuration": 14.56,
+    "clip": "mobile-m2-art.webm",
+    "clipSha256": "23d97a3a586ab398c10b083d4631ce906b6fea092270be4727462d9abda93a1c",
+    "start": 2.5600000000000005,
+    "duration": 12,
+    "note": "Real game UI orders, controlled browser clock for bounded visual checks; not real-time performance measurement or proof of victory."
+  },
+  {
+    "source": "mobile-m3-raw.webm",
+    "sourceSha256": "a6e9700bf49535e8587ed0aaeee00f97ea1dba01ec7bbd17213aee2394a0d15a",
+    "sourceDuration": 13.68,
+    "clip": "mobile-m3-art.webm",
+    "clipSha256": "cf095f3016fb073a4b0a4486c77da95bd41baeadb042460321c3b56e81991272",
+    "start": 1.6799999999999997,
+    "duration": 12,
+    "note": "Real game UI orders, controlled browser clock for bounded visual checks; not real-time performance measurement or proof of victory."
+  },
+  {
+    "source": "mobile-m4-raw.webm",
+    "sourceSha256": "9486e74789d64d83480cfd728f715872d4351028c8e8bef3e07e5cbfe2c54a21",
+    "sourceDuration": 13.56,
+    "clip": "mobile-m4-art.webm",
+    "clipSha256": "b05183acddf803032e4eaa654607c32ac77f3f69ac2e1a744638f585d1d7ee44",
+    "start": 1.5600000000000005,
+    "duration": 12,
+    "note": "Real game UI orders, controlled browser clock for bounded visual checks; not real-time performance measurement or proof of victory."
+  },
+  {
+    "source": "mobile-m5-raw.webm",
+    "sourceSha256": "2824268e9344bc4b932dde713b246e4efedf0bf88ed5dc2a280cf922870fa1e8",
+    "sourceDuration": 16.24,
+    "clip": "mobile-m5-art.webm",
+    "clipSha256": "30dae50c92f5d7a17188356ba5e5b0a28430ba15575660c8126933fc0980c211",
+    "start": 4.239999999999998,
+    "duration": 12,
+    "note": "Real game UI orders, controlled browser clock for bounded visual checks; not real-time performance measurement or proof of victory."
+  },
+  {
+    "source": "mobile-m6-raw.webm",
+    "sourceSha256": "c25a6e808ee4a7480f3a009b2ee043dcb3a78c9c81d8c69f227f688fc801d38e",
+    "sourceDuration": 15.32,
+    "clip": "mobile-m6-art.webm",
+    "clipSha256": "e2537205a97ecbb387c201154f667ff377ae6468bb89dfe4d43c46b66dc09690",
+    "start": 3.3200000000000003,
+    "duration": 12,
+    "note": "Real game UI orders, controlled browser clock for bounded visual checks; not real-time performance measurement or proof of victory."
+  },
+  {
+    "source": "coverage/coverage-raw.webm",
+    "sourceSha256": "8af4a9c49ccec6634e1df554e7dda8960d563ac7c3836af210f8c6ee45eb556a",
+    "sourceDuration": 33.56,
+    "clip": "antibody-coverage-fixture.webm",
+    "clipSha256": "841df50ead51671f832554bee171325191004df29756e2df82bdfb07e2d27cae",
+    "start": 13.560000000000002,
+    "duration": 20,
+    "note": "Explicit imported 14-cell/2-antibody visual fixture, NOT legal deployment, natural antibody production, or victory evidence."
+  }
+]

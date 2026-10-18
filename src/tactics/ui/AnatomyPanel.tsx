@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+import { intracellularStatus } from "../application/infectionStatus";
 import type {
   TacticalState,
   TacticalContent,
@@ -258,6 +260,11 @@ function Cutaway({
                       />
                     ))}
                   </g>
+                ) : content.pathogen.shape === "acidfast" ||
+                  content.pathogen.shape === "rod" ? (
+                  <g transform={`rotate(${i * 37} ${x} ${y})`}>
+                    <rect x={x - 3} y={y - 9} width="6" height="18" rx="3" />
+                  </g>
                 ) : (
                   <>
                     <ellipse cx={x - 4} cy={y} rx="5" ry="7" />
@@ -278,7 +285,7 @@ function Cutaway({
       <p>
         <b>
           {load
-            ? `${compartmentNames[compartment!]} · 活負荷 ${load}`
+            ? `${compartmentNames[compartment!]} · ${host?.infection ? "感染來源" : "活負荷"} ${load}`
             : "胞內沒有活病原"}
         </b>
         {processing
@@ -287,10 +294,30 @@ function Cutaway({
             ? " · 活病原仍計入感染負荷；位置不由模型重疊判定。"
             : "；沒有感染不代表這顆細胞沒有功能。"}
       </p>
+      {cell && intracellularStatus(cell, state, content) && (
+        <p data-testid="intracellular-status">
+          {intracellularStatus(cell, state, content)!.text}
+          。負荷過高會導致宿主破裂與活菌再播散；時間／菌量為教學壓縮。
+        </p>
+      )}
       {host?.infection && (
         <p>
           {hostStatus(host)}
-          。核內線段代表病毒基因組／複製材料，不是成熟病毒顆粒。
+          。核內線段代表病毒基因組／複製材料，不是成熟病毒顆粒。感染來源數不是胞內病毒顆數。
+          {host.infection.phase === "productive" && host.load > 0 && (
+            <>
+              已完成 {host.infection.cycles ?? 0} 輪產毒，下一輪約{" "}
+              {Math.max(
+                0,
+                Math.ceil(
+                  ((content.lifecycle?.virus?.every ?? 40) -
+                    (state.tick - (host.infection.since ?? state.tick))) *
+                    0.2,
+                ),
+              )}{" "}
+              秒；每輪新生病毒釋至胞外，IFN-I 可降低產量。
+            </>
+          )}
           {host.infection.phase === "latent"
             ? "潛伏整合 DNA 未表達病毒肽，不能被 CD8 當成產毒宿主。"
             : `MHC-I ${host.mhc1 ? "保留" : "降低"} · 抗原 ${host.antigen}`}
@@ -298,7 +325,7 @@ function Cutaway({
       )}
       {host?.apoptoticAt ? (
         <p>
-          此宿主已凋亡，停止產毒；已釋出的胞外病原仍獨立存在，不隨宿主消失。
+          此宿主已死亡並停止產毒；已釋出的胞外病原仍獨立存在，不隨宿主消失。免疫細胞誘導凋亡與感染／組織損傷造成的死亡，可由因果紀錄分辨。
         </p>
       ) : null}
     </div>
@@ -317,6 +344,14 @@ export function AnatomyPanel({
 }) {
   const host = s.hosts.find((h) => h.id === selected),
     cell = s.cells.find((u) => u.id === selected);
+  const detail = useRef<HTMLElement>(null);
+  useEffect(() => {
+    if (!selected || !(host || cell)) return;
+    const frame = requestAnimationFrame(() =>
+      detail.current?.scrollIntoView({ block: "start" }),
+    );
+    return () => cancelAnimationFrame(frame);
+  }, [selected]);
   return (
     <div className="t-anatomy-panel">
       <p className="t-anatomy-intro">
@@ -375,7 +410,7 @@ export function AnatomyPanel({
             ))}
           </div>
         </section>
-        <section aria-live="polite">
+        <section aria-live="polite" className="t-anatomy-selected" ref={detail}>
           {host || cell ? (
             <>
               <h3>

@@ -1,3 +1,4 @@
+import { intracellularControl } from "./intracellularControl";
 import { coat } from "./opsonization";
 import type {
   Cell,
@@ -81,9 +82,13 @@ export function updateImmunity(s: TacticalState, c: TacticalContent) {
       (u) => dist(u.position, f.center) <= f.radius,
     )) {
       const role = c.cells[cell.kind].role;
-      const nearby = s.colonies.some(
-        (p) => p.load > 0 && dist(p.position, cell.position) <= 5,
-      );
+      const nearby =
+        s.colonies.some(
+          (p) => p.load > 0 && dist(p.position, cell.position) <= 5,
+        ) ||
+        s.internal.some(
+          (p) => p.host === cell.id && p.stage === "persistent" && p.load > 0,
+        );
       if (nearby && ["phagocyte", "presenter"].includes(role)) {
         signal.cxcl8 = clamp(signal.cxcl8 + 9);
         if (cell.kind === "macrophage" || role === "presenter")
@@ -150,7 +155,10 @@ export function updateImmunity(s: TacticalState, c: TacticalContent) {
     const region = c.fields.reduce((a, b) =>
       dist(cell.position, a.center) < dist(cell.position, b.center) ? a : b,
     ).id;
-    if (s.immunity.signals[region].ifng >= 20) {
+    if (
+      s.immunity.signals[region].ifng >= 20 &&
+      intracellularControl(s, cell, c).activated
+    ) {
       const internal = s.internal.find(
         (p) =>
           p.host === cell.id &&
@@ -161,7 +169,10 @@ export function updateImmunity(s: TacticalState, c: TacticalContent) {
       if (
         internal &&
         s.tick % 15 === 0 &&
-        (c.mechanics !== "containment" || internal.load > 2)
+        (c.mechanics !== "containment" ||
+          s.internal
+            .filter((p) => p.host === cell.id && p.stage === "persistent")
+            .reduce((n, p) => n + p.load, 0) > 2)
       ) {
         internal.load--;
         emit(
@@ -266,6 +277,23 @@ export function supportDestination(
           dist(a.position, cell.position) - dist(b.position, cell.position),
       )[0];
     if (
+      !infected &&
+      (c.mechanics === "viral" || c.mechanics === "retroviral")
+    ) {
+      const source = s.hosts
+        .filter(
+          (h) =>
+            h.infection &&
+            h.infection.phase !== "latent" &&
+            (h.load > 0 || h.apoptoticAt > 0),
+        )
+        .sort(
+          (a, b) =>
+            dist(a.position, cell.position) - dist(b.position, cell.position),
+        )[0];
+      if (source) return source.position;
+    }
+    if (
       infected &&
       !s.colonies.some((p) => p.load > 0 && dist(p.position, cell.position) < 5)
     )
@@ -330,12 +358,19 @@ export function supportCell(
   if (
     role === "presenter" &&
     !cell.antigen &&
-    s.cells.some(
+    (s.cells.some(
       (u) =>
         u.id !== cell.id &&
         dist(u.position, cell.position) < 3 &&
         s.internal.some((p) => p.host === u.id && p.load > 0),
-    )
+    ) ||
+      s.hosts.some(
+        (h) =>
+          h.infection &&
+          h.infection.phase !== "latent" &&
+          (h.load > 0 || h.apoptoticAt > 0) &&
+          dist(h.position, cell.position) < 3,
+      ))
   ) {
     cell.antigen = c.pathogen.antigen ?? `${c.pathogen.id}:protein`;
     if (node.stage === "idle") {
@@ -346,7 +381,7 @@ export function supportCell(
       s,
       "present",
       cell.position,
-      "樹突細胞於感染焦點取得抗原材料，成熟後引流至淋巴結；未直接消除感染巨噬細胞。",
+      "樹突細胞於感染焦點取得抗原材料，成熟後引流至淋巴結；未直接消除原感染宿主。",
       1,
       { actor: cell.id },
     );
@@ -486,11 +521,15 @@ export function supportCell(
       cell.order = { type: "guard", point: { ...cell.position } };
       host.load = 0;
       host.apoptoticAt = s.tick;
+      s.health[host.region] = Math.max(
+        0,
+        s.health[host.region] - (c.mechanics === "retroviral" ? 0.2 : 0.6),
+      );
       emit(
         s,
         "cytotoxic",
         host.position,
-        `${c.cells[cell.kind].name}形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；胞外病原仍獨立存在，未被一併清除。`,
+        `${c.cells[cell.kind].name}形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。`,
         1,
         { actor: cell.id, target: host.id, from: { ...cell.position } },
       );

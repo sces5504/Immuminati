@@ -1,0 +1,110 @@
+[
+  {
+    "case": "m1",
+    "device": "desktop",
+    "triangles": 253782,
+    "originalTriangles": 200380,
+    "drawCalls": 176,
+    "originalDrawCalls": 209,
+    "hostDraws": 32
+  },
+  {
+    "case": "m2",
+    "device": "desktop",
+    "triangles": 264898,
+    "originalTriangles": 298712,
+    "drawCalls": 148,
+    "originalDrawCalls": 306,
+    "hostDraws": 32
+  },
+  {
+    "case": "m3",
+    "device": "desktop",
+    "triangles": 216638,
+    "originalTriangles": 200044,
+    "drawCalls": 175,
+    "originalDrawCalls": 208,
+    "hostDraws": 32
+  },
+  {
+    "case": "m4",
+    "device": "desktop",
+    "triangles": 226090,
+    "originalTriangles": 213664,
+    "drawCalls": 172,
+    "originalDrawCalls": 202,
+    "hostDraws": 32
+  },
+  {
+    "case": "m5",
+    "device": "desktop",
+    "triangles": 284718,
+    "originalTriangles": 222528,
+    "drawCalls": 193,
+    "originalDrawCalls": 238,
+    "hostDraws": 47
+  },
+  {
+    "case": "m6",
+    "device": "desktop",
+    "triangles": 291660,
+    "originalTriangles": 268104,
+    "drawCalls": 148,
+    "originalDrawCalls": 206,
+    "hostDraws": 32
+  },
+  {
+    "case": "m1",
+    "device": "mobile",
+    "triangles": 252038,
+    "originalTriangles": 198684,
+    "drawCalls": 165,
+    "originalDrawCalls": 197,
+    "hostDraws": 31
+  },
+  {
+    "case": "m2",
+    "device": "mobile",
+    "triangles": 258182,
+    "originalTriangles": 281960,
+    "drawCalls": 136,
+    "originalDrawCalls": 273,
+    "hostDraws": 30
+  },
+  {
+    "case": "m3",
+    "device": "mobile",
+    "triangles": 214894,
+    "originalTriangles": 198348,
+    "drawCalls": 164,
+    "originalDrawCalls": 196,
+    "hostDraws": 31
+  },
+  {
+    "case": "m4",
+    "device": "mobile",
+    "triangles": 224346,
+    "originalTriangles": 211968,
+    "drawCalls": 161,
+    "originalDrawCalls": 190,
+    "hostDraws": 31
+  },
+  {
+    "case": "m5",
+    "device": "mobile",
+    "triangles": 284718,
+    "originalTriangles": 222528,
+    "drawCalls": 193,
+    "originalDrawCalls": 238,
+    "hostDraws": 47
+  },
+  {
+    "case": "m6",
+    "device": "mobile",
+    "triangles": 288290,
+    "originalTriangles": 264232,
+    "drawCalls": 141,
+    "originalDrawCalls": 197,
+    "hostDraws": 31
+  }
+]

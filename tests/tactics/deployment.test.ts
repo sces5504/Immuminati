@@ -111,7 +111,7 @@ describe("player-owned opening deployment", () => {
     expect(migrated.undo).toEqual(raw.undo);
     expect(migrated.state.preparation).toBeUndefined();
     expect(migrated.state.immunity.autoSeek).toBe(false);
-    expect(migrated.rules).toBe("3.1");
+    expect(migrated.rules).toBe("3.2");
   });
   it("rejects forged preparation budget, running phase and undo frames", () => {
     const ctrl = new TacticalController(m1);
@@ -188,7 +188,7 @@ describe("newly configured six-case defenses", () => {
       ).toBeUndefined();
       expect(ctrl.command({ type: "begin" })).toBeUndefined();
       let s = ctrl.save.state;
-      while (!s.result && s.tick < c.limit) {
+      while (!s.result && s.tick < (c.id === "m6" ? 10000 : c.limit)) {
         for (const [tick, kind, region] of plans[c.id])
           if (tick === s.tick)
             s = commandTactical(s, { type: "recruit", kind, region }, c).state;
@@ -213,7 +213,7 @@ describe("newly configured six-case defenses", () => {
       if (c.id === "m3") expect(s.internal.some((i) => i.load > 0)).toBe(true);
       if (c.id === "m6") {
         expect(s.result!.stars).toBe(0);
-        expect(s.hosts.some((h) => h.infection?.phase === "latent")).toBe(true);
+        expect(Object.values(s.health).every((n) => n === 0)).toBe(true);
       }
     });
 });

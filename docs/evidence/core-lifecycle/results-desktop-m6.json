@@ -1,0 +1,62 @@
+{
+  "target": "http://127.0.0.1:24865/Immuminati/",
+  "browser": "141.0.7390.37",
+  "checks": [
+    {
+      "device": "desktop",
+      "case": "m6",
+      "passed": true,
+      "result": {
+        "type": "limited",
+        "reason": "未治療情境：全部防區組織保全耗盡",
+        "preservation": 0,
+        "stars": 0,
+        "seconds": 436
+      },
+      "fit": {
+        "scroll": true,
+        "visible": true,
+        "buttons": [
+          {
+            "h": 44,
+            "w": 44,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 44,
+            "w": 290,
+            "overflow": false
+          },
+          {
+            "h": 48,
+            "w": 290,
+            "overflow": false
+          }
+        ],
+        "helper": 19
+      },
+      "events": [
+        "wave",
+        "infect",
+        "mark",
+        "request",
+        "recognize",
+        "present",
+        "arrive",
+        "damage",
+        "cytotoxic",
+        "release",
+        "activate",
+        "clear",
+        "result"
+      ],
+      "errors": [],
+      "bad": []
+    }
+  ]
+}

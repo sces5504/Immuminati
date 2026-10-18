@@ -35,7 +35,7 @@ const result = z
     reason: z.string().max(300),
     preservation: integer(100),
     stars: integer(3),
-    seconds: num(3600),
+    seconds: num(200_000_000),
   })
   .strict();
 const battle = z
@@ -51,11 +51,11 @@ const battle = z
     scenario: id,
     seed: integer(4294967295),
     rng: integer(4294967295),
-    tick: integer(10000),
+    tick: integer(1_000_000_000),
     energy: integer(20),
     support: integer(6),
     wave: integer(20),
-    nextWaveAt: integer(100000),
+    nextWaveAt: integer(1_000_000_000),
     health: z.record(id, num(100)),
     cells: z
       .array(
@@ -67,15 +67,16 @@ const battle = z
             region: id,
             order,
             path: z.array(vec).max(10),
-            readyAt: integer(10000),
+            readyAt: integer(1_000_000_000),
             recognized: z.boolean().optional(),
+            replicateAt: integer(1_000_000_000).optional(),
             antigen: id.optional(),
             activation: z
               .enum(["resting", "activating", "effector"])
               .optional(),
-            activationAt: integer(10000).optional(),
+            activationAt: integer(1_000_000_000).optional(),
             partner: id.optional(),
-            dockAt: integer(10000).optional(),
+            dockAt: integer(1_000_000_000).optional(),
           })
           .strict(),
       )
@@ -88,18 +89,20 @@ const battle = z
             region: id,
             position: vec,
             load: integer(1000),
-            markedUntil: integer(10000),
+            markedUntil: integer(1_000_000_000),
             form: z.enum(["yeast", "hypha"]).optional(),
             opsonin: z.enum(["c3b", "antibody"]).optional(),
-            complementUntil: integer(10000).optional(),
-            antibodyUntil: integer(10000).optional(),
+            complementUntil: integer(1_000_000_000).optional(),
+            antibodyUntil: integer(1_000_000_000).optional(),
             pathogen: id,
           })
           .strict(),
       )
       .max(200),
     arrivals: z
-      .array(z.object({ id, kind, region: id, at: integer(10000) }).strict())
+      .array(
+        z.object({ id, kind, region: id, at: integer(1_000_000_000) }).strict(),
+      )
       .max(1000),
     internal: z
       .array(
@@ -111,7 +114,7 @@ const battle = z
             pathogen: id,
             compartment: z.enum(["phagosome", "cytosol"]).optional(),
             stage: z.enum(["processing", "persistent"]).optional(),
-            clearAt: integer(10000).optional(),
+            clearAt: integer(1_000_000_000).optional(),
           })
           .strict(),
       )
@@ -138,7 +141,7 @@ const battle = z
           .object({
             stage: z.enum(["idle", "migrating", "presenting", "primed"]),
             antigen: z.string().max(50),
-            until: integer(10000),
+            until: integer(1_000_000_000),
             crossPresented: z.boolean().optional(),
           })
           .strict(),
@@ -177,27 +180,28 @@ const battle = z
                 pathogen: id,
                 compartment: z.enum(["cytosol", "nucleus"]),
                 phase: z.enum(["eclipse", "productive", "latent"]).optional(),
-                since: integer(10000).optional(),
+                since: integer(1_000_000_000).optional(),
+                cycles: integer(1000).optional(),
               })
               .strict()
               .optional(),
             mhc1: z.boolean(),
             stressed: z.boolean(),
             load: integer(1000),
-            apoptoticAt: integer(10000),
+            apoptoticAt: integer(1_000_000_000),
           })
           .strict(),
       )
       .max(200)
       .optional(),
-    serial: integer(100000),
-    eventId: integer(100000),
+    serial: integer(1_000_000_000),
+    eventId: integer(1_000_000_000),
     events: z
       .array(
         z
           .object({
-            id: integer(100000),
-            tick: integer(10000),
+            id: integer(1_000_000_000),
+            tick: integer(1_000_000_000),
             type: z.enum([
               "move",
               "engulf",
@@ -242,7 +246,7 @@ const battle = z
       .object({
         containment: z.record(id, num(100)),
         barrier: z.record(id, num(100)),
-        stable: integer(10000),
+        stable: integer(1_000_000_000),
         cd4: num(100),
         impairment: num(100),
       })
@@ -253,7 +257,7 @@ const battle = z
 const schema = z
   .object({
     schema: z.literal(2),
-    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4", "3.0", "3.1"]),
+    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4", "3.0", "3.1", "3.2"]),
     content: z.enum([
       "m1-tactics.1",
       "m1-tactics.2",
@@ -262,6 +266,7 @@ const schema = z
       "m1-tactics.5",
       "campaign.1",
       "campaign.2",
+      "campaign.3",
     ]),
     state: battle,
     paused: z.boolean(),
@@ -332,7 +337,7 @@ function check(s: TacticalState, c: TacticalContent) {
     throw new Error("關卡組織狀態不完整。");
   if (
     s.scenario !== c.id ||
-    s.tick > c.limit ||
+    (c.mechanics !== "retroviral" && s.tick > c.limit) ||
     s.energy > c.energyMax ||
     s.wave >= c.waves.length
   )
@@ -393,10 +398,35 @@ function check(s: TacticalState, c: TacticalContent) {
     )
       throw new Error("宿主感染來源或階段不合法。");
     if (
+      h.infection &&
+      !c.practice &&
+      (h.infection.cycles === undefined ||
+        (h.load > 0 &&
+          h.infection.cycles >= (c.lifecycle?.virus?.lifespan ?? Infinity)))
+    )
+      throw new Error("宿主產毒週期不合法。");
+    if (
       h.infection?.phase === "latent" &&
       (c.mechanics !== "retroviral" || h.antigen !== "self")
     )
       throw new Error("潛伏宿主不可自動取得病毒肽。");
+  }
+  for (const u of s.cells) {
+    if (
+      u.replicateAt !== undefined &&
+      (!c.lifecycle?.intracellular ||
+        u.replicateAt <= s.tick ||
+        u.replicateAt > s.tick + c.lifecycle.intracellular.every)
+    )
+      throw new Error("胞內增殖時鐘不合法。");
+    if (
+      c.lifecycle?.intracellular &&
+      s.internal.some(
+        (p) => p.host === u.id && p.stage === "persistent" && p.load > 0,
+      ) &&
+      u.replicateAt === undefined
+    )
+      throw new Error("缺少胞內增殖時鐘。");
   }
   for (const p of s.internal) {
     if (
@@ -457,12 +487,13 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     "2.4": "m1-tactics.5",
     "3.0": "campaign.1",
     "3.1": "campaign.2",
+    "3.2": "campaign.3",
   };
   if (versions[data.rules] !== data.content)
     throw new Error("規則與內容版本不一致。");
   const migrate = (state: typeof data.state): TacticalState => {
     if (
-      ["3.0", "3.1"].includes(data.rules) &&
+      ["3.0", "3.1", "3.2"].includes(data.rules) &&
       (!state.immunity ||
         !state.hosts?.length ||
         Object.values(state.immunity.signals).some(
@@ -474,12 +505,12 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     )
       throw new Error("新版免疫／組織狀態不完整。");
     if (
-      ["2.2", "2.3", "2.4", "3.0", "3.1"].includes(data.rules) &&
+      ["2.2", "2.3", "2.4", "3.0", "3.1", "3.2"].includes(data.rules) &&
       (!state.immunity || !state.hosts)
     )
       throw new Error("新版免疫狀態不完整。");
     if (
-      ["2.3", "2.4", "3.0", "3.1"].includes(data.rules) &&
+      ["2.3", "2.4", "3.0", "3.1", "3.2"].includes(data.rules) &&
       (!state.hosts?.length ||
         state.hosts.some(
           (h) =>
@@ -493,7 +524,7 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
         ))
     )
       throw new Error("新版組織／區室狀態不完整。");
-    if (data.rules !== "3.1" && state.preparation)
+    if (!["3.1", "3.2"].includes(data.rules) && state.preparation)
       throw new Error("舊規則不可包含開局部署狀態。");
     const migrated: TacticalState = {
       ...state,
@@ -523,23 +554,49 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
         clearAt: p.clearAt ?? 0,
       })),
     };
-    if (!["2.4", "3.0", "3.1"].includes(data.rules))
+    if (!["2.4", "3.0", "3.1", "3.2"].includes(data.rules))
       for (const p of migrated.colonies) {
         const previous = coatings(p, 0);
         p.complementUntil = previous.complementUntil;
         p.antibodyUntil = previous.antibodyUntil;
       }
     if (
-      !["2.3", "2.4", "3.0", "3.1"].includes(data.rules) &&
+      !["2.3", "2.4", "3.0", "3.1", "3.2"].includes(data.rules) &&
       !migrated.hosts.some((h) => h.wall)
     )
       populateTissue(migrated, c);
+    if (data.rules !== "3.2") {
+      // No retroactive replication or replay of historical production cycles.
+      for (const u of migrated.cells) {
+        if (
+          c.lifecycle?.intracellular &&
+          migrated.internal.some(
+            (p) => p.host === u.id && p.stage === "persistent" && p.load > 0,
+          )
+        )
+          u.replicateAt = migrated.tick + c.lifecycle.intracellular.every;
+      }
+      for (const h of migrated.hosts)
+        if (h.infection) {
+          h.infection.cycles = 0;
+          if (h.infection.phase === "productive")
+            h.infection.since = migrated.tick;
+        }
+      // Old finite observations become safely paused resumable snapshots, not forced tissue wipes.
+      if (
+        c.mechanics === "retroviral" &&
+        migrated.result &&
+        !limitedCondition(migrated, c)
+      )
+        delete migrated.result;
+    }
     return migrated;
   };
   const save: TacticalSave = {
     ...data,
-    rules: "3.1",
-    content: "campaign.2",
+    rules: "3.2",
+    content: "campaign.3",
+    paused: data.paused || data.rules !== "3.2",
     state: migrate(data.state),
     undo: data.undo.map(migrate),
   };
@@ -572,7 +629,7 @@ export function readTactical(c: TacticalContent): {
     return value
       ? {
           save: parseTactical(value, c),
-          migrated: JSON.parse(value).rules !== "3.1",
+          migrated: JSON.parse(value).rules !== "3.2",
         }
       : {};
   } catch (e) {
@@ -590,10 +647,10 @@ export function writeTactical(save: TacticalSave) {
     }
     if (
       previous &&
-      previousRules !== "3.1" &&
-      !localStorage.getItem("immuminati:tactics:pre-3.1")
+      previousRules !== "3.2" &&
+      !localStorage.getItem("immuminati:tactics:pre-3.2")
     )
-      localStorage.setItem("immuminati:tactics:pre-3.1", previous);
+      localStorage.setItem("immuminati:tactics:pre-3.2", previous);
     localStorage.setItem(TACTICS_KEY, JSON.stringify(save));
     return "已儲存";
   } catch {
@@ -613,6 +670,6 @@ export function exportTactical(save: TacticalSave) {
 
 /** Preserve the imported original before any format migration is committed. */
 export function backupTacticalImport(text: string) {
-  if (JSON.parse(text).rules === "3.1") return;
-  localStorage.setItem(`immuminati:tactics:import-pre-3.1:${Date.now()}`, text);
+  if (JSON.parse(text).rules === "3.2") return;
+  localStorage.setItem(`immuminati:tactics:import-pre-3.2:${Date.now()}`, text);
 }

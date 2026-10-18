@@ -33,6 +33,9 @@ export function campaignLevels(
       title: "囊泡內的躲藏者",
       tissue: "intestinal",
       mechanics: "intravesicular",
+      lifecycle: {
+        intracellular: { every: 45, fraction: 0.25, ruptureAt: 16 },
+      },
       pathogen: {
         id: "salmonella",
         name: "鼠傷寒沙門氏菌",
@@ -58,6 +61,7 @@ export function campaignLevels(
     m3: make("m3", {
       title: "封鎖持續感染",
       mechanics: "containment",
+      lifecycle: { intracellular: { every: 75, fraction: 0.2, ruptureAt: 40 } },
       pathogen: {
         id: "tuberculosis",
         name: "結核分枝桿菌",
@@ -78,6 +82,7 @@ export function campaignLevels(
     m4: make("m4", {
       title: "被挾持的肺泡",
       mechanics: "viral",
+      lifecycle: { virus: { eclipse: 35, every: 40, lifespan: 4 } },
       pathogen: {
         id: "influenza-a",
         name: "A 型流感病毒",
@@ -123,6 +128,7 @@ export function campaignLevels(
       title: "免疫支援的考驗",
       tissue: "lymphoid",
       mechanics: "retroviral",
+      lifecycle: { virus: { eclipse: 35, every: 40, lifespan: 8 } },
       pathogen: {
         id: "hiv",
         name: "HIV",
@@ -132,7 +138,8 @@ export function campaignLevels(
       },
       briefing:
         "觀察 CD4 宿主的易感性、產毒與潛伏狀態。協調先天及特異性防禦，盡量維持局部控制與免疫支援時間。此情境沒有使用抗反轉錄病毒治療。",
-      objective: "維持功能性 CD4 支援，抑制胞外傳播與產毒宿主。",
+      objective:
+        "持續保全組織、維持 CD4 支援；無倒數期限，至全部防區失守才結算。",
       fields: base.fields.map((f, i) => ({
         ...f,
         name: ["旁皮質區", "濾泡邊界", "髓質引流區"][i],

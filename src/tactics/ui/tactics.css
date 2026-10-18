@@ -11,6 +11,40 @@
   --t-cyan: #8bdcf0;
   --t-gold: #ffe0a1;
 }
+.t-art-preview {
+  max-width: 390px;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #8bdcf055;
+  border-radius: 10px;
+  background: #1d334cdd;
+  color: #edf4ff;
+}
+.t-art-preview > strong {
+  font-size: 12px;
+}
+.t-art-preview > p {
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 8px 0;
+  color: #bed6e6;
+}
+.t-art-preview > small {
+  display: block;
+  font-size: 10px;
+  margin-top: 8px;
+  color: #a9c6d8;
+}
+.t-art-preview > button {
+  min-height: 44px;
+  font-size: 12px;
+  background: #304f65;
+  padding: 8px 14px;
+}
+.tactical-root dialog .t-art-preview > button {
+  color: #edf4ff;
+  background: #304f65;
+}
 .tactical-root button {
   min-height: 44px;
   border-color: var(--t-line);
@@ -3358,4 +3392,34 @@
 .tactical-root dialog:has(.t-deployment) .t-primary:hover:not(:disabled) {
   background: #b2e5ec;
   color: #183347;
+}
+
+/* Lifecycle explanations remain readable and wrap inside the existing dock. */
+.t-selection-info > p {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.t-compartment-summary {
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+}
+@media (max-width: 760px) {
+  .t-command-dock:not(.is-empty) .t-selection-info > p {
+    font-size: 10px;
+    line-height: 1.5;
+    margin: 3px 0;
+  }
+}
+
+/* Keep the paused action readable under mouse hover and sticky touch hover. */
+.tactical-root .t-pause.is-paused:hover:not(:disabled) {
+  background: #d3edf0;
+  color: #16344a !important;
+}
+
+.t-pause > svg {
+  flex-shrink: 0;
+}
+.t-anatomy-selected {
+  scroll-margin-top: 85px;
 }

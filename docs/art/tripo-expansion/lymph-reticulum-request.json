@@ -1,0 +1,14 @@
+{
+  "asset": "lymph-reticulum",
+  "request": {
+    "prompt": "One reusable lymph node stromal tissue module, delicate softly curved branching reticular fibers forming an open irregular mesh with small soft junctions, pearl rose lavender translucent looking biological fibers, flat horizontal low relief, no cells or beads, no solid platform. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+    "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+    "face_limit": 1600,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 202610195,
+    "image_seed": 202610195,
+    "texture_seed": 202610195,
+    "model": "v3.1-20260211"
+  }
+}
