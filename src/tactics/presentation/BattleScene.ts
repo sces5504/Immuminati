@@ -5,6 +5,7 @@ import {
 } from "./MolecularModels";
 import { coatings } from "../engine/opsonization";
 import { chooseEntity } from "./selection";
+import { layoutCells } from "./cellLayout";
 import {
   makeTissueActor,
   updateTissueActor,
@@ -89,6 +90,8 @@ export class BattleScene {
   scene = new THREE.Scene();
   camera = new THREE.OrthographicCamera();
   private actors = new Map<string, Actor>();
+  private layoutState?: TacticalState;
+  private cellLayout = new Map<string, Vec>();
   private hosts = new Map<string, THREE.Group>();
   private bacteria = new Map<string, Bacteria>();
   private effects: Effect[] = [];
@@ -843,12 +846,17 @@ export class BattleScene {
         return false;
       }
       const e = f.event;
+      const source = e.actor ? (this.actorPoint(e.actor) ?? e.from) : e.from;
+      const position =
+        e.type === "dock" && e.target
+          ? (this.actorPoint(e.target) ?? e.position)
+          : e.position;
       if (reduced) {
         f.root.visible = false;
         return true;
       }
       if (e.type === "mark" && f.ghost) {
-        const from = vector(e.from ?? this.content.portal, 2),
+        const from = vector(source ?? this.content.portal, 2),
           to = vector(e.position, 0.5);
         f.ghost.children.forEach((g, i) => {
           const delay = i * 0.017,
@@ -867,9 +875,9 @@ export class BattleScene {
       } else if (
         (e.type === "infect" || e.type === "release") &&
         f.ghost &&
-        e.from
+        source
       ) {
-        const from = vector(e.from, e.type === "release" ? 1 : 0.6),
+        const from = vector(source, e.type === "release" ? 1 : 0.6),
           to = vector(e.position, 0.8);
         const t = Math.min(1, p / 0.8);
         f.ghost.position.copy(from.lerp(to, t));
@@ -879,9 +887,9 @@ export class BattleScene {
             ? 1 - Math.max(0, (p - 0.6) / 0.4) * 0.85
             : Math.min(1, 0.3 + p * 1.5),
         );
-      } else if (e.type === "dock" && f.ghost && e.from) {
-        const from = vector(e.from, 1.4),
-          to = vector(e.position, 1.4);
+      } else if (e.type === "dock" && f.ghost && source) {
+        const from = vector(source, 1.4),
+          to = vector(position, 1.4);
         f.ghost.children.forEach((g, i) =>
           g.position
             .copy(from.clone().lerp(to, (i + 0.5) / 5))
@@ -890,16 +898,16 @@ export class BattleScene {
       } else if (
         (e.type === "cytotoxic" || e.type === "degranulate") &&
         f.ghost &&
-        e.from
+        source
       ) {
-        const from = vector(e.from, 1),
+        const from = vector(source, 1),
           to = vector(e.position, 1);
         f.ghost.position.copy(from.lerp(to, Math.min(1, p / 0.55)));
         f.ghost.scale.setScalar(p < 0.55 ? 1 : 1 - (p - 0.55));
         // Contact-local pore ring and granule transfer precede host shrinkage/blebbing.
         f.ghost.lookAt(to);
-      } else if (f.arms && f.ghost && e.from) {
-        const from = vector(e.from, 1.1),
+      } else if (f.arms && f.ghost && source) {
+        const from = vector(source, 1.1),
           to = vector(e.position, 0.7);
         const direction = to.clone().sub(from).setY(0).normalize();
         const side = new THREE.Vector3(-direction.z, 0, direction.x);
@@ -936,9 +944,9 @@ export class BattleScene {
         f.ghost.scale.setScalar(
           p > 0.75 ? (e.survives ? 0.7 : Math.max(0, (1 - p) / 0.25)) : 1,
         );
-      } else if (f.ghost && e.from) {
+      } else if (f.ghost && source) {
         f.ghost.position.copy(
-          vector(e.from, 0.7).lerp(vector(e.position, 0.7), p),
+          vector(source, 0.7).lerp(vector(e.position, 0.7), p),
         );
       }
       if (f.ring) {
@@ -979,9 +987,14 @@ export class BattleScene {
       for (const fx of this.effects) this.scene.remove(fx.root);
       this.effects = [];
       this.lastEvent = 0;
+      this.cellLayout.clear();
     }
     this.lastTick = s.tick;
     this.lastSeed = s.seed;
+    if (this.layoutState !== s) {
+      this.cellLayout = layoutCells(s.cells, this.content, this.cellLayout);
+      this.layoutState = s;
+    }
     const fresh = this.lastEvent === 0;
     for (const e of s.events)
       if (e.id > this.lastEvent) {
@@ -1008,10 +1021,8 @@ export class BattleScene {
         actor = this.makeActor(cell);
         this.actors.set(cell.id, actor);
       }
-      const target = vector(
-        cell.position,
-        terrain(cell.position.x, cell.position.z),
-      );
+      const point = this.cellLayout.get(cell.id) ?? cell.position;
+      const target = vector(point, terrain(point.x, point.z));
       actor.root.position.lerp(target, 1 - Math.exp(-delta * 18));
       if (actor.root.position.distanceTo(target) > 10)
         actor.root.position.copy(target);
@@ -1089,7 +1100,10 @@ export class BattleScene {
             u.region === field.id && s.internal.some((p) => p.host === u.id),
         );
         wall.visible = !!focus && progress > 5;
-        if (focus) wall.position.copy(vector(focus.position, 0.15));
+        if (focus)
+          wall.position.copy(
+            vector(this.actorPoint(focus.id) ?? focus.position, 0.15),
+          );
         wall.children.forEach((f, i) => (f.visible = i / 18 < progress / 100));
       }
     for (const [id, b] of this.bacteria)
@@ -1169,7 +1183,10 @@ export class BattleScene {
     }
     const selectedCell = s.cells.find((u) => u.id === input.selected);
     if (selectedCell?.path.length) {
-      const points = [selectedCell.position, ...selectedCell.path].slice(0, 12);
+      const points = [
+        this.actorPoint(selectedCell.id) ?? selectedCell.position,
+        ...selectedCell.path,
+      ].slice(0, 12);
       const attribute = this.routeGeometry.attributes.position;
       points.forEach((p, i) =>
         attribute.setXYZ(i, p.x, terrain(p.x, p.z) + 0.25, p.z),
@@ -1198,9 +1215,17 @@ export class BattleScene {
       y: (-v.y * 0.5 + 0.5) * this.size.h,
     };
   }
+  private actorPoint(id: string): Vec | undefined {
+    const point = this.actors.get(id)?.root.position;
+    return point ? { x: point.x, z: point.z } : undefined;
+  }
   private labels(s: TacticalState) {
     const items = [
-      ...s.cells.map((u) => ({ id: u.id, p: u.position, y: 3.1 })),
+      ...s.cells.map((u) => ({
+        id: u.id,
+        p: this.actorPoint(u.id) ?? u.position,
+        y: 3.1,
+      })),
       ...s.colonies.map((p) => ({ id: p.id, p: p.position, y: 1 })),
       ...s.hosts.map((h) => ({
         id: h.id,
@@ -1259,7 +1284,11 @@ export class BattleScene {
     }
     // Keep model hit regions available as well as their DOM labels.
     for (const u of s.cells)
-      blockers.push({ ...this.project(u.position, 1.5), w: 44, h: 44 });
+      blockers.push({
+        ...this.project(this.actorPoint(u.id) ?? u.position, 1.5),
+        w: 44,
+        h: 44,
+      });
     for (const item of items) {
       const el = this.host.querySelector<HTMLElement>(
         `[data-world-label="${item.id}"]`,
@@ -1457,7 +1486,7 @@ export class BattleScene {
       ...s.cells.map((u) => ({
         type: "cell" as const,
         id: u.id,
-        point: u.position,
+        point: this.actorPoint(u.id) ?? u.position,
         y: 1.5,
       })),
       ...s.hosts.map((h) => ({

@@ -1,4 +1,5 @@
-# Manual publication for changes where the user explicitly requests no tests.
+# Manual publication when the user requests no tests or only scoped checks.
+# Run any requested scoped checks separately before dispatching this workflow.
 # Normal pushes still use pages.yml and its full verification pipeline.
 name: Publish Pages (explicit build only)
 on:

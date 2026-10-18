@@ -1316,8 +1316,10 @@ export default function TacticalApp() {
                     />
                   </div>
                   <div className="t-selection-info">
-                    <small>{field.name} · 胞外菌群</small>
-                    <h2>感染負荷 {colony.load}</h2>
+                    <small>
+                      {field.name} · 胞外病原 · 感染負荷 {colony.load}
+                    </small>
+                    <h2>{content.pathogen.name}</h2>
                     <p>
                       {isMarked ? (
                         <>
