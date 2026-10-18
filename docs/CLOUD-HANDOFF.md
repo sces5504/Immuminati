@@ -6,6 +6,8 @@
 
 **交付這一組樣本後先停下來等使用者確認，不自行擴充、不再付費生成、不合併Immuminati main或發布正式Pages。** 使用者的樣本認可與最終合併認可分開處理。以下公開站資料仍描述未改動的main。
 
+私人預覽已部署成功：https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site 。[草稿PR #3](https://github.com/sces5504/Immuminati/pull/3) 已附預覽與檢查；遊戲來源 `bd4b0b1`，託管來源 `d28892e`，版本／部署ID在preview.json。GitHub新增deployment狀態卡API回403，未寫入狀態卡；獨立Sites預覽已由原生部署結果確認成功。分支未觸發完整Actions矩陣，main核對仍為 `36a1f39`。
+
 # 最新交接 v3.1（優先於下文 v3.0 基準）
 
 最新遊戲程式來源 `ff62c59`，[直接遊玩](https://sces5504.github.io/Immuminati/?v=ff62c59)。本次顯示病原名稱、加入純展示層輕量避讓；13項相關單元測試、型別／建置、雙平台14項局部操作與最終桌面避讓補查通過。詳見 [本次實作與限制](CELL-LAYOUT.md) 及 [新證據](evidence/cell-layout/README.md)。前一版 `26a26d1` 的完整關卡／發布驗證不能當成本次驗證；黑畫面修正來源 `cb7580e` 仍包含於本版。

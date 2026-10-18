@@ -2,6 +2,8 @@
 
 本分支 `art/tripo-samples` 由 main `36a1f39` 建立。這是待使用者審閱的樣本，**不代表全遊戲美術重置完成，也不合併 main／發布正式 Pages**。確認方向後才能擴充；正式合併另等使用者核准。
 
+[私人預覽](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 已成功部署，使用同一ChatGPT帳號登入；[草稿PR #3](https://github.com/sces5504/Immuminati/pull/3) 保持Draft。遊戲來源 `bd4b0b1`，託管來源／版本／部署ID在 `preview.json`。進入M1後配置巨噬／嗜中性，可從設定切回原模型。Sites預覽使用自己的origin與存檔，不動正式站。
+
 ## 素材與費用
 
 已實際呼叫 Tripo v3 API H3.1文字建模三次，每件20 credits，共60 credits。沒有付費重試、高清、綁骨、重拓樸或追加模型。原提示、參數、任務ID、實際費用保留在三份 `*-request.json` 與 `tasks.json`；沒有金鑰或帶簽名下載網址。
