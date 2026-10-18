@@ -78,7 +78,7 @@ try {
     await configureM1(page);
     await page.waitForTimeout(1200);
     const initial = await saved();
-    assert.equal(initial.rules, "3.1");
+    assert.equal(initial.rules, "3.2");
     assert.equal(initial.state.hosts.length, 32);
     assert.equal(
       await page.evaluate(
