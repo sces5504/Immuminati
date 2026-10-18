@@ -1,3 +1,4 @@
+import { configureM1 } from "./deployment-helpers.mjs";
 import { spawn } from "node:child_process";
 import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
@@ -74,6 +75,7 @@ try {
     });
     await page.goto(target);
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
+    await configureM1(page);
     await page.waitForTimeout(1000);
     await page.screenshot({ path: dir + device + "-anatomy.png" });
     const initial = structuredClone(await saved(page));
@@ -107,7 +109,9 @@ try {
       await page.locator(".t-tutorial footer button").last().click();
     };
     await next(0);
-    await page.locator('[data-cell-id="u1"]').click();
+    await page
+      .locator(`[data-cell-id="${(await saved(page)).state.cells[0].id}"]`)
+      .click();
     await next(1);
     await page
       .getByRole("button", { name: "防區深部肺泡", exact: true })
@@ -152,6 +156,7 @@ try {
     console.log("CHECK", device, "adaptive strategy");
     await page.locator(".t-brand").click();
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
+    await configureM1(page);
     if ((await saved(page)).settings.speed !== 2)
       await page.getByTestId("speed-toggle").click();
     if (!(await saved(page)).state.immunity.autoSeek)
@@ -229,22 +234,22 @@ try {
     const legacyText = JSON.stringify(legacy);
     await page.evaluate((text) => {
       localStorage.setItem("immuminati:tactics:v2", text);
-      localStorage.removeItem("immuminati:tactics:pre-3.0");
+      localStorage.removeItem("immuminati:tactics:pre-3.1");
     }, legacyText);
     await page.reload();
     await page.getByRole("button", { name: "繼續防線 →", exact: true }).click();
-    assert.equal((await saved(page)).rules, "3.0");
+    assert.equal((await saved(page)).rules, "3.1");
     assert.equal((await saved(page)).state.immunity.autoSeek, false);
     assert.equal(
       await page.evaluate(() =>
-        localStorage.getItem("immuminati:tactics:pre-3.0"),
+        localStorage.getItem("immuminati:tactics:pre-3.1"),
       ),
       legacyText,
     );
     checks.push({
       device,
       check:
-        "real pre-3.0 save migration preserves original text backup and starts new immunity explicitly inactive",
+        "real pre-3.1 save migration preserves original text backup and starts new immunity explicitly inactive",
       passed: true,
     });
     assert.deepEqual(errors, []);

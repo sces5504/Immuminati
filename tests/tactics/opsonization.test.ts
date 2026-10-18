@@ -17,6 +17,7 @@ import * as THREE from "three";
 describe("distinct complement and antibody support", () => {
   it("new games seek automatically; migrations retain an explicit off choice and legacy Ig identity", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     expect(ctrl.save.state.immunity.autoSeek).toBe(true);
     const raw = JSON.parse(JSON.stringify(ctrl.snapshot()));
     raw.rules = "2.3";
@@ -88,6 +89,7 @@ describe("distinct complement and antibody support", () => {
       stepTactical(one, m1).colonies[0].load,
     );
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.save.state = s;
     expect(
       parseTactical(JSON.stringify(ctrl.snapshot()), m1).state.colonies,
@@ -100,6 +102,7 @@ describe("distinct complement and antibody support", () => {
   });
   it("planned antibody placement undoes pool, coating and event once", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.save.state.immunity.antibodies = 2;
     const before = ctrl.snapshot();
     ctrl.command({ type: "antibody", target: before.state.colonies[0].id });

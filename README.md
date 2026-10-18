@@ -1,3 +1,5 @@
+> v3.1 更新：新局先選知識套組／自行配置（12部署點），手機戰場支援雙指縮放，移除略過動畫鍵。舊局保留原隊伍。[本輪進度與驗證](docs/DEPLOYMENT-AND-GESTURES.md) · [給美術建模組的交接 prompt](docs/ART-HANDOFF-PROMPT.md)。
+
 # Immuminati · 微觀防線
 
 [線上遊玩](https://sces5504.github.io/Immuminati/?v=f004bdf)。保留已確認的立體戰術 UI、指揮、鏡頭與 C「柔光微觀立體」風格；沒有另做整套 RTS。

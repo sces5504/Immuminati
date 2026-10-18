@@ -7,7 +7,7 @@ import type {
 import {
   commandTactical,
   copy,
-  createTactical,
+  createDeployment,
   stepTactical,
 } from "../engine/simulation";
 export class TacticalController {
@@ -18,9 +18,9 @@ export class TacticalController {
   ) {
     this.save = save ?? {
       schema: 2,
-      rules: "3.0",
-      content: "campaign.1",
-      state: createTactical(content, 1),
+      rules: "3.1",
+      content: "campaign.2",
+      state: createDeployment(content, 1),
       paused: true,
       undo: [],
       settings: {
@@ -39,8 +39,9 @@ export class TacticalController {
     const old = this.save.state;
     const r = commandTactical(old, command, this.content);
     if (r.error) return r.error;
-    if (this.save.paused)
+    if (this.save.paused && command.type !== "begin")
       this.save.undo = [...this.save.undo.slice(-9), copy(old)];
+    if (command.type === "begin") this.save.undo = [];
     this.save.state = r.state;
     return;
   }
@@ -57,6 +58,7 @@ export class TacticalController {
       this.save.records[this.content.id] = copy(result);
   }
   pause(value: boolean) {
+    if (!value && this.save.state.preparation) return;
     if (this.save.paused === value) return;
     this.save.paused = value;
     this.save.undo = [];
@@ -68,7 +70,7 @@ export class TacticalController {
   restart(seed: number) {
     this.save = {
       ...this.save,
-      state: createTactical(this.content, seed),
+      state: createDeployment(this.content, seed),
       paused: true,
       undo: [],
     };

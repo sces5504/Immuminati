@@ -64,6 +64,7 @@ describe("six distinct playable campaigns", () => {
         s = run(id);
       expect(s.result?.type).toBe(id === "m6" ? "limited" : "victory");
       const ctrl = new TacticalController(c);
+      ctrl.save.state = createTactical(c);
       ctrl.save.state = s;
       expect(parseTactical(JSON.stringify(ctrl.save), c).state).toEqual(s);
     });
@@ -72,6 +73,7 @@ describe("six distinct playable campaigns", () => {
       let a = createTactical(c, 7);
       for (let i = 0; i < 100; i++) a = stepTactical(a, c);
       const ctrl = new TacticalController(c);
+      ctrl.save.state = createTactical(c);
       ctrl.save.state = a;
       let b = parseTactical(JSON.stringify(ctrl.save), c).state;
       for (let i = 0; i < 100; i++) {
@@ -268,6 +270,7 @@ describe("campaign robustness", () => {
   it("a forged early limited ending and campaign victory record are rejected", () => {
     const c = tacticalScenarios.m6,
       ctrl = new TacticalController(c);
+    ctrl.save.state = createTactical(c);
     const raw = ctrl.snapshot();
     raw.state.result = {
       type: "limited",

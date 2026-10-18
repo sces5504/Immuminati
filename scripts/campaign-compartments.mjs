@@ -1,3 +1,4 @@
+import { configureCase } from "./deployment-helpers.mjs";
 // Real UI verification of each case's internal compartment. No fixture state injection.
 import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
@@ -60,6 +61,7 @@ try {
         .locator(".t-case-cards button")
         .nth(Number(id.slice(1)) - 1)
         .click();
+      await configureCase(p);
       await p.getByTestId("speed-toggle").click();
       await p.getByTestId("pause-toggle").click();
       await expect

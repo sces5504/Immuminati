@@ -1,3 +1,18 @@
+# 最新交接 v3.1（優先於下文 v3.0 基準）
+
+六關與14種免疫細胞／分化狀態已可玩。這輪保留模型與戰術UI，改為玩家開局部署、知識套組、手機雙指縮放，移除略過動畫鍵並調整首頁文案。最新進度／實測／發布見 [v3.1紀錄](DEPLOYMENT-AND-GESTURES.md)；外部美術建模組直接使用 [交接prompt](ART-HANDOFF-PROMPT.md)。原模型可替換但尚未經新一輪專業美化。
+
+- 新局使用 `createDeployment`；`createTactical` 僅為歷史active狀態／機制測試工廠，不再作正式新局隊伍。M3保留感染宿主，其他無預配可指揮隊伍。
+- `content/deployment.ts` 配置各關兩套知識套組；`engine/deployment.ts` 處理預算／撤下／套組／確認，`ui/DeploymentPanel.tsx` 沿用對話框及戰術語彙。12部署點不是單位上限；戰中募集無變。
+- preparation狀態阻止步進及戰鬥命令，確認時清undo階段邊界；已配置草稿可儲存／續玩。舊active state／undo無損遷移，絕不清隊。
+- 規則3.1／campaign.2，schema2。保留pre-3.1及歷史key；遷移中不重跑感染初始化。
+- `BattleScene.ts` 新增pointer集合／雙指中點錨定，暫時剩一指、第三指、取消／失焦後不得點選或移動細胞。不要為換模型改這套相機輸入。玩家UI無略過動畫，底層開發工具仍存在。
+- 新驗證：`npm run test:deployment`、`npm run test:deployment-policy` 及擴充的單元測試。原回歸腳本透過可見部署UI實際配置隊伍，不再假定u1是第一個新部署單位。重新發布的實測數字以v3.1紀錄為準。
+
+---
+
+以下為v3.0完整六關機制／架構基準；版本、開局配置及略過鍵描述依上文更新。
+
 # Immuminati 開發交接 v3.0
 
 公開站：[Immuminati](https://sces5504.github.io/Immuminati/?v=f004bdf)。本輪由 main `b10c428` 延續；遊戲程式來源 `ca00027`，最終驗證／發布來源 `f004bdf`。文件與證據提交不改遊戲資產。實際檢查見 [本輪驗證](CAMPAIGN-VERIFICATION.md)，不要引用舊64項或舊影片當作新驗證。

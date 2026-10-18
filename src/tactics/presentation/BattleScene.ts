@@ -108,7 +108,13 @@ export class BattleScene {
   private yaw = 0.48;
   private zoom = 1;
   private pan = new THREE.Vector3();
+  private contacts = new Map<number, { x: number; y: number }>();
+  private pinching = false;
+  private pinch?: { distance: number; x: number; y: number };
+  private swallowClick = false;
   private pointer?: {
+    id: number;
+    label: boolean;
     x: number;
     y: number;
     lastX: number;
@@ -192,11 +198,14 @@ export class BattleScene {
     this.buildTerrain();
     this.observer = new ResizeObserver(() => this.resize());
     this.observer.observe(host);
-    canvas.addEventListener("pointerdown", this.down);
-    canvas.addEventListener("pointermove", this.move);
-    canvas.addEventListener("pointerup", this.up);
-    canvas.addEventListener("pointercancel", this.cancelPointer);
+    host.addEventListener("pointerdown", this.down);
+    host.addEventListener("pointermove", this.move);
+    host.addEventListener("pointerup", this.up);
+    host.addEventListener("pointercancel", this.cancelPointer);
     canvas.addEventListener("wheel", this.wheel, { passive: false });
+    host.addEventListener("click", this.guardClick, true);
+    host.addEventListener("lostpointercapture", this.cancelPointer);
+    window.addEventListener("blur", this.resetPointers);
     this.lastEvent = this.read().state.eventId;
     this.lastSeed = this.read().state.seed;
     this.lastTick = this.read().state.tick;
@@ -1302,6 +1311,7 @@ export class BattleScene {
     this.camera.lookAt(this.pan.x, 0.5, this.pan.z);
     this.camera.updateProjectionMatrix();
     this.camera.updateMatrixWorld(true);
+    this.host.dataset.cameraZoom = this.zoom.toFixed(4);
     this.labels(this.read().state);
   }
   setZoom(delta: number) {
@@ -1323,16 +1333,45 @@ export class BattleScene {
     this.pan.set(0, 0, 0);
     this.updateCamera();
   }
+  private guardClick = (e: MouseEvent) => {
+    if (!this.swallowClick) return;
+    this.swallowClick = false;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  };
+  private pinchPair() {
+    const [a, b] = [...this.contacts.values()];
+    return a && b
+      ? {
+          distance: Math.max(20, Math.hypot(a.x - b.x, a.y - b.y)),
+          x: (a.x + b.x) / 2,
+          y: (a.y + b.y) / 2,
+        }
+      : undefined;
+  }
   private down = (e: PointerEvent) => {
     if (e.button !== 0) return;
+    if (!this.contacts.size) this.swallowClick = false;
+    this.contacts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (this.contacts.size > 1) {
+      this.pinching = true;
+      this.swallowClick = true;
+      this.pointer = undefined;
+      this.pinch = this.pinchPair();
+      for (const id of this.contacts.keys()) this.host.setPointerCapture(id);
+      return;
+    }
+    if (this.pinching) return;
     this.pointer = {
+      id: e.pointerId,
+      label: e.target instanceof Element && !!e.target.closest("button"),
       x: e.clientX,
       y: e.clientY,
       lastX: e.clientX,
       lastY: e.clientY,
       moved: false,
     };
-    this.canvas.setPointerCapture(e.pointerId);
+    if (!this.pointer.label) this.host.setPointerCapture(e.pointerId);
   };
   private groundAt(clientX: number, clientY: number) {
     const rect = this.canvas.getBoundingClientRect();
@@ -1349,10 +1388,28 @@ export class BattleScene {
     );
   }
   private move = (e: PointerEvent) => {
-    if (!this.pointer) return;
+    if (!this.contacts.has(e.pointerId)) return;
+    this.contacts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (this.pinching) {
+      const next = this.pinchPair();
+      if (next && this.pinch) {
+        const from = this.groundAt(this.pinch.x, this.pinch.y);
+        this.setZoom(this.zoom * (next.distance / this.pinch.distance - 1));
+        const to = this.groundAt(next.x, next.y);
+        if (from && to) {
+          this.pan.x = Math.max(-7, Math.min(7, this.pan.x + from.x - to.x));
+          this.pan.z = Math.max(-7, Math.min(7, this.pan.z + from.z - to.z));
+          this.updateCamera();
+        }
+      }
+      this.pinch = next;
+      return;
+    }
+    if (!this.pointer || this.pointer.id !== e.pointerId) return;
     const p = this.pointer;
     if (!p.moved && Math.hypot(e.clientX - p.x, e.clientY - p.y) <= 6) return;
     p.moved = true;
+    this.swallowClick = true;
     // Keep the grabbed ground point under the pointer. Ray/plane projection
     // handles camera pitch, yaw, zoom and viewport without inverted axes.
     const from = this.groundAt(p.lastX, p.lastY);
@@ -1366,6 +1423,16 @@ export class BattleScene {
     p.lastY = e.clientY;
   };
   private up = (e: PointerEvent) => {
+    if (!this.contacts.has(e.pointerId)) return;
+    if (this.pinching) {
+      this.contacts.delete(e.pointerId);
+      this.pinch = this.pinchPair();
+      if (!this.contacts.size) {
+        this.pinching = false;
+        this.pointer = undefined;
+      }
+      return;
+    }
     const active = this.pointer;
     // Touch moves may be coalesced until the next frame. Apply the release
     // position before clearing capture, so a quick swipe cannot become a click.
@@ -1377,7 +1444,8 @@ export class BattleScene {
       this.move(e);
     const down = this.pointer;
     this.pointer = undefined;
-    if (!down || down.moved) return;
+    this.contacts.delete(e.pointerId);
+    if (!down || down.moved || down.label) return;
     const rect = this.canvas.getBoundingClientRect(),
       p = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     const s = this.read().state;
@@ -1417,8 +1485,20 @@ export class BattleScene {
     const hit = this.groundAt(e.clientX, e.clientY);
     if (hit) this.pick({ type: "ground", point: { x: hit.x, z: hit.z } });
   };
-  private cancelPointer = () => {
+  private cancelPointer = (e: PointerEvent) => {
+    if (!this.contacts.has(e.pointerId)) return;
+    this.contacts.delete(e.pointerId);
     this.pointer = undefined;
+    this.swallowClick = true;
+    this.pinch = this.pinchPair();
+    if (!this.contacts.size) this.pinching = false;
+  };
+  private resetPointers = () => {
+    this.contacts.clear();
+    this.pointer = undefined;
+    this.pinching = false;
+    this.pinch = undefined;
+    this.swallowClick = true;
   };
   private wheel = (e: WheelEvent) => {
     e.preventDefault();
@@ -1426,11 +1506,15 @@ export class BattleScene {
   };
   dispose() {
     cancelAnimationFrame(this.raf);
+    this.resetPointers();
+    this.host.removeEventListener("click", this.guardClick, true);
+    this.host.removeEventListener("lostpointercapture", this.cancelPointer);
+    window.removeEventListener("blur", this.resetPointers);
     this.observer.disconnect();
-    this.canvas.removeEventListener("pointerdown", this.down);
-    this.canvas.removeEventListener("pointermove", this.move);
-    this.canvas.removeEventListener("pointerup", this.up);
-    this.canvas.removeEventListener("pointercancel", this.cancelPointer);
+    this.host.removeEventListener("pointerdown", this.down);
+    this.host.removeEventListener("pointermove", this.move);
+    this.host.removeEventListener("pointerup", this.up);
+    this.host.removeEventListener("pointercancel", this.cancelPointer);
     this.canvas.removeEventListener("wheel", this.wheel);
     for (const a of this.actors.values()) {
       a.lobes.dispose();

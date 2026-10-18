@@ -1,3 +1,9 @@
+import {
+  applyDeployment,
+  validateDeployment,
+  isDeploymentCommand,
+} from "./deployment";
+import { DEPLOYMENT_BUDGET } from "../content/deployment";
 import { victoryCondition, limitedCondition } from "./goals";
 import {
   initialCampaign,
@@ -152,6 +158,20 @@ export function createTactical(c: TacticalContent, seed = 1): TacticalState {
   initialCampaign(s, c);
   return s;
 }
+/** New sessions choose a roster; createTactical remains the active-state/legacy fixture factory. */
+export function createDeployment(c: TacticalContent, seed = 1): TacticalState {
+  if (c.practice) return createTactical(c, seed);
+  const resident =
+    c.mechanics === "containment"
+      ? c.initial.filter((u) => u.kind === "macrophage").slice(0, 1)
+      : [];
+  const s = createTactical({ ...c, initial: resident }, seed);
+  s.preparation = {
+    remaining: DEPLOYMENT_BUDGET,
+    fixed: s.cells.map((u) => u.id),
+  };
+  return s;
+}
 function pathTo(cell: Cell, point: Vec, c: TacticalContent) {
   const from = fieldOf(cell.position, c),
     to = fieldOf(point, c);
@@ -164,6 +184,8 @@ export function validateTactical(
   c: TacticalContent,
 ): string | undefined {
   if (s.result) return "此局已結算，請重試。";
+  if (s.preparation || isDeploymentCommand(cmd))
+    return validateDeployment(s, cmd, c);
   if (cmd.type === "mark" || cmd.type === "antibody") {
     const p = s.colonies.find((p) => p.id === cmd.target && p.load > 0);
     if (!p) return "此菌群已清除。";
@@ -224,6 +246,10 @@ export function commandTactical(
   const error = validateTactical(before, cmd, c);
   if (error) return { state: before, error };
   const s = copy(before);
+  if (isDeploymentCommand(cmd)) {
+    applyDeployment(s, cmd, c);
+    return { state: s };
+  }
   if (cmd.type === "mark") {
     const p = s.colonies.find((p) => p.id === cmd.target)!;
     s.energy -= c.markCost;
@@ -354,7 +380,7 @@ export function stepTactical(
   before: TacticalState,
   c: TacticalContent,
 ): TacticalState {
-  if (before.result) return before;
+  if (before.result || before.preparation) return before;
   const s = copy(before);
   s.tick++;
   if (s.tick % c.energyEvery === 0)

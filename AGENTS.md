@@ -1,3 +1,9 @@
+# 最新授權 v3.1（優先於下文歷史規格）
+
+新局先由玩家選知識套組／自行部署，12初始部署點與戰鬥資源分開，M3感染巨噬宿主不能撤下；舊存檔保留隊伍、進度與undo，不重新部署。移除戰場略過動畫鍵，首頁文案改為運用免疫知識／直觀看見結果。手機雙指縮放只改相機，保留單指同向拖曳及±替代操作，放一指／cancel不得誤下指令。規則3.1／campaign.2，原文備份pre-3.1，舊key不刪。
+
+現行追加：[部署／手勢與實測](docs/DEPLOYMENT-AND-GESTURES.md)。美術接手用 [ART-HANDOFF-PROMPT.md](docs/ART-HANDOFF-PROMPT.md)，先做一組可審閱樣本，保留舊模型回退路徑，不改玩法或整套UI；這是交接建議，使用者後續授權優先。
+
 # 本輪授權更新（v3.0，優先於下文歷史範圍）
 
 使用者明確授權完成 M2–M6 與相關細胞、修正手機 UI、抗體模型／附著及 T–B 協作，並驗證發布 Pages。下文「不要新增 M2–M6」是舊輪次範圍，本輪不適用。保留既有立體戰術介面、操作、六關開場可選、M3 控制感染與 M6 有限結局，不能重做整套 RTS。新規則 3.0／內容 campaign.1；舊 state／undo 顯式遷移並備份原文。
@@ -6,7 +12,7 @@
 
 ## 現行方向與讀取順序
 
-1. [主規格 v3.0](docs/Immuminati-spec.md)：唯一現行產品／玩法依據。
+1. [主規格 v3.1](docs/Immuminati-spec.md)：唯一現行產品／玩法依據。
 2. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)。
 3. [開發交接](docs/CLOUD-HANDOFF.md)。
 4. 實際檢視 `docs/evidence/tactics/desktop-field.png`、`mobile-field.png` 與既有遊戲；C 概念圖作風格來源。

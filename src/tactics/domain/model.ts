@@ -169,6 +169,7 @@ export interface Result {
 }
 export interface TacticalState {
   version: 2;
+  preparation?: { remaining: number; fixed: string[] };
   scenario: string;
   seed: number;
   rng: number;
@@ -264,6 +265,10 @@ export interface TacticalContent {
   stars: [number, number];
 }
 export type TacticalCommand =
+  | { type: "deploy"; kind: CellType; region: string }
+  | { type: "withdraw"; cell: string }
+  | { type: "deploy-kit"; kit: string }
+  | { type: "begin" }
   | { type: "move"; cell: string; point: Vec }
   | { type: "attack"; cell: string; target: string }
   | { type: "guard"; cell: string }
@@ -281,8 +286,8 @@ export interface TacticalSettings {
 }
 export interface TacticalSave {
   schema: 2;
-  rules: "3.0";
-  content: "campaign.1";
+  rules: "3.1";
+  content: "campaign.2";
   state: TacticalState;
   paused: boolean;
   undo: TacticalState[];

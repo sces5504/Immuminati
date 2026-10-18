@@ -199,9 +199,38 @@ jobs:
         with:
           name: campaign-${{ matrix.device }}-${{ matrix.case }}-evidence
           path: docs/evidence/ci/campaign-${{ matrix.device }}-${{ matrix.case }}/
+  deployment:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        device: [desktop, mobile, narrow]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: production-dist
+          path: dist
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:deployment
+        env:
+          DEVICE: ${{ matrix.device }}
+          EVIDENCE_DIR: docs/evidence/ci/deployment-${{ matrix.device }}/
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deployment-${{ matrix.device }}-evidence
+          path: docs/evidence/ci/deployment-${{ matrix.device }}/
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    needs: [verify, browser, immune, anatomy, clarity, animation, campaign]
+    needs: [verify, browser, immune, anatomy, clarity, animation, campaign, deployment]
     runs-on: ubuntu-latest
     permissions:
       pages: write

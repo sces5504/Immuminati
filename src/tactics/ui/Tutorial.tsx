@@ -9,8 +9,8 @@ const steps = [
   },
   {
     title: "選擇免疫細胞",
-    text: "點下方單位清單的巨噬細胞。場上模型與清單都能選取，底部會顯示它的功能。",
-    target: '[data-cell-id="u1"]',
+    text: "點下方單位清單的任一已部署細胞。場上模型與清單都能選取，底部會顯示它的功能。",
+    target: ".t-roster>button[data-cell-id]",
   },
   {
     title: "調度到另一防區",

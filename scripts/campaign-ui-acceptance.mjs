@@ -1,3 +1,4 @@
+import { configureM1 } from "./deployment-helpers.mjs";
 import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
 import { mkdir, writeFile } from "node:fs/promises";
@@ -55,6 +56,7 @@ try {
     p.on("pageerror", (e) => errors.push(e.message));
     await p.goto(target);
     await p.getByRole("button", { name: "開始 M1", exact: true }).click();
+    await configureM1(p);
     const read = () =>
       p.evaluate(() =>
         JSON.parse(localStorage.getItem("immuminati:tactics:v2")),
@@ -63,13 +65,11 @@ try {
     const fixture = structuredClone(original);
     fixture.state.immunity.antibodies = 3;
     await p.getByRole("button", { name: "設定與存檔" }).click();
-    await p
-      .getByLabel("新版存檔檔案")
-      .setInputFiles({
-        name: "stock-fixture.json",
-        mimeType: "application/json",
-        buffer: Buffer.from(JSON.stringify(fixture)),
-      });
+    await p.getByLabel("新版存檔檔案").setInputFiles({
+      name: "stock-fixture.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(fixture)),
+    });
     await p.getByRole("button", { name: "繼續防線 →" }).click();
     await p.getByTestId("antibody-tool").click();
     await expect(p.getByRole("region", { name: "B 細胞與抗體" })).toHaveCount(
@@ -87,7 +87,7 @@ try {
     await p.screenshot({ path: dir + device + "-antibody-attached.png" });
     await p.getByTestId("colony-antibody").click();
     assert.equal((await read()).state.immunity.antibodies, 2);
-    await p.getByTestId("skip-effects").click();
+    await expect(p.getByTestId("skip-effects")).toHaveCount(0);
     assert.deepEqual((await read()).state, saved.state);
     await p.getByTestId("antibody-explain").click();
     await expect(p.getByRole("region", { name: "B 細胞與抗體" })).toBeVisible();
@@ -97,13 +97,11 @@ try {
     inter.state.colonies = [];
     inter.state.internal = [];
     await p.getByRole("button", { name: "設定與存檔" }).click();
-    await p
-      .getByLabel("新版存檔檔案")
-      .setInputFiles({
-        name: "inter-wave-layout.json",
-        mimeType: "application/json",
-        buffer: Buffer.from(JSON.stringify(inter)),
-      });
+    await p.getByLabel("新版存檔檔案").setInputFiles({
+      name: "inter-wave-layout.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(inter)),
+    });
     await p.getByRole("button", { name: "繼續防線 →" }).click();
     const next = await p.locator(".t-next-wave").evaluate((el) => {
       const r = el.getBoundingClientRect(),
@@ -145,7 +143,7 @@ try {
         "stock tool targets directly",
         "one antibody charge; independent energy and living load",
         "duplicate rejected",
-        "cosmetic skip never changes state",
+        "skip button removed; cosmetic waiting never changes paused state",
         "independent explanation entry",
         "next wave reward and right-side help stay in bounds",
         "home saves and pauses",

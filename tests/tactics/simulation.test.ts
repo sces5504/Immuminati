@@ -147,6 +147,7 @@ describe("spatial fixed-step tactics", () => {
   });
   it("allows crowded-region movement, attacks, recruitment, arrival and saves beyond old limits", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     const s = ctrl.save.state;
     // This fixture measures manual crowded deployment, not autonomous redistribution.
     s.immunity.autoSeek = false;
@@ -247,6 +248,7 @@ describe("spatial fixed-step tactics", () => {
     c.waves = [c.waves[0]];
     c.stars = [95, 90];
     const ctrl = new TacticalController(c);
+    ctrl.save.state = createTactical(c);
     expect(ctrl.save.state.scenario).toBe(c.id);
     expect(
       parseTactical(JSON.stringify(ctrl.snapshot()), c).state.scenario,
@@ -294,6 +296,7 @@ describe("spatial fixed-step tactics", () => {
 describe("pause, save and rendering independence", () => {
   it("pause stops authority; planned orders undo resources, positions and event IDs", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     const before = ctrl.snapshot();
     ctrl.step();
     expect(ctrl.snapshot()).toEqual(before);
@@ -308,6 +311,7 @@ describe("pause, save and rendering independence", () => {
   });
   it("roundtrips pause plans; invalid data is rejected without overwriting", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.command({ type: "mark", target: ctrl.save.state.colonies[0].id });
     const parsed = parseTactical(JSON.stringify(ctrl.snapshot()), m1);
     expect(parsed).toEqual(ctrl.snapshot());
@@ -327,6 +331,7 @@ describe("pause, save and rendering independence", () => {
   });
   it("upgrades legacy rule labels without changing saved combat or pause plans", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.command({ type: "mark", target: ctrl.save.state.colonies[0].id });
     const legacy = {
       ...ctrl.snapshot(),
@@ -340,6 +345,7 @@ describe("pause, save and rendering independence", () => {
   });
   it("completed final-wave saves roundtrip with bounded planning history", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.save.state = defend(1, "reinforce").s;
     expect(ctrl.save.state.wave).toBe(2);
     expect(parseTactical(JSON.stringify(ctrl.snapshot()), m1).state).toEqual(
@@ -360,6 +366,7 @@ describe("pause, save and rendering independence", () => {
   it("normal, accelerated scheduling and reduced visuals consume identical fixed steps", () => {
     const run = (batch: number, reduced: boolean) => {
       const ctrl = new TacticalController(m1);
+      ctrl.save.state = createTactical(m1);
       ctrl.save.settings.reduced = reduced;
       ctrl.command({ type: "mark", target: ctrl.save.state.colonies[0].id });
       ctrl.pause(false);

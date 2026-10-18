@@ -1,3 +1,4 @@
+import { configureCase } from "./deployment-helpers.mjs";
 import { chromium, expect } from "@playwright/test";
 import { mkdir, writeFile, rm, appendFile } from "node:fs/promises";
 import { spawn } from "node:child_process";
@@ -44,7 +45,7 @@ const log = async (...args) => {
 const plans = {
   m1: [[0, "neutrophil", "a"]],
   m2: [
-    [0, "th1", "a"],
+    [0, "neutrophil", "b"],
     [100, "macrophage", "b"],
     [260, "neutrophil", "c"],
   ],
@@ -53,18 +54,18 @@ const plans = {
     [180, "macrophage", "a"],
   ],
   m4: [
-    [0, "cytotoxicT", "b"],
+    [0, "macrophage", "a"],
     [160, "pdc", "a"],
     [300, "helperT", "c"],
     [450, "bcell", "c"],
   ],
   m5: [
     [0, "neutrophil", "b"],
-    [150, "th17", "a"],
+    [150, "neutrophil", "a"],
     [300, "neutrophil", "c"],
   ],
   m6: [
-    [0, "cytotoxicT", "b"],
+    [0, "pdc", "a"],
     [150, "pdc", "a"],
   ],
 };
@@ -110,6 +111,7 @@ try {
         .nth(Number(id.slice(1)) - 1)
         .click();
       await page.clock.runFor(200);
+      await configureCase(page);
       const read = () =>
         page.evaluate(() =>
           JSON.parse(localStorage.getItem("immuminati:tactics:v2")),

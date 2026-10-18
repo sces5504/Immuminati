@@ -132,13 +132,14 @@ describe("consistent host anatomy and explicit pathogen compartments", () => {
   });
   it("2.2 migration preserves state and undo, adds healthy anatomy without inventing past infections", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.command({ type: "mark", target: ctrl.save.state.colonies[0].id });
     const raw: any = ctrl.snapshot();
     raw.rules = "2.2";
     raw.content = "m1-tactics.3";
     for (const state of [raw.state, ...raw.undo]) state.hosts = [];
     const next = parseTactical(JSON.stringify(raw), m1);
-    expect(next.rules).toBe("3.0");
+    expect(next.rules).toBe("3.1");
     expect(next.state.tick).toBe(raw.state.tick);
     expect(next.state.energy).toBe(4);
     expect(next.undo[0].energy).toBe(5);
@@ -151,6 +152,7 @@ describe("consistent host anatomy and explicit pathogen compartments", () => {
   });
   it("save round trips processing cargo and rejects incomplete compartments and invented M1 viral infection", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.save.state.cells[0].position = {
       ...ctrl.save.state.colonies[0].position,
     };
@@ -173,6 +175,7 @@ describe("consistent host anatomy and explicit pathogen compartments", () => {
   });
   it("processing, cell identities and results survive a save reload with identical fixed steps", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.save.state.cells[0].position = {
       ...ctrl.save.state.colonies[0].position,
     };

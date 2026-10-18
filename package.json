@@ -17,7 +17,9 @@
     "test:anatomy": "node scripts/anatomy-acceptance.mjs",
     "test:clarity": "node scripts/ui-clarity-acceptance.mjs",
     "test:campaign": "node scripts/campaign-acceptance.mjs",
-    "test:campaign-ui": "node scripts/campaign-ui-acceptance.mjs"
+    "test:campaign-ui": "node scripts/campaign-ui-acceptance.mjs",
+    "test:deployment": "node scripts/deployment-acceptance.mjs",
+    "test:deployment-policy": "node scripts/deployment-policy.mjs"
   },
   "dependencies": {
     "react": "19.2.0",

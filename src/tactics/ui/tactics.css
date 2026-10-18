@@ -3086,9 +3086,6 @@
     font-size: 10px;
     padding: 5px 6px;
   }
-  .t-strategy-tools .t-skip-effects {
-    font-size: 9px;
-  }
 }
 .t-antibody-card .t-card-heading > button {
   width: 44px;
@@ -3159,4 +3156,202 @@
     min-height: 44px;
     width: 44px;
   }
+}
+
+/* v3.1 pre-infection choices reuse the existing dialog and tactical palette. */
+.t-deployment {
+  padding: 0 24px 20px;
+  color: var(--text, #e0eef5);
+}
+.t-deployment p {
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+.t-deploy-budget {
+  display: grid;
+  gap: 5px;
+  padding: 12px 0;
+}
+.t-deploy-budget small,
+.t-deploy-note,
+.t-deploy-custom p {
+  color: #afc4d2;
+  font-size: 12px;
+}
+.t-deploy-kits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.t-deploy-kits > button {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid #617e91;
+  border-radius: 12px;
+  background: #263e52;
+  color: #e0eef5;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+.t-deploy-kits b {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  justify-content: space-between;
+  font-size: 15px;
+}
+.t-deploy-kits span {
+  font-size: 13px;
+  line-height: 1.6;
+}
+.t-deploy-kits small {
+  color: #b9d2df;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.t-deploy-roster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+.t-deploy-roster > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #213549;
+  border-radius: 8px;
+  padding-left: 6px;
+  font-size: 12px;
+}
+.t-deploy-roster svg {
+  width: 30px;
+  height: 30px;
+}
+.t-deploy-roster button {
+  min-width: 44px;
+  min-height: 44px;
+  color: #d9ebf3;
+  border: 0;
+  background: #30485e;
+  border-radius: 6px;
+}
+.t-deploy-custom summary {
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  color: #9bdae4;
+}
+.t-deploy-custom label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+.t-deploy-custom select {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  background: #213549;
+  color: #e0eef5;
+  border: 1px solid #617e91;
+  border-radius: 6px;
+}
+.t-deploy-cells {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.t-deploy-cells button {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: #263e52;
+  color: #e0eef5;
+  border: 1px solid #617e91;
+  border-radius: 8px;
+}
+.t-deploy-cells svg {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.t-deploy-cells span {
+  font-size: 12px;
+  text-align: left;
+}
+.t-deploy-cells small {
+  display: block;
+  font-size: 11px;
+  color: #b9d2df;
+}
+.t-deployment button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.t-deployment footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  position: sticky;
+  bottom: -1px;
+  background: #192d40;
+  padding: 10px 0;
+}
+.t-deployment footer button {
+  min-height: 44px;
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #617e91;
+  border-radius: 8px;
+  color: #e0eef5;
+  background: #263e52;
+  white-space: nowrap;
+  font-size: 13px;
+}
+.t-deployment footer .t-primary {
+  background: #9bd4df;
+  color: #183347;
+}
+@media (max-width: 600px) {
+  .t-deployment {
+    padding: 0 16px 16px;
+  }
+  .t-deploy-kits {
+    grid-template-columns: 1fr;
+  }
+  .t-deploy-kits > button {
+    gap: 5px;
+    padding: 10px;
+  }
+  .t-deploy-cells {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* Limit gesture handling to the battlefield; dialogs and page zoom retain browser defaults. */
+.t-scene {
+  touch-action: none;
+}
+.tactical-root dialog:has(.t-deployment),
+.tactical-root dialog:has(.t-deployment) .dialog-header {
+  background: #192d40;
+  color: #e0eef5;
+  border-color: #48647a;
+}
+.tactical-root dialog:has(.t-deployment) .dialog-header {
+  border-bottom: 1px solid #48647a;
+}
+.tactical-root dialog:has(.t-deployment) button:hover:not(:disabled) {
+  background: #365a71;
+}
+.tactical-root dialog:has(.t-deployment) .t-primary:hover:not(:disabled) {
+  background: #b2e5ec;
+  color: #183347;
 }

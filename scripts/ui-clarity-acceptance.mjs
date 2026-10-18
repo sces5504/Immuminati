@@ -1,3 +1,4 @@
+import { configureM1 } from "./deployment-helpers.mjs";
 import { chromium, expect } from "@playwright/test";
 import assert from "node:assert/strict";
 import { mkdir, writeFile, rm } from "node:fs/promises";
@@ -72,6 +73,7 @@ try {
     };
     await page.goto(url);
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
+    await configureM1(page);
     await page.waitForTimeout(1200);
     assert.equal((await save()).state.immunity.autoSeek, true);
     await expect(page.locator(".t-world-labels")).toHaveClass(/is-minimal/);

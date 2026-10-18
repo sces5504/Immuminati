@@ -1,3 +1,4 @@
+import { configureM1 } from "./deployment-helpers.mjs";
 import { chromium, expect } from "@playwright/test";
 import { OrthographicCamera, Vector3 } from "three";
 import assert from "node:assert/strict";
@@ -74,9 +75,10 @@ try {
       );
     await page.goto(target);
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
+    await configureM1(page);
     await page.waitForTimeout(1200);
     const initial = await saved();
-    assert.equal(initial.rules, "3.0");
+    assert.equal(initial.rules, "3.1");
     assert.equal(initial.state.hosts.length, 32);
     assert.equal(
       await page.evaluate(
@@ -157,7 +159,9 @@ try {
       passed: true,
     });
     // Real play: observe engulfed live cargo, pause to inspect, then resume until killing completes.
-    await page.locator('[data-cell-id="u1"]').click();
+    await page
+      .locator(`[data-cell-id="${(await saved()).state.cells[0].id}"]`)
+      .click();
     await page.getByTestId("pause-toggle").click();
     await page.waitForFunction(
       () =>

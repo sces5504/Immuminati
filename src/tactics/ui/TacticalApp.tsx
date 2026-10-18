@@ -1,8 +1,9 @@
+import { DeploymentPanel } from "./DeploymentPanel";
 import { AntibodyPanel } from "./AntibodyPanel";
 import { coatings } from "../engine/opsonization";
 import { AnatomyPanel } from "./AnatomyPanel";
 import { hostStatus, tissueCellCatalog } from "../content/anatomy";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type {
   CellType,
   TacticalCommand,
@@ -13,6 +14,7 @@ import type {
 import { m1, tacticalScenarios } from "../content/m1";
 import { TacticalController } from "../application/controller";
 import {
+  createTactical,
   distance,
   fieldOf,
   loadOf,
@@ -79,6 +81,8 @@ export default function TacticalApp() {
     return ctrl;
   });
   const content = controller.content;
+  // Landing specimen is visual only; never becomes the player's deployed team.
+  const specimen = useMemo(() => createTactical(content, 1), [content]);
   const [snapshot, setSnapshot] = useState(() => controller.snapshot());
   const [home, setHome] = useState(true);
   const homeRef = useRef(true);
@@ -93,7 +97,7 @@ export default function TacticalApp() {
   const [notice, setNotice] = useState(
     boot.error ??
       (boot.migrated
-        ? "已升級至規則 3.0：保留原局與自動尋敵選擇，分開記錄補體與抗體；首次儲存另留原始備份。"
+        ? "已升級至規則 3.1：保留原局與自動尋敵選擇，分開記錄補體與抗體；首次儲存另留原始備份。"
         : ""),
   );
   const [storage, setStorage] = useState(boot.save ? "已載入存檔" : "本機存檔");
@@ -147,7 +151,7 @@ export default function TacticalApp() {
   };
   function pick(pick: Pick) {
     const s = controller.save.state;
-    if (homeRef.current || s.result) return;
+    if (homeRef.current || s.result || s.preparation) return;
     if (pick.type === "cell") {
       setNotice("");
       setSelected(pick.id);
@@ -210,7 +214,13 @@ export default function TacticalApp() {
         host.current!,
         canvas.current!,
         content,
-        () => ({ ...input.current, state: controller.save.state }),
+        () => ({
+          ...input.current,
+          state:
+            homeRef.current && controller.save.state.preparation
+              ? specimen
+              : controller.save.state,
+        }),
         (p) => pickRef.current(p),
       );
       scene.current = view;
@@ -465,8 +475,8 @@ export default function TacticalApp() {
       setRegion((nextContent ?? content).fields[0].id);
       setImported(true);
       setNotice(
-        JSON.parse(text).rules !== "3.0"
-          ? "已匯入並升級至規則 3.0；保留原局與尋敵選擇，分開補體／抗體期限，不追算過去免疫反應。"
+        JSON.parse(text).rules !== "3.1"
+          ? "已匯入並升級至規則 3.1；保留原局與尋敵選擇，分開補體／抗體期限，不追算過去免疫反應。"
           : "已匯入新版存檔，繼續遊玩時先維持戰術暫停。",
       );
     } catch (e) {
@@ -528,6 +538,7 @@ export default function TacticalApp() {
       data-selected={selected}
       data-autoseek={s.immunity.autoSeek}
       data-speed={snapshot.settings.speed}
+      data-preparing={!!s.preparation}
       data-internal-load={s.internal.reduce((n, p) => n + p.load, 0)}
     >
       <div className="t-scene" ref={host} data-testid="tactical-scene">
@@ -685,6 +696,14 @@ export default function TacticalApp() {
           </button>
         </div>
       </header>
+      {!home && s.preparation && (
+        <DeploymentPanel
+          state={s}
+          content={content}
+          command={command}
+          onBack={back}
+        />
+      )}
       {notice && (
         <div className="t-notice" role="status">
           <span>{notice}</span>
@@ -716,7 +735,11 @@ export default function TacticalApp() {
               >
                 開始 M1 <span>↗</span>
               </button>
-              {boot.save || imported || s.tick > 0 || s.eventId > 1 ? (
+              {boot.save ||
+              imported ||
+              (s.preparation && storage === "已儲存") ||
+              s.tick > 0 ||
+              s.eventId > 1 ? (
                 <button className="t-outline" onClick={() => start(false)}>
                   繼續防線 →
                 </button>
@@ -725,7 +748,7 @@ export default function TacticalApp() {
             <div className="t-landing-facts">
               <span>即時行動</span>
               <span>隨時暫停部署</span>
-              <span>無永久戰力升級</span>
+              <span>運用免疫知識 · 直觀看見結果</span>
             </div>
           </div>
           <div className="t-landing-specimen">
@@ -1023,13 +1046,6 @@ export default function TacticalApp() {
               {snapshot.settings.speed}×
             </button>
             <button
-              className="t-skip-effects"
-              data-testid="skip-effects"
-              onClick={() => scene.current?.skipEffects()}
-            >
-              略過動畫
-            </button>
-            <button
               data-testid="immune-panel"
               onClick={() => {
                 setSeenMechanisms(true);
@@ -1182,7 +1198,7 @@ export default function TacticalApp() {
               className="t-camera-hint"
               onClick={() => setCameraHint(false)}
             >
-              拖曳移動畫面 · ＋／− 調整鏡頭 <span>×</span>
+              單指拖曳 · 雙指縮放 · ＋／− 也可調整 <span>×</span>
             </button>
           )}
           {mode !== "command" && (

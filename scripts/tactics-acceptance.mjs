@@ -1,3 +1,4 @@
+import { configureM1 } from "./deployment-helpers.mjs";
 import { chromium, expect as baseExpect } from "@playwright/test";
 import { spawn } from "node:child_process";
 import { mkdir, writeFile, rm } from "node:fs/promises";
@@ -116,6 +117,7 @@ try {
     await page.waitForTimeout(600);
     await page.screenshot({ path: dir + name + "-home.png" });
     await page.getByRole("button", { name: "開始 M1", exact: true }).click();
+    await configureM1(page);
     await expect(page.locator(".t-colony-label")).toHaveCount(3);
     assert.equal((await save(page)).paused, true);
     const pristine = {
@@ -131,7 +133,7 @@ try {
     });
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.deepEqual((await save(page)).state, pristine.state);
-    assert.equal((await save(page)).rules, "3.0");
+    assert.equal((await save(page)).rules, "3.1");
     if ((await save(page)).state.immunity.autoSeek)
       await page.getByTestId("autoseek").click();
     record(name + ": zero-tick legacy imports can resume without restarting");
@@ -207,11 +209,13 @@ try {
     // Real mouse/touch gestures must move a projected landmark with the drag,
     // at every quarter-turn and at both tested zooms. No test-only scene hook.
     const cdp = mobile ? await ctx.newCDPSession(page) : null;
-    const marker = () =>
-      page.locator('[data-world-label="u1"]').evaluate((el) => {
-        const m = new DOMMatrix(getComputedStyle(el).transform);
-        return { x: m.m41, y: m.m42 };
-      });
+    const marker = async () =>
+      page
+        .locator(`[data-world-label="${(await save(page)).state.cells[0].id}"]`)
+        .evaluate((el) => {
+          const m = new DOMMatrix(getComputedStyle(el).transform);
+          return { x: m.m41, y: m.m42 };
+        });
     const drag = async (dx, dy) => {
       // CDP bypasses locator actionability: let the compositor commit the new
       // camera/label hit regions before choosing a genuinely open touch point.
@@ -327,7 +331,9 @@ try {
         ": grab-map drag follows mouse/touch across rotation and zoom without issuing orders",
       dragResults,
     );
-    const unitLabel = page.locator('[data-world-label="u1"]');
+    const unitLabel = page.locator(
+      `[data-world-label="${(await save(page)).state.cells[0].id}"]`,
+    );
     const box = await unitLabel.boundingBox();
     if (mobile)
       await page.touchscreen.tap(
@@ -341,10 +347,12 @@ try {
       );
     await expect(page.locator(".tactical-root")).toHaveAttribute(
       "data-selected",
-      "u1",
+      (await save(page)).state.cells[0].id,
     );
     // Use stable roster hit targets to issue explicit physical movement and then a legal attack.
-    await page.locator('[data-cell-id="u1"]').click();
+    await page
+      .locator(`[data-cell-id="${(await save(page)).state.cells[0].id}"]`)
+      .click();
     const original = (await save(page)).state.cells[0].position;
     await page.getByRole("button", { name: "防區深部肺泡" }).click();
     assert((await save(page)).state.cells[0].path.length > 1);
@@ -451,7 +459,9 @@ try {
     });
     await page.getByRole("button", { name: "繼續防線 →" }).click();
     assert.equal((await save(page)).state.cells.length, 30);
-    await page.locator('[data-cell-id="u1"]').click();
+    await page
+      .locator(`[data-cell-id="${(await save(page)).state.cells[0].id}"]`)
+      .click();
     // Crowded map labels can overlap in portrait. Use the existing direct
     // target gesture instead of forcing a click through an occluded field.
     const crowdTarget = crowded.state.colonies.find((p) => p.region === "b");
@@ -500,6 +510,7 @@ try {
   page.setDefaultTimeout(20000);
   await page.goto(url);
   await page.getByRole("button", { name: "開始 M1", exact: true }).click();
+  await configureM1(page);
   const p = (await save(page)).state.colonies[0];
   await selectColony(page, p.id);
   await page.getByTestId("apply-mark").click();

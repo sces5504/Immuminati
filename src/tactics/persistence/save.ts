@@ -1,3 +1,4 @@
+import { DEPLOYMENT_BUDGET } from "../content/deployment";
 import { victoryCondition, limitedCondition } from "../engine/goals";
 import { coatings } from "../engine/opsonization";
 import { populateTissue } from "../content/anatomy";
@@ -40,6 +41,13 @@ const result = z
 const battle = z
   .object({
     version: z.literal(2),
+    preparation: z
+      .object({
+        remaining: integer(DEPLOYMENT_BUDGET),
+        fixed: z.array(id).max(1),
+      })
+      .strict()
+      .optional(),
     scenario: id,
     seed: integer(4294967295),
     rng: integer(4294967295),
@@ -245,7 +253,7 @@ const battle = z
 const schema = z
   .object({
     schema: z.literal(2),
-    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4", "3.0"]),
+    rules: z.enum(["2.0", "2.1", "2.2", "2.3", "2.4", "3.0", "3.1"]),
     content: z.enum([
       "m1-tactics.1",
       "m1-tactics.2",
@@ -253,6 +261,7 @@ const schema = z
       "m1-tactics.4",
       "m1-tactics.5",
       "campaign.1",
+      "campaign.2",
     ]),
     state: battle,
     paused: z.boolean(),
@@ -272,6 +281,42 @@ const schema = z
   })
   .strict();
 function check(s: TacticalState, c: TacticalContent) {
+  if (s.preparation) {
+    const p = s.preparation;
+    const fixed = s.cells.filter((u) => p.fixed.includes(u.id));
+    if (
+      s.tick !== 0 ||
+      s.result ||
+      s.arrivals.length ||
+      s.energy !== 5 ||
+      s.support !== 6 ||
+      new Set(p.fixed).size !== p.fixed.length ||
+      fixed.length !== p.fixed.length ||
+      (c.mechanics === "containment"
+        ? fixed.length !== 1 ||
+          fixed[0].kind !== "macrophage" ||
+          !s.internal.some(
+            (i) => i.host === fixed[0].id && i.stage === "persistent",
+          )
+        : fixed.length !== 0) ||
+      s.cells
+        .filter((u) => !p.fixed.includes(u.id))
+        .some(
+          (u) =>
+            !c.cells[u.kind].recruitable ||
+            u.activation ||
+            u.antigen ||
+            u.recognized ||
+            u.path.length ||
+            u.order.type !== "guard",
+        ) ||
+      s.cells
+        .filter((u) => !p.fixed.includes(u.id))
+        .reduce((n, u) => n + c.cells[u.kind].cost, p.remaining) !==
+        DEPLOYMENT_BUDGET
+    )
+      throw new Error("開局部署資料不一致。");
+  }
   if (c.mechanics && !s.campaign) throw new Error("缺少關卡機制狀態。");
   if (s.result?.type === "limited" && c.mechanics !== "retroviral")
     throw new Error("特殊結局不屬於此關。");
@@ -411,12 +456,13 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     "2.3": "m1-tactics.4",
     "2.4": "m1-tactics.5",
     "3.0": "campaign.1",
+    "3.1": "campaign.2",
   };
   if (versions[data.rules] !== data.content)
     throw new Error("規則與內容版本不一致。");
   const migrate = (state: typeof data.state): TacticalState => {
     if (
-      data.rules === "3.0" &&
+      ["3.0", "3.1"].includes(data.rules) &&
       (!state.immunity ||
         !state.hosts?.length ||
         Object.values(state.immunity.signals).some(
@@ -428,12 +474,12 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
     )
       throw new Error("新版免疫／組織狀態不完整。");
     if (
-      ["2.2", "2.3", "2.4", "3.0"].includes(data.rules) &&
+      ["2.2", "2.3", "2.4", "3.0", "3.1"].includes(data.rules) &&
       (!state.immunity || !state.hosts)
     )
       throw new Error("新版免疫狀態不完整。");
     if (
-      ["2.3", "2.4", "3.0"].includes(data.rules) &&
+      ["2.3", "2.4", "3.0", "3.1"].includes(data.rules) &&
       (!state.hosts?.length ||
         state.hosts.some(
           (h) =>
@@ -447,6 +493,8 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
         ))
     )
       throw new Error("新版組織／區室狀態不完整。");
+    if (data.rules !== "3.1" && state.preparation)
+      throw new Error("舊規則不可包含開局部署狀態。");
     const migrated: TacticalState = {
       ...state,
       immunity: {
@@ -475,14 +523,14 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
         clearAt: p.clearAt ?? 0,
       })),
     };
-    if (!["2.4", "3.0"].includes(data.rules))
+    if (!["2.4", "3.0", "3.1"].includes(data.rules))
       for (const p of migrated.colonies) {
         const previous = coatings(p, 0);
         p.complementUntil = previous.complementUntil;
         p.antibodyUntil = previous.antibodyUntil;
       }
     if (
-      !["2.3", "2.4", "3.0"].includes(data.rules) &&
+      !["2.3", "2.4", "3.0", "3.1"].includes(data.rules) &&
       !migrated.hosts.some((h) => h.wall)
     )
       populateTissue(migrated, c);
@@ -490,11 +538,13 @@ export function parseTactical(text: string, c: TacticalContent): TacticalSave {
   };
   const save: TacticalSave = {
     ...data,
-    rules: "3.0",
-    content: "campaign.1",
+    rules: "3.1",
+    content: "campaign.2",
     state: migrate(data.state),
     undo: data.undo.map(migrate),
   };
+  if (save.state.preparation && !save.paused)
+    throw new Error("開局部署必須暫停。");
   check(save.state, c);
   for (const snapshot of save.undo) {
     check(snapshot, c);
@@ -522,7 +572,7 @@ export function readTactical(c: TacticalContent): {
     return value
       ? {
           save: parseTactical(value, c),
-          migrated: JSON.parse(value).rules !== "3.0",
+          migrated: JSON.parse(value).rules !== "3.1",
         }
       : {};
   } catch (e) {
@@ -540,10 +590,10 @@ export function writeTactical(save: TacticalSave) {
     }
     if (
       previous &&
-      previousRules !== "3.0" &&
-      !localStorage.getItem("immuminati:tactics:pre-3.0")
+      previousRules !== "3.1" &&
+      !localStorage.getItem("immuminati:tactics:pre-3.1")
     )
-      localStorage.setItem("immuminati:tactics:pre-3.0", previous);
+      localStorage.setItem("immuminati:tactics:pre-3.1", previous);
     localStorage.setItem(TACTICS_KEY, JSON.stringify(save));
     return "已儲存";
   } catch {
@@ -563,6 +613,6 @@ export function exportTactical(save: TacticalSave) {
 
 /** Preserve the imported original before any format migration is committed. */
 export function backupTacticalImport(text: string) {
-  if (JSON.parse(text).rules === "3.0") return;
-  localStorage.setItem(`immuminati:tactics:import-pre-3.0:${Date.now()}`, text);
+  if (JSON.parse(text).rules === "3.1") return;
+  localStorage.setItem(`immuminati:tactics:import-pre-3.1:${Date.now()}`, text);
 }

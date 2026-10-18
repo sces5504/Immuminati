@@ -237,6 +237,7 @@ describe("immune roles and causal prerequisites", () => {
   });
   it("migrates actual pre-2.2 state and undo frames, rejects incomplete new-format state", () => {
     const ctrl = new TacticalController(m1);
+    ctrl.save.state = createTactical(m1);
     ctrl.command({ type: "mark", target: ctrl.save.state.colonies[0].id });
     const raw: any = ctrl.snapshot();
     raw.rules = "2.1";
@@ -246,7 +247,7 @@ describe("immune roles and causal prerequisites", () => {
       delete s.hosts;
     }
     const migrated = parseTactical(JSON.stringify(raw), m1);
-    expect(migrated.rules).toBe("3.0");
+    expect(migrated.rules).toBe("3.1");
     expect(migrated.state.immunity.autoSeek).toBe(false);
     expect(migrated.state.energy).toBe(4);
     expect(migrated.undo[0].energy).toBe(5);
