@@ -34,3 +34,13 @@
 ## 明確未驗證
 
 沒有重新跑六關完整勝敗／平衡回歸；本輪只改展示，不能據短時間操作宣稱重新完成所有關卡通關驗證。沒有實體iPhone Safari／Android GPU、低記憶體機或多人同時使用實測。新模型的真人美感與裝置效能仍待使用者在私人Preview審閱。百科肖像／區室剖視繼續用原本結構示意。
+
+## 最終成功結果
+
+程式來源 `1faa5b3`。20項相關單元、型別、Preview與原版建置成功；六關×雙平台 **12組成功**，所有HTTP資產／JS錯誤列表為空。14種免疫／抗體覆蓋fixture成功；手機M1正常時間的C3b、吞噬／調度、速度／降低動態及全素材失敗回退成功。新證據與記錄均在本輪目錄，不沿用舊批。
+
+開場畫面面數約22.5–29.2萬，draw call 136–193；不同器官／原版的同構圖比較見 `metrics.json`。面數有增有減，所有案例draw call低於原版；這不是密集後期戰場或真機FPS壓力測試。
+
+[私人Preview](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 已由Sites回傳succeeded；部署 `appgdep_6ad4ac3a2504819193efcb6d2cd47a89`，來源與版本見 `preview.json`。正式GitHub Pages與main未變更，等待最終審閱。
+
+畫面：每關 `desktop-mN-field.png`、`mobile-mN-field.png`，剖面與實際行動各另有截圖。14種覆蓋與抗體fixture在 `coverage/`；M1同構圖原版比較、吞噬後與回退在 `actions/`。影片：`mobile-m1-engulf.webm` 為本輪正常時間實錄剪段；`mobile-m1-art.webm`–`mobile-m6-art.webm` 為受控瀏覽器時鐘的自動化畫面；`antibody-coverage-fixture.webm` 明確是視覺fixture。確切原片SHA、剪段與限制見 `recording-provenance.json`。

@@ -16,3 +16,5 @@ docs/evidence/**/failure.txt
 docs/evidence/tripo-expansion/*-raw.webm
 
 __pycache__/
+
+docs/evidence/tripo-expansion/**/*-raw.webm
