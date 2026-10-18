@@ -1,0 +1,26 @@
+{
+  "scenario": "All cells at one point; standalone layout on cloud CPU, not browser FPS",
+  "repeats": 20,
+  "results": [
+    {
+      "count": 20,
+      "medianMs": 0.265,
+      "p95Ms": 1.101
+    },
+    {
+      "count": 100,
+      "medianMs": 1.479,
+      "p95Ms": 2.42
+    },
+    {
+      "count": 500,
+      "medianMs": 5.192,
+      "p95Ms": 29.272
+    },
+    {
+      "count": 2500,
+      "medianMs": 26.79,
+      "p95Ms": 57.792
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "checks": [
+    {
+      "device": "desktop",
+      "check": "coincident cells spread, remain selectable, and preserve authority at 1x/2x"
+    }
+  ],
+  "scope": "pathogen selection and visual cell spacing only"
+}

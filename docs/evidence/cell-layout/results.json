@@ -1,0 +1,61 @@
+{
+  "checks": [
+    {
+      "device": "desktop",
+      "check": "M1 selection identifies 肺炎鏈球菌 and retains burden"
+    },
+    {
+      "device": "desktop",
+      "check": "M2 selection identifies 鼠傷寒沙門氏菌 and retains burden"
+    },
+    {
+      "device": "desktop",
+      "check": "M3 selection identifies 結核分枝桿菌 and retains burden"
+    },
+    {
+      "device": "desktop",
+      "check": "M4 selection identifies A 型流感病毒 and retains burden"
+    },
+    {
+      "device": "desktop",
+      "check": "M5 selection identifies 白色念珠菌 and retains burden"
+    },
+    {
+      "device": "desktop",
+      "check": "M6 selection identifies HIV and retains burden"
+    },
+    {
+      "device": "desktop",
+      "check": "coincident cells spread, remain selectable, and preserve authority at 1x/2x"
+    },
+    {
+      "device": "mobile",
+      "check": "M1 selection identifies 肺炎鏈球菌 and retains burden"
+    },
+    {
+      "device": "mobile",
+      "check": "M2 selection identifies 鼠傷寒沙門氏菌 and retains burden"
+    },
+    {
+      "device": "mobile",
+      "check": "M3 selection identifies 結核分枝桿菌 and retains burden"
+    },
+    {
+      "device": "mobile",
+      "check": "M4 selection identifies A 型流感病毒 and retains burden"
+    },
+    {
+      "device": "mobile",
+      "check": "M5 selection identifies 白色念珠菌 and retains burden"
+    },
+    {
+      "device": "mobile",
+      "check": "M6 selection identifies HIV and retains burden"
+    },
+    {
+      "device": "mobile",
+      "check": "coincident cells spread, remain selectable, and preserve authority at 1x/2x"
+    }
+  ],
+  "scope": "pathogen selection and visual cell spacing only"
+}
