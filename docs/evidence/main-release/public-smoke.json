@@ -1,0 +1,55 @@
+{
+  "target": "https://sces5504.github.io/Immuminati/?v=9dd5215",
+  "checkedAt": "2026-10-18T17:59:06.645Z",
+  "method": "Visible fresh TB deployments, real engine steps, no state injection. Asset bytes match the local main build; see target for the actual tested host.",
+  "results": [
+    {
+      "device": "desktop",
+      "tick": 102,
+      "initialInternal": 6,
+      "liveInternal": 16,
+      "art": {
+        "testid": "tactical-scene",
+        "renderer": "software",
+        "cameraZoom": "1.0000",
+        "artKinds": "alveolar-septum,bacillus,dendritic,epithelial,macrophage,neutrophil",
+        "artAssets": "6",
+        "artMode": "tripo",
+        "artCells": "2",
+        "artTriangles": "204354",
+        "artDrawCalls": "167",
+        "artHosts": "32",
+        "artHostDraws": "32",
+        "artPathogens": "1",
+        "artTissue": "true"
+      },
+      "errors": [],
+      "bad": [],
+      "homeResumePreserved": true
+    },
+    {
+      "device": "mobile",
+      "tick": 102,
+      "initialInternal": 6,
+      "liveInternal": 16,
+      "art": {
+        "testid": "tactical-scene",
+        "renderer": "software",
+        "cameraZoom": "1.0000",
+        "artKinds": "alveolar-septum,bacillus,dendritic,epithelial,macrophage,neutrophil",
+        "artAssets": "6",
+        "artMode": "tripo",
+        "artCells": "2",
+        "artTriangles": "202610",
+        "artDrawCalls": "156",
+        "artHosts": "32",
+        "artHostDraws": "31",
+        "artPathogens": "1",
+        "artTissue": "true"
+      },
+      "errors": [],
+      "bad": [],
+      "homeResumePreserved": true
+    }
+  ]
+}

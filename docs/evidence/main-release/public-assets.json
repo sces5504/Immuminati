@@ -1,0 +1,144 @@
+{
+  "target": "https://sces5504.github.io/Immuminati/?v=9dd5215",
+  "checkedAt": "2026-10-18T17:58:15.673Z",
+  "assets": [
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/index-RJL4sCxa.css",
+      "status": 200,
+      "bytes": 98661,
+      "sha256": "7394b4513eb91341dc3b66ba9ae6501941fa61debf123ee6ee35f1381c30691f"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/index-fICJhcaS.js",
+      "status": 200,
+      "bytes": 511778,
+      "sha256": "d3ce4529e6c63e5c1f456aff7695e7a303d4c2e86a0519dcaca65643bf005da5"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/mark.svg",
+      "status": 200,
+      "bytes": 504,
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/three-CpellLxT.js",
+      "status": 200,
+      "bytes": 570603,
+      "sha256": "d884361c47e7ac6ab0c97f416499cc4d2e153ffa3a8d9ad3e1fa7fe43da5b778"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/alveolar-septum.glb",
+      "status": 200,
+      "bytes": 636100,
+      "sha256": "5158e272421028a1f9255802a1a2a64917a764e8b2b4d0171e2cdedcad6e9650"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/bacillus.glb",
+      "status": 200,
+      "bytes": 149764,
+      "sha256": "16e6ae7cba1e1865000f9c852263e7101f0ede920c2d164c9fa18972485bcb32"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/bcell.glb",
+      "status": 200,
+      "bytes": 562604,
+      "sha256": "dd588a513a6c11378c5d51ceb71764ad02c205facd0e4f1cbbb6f92047cafe13"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/dendritic.glb",
+      "status": 200,
+      "bytes": 510032,
+      "sha256": "98e6e12c7e939980763f903c54f96a32ca45b9cfad4c380f25b79a5d72182072"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/diplococcus.glb",
+      "status": 200,
+      "bytes": 115480,
+      "sha256": "af82e0f74bab8421776f5ba44cb2edba1419c8a6dbf0c548ea653985c68e581e"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/enterocyte.glb",
+      "status": 200,
+      "bytes": 557804,
+      "sha256": "19717647d3f2a2ae0c783135baa6152ce046ccbbf651624b957e005e3736bf68"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/enveloped-virus.glb",
+      "status": 200,
+      "bytes": 135396,
+      "sha256": "ab8dad001894cbc81bc9f07dc124fd860a01aea01f9fa981664db33824a0fe73"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/epithelial.glb",
+      "status": 200,
+      "bytes": 353684,
+      "sha256": "f386a519b60f8a545135b23a09761f068393f5c264e32740c3d171fff3d17847"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/goblet.glb",
+      "status": 200,
+      "bytes": 415728,
+      "sha256": "566928ee75eba8d2240755e91ceaa1ac674767f8ce56ee4c405e5c8626e01810"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/intestinal-villus.glb",
+      "status": 200,
+      "bytes": 309100,
+      "sha256": "8ba941d1b677eba8768e19d670b14278c414b9f91a059136116ffd1ed00f161c"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/lymph-reticulum.glb",
+      "status": 200,
+      "bytes": 343740,
+      "sha256": "cd5670eb36d0d090bb141814df31cbfdb7beb307140ce67412034c1957bf577a"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/macrophage.glb",
+      "status": 200,
+      "bytes": 504264,
+      "sha256": "22987db18bea416bc8fd337bb8652c8619bb1ce51af8d0868798635712f686dc"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/neutrophil.glb",
+      "status": 200,
+      "bytes": 497260,
+      "sha256": "2f125de5788346f235f24e94937bde77a00ac55b54a35ef28ceafb72ebcbbac5"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/nk.glb",
+      "status": 200,
+      "bytes": 580048,
+      "sha256": "6aae84fa028f57308d9a21ad8849a0c9ddab32796674dc6c41d4458c3d5d326c"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/oral-mucosa.glb",
+      "status": 200,
+      "bytes": 401732,
+      "sha256": "05b91453ca20ef7e24aa11955ab2714cadbd698ed0cab2101579b4e5883ae692"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/pdc.glb",
+      "status": 200,
+      "bytes": 453088,
+      "sha256": "f525c3bc864172562fe41f66c346c7a2ddffeb60fd358929ee1fee903c86cbb0"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/plasma.glb",
+      "status": 200,
+      "bytes": 374824,
+      "sha256": "f3bc953c1654e8f764c7c69683bfeafd074c12cff6631972bf4cde8a10a336ba"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/t-lymphocyte.glb",
+      "status": 200,
+      "bytes": 398980,
+      "sha256": "d3525ce42b630b84c3a1806d5fe59a4597528105a79a5353a8ef894d542b0eae"
+    },
+    {
+      "url": "https://sces5504.github.io/Immuminati/assets/tripo/yeast.glb",
+      "status": 200,
+      "bytes": 102584,
+      "sha256": "8b4156874c7bd0cddbe01edba426585af8eec2dbd9d56c97930e59546eff6acd"
+    }
+  ]
+}

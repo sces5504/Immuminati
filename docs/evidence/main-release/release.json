@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-18",
+  "public_url": "https://sces5504.github.io/Immuminati/?v=9dd5215",
+  "source_commit": "9dd52157b00b3d4473a89f99b06e0be2fddbd85a",
+  "workflow": {
+    "id": 39150688765,
+    "url": "https://github.com/sces5504/Immuminati/actions/runs/39150688765",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "merge_pr": "https://github.com/sces5504/Immuminati/pull/3",
+  "rules": "3.2",
+  "content": "campaign.3",
+  "models": "Approved Tripo models enabled by default; player comparison controls removed; automatic load fallback retained",
+  "unit_tests": {
+    "files": 13,
+    "passed": 136
+  },
+  "public_checks": [
+    "23 assets byte-identical to production build",
+    "Desktop 1280x800 and touch portrait 390x844 fresh TB play, no state injection",
+    "Intracellular load 6 to 16 by tick102, growth event present",
+    "No model toggle on landing/settings, six model assets loaded",
+    "Home/resume preserves authoritative state",
+    "No JS or HTTP errors"
+  ],
+  "live_workflow": {
+    "id": 39151776296,
+    "status": "in_progress at this record",
+    "note": "Separate scheduled public matrix; do not claim completion from this snapshot"
+  },
+  "limits": [
+    "No physical Safari/Android GPU validation or large-unit hardware benchmark",
+    "Balance needs human play feedback; not commercial-release certification",
+    "Simulation time/load, organ anatomy and HIV support attrition are educational abstractions; ART not simulated"
+  ],
+  "transport_note": "Public asset requests validate the managed proxy CA via Node. Chromium has separate CA trust; proxy-only test context uses ignoreHTTPSErrors. Production app unchanged. Initial direct Node connection and first proxied Chromium navigation failed before the successful check; not game/asset-path failures."
+}

@@ -1,3 +1,7 @@
+# 最新交付定位（2026-10-18）
+
+本輪素材與v3.2核心修正已合併main並正式發布；後續從最新main及AGENTS.md／CLOUD-HANDOFF.md接續，不重放舊生成任務。玩家模型切換已移除，載入失敗自動回退保留；不再新增歷史存檔遷移。最新畫面與實測見 `docs/evidence/main-release/README.md`。以下私人Preview／分支限制是當時流程紀錄，後續工作依新的使用者授權處理。
+
 整體私人Preview已隨v3.2核心修正更新；最新運行來源／部署見 [本輪preview.json](../../evidence/core-lifecycle/preview.json)。此目錄原preview.json保留美術批次的歷史來源，不代表目前運行的引擎版本。
 
 本分支後續已獲授權修正核心玩法 v3.2；原素材／費用不變，新增胞內增殖與生命週期展示。現行規則、驗證與預覽來源見 [本輪修正](../../CORE-LIFECYCLE.md)。下文是美術批次交接，不能把其「不改規則」當成最新任務限制。

@@ -1,10 +1,10 @@
-本分支最新：核心生命週期修正 v3.2（TB胞內增殖、病毒來源、HIV持續防守），見 [實作／查證／限制](docs/CORE-LIFECYCLE.md)。使用者已授權將 PR #3 合併 main 並發布正式 Pages；新模型預設啟用，移除玩家模型切換入口，保留載入失敗自動回退。發布狀態見 [交接](docs/CLOUD-HANDOFF.md)。
+最新版 v3.2 已發布：TB／沙門氏菌胞內增殖、病毒來源與HIV持續防守已修正；新模型預設啟用，移除玩家模型切換入口並保留載入失敗回退。[公開版本與新驗證](docs/evidence/main-release/README.md) · [科學依據與限制](docs/CORE-LIFECYCLE.md)。
 
 > v3.1 更新：新局先選知識套組／自行配置（12部署點），手機戰場支援雙指縮放，移除略過動畫鍵。舊局保留原隊伍。[本輪進度與驗證](docs/DEPLOYMENT-AND-GESTURES.md) · [給美術建模組的交接 prompt](docs/ART-HANDOFF-PROMPT.md)。
 
 # Immuminati · 微觀防線
 
-[線上遊玩](https://sces5504.github.io/Immuminati/?v=3.2)。保留已確認的立體戰術 UI、指揮、鏡頭與 C「柔光微觀立體」風格；沒有另做整套 RTS。
+[線上遊玩](https://sces5504.github.io/Immuminati/?v=9dd5215)。保留已確認的立體戰術 UI、指揮、鏡頭與 C「柔光微觀立體」風格；沒有另做整套 RTS。
 
 六關從開場全可選，使用同一套規則／展示架構：
 

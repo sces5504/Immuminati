@@ -81,7 +81,24 @@ await writeFile(
     2,
   ),
 );
+const proxyUrl =
+  process.env.SMOKE_USE_PROXY === "1"
+    ? new URL(process.env.HTTPS_PROXY ?? process.env.HTTP_PROXY)
+    : undefined;
 const browser = await chromium.launch({
+  ...(proxyUrl
+    ? {
+        proxy: {
+          server: `${proxyUrl.protocol}//${proxyUrl.host}`,
+          ...(proxyUrl.username
+            ? {
+                username: decodeURIComponent(proxyUrl.username),
+                password: decodeURIComponent(proxyUrl.password),
+              }
+            : {}),
+        },
+      }
+    : {}),
   args: [
     "--no-sandbox",
     "--enable-unsafe-swiftshader",
@@ -91,15 +108,19 @@ const browser = await chromium.launch({
 const results = [];
 try {
   for (const device of ["desktop", "mobile"]) {
-    const context = await browser.newContext(
-      device === "mobile"
+    const context = await browser.newContext({
+      // The managed session proxy CA is validated by Node for every asset above.
+      // Chromium has a separate trust store; this exception applies only to this
+      // explicitly opted-in test transport, never to the production application.
+      ignoreHTTPSErrors: !!proxyUrl,
+      ...(device === "mobile"
         ? {
             viewport: { width: 390, height: 844 },
             isMobile: true,
             hasTouch: true,
           }
-        : { viewport: { width: 1280, height: 800 } },
-    );
+        : { viewport: { width: 1280, height: 800 } }),
+    });
     const page = await context.newPage(),
       errors = [],
       bad = [];
