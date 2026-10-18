@@ -12,3 +12,7 @@ docs/evidence/raw*/
 docs/evidence/browser-failure.txt
 docs/evidence/**/raw*/
 docs/evidence/**/failure.txt
+
+docs/evidence/tripo-expansion/*-raw.webm
+
+__pycache__/

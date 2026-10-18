@@ -85,9 +85,9 @@ export default function TacticalApp() {
   const [artSamples, setArtSamples] = useState(ART_PREVIEW);
   const artControls = ART_PREVIEW ? (
     <section className="t-art-preview" aria-label="美術樣本比較">
-      <strong>Tripo 美術樣本 · 待審閱</strong>
+      <strong>Tripo 六關美術 · 待審閱</strong>
       <p>
-        M1：巨噬、嗜中性球與肺泡入口局部隔壁。其他模型維持原版；此預覽獨立存檔。
+        六關免疫細胞、病原與宿主，以及肺泡、腸黏膜、口腔與淋巴組織。此預覽獨立存檔，可隨時比較原模型。
       </p>
       <button
         data-testid="art-toggle"

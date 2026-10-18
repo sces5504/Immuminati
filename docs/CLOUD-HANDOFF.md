@@ -1,3 +1,7 @@
+# Tripo 全角色／器官預覽交接（2026-10-18）
+
+第一批已由使用者確認；本輪擴充14種免疫、六關病原、八種宿主與四種組織。工作分支 `art/tripo-samples`、Draft PR #3，仍不可合併main／正式Pages。原規則3.1、部署、存檔與操作保留。最新素材、320 credits收據、adapter與實際新驗證見 [本輪美術交接](art/tripo-expansion/README.md)；部署來源核對 `art/tripo-expansion/preview.json`，不要沿用首批preview.json或舊錄影當成最新。
+
 # 本分支：Tripo 第一批樣本，等待使用者確認
 
 `art/tripo-samples` 由main `36a1f39`建立；不是正式站改版。三次已授權Tripo生成均成功，總60 credits，沒有追加付費或重試。兩種細胞膜＋M1入口A區局部隔壁已接入實際遊戲，原模型可切換、載入失敗可回退；一般建置預設原版。引擎、存檔與main均未更動。

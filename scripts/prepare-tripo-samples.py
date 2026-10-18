@@ -1,13 +1,15 @@
 """Offline-only Blender adapter. No API calls or credentials.
 blender -b --python scripts/prepare-tripo-samples.py -- .art-source public/assets/tripo
 """
-import bpy, json, math, pathlib, sys
+import bpy, json, math, pathlib, sys, os, struct
 from mathutils import Vector
 
 source, target = map(pathlib.Path, sys.argv[sys.argv.index('--')+1:])
 target.mkdir(parents=True, exist_ok=True)
 audit = []
-for kind, faces, dimensions in [('macrophage',4000,(3.6,3.3,2.2)), ('neutrophil',4000,(3.0,2.85,2.25)), ('alveolar-septum',3000,(4.2,1.15,1.0))]:
+for kind, faces, dimensions in [('macrophage',4000,(3.6,3.3,2.2)), ('neutrophil',4000,(3.0,2.85,2.25)), ('alveolar-septum',1200,(4.2,1.15,1.0))]:
+    selected=os.environ.get('ART_ASSETS','').split(',')
+    if selected!=[''] and kind not in selected: continue
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=str((source/(kind+'.glb')).resolve()),merge_vertices=True)
     objects = [o for o in bpy.context.scene.objects if o.type=='MESH']
@@ -63,6 +65,19 @@ for kind, faces, dimensions in [('macrophage',4000,(3.6,3.3,2.2)), ('neutrophil'
             stretch=1+.045*math.sin(math.atan2(y,x)*3+z)*weight
             vertex.co.x*=stretch
             vertex.co.y*=stretch
+    if kind=='alveolar-septum':
+        diffuse=set()
+        for mat in obj.data.materials:
+            if mat.use_nodes:
+                for node in mat.node_tree.nodes:
+                    if node.type=='BSDF_PRINCIPLED':
+                        for link in node.inputs['Base Color'].links:
+                            if link.from_node.type=='TEX_IMAGE': diffuse.add(link.from_node.image)
+        for image in diffuse:
+            pixels=list(image.pixels[:])
+            for i in range(0,len(pixels),4):
+                for channel in range(3):pixels[i+channel]=pixels[i+channel]*.65+.25
+            image.pixels[:]=pixels;image.pack()
     textures=[]
     for image in bpy.data.images:
         if image.size[0]<=0 or image.type!='IMAGE': continue
@@ -76,8 +91,14 @@ for kind, faces, dimensions in [('macrophage',4000,(3.6,3.3,2.2)), ('neutrophil'
     bpy.ops.export_scene.gltf(filepath=str(path.resolve()),export_format='GLB',use_selection=True,
         export_animations=False,export_morph=True,export_morph_normal=True,export_yup=True,
         export_image_format='AUTO',export_cameras=False,export_lights=False)
+    glb=path.read_bytes(); exported=json.loads(glb[20:20+struct.unpack_from('<I',glb,12)[0]])
+    used_images={i.get('name') for i in exported.get('images',[])}
+    textures=[t for t in textures if t['name'] in used_images]
     audit.append({'asset':kind,'triangles':len(obj.data.polygons),'materials':len(obj.data.materials),
         'textures':textures,'dimensionsXYZ':dimensions,'bytes':path.stat().st_size,
         'morphTargets':0 if kind=='alveolar-septum' else 1})
-(target/'manifest.json').write_text(json.dumps({'source':'TripoAI v3.1, three one-time text generations; offline size/material/morph adapter','assets':audit},indent=2)+'\n')
+previous=json.loads((target/'manifest.json').read_text()) if (target/'manifest.json').exists() else {'assets':[]}
+updated={x['asset'] for x in audit}
+audit=[x for x in previous['assets'] if x['asset'] not in updated]+audit
+(target/'manifest.json').write_text(json.dumps({'source':'TripoAI v3.1; approved samples plus sixteen-asset expansion; offline web adapters','assets':audit},indent=2)+'\n')
 print(json.dumps(audit))

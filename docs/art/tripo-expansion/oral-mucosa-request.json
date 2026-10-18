@@ -1,0 +1,14 @@
+{
+  "asset": "oral-mucosa",
+  "request": {
+    "prompt": "One reusable oral mucosal tissue patch, low relief tightly packed irregular flattened squamous epithelial tiles with rounded borders and delicate pink cell seams, soft pearlescent blush surface, thin shallow layered edge. No gums teeth tongue, no floating cubes, no tall lumps. Soft micro 3D biological game asset, gentle subsurface appearance, smooth continuous surface, restrained premium educational style. Isolated single object, low polygon budget, no text, no frame, no environment.",
+    "negative_prompt": "text, watermark, labels, eyes, face, cartoon arms, weapons, metal, sharp crystals, ornate decoration, hard polygons, pedestal, scene, background objects, excessive noise",
+    "face_limit": 1800,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 202610194,
+    "image_seed": 202610194,
+    "texture_seed": 202610194,
+    "model": "v3.1-20260211"
+  }
+}

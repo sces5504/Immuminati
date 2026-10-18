@@ -65,6 +65,8 @@ interface Bacteria {
   signature: string;
   form?: string;
   phase: number;
+  originalGeometry: THREE.BufferGeometry;
+  visualSignature?: string;
 }
 interface Effect {
   event: TacticalEvent;
@@ -100,6 +102,8 @@ export class BattleScene {
   private actors = new Map<string, Actor>();
   private samples?: TripoSamples;
   private sampleTissue?: THREE.Group;
+  private sampleHosts = new Map<string, SampleCell>();
+  private anatomyRoot?: THREE.Group;
   private layoutState?: TacticalState;
   private sampleLayout = false;
   private cellLayout = new Map<string, Vec>();
@@ -158,7 +162,7 @@ export class BattleScene {
     private read: () => SceneInput,
     private pick: (pick: Pick) => void,
   ) {
-    if (ART_PREVIEW && content.id === "m1") this.samples = new TripoSamples();
+    if (ART_PREVIEW) this.samples = new TripoSamples(content);
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
@@ -261,6 +265,7 @@ export class BattleScene {
   private buildTerrain() {
     const anatomy = buildAnatomy(this.content, this.texture);
     this.scene.add(anatomy.root);
+    this.anatomyRoot = anatomy.root;
     this.ownedGeometry.push(...anatomy.geometries);
     this.ownedMaterials.push(...anatomy.materials);
     this.fields = anatomy.regions;
@@ -579,6 +584,7 @@ export class BattleScene {
       marks,
       ring,
       signature: "",
+      originalGeometry: pg,
       form: p.form,
       phase: Number(p.id.slice(1)),
     };
@@ -597,7 +603,7 @@ export class BattleScene {
       );
     const showC3 = active.complement && !pending("c3b"),
       showIg = active.antibody && !pending("antibody");
-    const signature = `${p.load}:${showC3}:${showIg}:${p.form}`;
+    const signature = `${p.load}:${showC3}:${showIg}:${p.form}:${!!this.read().artSamples}`;
     if (b.form !== p.form) {
       const g = pathogenGeometry(
         this.content.pathogen.shape ?? "coccus",
@@ -607,12 +613,17 @@ export class BattleScene {
       b.capsule.geometry = g;
       this.ownedGeometry.push(g);
       b.form = p.form;
+      b.originalGeometry = g;
+      b.visualSignature = "";
       if (p.form === "hypha") b.root.userData.hyphaAt = this.now;
     }
 
     if (signature === b.signature) return;
     b.signature = signature;
-    const count = Math.min(p.load, p.form === "hypha" ? 9 : 50);
+    const count = Math.min(
+      p.load,
+      p.form === "hypha" ? 9 : this.read().artSamples ? 20 : 50,
+    );
     b.core.count = b.capsule.count = count * 2;
     for (let i = 0; i < count; i++) {
       const a = i * 2.39996;
@@ -1054,6 +1065,11 @@ export class BattleScene {
         if (actor.sample) actor.body.add(actor.sample.root);
       }
       const useSample = !!input.artSamples && !!actor.sample;
+      const internalShape = useSample
+        ? this.samples?.pathogen(this.content.pathogen.shape ?? "coccus", false)
+        : undefined;
+      for (const part of actor.vacuole.children.slice(1))
+        (part as THREE.Mesh).geometry = internalShape?.geometry ?? smallSphere;
       actor.shell.visible = actor.lobes.visible = !useSample;
       if (actor.sample) {
         actor.sample.root.visible = useSample;
@@ -1116,6 +1132,11 @@ export class BattleScene {
         if (this.sampleTissue) this.scene.add(this.sampleTissue);
       }
       if (this.sampleTissue) this.sampleTissue.visible = !!input.artSamples;
+      this.anatomyRoot?.children.forEach((o) => {
+        if (o.userData.organDetail)
+          o.visible = !input.artSamples || !this.sampleTissue;
+      });
+      this.host.dataset.artKinds = this.samples.readyKinds.join(",");
       this.host.dataset.artAssets = String(this.samples.readyCount);
       this.host.dataset.artMode = input.artSamples ? "tripo" : "original";
       this.host.dataset.artCells = String(
@@ -1175,6 +1196,23 @@ export class BattleScene {
           : 0;
       b.ring.visible = input.selected === p.id;
       this.updateBacteria(p, b, s.tick);
+      const replacement = input.artSamples
+        ? this.samples?.pathogen(
+            this.content.pathogen.shape ?? "coccus",
+            p.form === "hypha",
+          )
+        : undefined;
+      const signature = `${!!replacement}:${p.form}`;
+      if (b.visualSignature !== signature) {
+        b.visualSignature = signature;
+        b.core.geometry = b.capsule.geometry =
+          replacement?.geometry ?? b.originalGeometry;
+        const mat = b.core.material as THREE.MeshStandardMaterial;
+        mat.map = replacement?.map ?? null;
+        mat.normalMap = replacement?.normalMap ?? null;
+        mat.normalScale.setScalar(0.15);
+        mat.needsUpdate = true;
+      }
       const growth = input.reduced
         ? 1
         : Math.max(
@@ -1190,6 +1228,8 @@ export class BattleScene {
     for (const [id, root] of this.hosts)
       if (!s.hosts.some((h) => h.id === id)) {
         this.scene.remove(root);
+        this.sampleHosts.get(id)?.dispose();
+        this.sampleHosts.delete(id);
         disposeTissueActor(root);
         this.hosts.delete(id);
       }
@@ -1207,6 +1247,36 @@ export class BattleScene {
         input.selected === host.id,
         !!input.inspect && input.selected === host.id,
       );
+      let sample = this.sampleHosts.get(host.id);
+      if (!sample && this.samples) {
+        sample = this.samples.host(host, this.content);
+        if (sample) {
+          this.sampleHosts.set(host.id, sample);
+          root.add(sample.root);
+        }
+      }
+      if (sample) {
+        const p = host.apoptoticAt
+          ? Math.min(1, (s.tick - host.apoptoticAt) / 12)
+          : 0;
+        sample.root.visible = !!input.artSamples && p < 1;
+        sample.opacity?.(
+          (input.inspect && input.selected === host.id ? 0.18 : 0.65) *
+            (1 - p * 0.6),
+        );
+        sample.update(
+          this.now * 0.65 + Number(host.id.slice(1)),
+          input.idle && !input.reduced,
+          host.load > 0,
+        );
+        if (!sample.root.userData.restScale)
+          sample.root.userData.restScale = sample.root.scale.clone();
+        sample.root.scale
+          .copy(sample.root.userData.restScale)
+          .multiplyScalar(1 - p * 0.5);
+        if (sample.root.visible)
+          root.getObjectByName("membrane")!.visible = false;
+      }
       if (
         !input.reduced &&
         this.effects.some(
@@ -1249,6 +1319,22 @@ export class BattleScene {
         this.renderer.info.render.triangles,
       );
       this.host.dataset.artDrawCalls = String(this.renderer.info.render.calls);
+      this.host.dataset.artHosts = String(
+        [...this.sampleHosts.values()].filter((a) => a.root.visible).length,
+      );
+      this.host.dataset.artHostDraws = String(
+        [...this.sampleHosts.values()].filter(
+          (a) => a.root.visible && a.root.userData.rendered,
+        ).length,
+      );
+      for (const a of this.sampleHosts.values())
+        a.root.userData.rendered = false;
+      this.host.dataset.artPathogens = String(
+        [...this.bacteria.values()].filter((b) =>
+          b.visualSignature?.startsWith("true"),
+        ).length,
+      );
+      this.host.dataset.artTissue = String(!!this.sampleTissue?.visible);
     }
     if (this.software) {
       const gl = this.renderer.getContext() as WebGL2RenderingContext;
@@ -1618,6 +1704,8 @@ export class BattleScene {
     this.sampleTissue?.traverse((o) => {
       if (o instanceof THREE.Mesh) o.geometry.dispose();
     });
+    for (const sample of this.sampleHosts.values()) sample.dispose();
+    this.sampleHosts.clear();
     this.samples?.dispose();
     for (const h of this.hosts.values()) disposeTissueActor(h);
     for (const b of this.bacteria.values()) {

@@ -213,6 +213,7 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
     transparent: true,
     opacity: 0.45,
   });
+  const detailStart = root.children.length;
   if (c.tissue !== "intestinal" && c.tissue !== "lymphoid") {
     const edge = c.tissue === "oral" ? 2.5 : 3.1;
     const vertices: THREE.Vector3[] = [];
@@ -323,6 +324,10 @@ export function buildAnatomy(c: TacticalContent, texture: THREE.Texture) {
       }
     }
   }
+  if (c.tissue === "intestinal" || c.tissue === "lymphoid")
+    root.children
+      .slice(detailStart)
+      .forEach((o) => (o.userData.organDetail = true));
   // All access structures follow the terrain instead of cutting through it.
   const conform = (points: number[][], clearance: number) => {
     const horizontal = new THREE.CatmullRomCurve3(
