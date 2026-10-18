@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import {
   TripoSamples,
   fitSeptumPoint,
+  hostMembraneGeometry,
 } from "../../src/tactics/presentation/TripoSamples";
 import {
   immuneArt,
@@ -15,6 +16,7 @@ import { cellCatalog } from "../../src/tactics/content/cells";
 import { tissueCellCatalog } from "../../src/tactics/content/anatomy";
 import { tacticalScenarios } from "../../src/tactics/content/m1";
 import { m1 } from "../../src/tactics/content/m1";
+import { createTactical } from "../../src/tactics/engine/simulation";
 import { anatomyHeight } from "../../src/tactics/presentation/Anatomy";
 
 function readAsset(name: string) {
@@ -50,6 +52,23 @@ describe("Tripo sample budgets and safe fallback", () => {
           (b.x - a.x) * (c.z - a.z) - (c.x - a.x) * (b.z - a.z),
         ).toBeGreaterThan(0);
       }
+  });
+  it("keeps every lung host membrane vertex above the anatomical surface", () => {
+    const state = createTactical(m1, 1);
+    for (const host of state.hosts.filter((h) => h.wall)) {
+      const geometry = hostMembraneGeometry(host, m1);
+      const p = geometry.attributes.position;
+      for (let i = 0; i < p.count; i++) {
+        const h = anatomyHeight(
+          p.getX(i) + host.position.x,
+          p.getZ(i) + host.position.z,
+          m1,
+        );
+        expect(p.getY(i) - h).toBeGreaterThan(0.044);
+      }
+      expect(geometry.boundingSphere!.radius).toBeLessThan(3);
+      geometry.dispose();
+    }
   });
   it("keeps all three game assets within the agreed web budget with no external dependencies", () => {
     let total = 0;

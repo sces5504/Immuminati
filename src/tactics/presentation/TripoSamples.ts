@@ -241,28 +241,10 @@ export class TripoSamples {
     const root = instance.root;
     const unique: THREE.BufferGeometry[] = [];
     if (host.wall) {
-      const field = content.fields.find((f) => f.id === host.region)!;
-      const wall = host.wall;
       root.updateMatrixWorld(true);
       root.traverse((o) => {
         if (!(o instanceof THREE.Mesh)) return;
-        const geometry = o.geometry.clone().applyMatrix4(o.matrixWorld);
-        const p = geometry.attributes.position;
-        for (let i = 0; i < p.count; i++) {
-          const a = wall.angle - (p.getX(i) / 3.2) * wall.arc * 0.97;
-          const r = wall.radius + p.getZ(i) * 0.5;
-          const x = field.center.x + Math.cos(a) * r;
-          const z = field.center.z + Math.sin(a) * r;
-          p.setXYZ(
-            i,
-            x - host.position.x,
-            anatomyHeight(x, z, content) + 0.065 + p.getY(i) * 0.22,
-            z - host.position.z,
-          );
-        }
-        geometry.computeVertexNormals();
-        geometry.computeBoundingBox();
-        geometry.computeBoundingSphere();
+        const geometry = hostMembraneGeometry(host, content);
         o.geometry = geometry;
         o.matrixAutoUpdate = true;
         o.position.set(0, 0, 0);
@@ -524,4 +506,61 @@ export function fitSeptumPoint(
   const x = field.center.x + Math.cos(a) * radius;
   const z = field.center.z + Math.sin(a) * radius;
   return { x, y: anatomyHeight(x, z, content) + Math.max(0.025, up * 0.28), z };
+}
+
+/** Thin squamous membrane needs evenly spaced vertices: a decimated imported
+ * sheet bridges the steep septum and leaves floating shards. Keep the generated
+ * material on a dedicated smooth, replaceable anatomical surface instead.
+ */
+export function hostMembraneGeometry(host: HostCell, content: TacticalContent) {
+  const wall = host.wall!;
+  const field = content.fields.find((f) => f.id === host.region)!;
+  const positions: number[] = [],
+    uv: number[] = [],
+    indices: number[] = [];
+  const columns = 16,
+    rows = 6;
+  for (let row = 0; row <= rows; row++)
+    for (let col = 0; col <= columns; col++) {
+      const u = (col / columns) * 2 - 1,
+        v = (row / rows) * 2 - 1;
+      const a = wall.angle - u * wall.arc * 0.485;
+      const radius =
+        wall.radius + v * 0.66 * (0.86 + 0.14 * Math.cos((u * Math.PI) / 2));
+      const x = field.center.x + Math.cos(a) * radius,
+        z = field.center.z + Math.sin(a) * radius;
+      const bump =
+        host.kind === "alveolarII"
+          ? 0.24 * Math.max(0, 1 - u * u) * Math.max(0, 1 - v * v)
+          : 0.025 * Math.max(0, 1 - u * u) * Math.max(0, 1 - v * v);
+      positions.push(
+        x - host.position.x,
+        anatomyHeight(x, z, content) + 0.045 + bump,
+        z - host.position.z,
+      );
+      uv.push(col / columns, row / rows);
+    }
+  for (let row = 0; row < rows; row++)
+    for (let col = 0; col < columns; col++) {
+      const a = row * (columns + 1) + col;
+      indices.push(
+        a,
+        a + columns + 1,
+        a + 1,
+        a + 1,
+        a + columns + 1,
+        a + columns + 2,
+      );
+    }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(positions, 3),
+  );
+  geometry.setAttribute("uv", new THREE.Float32BufferAttribute(uv, 2));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  return geometry;
 }

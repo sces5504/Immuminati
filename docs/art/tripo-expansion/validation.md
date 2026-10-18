@@ -5,7 +5,7 @@
 ## 自動檢查
 
 - 型別：`npm run typecheck`。
-- 相關單元：`npx vitest run tests/tactics/tripoSamples.test.ts tests/tactics/cellLayout.test.ts tests/tactics/selection.test.ts`，**20項通過**。
+- 相關單元：`npx vitest run tests/tactics/tripoSamples.test.ts tests/tactics/cellLayout.test.ts tests/tactics/selection.test.ts`，**21項通過**。
 - 含括19個GLB的完整類型覆蓋／尺寸、單材質與無外部buffer、面數、膜morph、原始三件60＋本批十六件320的安全收據、載入失敗／拆除取消、地形貼合與三區面朝向、視覺避讓與選取。
 - Preview：`node scripts/build-art-preview.mjs`，相對資產可從 `/Immuminati/` 子路徑啟動。
 - 原版建置：`npx vite build --outDir /tmp/immuminati-standard-build --emptyOutDir`，不啟用美術旗標時仍產生原版程式。
@@ -26,7 +26,7 @@
 - API並行上限：十件受理後的六件HTTP429拒收，先對帳、再提交未受理的唯一素材；無付費重試。
 - 原始生成網架過尖、腸絨毛偏褐：離線重建纖維／平滑及色彩修正，沒有再付費生成。
 - 重複肺泡隔與病原面數放大：降低隔壁至1200面、宿主薄膜600面、代表病原480–900級；實際負荷不變。
-- 貼合變形需保留面朝向與重算包圍範圍；補上三區數學檢查。
+- 貼合變形需保留面朝向與重算包圍範圍；補上三區數學檢查。最終逐格檢查另發現，簡化生成薄片在陡峭肺泡隔會跨過曲面；肺泡I／II改用均勻細分曲面膜、保留生成材質與獨立核／胞內部件，新增全部肺泡宿主頂點貼地驗證。
 - 首次相關單元曾遇浮點邊界0.024999999999999994，改為容許1e-10數值誤差，沒有放寬實際貼地要求。
 - 初次14種覆蓋fixture用了不存在的hold指令，被存檔驗證拒絕；已改為合法guard／point。初次5秒素材斷言也不足以等雲端軟體WebGL解碼，改為有界60秒；並非隱藏資產錯誤。最終結果另以成功重跑記錄。
 - 組織末次修整後再跑雙平台六關；中斷的中間批不列為最終通過。
@@ -37,7 +37,7 @@
 
 ## 最終成功結果
 
-程式來源 `1faa5b3`。20項相關單元、型別、Preview與原版建置成功；六關×雙平台 **12組成功**，所有HTTP資產／JS錯誤列表為空。14種免疫／抗體覆蓋fixture成功；手機M1正常時間的C3b、吞噬／調度、速度／降低動態及全素材失敗回退成功。新證據與記錄均在本輪目錄，不沿用舊批。
+程式來源 `1faa5b3`。21項相關單元、型別、Preview與原版建置成功；六關×雙平台 **12組成功**，所有HTTP資產／JS錯誤列表為空。14種免疫／抗體覆蓋fixture成功；手機M1正常時間的C3b、吞噬／調度、速度／降低動態及全素材失敗回退成功。新證據與記錄均在本輪目錄，不沿用舊批。
 
 開場畫面面數約22.5–29.2萬，draw call 136–193；不同器官／原版的同構圖比較見 `metrics.json`。面數有增有減，所有案例draw call低於原版；這不是密集後期戰場或真機FPS壓力測試。
 
