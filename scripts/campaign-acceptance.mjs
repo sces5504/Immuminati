@@ -216,7 +216,11 @@ try {
             done.add(index);
           }
         await pause(false);
-        await page.clock.runFor(1000);
+        // HIV now runs to actual tissue exhaustion. Drive the same production
+        // fixed steps without rendering every intermediate frame in this long case;
+        // normal-play animation is covered separately and all result assertions stay.
+        if (id === "m6") await page.clock.fastForward(1000);
+        else await page.clock.runFor(1000);
         if (n % 15 === 0) await log("PROGRESS", device, id, await tick());
         if (!savedMid && (await tick()) >= 110) {
           await click(page.getByTestId("pause-toggle"));

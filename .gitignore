@@ -34,3 +34,11 @@ docs/evidence/main-release/raw-focus/
 docs/evidence/main-release/mobile-tb-untreated-start.png
 docs/evidence/main-release/*-raw.webm
 docs/evidence/main-release/mobile-tb-growing-selected.png
+
+# Expanded local anatomy diagnostics; retain the structured result only.
+docs/evidence/main-release/anatomy/*
+!docs/evidence/main-release/anatomy/anatomy-results.json
+docs/evidence/main-release/local-before-public/
+docs/evidence/main-release/browser/
+docs/evidence/main-release/m6-driver/*
+!docs/evidence/main-release/m6-driver/results-desktop-m6.json

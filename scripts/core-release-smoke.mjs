@@ -131,6 +131,13 @@ try {
       page.evaluate(() =>
         JSON.parse(localStorage.getItem("immuminati:tactics:v2")),
       );
+    await click(page.getByRole("button", { name: "設定與存檔", exact: true }));
+    assert.equal(await page.getByTestId("art-toggle").count(), 0);
+    assert.equal(
+      await page.getByText("Tripo 六關美術 · 待審閱", { exact: true }).count(),
+      0,
+    );
+    await click(page.getByRole("button", { name: "關閉視窗", exact: true }));
     const first = await read(),
       host = first.state.cells.find((c) => c.kind === "macrophage").id;
     const load = (s) =>
@@ -180,7 +187,7 @@ try {
         target,
         checkedAt: new Date().toISOString(),
         method:
-          "Visible fresh TB deployments, real engine steps, no state injection. Public asset bytes match local main build.",
+          "Visible fresh TB deployments, real engine steps, no state injection. Asset bytes match the local main build; see target for the actual tested host.",
         results,
       },
       null,
