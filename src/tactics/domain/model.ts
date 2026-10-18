@@ -75,7 +75,9 @@ export interface HostCell {
   antigen: string;
   mhc1: boolean;
   stressed: boolean;
+  /** Viable infected-source groups, not the number of intracellular virions. */
   load: number;
+  /** Death/nonfunctional time; legacy save field name, not all causes are apoptosis. */
   apoptoticAt: number;
 }
 export type Order =

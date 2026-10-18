@@ -864,7 +864,7 @@ export default function TacticalApp() {
               disabled={!!result}
               data-testid="pause-toggle"
             >
-              {paused ? "▶" : "Ⅱ"}{" "}
+              {paused ? "▶︎" : "Ⅱ"}{" "}
               <span>
                 {paused ? (s.tick === 0 ? "開始行動" : "繼續行動") : "戰術暫停"}
               </span>

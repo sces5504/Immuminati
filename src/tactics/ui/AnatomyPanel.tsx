@@ -284,7 +284,7 @@ function Cutaway({
       <p>
         <b>
           {load
-            ? `${compartmentNames[compartment!]} · 活負荷 ${load}`
+            ? `${compartmentNames[compartment!]} · ${host?.infection ? "感染來源" : "活負荷"} ${load}`
             : "胞內沒有活病原"}
         </b>
         {processing
@@ -302,7 +302,21 @@ function Cutaway({
       {host?.infection && (
         <p>
           {hostStatus(host)}
-          。核內線段代表病毒基因組／複製材料，不是成熟病毒顆粒。
+          。核內線段代表病毒基因組／複製材料，不是成熟病毒顆粒。感染來源數不是胞內病毒顆數。
+          {host.infection.phase === "productive" && host.load > 0 && (
+            <>
+              已完成 {host.infection.cycles ?? 0} 輪產毒，下一輪約{" "}
+              {Math.max(
+                0,
+                Math.ceil(
+                  ((content.lifecycle?.virus?.every ?? 40) -
+                    (state.tick - (host.infection.since ?? state.tick))) *
+                    0.2,
+                ),
+              )}{" "}
+              秒；每輪新生病毒釋至胞外，IFN-I 可降低產量。
+            </>
+          )}
           {host.infection.phase === "latent"
             ? "潛伏整合 DNA 未表達病毒肽，不能被 CD8 當成產毒宿主。"
             : `MHC-I ${host.mhc1 ? "保留" : "降低"} · 抗原 ${host.antigen}`}
@@ -310,7 +324,7 @@ function Cutaway({
       )}
       {host?.apoptoticAt ? (
         <p>
-          此宿主已凋亡，停止產毒；已釋出的胞外病原仍獨立存在，不隨宿主消失。
+          此宿主已死亡並停止產毒；已釋出的胞外病原仍獨立存在，不隨宿主消失。免疫細胞誘導凋亡與感染／組織損傷造成的死亡，可由因果紀錄分辨。
         </p>
       ) : null}
     </div>

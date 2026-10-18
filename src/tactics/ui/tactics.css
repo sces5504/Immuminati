@@ -3410,3 +3410,9 @@
     margin: 3px 0;
   }
 }
+
+/* Keep the paused action readable under mouse hover and sticky touch hover. */
+.tactical-root .t-pause.is-paused:hover:not(:disabled) {
+  background: #d3edf0;
+  color: #16344a !important;
+}

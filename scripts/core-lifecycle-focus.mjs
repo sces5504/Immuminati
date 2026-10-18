@@ -20,8 +20,12 @@ try {
     recordVideo: { dir: dir + "raw-focus", size: { width: 390, height: 844 } },
   });
   const page = await context.newPage(),
-    errors = [];
+    errors = [],
+    bad = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  page.on("response", (r) => {
+    if (r.status() >= 400) bad.push({ status: r.status(), url: r.url() });
+  });
   const click = (l) => l.evaluate((el) => el.click());
   await page.clock.install({ time: new Date("2030-01-01") });
   await page.clock.pauseAt(new Date("2030-01-01T00:01:00Z"));
@@ -42,6 +46,46 @@ try {
     (u) => u.kind === "macrophage",
   ).id;
   await click(page.locator(`.t-roster [data-cell-id="${host}"]`));
+  const beforeCompare = (await read()).state;
+  for (const mode of ["original", "tripo"]) {
+    await click(page.getByRole("button", { name: "設定與存檔", exact: true }));
+    await click(page.getByTestId("art-toggle"));
+    await click(page.getByRole("button", { name: "關閉視窗", exact: true }));
+    for (let k = 0; k < 80; k++) {
+      await page.clock.runFor(150);
+      await new Promise((r) => setTimeout(r, 40));
+      if (
+        (await page
+          .getByTestId("tactical-scene")
+          .getAttribute("data-art-mode")) === mode
+      )
+        break;
+    }
+    assert.equal(
+      await page.getByTestId("tactical-scene").getAttribute("data-art-mode"),
+      mode,
+    );
+    assert.deepEqual((await read()).state, beforeCompare);
+  }
+  const pauseBox = await page.getByTestId("pause-toggle").boundingBox();
+  await page.mouse.move(
+    pauseBox.x + pauseBox.width / 2,
+    pauseBox.y + pauseBox.height / 2,
+  );
+  await page.clock.runFor(160);
+  const pauseContrast = await page.getByTestId("pause-toggle").evaluate((e) => {
+    const style = getComputedStyle(e);
+    return {
+      background: style.backgroundColor,
+      color: style.color,
+      text: e.textContent,
+      hover: e.matches(":hover"),
+    };
+  });
+  assert.ok(pauseContrast.text.includes("開始行動"));
+  if (pauseContrast.hover)
+    assert.equal(pauseContrast.background, "rgb(211, 237, 240)");
+  await page.mouse.move(1, 1);
   await page.clock.runFor(1600);
   await page.screenshot({ path: dir + "mobile-tb-untreated-start.png" });
   await click(page.getByTestId("pause-toggle"));
@@ -101,6 +145,7 @@ try {
   assert.ok(rupture);
   assert.ok(peak > 6);
   assert.deepEqual(errors, []);
+  assert.deepEqual(bad, []);
   await writeFile(
     dir + "tb-failure-branch.json",
     JSON.stringify(
@@ -111,6 +156,7 @@ try {
         elapsed,
         timeline,
         errors,
+        bad,
         method:
           "Visible fresh TB deployment, no Th1, normal motion near divisions. No state injection.",
       },

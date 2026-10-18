@@ -161,8 +161,8 @@ export function syncTissueHealth(s: TacticalState) {
 }
 export function hostStatus(host: HostCell) {
   return host.apoptoticAt
-    ? "已凋亡"
+    ? "宿主已死亡"
     : host.load > 0
-      ? `${compartmentNames[host.infection?.compartment ?? "cytosol"]}${host.infection?.phase === "latent" ? " · 潛伏（未呈遞病毒肽）" : host.infection?.phase === "eclipse" ? " · 感染建立中" : "感染"} · 活負荷 ${host.load}`
+      ? `${compartmentNames[host.infection?.compartment ?? "cytosol"]}${host.infection?.phase === "latent" ? " · 潛伏（未呈遞病毒肽）" : host.infection?.phase === "eclipse" ? " · 感染建立中" : "感染"} · 感染來源 ${host.load}`
       : "未感染";
 }
