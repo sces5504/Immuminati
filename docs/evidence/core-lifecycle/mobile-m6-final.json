@@ -1,0 +1,3848 @@
+{
+  "schema": 2,
+  "rules": "3.2",
+  "content": "campaign.3",
+  "state": {
+    "version": 2,
+    "scenario": "m6",
+    "seed": 1,
+    "rng": 1,
+    "tick": 2180,
+    "energy": 8,
+    "support": 0,
+    "wave": 0,
+    "nextWaveAt": 1250,
+    "health": {
+      "a": 0,
+      "b": 0,
+      "c": 0
+    },
+    "cells": [
+      {
+        "id": "u35",
+        "kind": "pdc",
+        "region": "a",
+        "position": {
+          "x": -10,
+          "z": -5.08
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -4
+          }
+        },
+        "path": [],
+        "readyAt": 0
+      },
+      {
+        "id": "u36",
+        "kind": "nk",
+        "region": "a",
+        "position": {
+          "x": -8.027147785672831,
+          "z": -6.901357389283643
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 12.09155110208376,
+            "z": -0.9020419236974275
+          }
+        },
+        "path": [],
+        "readyAt": 79
+      },
+      {
+        "id": "u37",
+        "kind": "dendritic",
+        "region": "c",
+        "position": {
+          "x": -4.237641248509603,
+          "z": 16.475282497019204
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 0,
+            "z": 11
+          }
+        },
+        "path": [
+          {
+            "x": -5,
+            "z": 18
+          }
+        ],
+        "readyAt": 0,
+        "recognized": true,
+        "antigen": "hiv:protein"
+      },
+      {
+        "id": "u38",
+        "kind": "cytotoxicT",
+        "region": "b",
+        "position": {
+          "x": 5.468803834583468,
+          "z": -9.613508361725671
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 5.468803834583468,
+            "z": -9.613508361725671
+          }
+        },
+        "path": [],
+        "readyAt": 988,
+        "activation": "effector",
+        "antigen": "hiv:protein",
+        "activationAt": 272
+      },
+      {
+        "id": "u40",
+        "kind": "pdc",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -7
+          }
+        },
+        "path": [],
+        "readyAt": 40
+      },
+      {
+        "id": "u49",
+        "kind": "pdc",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -7
+          }
+        },
+        "path": [],
+        "readyAt": 190
+      }
+    ],
+    "colonies": [
+      {
+        "id": "p1",
+        "region": "a",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "load": 1,
+        "markedUntil": 400,
+        "complementUntil": 400,
+        "antibodyUntil": 0,
+        "pathogen": "hiv",
+        "opsonin": "c3b"
+      },
+      {
+        "id": "p41",
+        "region": "a",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "load": 8,
+        "markedUntil": 350,
+        "complementUntil": 350,
+        "antibodyUntil": 0,
+        "pathogen": "hiv",
+        "opsonin": "c3b"
+      },
+      {
+        "id": "p42",
+        "region": "a",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "load": 8,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p43",
+        "region": "a",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "load": 8,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p44",
+        "region": "b",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "load": 6,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p45",
+        "region": "a",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "load": 8,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p46",
+        "region": "b",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "load": 8,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p48",
+        "region": "a",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "load": 7,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p50",
+        "region": "b",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "load": 4,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p51",
+        "region": "b",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "load": 4,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      },
+      {
+        "id": "p52",
+        "region": "b",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "load": 1,
+        "markedUntil": 0,
+        "complementUntil": 0,
+        "antibodyUntil": 0,
+        "pathogen": "hiv"
+      }
+    ],
+    "arrivals": [],
+    "internal": [],
+    "immunity": {
+      "autoSeek": true,
+      "signals": {
+        "a": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 100,
+          "il17": 0,
+          "il22": 0
+        },
+        "b": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 100,
+          "il17": 0,
+          "il22": 0
+        },
+        "c": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 0,
+          "il17": 0,
+          "il22": 0
+        }
+      },
+      "node": {
+        "stage": "primed",
+        "antigen": "hiv:protein",
+        "until": 157,
+        "crossPresented": true
+      },
+      "antibodies": 0
+    },
+    "hosts": [
+      {
+        "id": "h3",
+        "region": "a",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1290
+      },
+      {
+        "id": "h4",
+        "region": "a",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 508,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 492,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h5",
+        "region": "a",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 355,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 355,
+          "cycles": 8
+        }
+      },
+      {
+        "id": "h6",
+        "region": "a",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1290
+      },
+      {
+        "id": "h7",
+        "region": "a",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 355,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 355,
+          "cycles": 8
+        }
+      },
+      {
+        "id": "h8",
+        "region": "a",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 370,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 370,
+          "cycles": 8
+        }
+      },
+      {
+        "id": "h9",
+        "region": "a",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1290
+      },
+      {
+        "id": "h10",
+        "region": "a",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 400,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 400,
+          "cycles": 8
+        }
+      },
+      {
+        "id": "h11",
+        "region": "a",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 436,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 405,
+          "cycles": 7
+        }
+      },
+      {
+        "id": "h12",
+        "region": "a",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1290
+      },
+      {
+        "id": "h13",
+        "region": "b",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1640
+      },
+      {
+        "id": "h14",
+        "region": "b",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 384,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 360,
+          "cycles": 7
+        }
+      },
+      {
+        "id": "h15",
+        "region": "b",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 59,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 50,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h16",
+        "region": "b",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1640
+      },
+      {
+        "id": "h17",
+        "region": "b",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 968,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 961,
+          "cycles": 1
+        }
+      },
+      {
+        "id": "h18",
+        "region": "b",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1640
+      },
+      {
+        "id": "h19",
+        "region": "b",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 344,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 315,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h20",
+        "region": "b",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 324,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 305,
+          "cycles": 6
+        }
+      },
+      {
+        "id": "h21",
+        "region": "b",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 1640
+      },
+      {
+        "id": "h22",
+        "region": "b",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "hiv:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 364,
+        "infection": {
+          "pathogen": "hiv",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 330,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h23",
+        "region": "c",
+        "position": {
+          "x": 8.1967583526948,
+          "z": 9.870856605155543
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h24",
+        "region": "c",
+        "position": {
+          "x": 6.490873310335829,
+          "z": 13.176298735599861
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h25",
+        "region": "c",
+        "position": {
+          "x": -6.912109135641785,
+          "z": 13.512223096725279
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h26",
+        "region": "c",
+        "position": {
+          "x": -7.9629901059147254,
+          "z": 9.817500528308365
+        },
+        "kind": "stromal",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h27",
+        "region": "c",
+        "position": {
+          "x": -7.49958103343256,
+          "z": 6.288269568458882
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h28",
+        "region": "c",
+        "position": {
+          "x": -1.6012548675897756e-15,
+          "z": -0.7168255026925952
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h29",
+        "region": "c",
+        "position": {
+          "x": 7.733349280212635,
+          "z": 6.234913491611701
+        },
+        "kind": "cd4host",
+        "layer": "lymphoid",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h30",
+        "region": "c",
+        "position": {
+          "x": -6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h31",
+        "region": "c",
+        "position": {
+          "x": -3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h32",
+        "region": "c",
+        "position": {
+          "x": 0,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h33",
+        "region": "c",
+        "position": {
+          "x": 3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      },
+      {
+        "id": "h34",
+        "region": "c",
+        "position": {
+          "x": 6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 0,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 2180
+      }
+    ],
+    "serial": 53,
+    "eventId": 220,
+    "events": [
+      {
+        "id": 1,
+        "tick": 0,
+        "type": "wave",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "第 1 波：局部病毒暴露。感染入口與負荷已標示。",
+        "amount": 1
+      },
+      {
+        "id": 2,
+        "tick": 0,
+        "type": "infect",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "message": "病毒基因組整合並潛伏；目前無病毒肽供 CD8 辨識，並非已清除。",
+        "amount": 1,
+        "target": "h4"
+      },
+      {
+        "id": 3,
+        "tick": 0,
+        "type": "infect",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h5"
+      },
+      {
+        "id": 4,
+        "tick": 0,
+        "type": "infect",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h7"
+      },
+      {
+        "id": 5,
+        "tick": 0,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p1",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 6,
+        "tick": 0,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "漿細胞樣樹突細胞向旁皮質區集結，8 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 7,
+        "tick": 15,
+        "type": "infect",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h8",
+        "from": {
+          "x": -10,
+          "z": -7
+        }
+      },
+      {
+        "id": 8,
+        "tick": 15,
+        "type": "infect",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h15",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 9,
+        "tick": 30,
+        "type": "infect",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h20",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 10,
+        "tick": 35,
+        "type": "recognize",
+        "position": {
+          "x": -7.765802747153206,
+          "z": -3.6487041207298105
+        },
+        "message": "樹突細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u37"
+      },
+      {
+        "id": 11,
+        "tick": 35,
+        "type": "present",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h5"
+      },
+      {
+        "id": 12,
+        "tick": 35,
+        "type": "present",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h7"
+      },
+      {
+        "id": 13,
+        "tick": 40,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "漿細胞樣樹突細胞由微血管抵達，正前往旁皮質區。",
+        "amount": 1,
+        "actor": "u40"
+      },
+      {
+        "id": 14,
+        "tick": 45,
+        "type": "infect",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h10",
+        "from": {
+          "x": -10,
+          "z": -7
+        }
+      },
+      {
+        "id": 15,
+        "tick": 45,
+        "type": "infect",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h14",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 16,
+        "tick": 50,
+        "type": "present",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h8"
+      },
+      {
+        "id": 17,
+        "tick": 50,
+        "type": "present",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h15"
+      },
+      {
+        "id": 18,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 19,
+        "tick": 52,
+        "type": "present",
+        "position": {
+          "x": -13.939932388562237,
+          "z": -10.072920706929633
+        },
+        "message": "樹突細胞於感染焦點取得抗原材料，成熟後引流至淋巴結；未直接消除原感染宿主。",
+        "amount": 1,
+        "actor": "u37"
+      },
+      {
+        "id": 20,
+        "tick": 59,
+        "type": "cytotoxic",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h15",
+        "from": {
+          "x": 12.09155110208376,
+          "z": -0.9020419236974275
+        }
+      },
+      {
+        "id": 21,
+        "tick": 65,
+        "type": "present",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h20"
+      },
+      {
+        "id": 22,
+        "tick": 75,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 23,
+        "tick": 75,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 24,
+        "tick": 80,
+        "type": "present",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h10"
+      },
+      {
+        "id": 25,
+        "tick": 80,
+        "type": "present",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h14"
+      },
+      {
+        "id": 26,
+        "tick": 90,
+        "type": "infect",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h11",
+        "from": {
+          "x": -10,
+          "z": -7
+        }
+      },
+      {
+        "id": 27,
+        "tick": 90,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 28,
+        "tick": 100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 54%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 54
+      },
+      {
+        "id": 29,
+        "tick": 100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 30,
+        "tick": 100,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p1",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 31,
+        "tick": 105,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "3 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 3,
+        "target": "p44",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 32,
+        "tick": 115,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 33,
+        "tick": 115,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 34,
+        "tick": 117,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "樹突細胞經引流到達淋巴結：開始蛋白肽 MHC-II 呈遞，需共刺激與活化等待。",
+        "amount": 8,
+        "actor": "u37"
+      },
+      {
+        "id": 35,
+        "tick": 120,
+        "type": "infect",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h19",
+        "from": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        }
+      },
+      {
+        "id": 36,
+        "tick": 120,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 37,
+        "tick": 120,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "3 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 3,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 38,
+        "tick": 125,
+        "type": "present",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h11"
+      },
+      {
+        "id": 39,
+        "tick": 130,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 40,
+        "tick": 135,
+        "type": "infect",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "message": "HIV進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h22",
+        "from": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        }
+      },
+      {
+        "id": 41,
+        "tick": 135,
+        "type": "infect",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "message": "病毒基因組整合並潛伏；目前無病毒肽供 CD8 辨識，並非已清除。",
+        "amount": 1,
+        "target": "h17",
+        "from": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        }
+      },
+      {
+        "id": 42,
+        "tick": 145,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p44",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 43,
+        "tick": 150,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 44,
+        "tick": 150,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 45,
+        "tick": 150,
+        "type": "mark",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p41",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 46,
+        "tick": 150,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "漿細胞樣樹突細胞向旁皮質區集結，8 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 47,
+        "tick": 155,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 48,
+        "tick": 155,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 49,
+        "tick": 155,
+        "type": "present",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h19"
+      },
+      {
+        "id": 50,
+        "tick": 157,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "淋巴結：DC 呈遞 MHC-II 肽給 CD4，另以交叉呈遞的 MHC-I 病毒肽及共刺激啟動相符 CD8。",
+        "amount": 1
+      },
+      {
+        "id": 51,
+        "tick": 160,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 52,
+        "tick": 160,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 53,
+        "tick": 165,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 54,
+        "tick": 170,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 55,
+        "tick": 170,
+        "type": "present",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h22"
+      },
+      {
+        "id": 56,
+        "tick": 185,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p44",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 57,
+        "tick": 190,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "漿細胞樣樹突細胞由微血管抵達，正前往旁皮質區。",
+        "amount": 1,
+        "actor": "u49"
+      },
+      {
+        "id": 58,
+        "tick": 195,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 59,
+        "tick": 195,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 60,
+        "tick": 195,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p50",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 61,
+        "tick": 200,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 62,
+        "tick": 200,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 63,
+        "tick": 200,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 37%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 37
+      },
+      {
+        "id": 64,
+        "tick": 200,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 65,
+        "tick": 200,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 66,
+        "tick": 200,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p1",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 67,
+        "tick": 201,
+        "type": "activate",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "相符 CD8 T 接受 DC 交叉呈遞的 MHC-I 肽／共刺激，開始擴增分化。",
+        "amount": 1,
+        "actor": "u38"
+      },
+      {
+        "id": 68,
+        "tick": 205,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 69,
+        "tick": 210,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 70,
+        "tick": 210,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p51",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 71,
+        "tick": 225,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p44",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 72,
+        "tick": 235,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 73,
+        "tick": 235,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 74,
+        "tick": 235,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p50",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 75,
+        "tick": 240,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 76,
+        "tick": 240,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 77,
+        "tick": 245,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 78,
+        "tick": 250,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 79,
+        "tick": 250,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p51",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 80,
+        "tick": 250,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 81,
+        "tick": 250,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 82,
+        "tick": 250,
+        "type": "mark",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p41",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 83,
+        "tick": 265,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p44",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 84,
+        "tick": 272,
+        "type": "activate",
+        "position": {
+          "x": -5.423963559901049,
+          "z": 17.599935504249643
+        },
+        "message": "細胞毒性 T 細胞已活化，依其亞群及相符抗原執行效應；不直接清除所有種類的病原。",
+        "amount": 1,
+        "actor": "u38"
+      },
+      {
+        "id": 85,
+        "tick": 275,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 86,
+        "tick": 275,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 87,
+        "tick": 275,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p50",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 88,
+        "tick": 280,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 89,
+        "tick": 280,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 90,
+        "tick": 285,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 91,
+        "tick": 290,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 92,
+        "tick": 290,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p51",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 93,
+        "tick": 300,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 35%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 35
+      },
+      {
+        "id": 94,
+        "tick": 300,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 95,
+        "tick": 300,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 96,
+        "tick": 300,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p1",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 97,
+        "tick": 305,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p44",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 98,
+        "tick": 315,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 99,
+        "tick": 315,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 100,
+        "tick": 315,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p50",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 101,
+        "tick": 320,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 102,
+        "tick": 320,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 103,
+        "tick": 324,
+        "type": "cytotoxic",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h20",
+        "from": {
+          "x": 12.187279984556358,
+          "z": -10.55188863220541
+        }
+      },
+      {
+        "id": 104,
+        "tick": 325,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 105,
+        "tick": 330,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 106,
+        "tick": 330,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p51",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 107,
+        "tick": 344,
+        "type": "cytotoxic",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h19",
+        "from": {
+          "x": 10.95861228340834,
+          "z": -12.797768344067924
+        }
+      },
+      {
+        "id": 108,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 109,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 110,
+        "tick": 355,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 111,
+        "tick": 355,
+        "type": "clear",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h5"
+      },
+      {
+        "id": 112,
+        "tick": 355,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p42",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 113,
+        "tick": 355,
+        "type": "clear",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h7"
+      },
+      {
+        "id": 114,
+        "tick": 360,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 115,
+        "tick": 360,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p46",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 116,
+        "tick": 364,
+        "type": "cytotoxic",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h22",
+        "from": {
+          "x": 16.757301134741425,
+          "z": -8.805675208202302
+        }
+      },
+      {
+        "id": 117,
+        "tick": 365,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 118,
+        "tick": 370,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 119,
+        "tick": 370,
+        "type": "clear",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h8"
+      },
+      {
+        "id": 120,
+        "tick": 384,
+        "type": "cytotoxic",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h14",
+        "from": {
+          "x": 16.332395602821006,
+          "z": -2.419795841275342
+        }
+      },
+      {
+        "id": 121,
+        "tick": 400,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 122,
+        "tick": 400,
+        "type": "clear",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h10"
+      },
+      {
+        "id": 123,
+        "tick": 400,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 33%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 33
+      },
+      {
+        "id": 124,
+        "tick": 400,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 125,
+        "tick": 400,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 126,
+        "tick": 405,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 127,
+        "tick": 436,
+        "type": "cytotoxic",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h11",
+        "from": {
+          "x": -7.405114119154593,
+          "z": -12.388336053238946
+        }
+      },
+      {
+        "id": 128,
+        "tick": 450,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 129,
+        "tick": 450,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 130,
+        "tick": 492,
+        "type": "activate",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "message": "潛伏宿主再活化，開始表達病毒肽並產毒；潛伏庫未被清除。",
+        "amount": 1,
+        "target": "h4"
+      },
+      {
+        "id": 131,
+        "tick": 500,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 26%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 26
+      },
+      {
+        "id": 132,
+        "tick": 500,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 133,
+        "tick": 500,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 134,
+        "tick": 508,
+        "type": "cytotoxic",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h4",
+        "from": {
+          "x": -12.12576920075362,
+          "z": -2.5857947704606308
+        }
+      },
+      {
+        "id": 135,
+        "tick": 550,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 136,
+        "tick": 550,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 137,
+        "tick": 600,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 25%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 25
+      },
+      {
+        "id": 138,
+        "tick": 600,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 139,
+        "tick": 600,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 140,
+        "tick": 650,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 141,
+        "tick": 650,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 142,
+        "tick": 700,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 23%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 23
+      },
+      {
+        "id": 143,
+        "tick": 700,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 144,
+        "tick": 700,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 145,
+        "tick": 750,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 146,
+        "tick": 750,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 147,
+        "tick": 800,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 21%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 21
+      },
+      {
+        "id": 148,
+        "tick": 800,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 149,
+        "tick": 800,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 150,
+        "tick": 850,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 151,
+        "tick": 850,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 152,
+        "tick": 900,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 19%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 19
+      },
+      {
+        "id": 153,
+        "tick": 900,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 154,
+        "tick": 900,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 155,
+        "tick": 921,
+        "type": "activate",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "message": "潛伏宿主再活化，開始表達病毒肽並產毒；潛伏庫未被清除。",
+        "amount": 1,
+        "target": "h17"
+      },
+      {
+        "id": 156,
+        "tick": 950,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 157,
+        "tick": 950,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 158,
+        "tick": 961,
+        "type": "release",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p52",
+        "from": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        }
+      },
+      {
+        "id": 159,
+        "tick": 968,
+        "type": "cytotoxic",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h17",
+        "from": {
+          "x": 5.468803834583468,
+          "z": -9.613508361725671
+        }
+      },
+      {
+        "id": 160,
+        "tick": 1000,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 12%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 12
+      },
+      {
+        "id": 161,
+        "tick": 1000,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 162,
+        "tick": 1000,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 163,
+        "tick": 1050,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 164,
+        "tick": 1050,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 165,
+        "tick": 1100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 11%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 11
+      },
+      {
+        "id": 166,
+        "tick": 1100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 167,
+        "tick": 1100,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 168,
+        "tick": 1150,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 169,
+        "tick": 1150,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 170,
+        "tick": 1200,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 9%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 9
+      },
+      {
+        "id": 171,
+        "tick": 1200,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 172,
+        "tick": 1200,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 173,
+        "tick": 1250,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 174,
+        "tick": 1250,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 175,
+        "tick": 1300,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 7%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 7
+      },
+      {
+        "id": 176,
+        "tick": 1300,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 177,
+        "tick": 1300,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 178,
+        "tick": 1350,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 179,
+        "tick": 1350,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 180,
+        "tick": 1400,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 5%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 5
+      },
+      {
+        "id": 181,
+        "tick": 1400,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 182,
+        "tick": 1400,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 183,
+        "tick": 1450,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 184,
+        "tick": 1450,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 185,
+        "tick": 1500,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 3%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 3
+      },
+      {
+        "id": 186,
+        "tick": 1500,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 187,
+        "tick": 1500,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 188,
+        "tick": 1550,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 189,
+        "tick": 1550,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 190,
+        "tick": 1600,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 1%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 1
+      },
+      {
+        "id": 191,
+        "tick": 1600,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 192,
+        "tick": 1600,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 193,
+        "tick": 1650,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 194,
+        "tick": 1650,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 195,
+        "tick": 1700,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 0%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 0
+      },
+      {
+        "id": 196,
+        "tick": 1700,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 197,
+        "tick": 1700,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 198,
+        "tick": 1750,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 199,
+        "tick": 1750,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 200,
+        "tick": 1800,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 0%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 0
+      },
+      {
+        "id": 201,
+        "tick": 1800,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 202,
+        "tick": 1800,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 203,
+        "tick": 1850,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 204,
+        "tick": 1850,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 205,
+        "tick": 1900,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 0%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 0
+      },
+      {
+        "id": 206,
+        "tick": 1900,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 207,
+        "tick": 1900,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 208,
+        "tick": 1950,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 209,
+        "tick": 1950,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 210,
+        "tick": 2000,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 0%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 0
+      },
+      {
+        "id": 211,
+        "tick": 2000,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 212,
+        "tick": 2000,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 213,
+        "tick": 2050,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 214,
+        "tick": 2050,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 215,
+        "tick": 2100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "功能性 CD4 支援 0%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。",
+        "amount": 0
+      },
+      {
+        "id": 216,
+        "tick": 2100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 217,
+        "tick": 2100,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 218,
+        "tick": 2150,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "旁皮質區殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 219,
+        "tick": 2150,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "濾泡邊界殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 220,
+        "tick": 2180,
+        "type": "result",
+        "position": {
+          "x": 0,
+          "z": 0
+        },
+        "message": "未治療情境：全部防區組織保全耗盡",
+        "amount": 0
+      }
+    ],
+    "campaign": {
+      "containment": {
+        "a": 0,
+        "b": 0,
+        "c": 0
+      },
+      "barrier": {
+        "a": 0,
+        "b": 0,
+        "c": 0
+      },
+      "stable": 0,
+      "cd4": 0,
+      "impairment": 39.29199999999936
+    },
+    "result": {
+      "type": "limited",
+      "reason": "未治療情境：全部防區組織保全耗盡",
+      "preservation": 0,
+      "stars": 0,
+      "seconds": 436
+    }
+  },
+  "paused": false,
+  "undo": [],
+  "settings": {
+    "speed": 2,
+    "reduced": false,
+    "idle": true,
+    "hints": true,
+    "labels": false
+  },
+  "read": [],
+  "records": {},
+  "revealed": []
+}

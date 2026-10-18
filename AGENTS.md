@@ -1,3 +1,9 @@
+# 最新發布授權：合併 main 並發布正式 Pages（2026-10-18）
+
+使用者最新明確指示「這次要推到main」，取代下文歷史的私人預覽／不得合併限制。將已完成 Tripo 模型與 v3.2 核心生命週期修正合併 main，發布並核對 `/Immuminati/` 正式站；不需要再次請求合併確認。新模型預設啟用，保留遊戲內原模型切換及載入失敗回退；`VITE_ART_PREVIEW=original` 可建置原模型診斷版。沒有追加付費生成。檢查限本輪相關規則、型別／建置、桌面／手機與發布核對；既有完整驗證工作流未減少檢查。詳細結果見 [docs/CORE-LIFECYCLE.md](docs/CORE-LIFECYCLE.md)，發布結果另記於交接。
+
+以下舊授權依時間保留，衝突時以上述最新授權為準。
+
 # 最新授權：核心生命週期修正 v3.2（2026-10-18）
 
 使用者回報 TB 胞內不增殖並授權修正六關核心免疫機制及打磨體驗；本輪可修改純引擎與存檔，優先於下文美術輪「不改規則」。HIV 取消時間／CD4門檻結束，持續防守到全部防區組織耗盡；保留特殊無星等結果，不代表臨床病程。仍只更新 art/tripo-samples／PR #3／同一私人 Preview，不合併 main 或正式 Pages，不追加付費素材。規則3.2／campaign.3，舊 state 與 undo 顯式遷移並備份原文。詳見 [本輪修正與限制](docs/CORE-LIFECYCLE.md)。
@@ -20,7 +26,7 @@
 
 ## 現行方向與讀取順序
 
-1. [主規格 v3.1](docs/Immuminati-spec.md)：唯一現行產品／玩法依據。
+1. [主規格（現行 v3.2）](docs/Immuminati-spec.md)：唯一現行產品／玩法依據。
 2. [展示保留與動畫規格](docs/art-direction/C-art-and-animation.md)。
 3. [開發交接](docs/CLOUD-HANDOFF.md)。
 4. 實際檢視 `docs/evidence/tactics/desktop-field.png`、`mobile-field.png` 與既有遊戲；C 概念圖作風格來源。

@@ -1,0 +1,202 @@
+[
+  {
+    "output": "mobile-m1-highlights.mp4",
+    "output_sha256": "61d38d01c9643c56a9c2304df90e63e11caf531e97919d92a1976b540b68a57b",
+    "raw": "mobile-m1-raw.webm",
+    "raw_sha256": "def177920bc8eada827974e29924c6c5ed47256017cafa60f7364de2186b6ee8",
+    "raw_seconds": 42.64,
+    "segments": [
+      {
+        "start": 3.4112,
+        "seconds": 3
+      },
+      {
+        "start": 19.188000000000002,
+        "seconds": 4
+      },
+      {
+        "start": 38.64,
+        "seconds": 4
+      }
+    ],
+    "end_card": {
+      "file": "mobile-m1-report.png",
+      "seconds": 2,
+      "method": "Native UI replay screenshot of the same recorded final save; no score/state edits."
+    },
+    "method": "Gameplay at controlled browser clock; cuts only, no post-production retiming. H264/yuv420p MP4."
+  },
+  {
+    "output": "mobile-m2-highlights.mp4",
+    "output_sha256": "bb9562ffaf32424a39f8c2573957bfbe678659fd3ffbca0b24c906effa04a62b",
+    "raw": "mobile-m2-raw.webm",
+    "raw_sha256": "0f9f705c5fcdfa223aecdfd420afb105949595076abf9e0722bf3d5441db5160",
+    "raw_seconds": 39.32,
+    "segments": [
+      {
+        "start": 3.1456,
+        "seconds": 3
+      },
+      {
+        "start": 17.694,
+        "seconds": 4
+      },
+      {
+        "start": 35.32,
+        "seconds": 4
+      }
+    ],
+    "end_card": {
+      "file": "mobile-m2-report.png",
+      "seconds": 2,
+      "method": "Native UI replay screenshot of the same recorded final save; no score/state edits."
+    },
+    "method": "Gameplay at controlled browser clock; cuts only, no post-production retiming. H264/yuv420p MP4."
+  },
+  {
+    "output": "mobile-m3-highlights.mp4",
+    "output_sha256": "15ae0190c6efd08e8e72324ee50b61439ce1fa3c4740cd985b87468c398a00ba",
+    "raw": "mobile-m3-raw.webm",
+    "raw_sha256": "c2d8409c59f1a82e22f48c28e436f2111886fc6f815d40ae2dd0e92c7b18f3c0",
+    "raw_seconds": 44.32,
+    "segments": [
+      {
+        "start": 3.5456000000000003,
+        "seconds": 3
+      },
+      {
+        "start": 19.944,
+        "seconds": 4
+      },
+      {
+        "start": 40.32,
+        "seconds": 4
+      }
+    ],
+    "end_card": {
+      "file": "mobile-m3-report.png",
+      "seconds": 2,
+      "method": "Native UI replay screenshot of the same recorded final save; no score/state edits."
+    },
+    "method": "Gameplay at controlled browser clock; cuts only, no post-production retiming. H264/yuv420p MP4."
+  },
+  {
+    "output": "mobile-m4-highlights.mp4",
+    "output_sha256": "f409fc563d71a8af621ea830f88cad9a0dfb766d85b3c28976b9a039da70bd64",
+    "raw": "mobile-m4-raw.webm",
+    "raw_sha256": "2905e2d442a754a51004a68b5fc289539e7a12663f1b7b2f23dc58046d3c21b2",
+    "raw_seconds": 81.96,
+    "segments": [
+      {
+        "start": 4,
+        "seconds": 3
+      },
+      {
+        "start": 36.882,
+        "seconds": 4
+      },
+      {
+        "start": 77.96,
+        "seconds": 4
+      }
+    ],
+    "end_card": {
+      "file": "mobile-m4-report.png",
+      "seconds": 2,
+      "method": "Native UI replay screenshot of the same recorded final save; no score/state edits."
+    },
+    "method": "Gameplay at controlled browser clock; cuts only, no post-production retiming. H264/yuv420p MP4."
+  },
+  {
+    "output": "mobile-m5-highlights.mp4",
+    "output_sha256": "a642b1fd534ac1c28c7118054db1853d6e13721121d02293cd8f43da00f711d8",
+    "raw": "mobile-m5-raw.webm",
+    "raw_sha256": "695ca1bccc8874d2cb7f40203c760d2cda67d18a67bf5745a474dbafe9f1c4c3",
+    "raw_seconds": 57.04,
+    "segments": [
+      {
+        "start": 4,
+        "seconds": 3
+      },
+      {
+        "start": 25.668,
+        "seconds": 4
+      },
+      {
+        "start": 53.04,
+        "seconds": 4
+      }
+    ],
+    "end_card": {
+      "file": "mobile-m5-report.png",
+      "seconds": 2,
+      "method": "Native UI replay screenshot of the same recorded final save; no score/state edits."
+    },
+    "method": "Gameplay at controlled browser clock; cuts only, no post-production retiming. H264/yuv420p MP4."
+  },
+  {
+    "output": "mobile-m6-highlights.mp4",
+    "output_sha256": "c4fcbe78b43e90f626e6d613836f4f7961dd48f027687dc2ed7e8edc785d9550",
+    "raw": "mobile-m6-raw.webm",
+    "raw_sha256": "516cf0ea0b6442dea864d146025cf3655bf2d8971095d43c0c291058e833735a",
+    "raw_seconds": 318.96,
+    "segments": [
+      {
+        "start": 4,
+        "seconds": 3
+      },
+      {
+        "start": 143.53199999999998,
+        "seconds": 4
+      },
+      {
+        "start": 314.96,
+        "seconds": 4
+      }
+    ],
+    "end_card": {
+      "file": "mobile-m6-report.png",
+      "seconds": 2,
+      "method": "Native UI replay screenshot of the same recorded final save; no score/state edits."
+    },
+    "method": "Gameplay at controlled browser clock; cuts only, no post-production retiming. H264/yuv420p MP4."
+  },
+  {
+    "output": "tb-intracellular-inspection.mp4",
+    "output_sha256": "079ebc9cfa17b0a5c4090c24f4905f0e8d3c40ba1212f0a8fb251ec00f1d0dba",
+    "raw": "mobile-tb-inspection-raw.webm",
+    "raw_sha256": "c1d2f9398a9104fa8118a67818575f35132b997393f7c8a739d6058f80cf59c7",
+    "raw_seconds": 26.48,
+    "segments": [
+      {
+        "start": 12.48,
+        "seconds": 12
+      }
+    ],
+    "end_card": {
+      "file": "mobile-tb-growing-cutaway.png",
+      "seconds": 2,
+      "method": "Native screenshot from this same untreated TB branch, not a victory report."
+    },
+    "method": "Real visible UI new game, no Th1. Normal RAF playback near intracellular division. Cuts only; no post retiming."
+  },
+  {
+    "output": "tb-rupture.mp4",
+    "output_sha256": "9d3b77abe9568eb481fd0955a9a69aa0d132103424587a609a9db570fd058d70",
+    "raw": "mobile-tb-failure-raw.webm",
+    "raw_sha256": "bfbceb629a06b3bff8d822842c271c81a7022aacf1c74eac049a02d62cb70ad1",
+    "raw_seconds": 185.92,
+    "segments": [
+      {
+        "start": 171.92,
+        "seconds": 12
+      }
+    ],
+    "end_card": {
+      "file": "mobile-tb-rupture.png",
+      "seconds": 2,
+      "method": "Native screenshot from this same untreated TB branch, not a victory report."
+    },
+    "method": "Real visible UI new game, no Th1. Normal RAF playback near intracellular division. Cuts only; no post retiming."
+  }
+]

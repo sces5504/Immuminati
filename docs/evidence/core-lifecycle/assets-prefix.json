@@ -1,0 +1,143 @@
+{
+  "base": "http://127.0.0.1:24865/Immuminati/",
+  "rows": [
+    {
+      "path": "/Immuminati/assets/mark.svg",
+      "status": 200,
+      "bytes": 504,
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86"
+    },
+    {
+      "path": "/Immuminati/assets/index-fbXAY0if.js",
+      "status": 200,
+      "bytes": 458102,
+      "sha256": "678f5844186b85a96e6f055e6d91c14d3e28b6e151412a917dd86c20aa076322"
+    },
+    {
+      "path": "/Immuminati/assets/three-DH6SqBiy.js",
+      "status": 200,
+      "bytes": 527455,
+      "sha256": "7fd6393b3bbde940bab8fd39fc2066eb6d2ec6dd07d26708237487e1f7123def"
+    },
+    {
+      "path": "/Immuminati/assets/index-RJL4sCxa.css",
+      "status": 200,
+      "bytes": 98661,
+      "sha256": "7394b4513eb91341dc3b66ba9ae6501941fa61debf123ee6ee35f1381c30691f"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/alveolar-septum.glb",
+      "status": 200,
+      "bytes": 636100,
+      "sha256": "5158e272421028a1f9255802a1a2a64917a764e8b2b4d0171e2cdedcad6e9650"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/bacillus.glb",
+      "status": 200,
+      "bytes": 149764,
+      "sha256": "16e6ae7cba1e1865000f9c852263e7101f0ede920c2d164c9fa18972485bcb32"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/bcell.glb",
+      "status": 200,
+      "bytes": 562604,
+      "sha256": "dd588a513a6c11378c5d51ceb71764ad02c205facd0e4f1cbbb6f92047cafe13"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/dendritic.glb",
+      "status": 200,
+      "bytes": 510032,
+      "sha256": "98e6e12c7e939980763f903c54f96a32ca45b9cfad4c380f25b79a5d72182072"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/diplococcus.glb",
+      "status": 200,
+      "bytes": 115480,
+      "sha256": "af82e0f74bab8421776f5ba44cb2edba1419c8a6dbf0c548ea653985c68e581e"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/enterocyte.glb",
+      "status": 200,
+      "bytes": 557804,
+      "sha256": "19717647d3f2a2ae0c783135baa6152ce046ccbbf651624b957e005e3736bf68"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/enveloped-virus.glb",
+      "status": 200,
+      "bytes": 135396,
+      "sha256": "ab8dad001894cbc81bc9f07dc124fd860a01aea01f9fa981664db33824a0fe73"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/epithelial.glb",
+      "status": 200,
+      "bytes": 353684,
+      "sha256": "f386a519b60f8a545135b23a09761f068393f5c264e32740c3d171fff3d17847"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/goblet.glb",
+      "status": 200,
+      "bytes": 415728,
+      "sha256": "566928ee75eba8d2240755e91ceaa1ac674767f8ce56ee4c405e5c8626e01810"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/intestinal-villus.glb",
+      "status": 200,
+      "bytes": 309100,
+      "sha256": "8ba941d1b677eba8768e19d670b14278c414b9f91a059136116ffd1ed00f161c"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/lymph-reticulum.glb",
+      "status": 200,
+      "bytes": 343740,
+      "sha256": "cd5670eb36d0d090bb141814df31cbfdb7beb307140ce67412034c1957bf577a"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/macrophage.glb",
+      "status": 200,
+      "bytes": 504264,
+      "sha256": "22987db18bea416bc8fd337bb8652c8619bb1ce51af8d0868798635712f686dc"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/neutrophil.glb",
+      "status": 200,
+      "bytes": 497260,
+      "sha256": "2f125de5788346f235f24e94937bde77a00ac55b54a35ef28ceafb72ebcbbac5"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/nk.glb",
+      "status": 200,
+      "bytes": 580048,
+      "sha256": "6aae84fa028f57308d9a21ad8849a0c9ddab32796674dc6c41d4458c3d5d326c"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/oral-mucosa.glb",
+      "status": 200,
+      "bytes": 401732,
+      "sha256": "05b91453ca20ef7e24aa11955ab2714cadbd698ed0cab2101579b4e5883ae692"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/pdc.glb",
+      "status": 200,
+      "bytes": 453088,
+      "sha256": "f525c3bc864172562fe41f66c346c7a2ddffeb60fd358929ee1fee903c86cbb0"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/plasma.glb",
+      "status": 200,
+      "bytes": 374824,
+      "sha256": "f3bc953c1654e8f764c7c69683bfeafd074c12cff6631972bf4cde8a10a336ba"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/t-lymphocyte.glb",
+      "status": 200,
+      "bytes": 398980,
+      "sha256": "d3525ce42b630b84c3a1806d5fe59a4597528105a79a5353a8ef894d542b0eae"
+    },
+    {
+      "path": "/Immuminati/assets/tripo/yeast.glb",
+      "status": 200,
+      "bytes": 102584,
+      "sha256": "8b4156874c7bd0cddbe01edba426585af8eec2dbd9d56c97930e59546eff6acd"
+    }
+  ]
+}

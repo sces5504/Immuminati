@@ -1,0 +1,82 @@
+2026-10-18T14:38:10.146Z PROGRESS desktop m3 19
+2026-10-18T14:41:08.969Z PROGRESS desktop m3 319
+2026-10-18T14:41:56.536Z PASS desktop m3 {"type":"victory","reason":"感染被穩定圍堵；仍有活菌，並非臨床治癒","preservation":89,"stars":3,"seconds":75.2}
+2026-10-18T14:42:45.323Z PROGRESS desktop m1 5
+2026-10-18T14:43:35.616Z PROGRESS desktop m1 255
+2026-10-18T14:43:59.600Z PASS desktop m1 {"type":"victory","reason":"3 波感染來源均已清除","preservation":88,"stars":3,"seconds":83}
+2026-10-18T14:44:08.910Z PROGRESS desktop m2 5
+2026-10-18T14:45:01.738Z PROGRESS desktop m2 255
+2026-10-18T14:45:18.729Z PASS desktop m2 {"type":"victory","reason":"2 波感染來源均已清除","preservation":90,"stars":3,"seconds":70.2}
+2026-10-18T14:45:26.857Z PROGRESS desktop m3 5
+2026-10-18T14:46:09.453Z PROGRESS desktop m3 255
+2026-10-18T14:46:28.153Z PASS desktop m3 {"type":"victory","reason":"感染被穩定圍堵；仍有活菌，並非臨床治癒","preservation":89,"stars":3,"seconds":75.2}
+2026-10-18T14:46:35.910Z PROGRESS desktop m4 5
+2026-10-18T14:47:19.743Z PROGRESS desktop m4 255
+2026-10-18T14:48:06.428Z PROGRESS desktop m4 505
+2026-10-18T14:48:56.150Z PROGRESS desktop m4 755
+2026-10-18T14:49:10.435Z PASS desktop m4 {"type":"victory","reason":"2 波感染來源均已清除","preservation":75,"stars":2,"seconds":168.20000000000002}
+2026-10-18T14:49:18.850Z PROGRESS desktop m5 5
+2026-10-18T14:50:05.223Z PROGRESS desktop m5 255
+2026-10-18T14:50:27.191Z PASS desktop m5 {"type":"victory","reason":"2 波感染來源均已清除","preservation":98,"stars":3,"seconds":74}
+2026-10-18T14:50:35.029Z PROGRESS desktop m6 5
+2026-10-18T14:51:18.335Z PROGRESS desktop m6 255
+2026-10-18T14:52:11.164Z PROGRESS desktop m6 505
+2026-10-18T14:53:03.844Z PROGRESS desktop m6 755
+2026-10-18T14:54:01.821Z PROGRESS desktop m6 1005
+2026-10-18T14:54:59.630Z PROGRESS desktop m6 1255
+2026-10-18T14:55:55.736Z PROGRESS desktop m6 1505
+2026-10-18T14:56:49.052Z PROGRESS desktop m6 1755
+2026-10-18T15:01:08.143Z PROGRESS desktop m1 5
+2026-10-18T15:01:41.241Z PROGRESS desktop m1 255
+2026-10-18T15:02:01.580Z PASS desktop m1 {"type":"victory","reason":"3 波感染來源均已清除","preservation":88,"stars":3,"seconds":83}
+2026-10-18T15:02:08.838Z PROGRESS desktop m2 5
+2026-10-18T15:02:43.452Z PROGRESS desktop m2 255
+2026-10-18T15:03:02.461Z PASS desktop m2 {"type":"victory","reason":"2 波感染來源均已清除","preservation":90,"stars":3,"seconds":70.2}
+2026-10-18T15:03:09.525Z PROGRESS desktop m3 5
+2026-10-18T15:03:44.059Z PROGRESS desktop m3 255
+2026-10-18T15:03:59.943Z PASS desktop m3 {"type":"victory","reason":"感染被穩定圍堵；仍有活菌，並非臨床治癒","preservation":89,"stars":3,"seconds":75.2}
+2026-10-18T15:04:07.409Z PROGRESS desktop m4 5
+2026-10-18T15:04:40.522Z PROGRESS desktop m4 255
+2026-10-18T15:05:13.961Z PROGRESS desktop m4 505
+2026-10-18T15:05:49.826Z PROGRESS desktop m4 755
+2026-10-18T15:05:53.371Z PASS desktop m4 {"type":"victory","reason":"2 波感染來源均已清除","preservation":81,"stars":2,"seconds":155.60000000000002}
+2026-10-18T15:06:00.756Z PROGRESS desktop m5 5
+2026-10-18T15:06:40.012Z PROGRESS desktop m5 255
+2026-10-18T15:06:58.362Z PASS desktop m5 {"type":"victory","reason":"2 波感染來源均已清除","preservation":98,"stars":3,"seconds":74}
+2026-10-18T15:07:05.538Z PROGRESS desktop m6 5
+2026-10-18T15:07:43.610Z PROGRESS desktop m6 255
+2026-10-18T15:08:27.150Z PROGRESS desktop m6 505
+2026-10-18T15:09:11.656Z PROGRESS desktop m6 755
+2026-10-18T15:09:56.347Z PROGRESS desktop m6 1005
+2026-10-18T15:10:40.241Z PROGRESS desktop m6 1255
+2026-10-18T15:11:24.019Z PROGRESS desktop m6 1505
+2026-10-18T15:12:07.149Z PROGRESS desktop m6 1755
+2026-10-18T15:12:49.916Z PROGRESS desktop m6 2005
+2026-10-18T15:13:20.181Z PASS desktop m6 {"type":"limited","reason":"未治療情境：全部防區組織保全耗盡","preservation":0,"stars":0,"seconds":436}
+2026-10-18T15:13:25.246Z PROGRESS mobile m1 5
+2026-10-18T15:13:44.844Z PROGRESS mobile m1 255
+2026-10-18T15:13:57.138Z PASS mobile m1 {"type":"victory","reason":"3 波感染來源均已清除","preservation":88,"stars":3,"seconds":83}
+2026-10-18T15:14:02.786Z PROGRESS mobile m2 5
+2026-10-18T15:14:23.080Z PROGRESS mobile m2 255
+2026-10-18T15:14:31.713Z PASS mobile m2 {"type":"victory","reason":"2 波感染來源均已清除","preservation":90,"stars":3,"seconds":70.2}
+2026-10-18T15:14:37.716Z PROGRESS mobile m3 5
+2026-10-18T15:14:57.644Z PROGRESS mobile m3 255
+2026-10-18T15:15:09.934Z PASS mobile m3 {"type":"victory","reason":"感染被穩定圍堵；仍有活菌，並非臨床治癒","preservation":89,"stars":3,"seconds":75.2}
+2026-10-18T15:15:16.136Z PROGRESS mobile m4 5
+2026-10-18T15:15:36.469Z PROGRESS mobile m4 255
+2026-10-18T15:15:58.160Z PROGRESS mobile m4 505
+2026-10-18T15:16:19.455Z PROGRESS mobile m4 755
+2026-10-18T15:16:21.747Z PASS mobile m4 {"type":"victory","reason":"2 波感染來源均已清除","preservation":81,"stars":2,"seconds":155.60000000000002}
+2026-10-18T15:16:27.718Z PROGRESS mobile m5 5
+2026-10-18T15:16:52.719Z PROGRESS mobile m5 255
+2026-10-18T15:17:13.009Z PASS mobile m5 {"type":"victory","reason":"2 波感染來源均已清除","preservation":98,"stars":3,"seconds":74}
+2026-10-18T15:17:19.258Z PROGRESS mobile m6 5
+2026-10-18T15:17:43.927Z PROGRESS mobile m6 255
+2026-10-18T15:18:20.924Z PROGRESS mobile m6 505
+2026-10-18T15:18:53.978Z PROGRESS mobile m6 755
+2026-10-18T15:19:24.428Z PROGRESS mobile m6 1005
+2026-10-18T15:20:04.252Z PROGRESS mobile m6 1255
+2026-10-18T15:20:35.046Z PROGRESS mobile m6 1505
+2026-10-18T15:21:04.964Z PROGRESS mobile m6 1755
+2026-10-18T15:21:42.276Z PROGRESS mobile m6 2005
+2026-10-18T15:22:03.192Z PASS mobile m6 {"type":"limited","reason":"未治療情境：全部防區組織保全耗盡","preservation":0,"stars":0,"seconds":436}

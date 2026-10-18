@@ -1,0 +1,2795 @@
+{
+  "schema": 2,
+  "rules": "3.2",
+  "content": "campaign.3",
+  "state": {
+    "version": 2,
+    "scenario": "m1",
+    "seed": 2,
+    "rng": 2,
+    "tick": 415,
+    "energy": 7,
+    "support": 1,
+    "wave": 2,
+    "nextWaveAt": 900,
+    "health": {
+      "a": 87.16000000000003,
+      "b": 85.60000000000001,
+      "c": 92.20000000000003
+    },
+    "cells": [
+      {
+        "id": "u36",
+        "kind": "macrophage",
+        "region": "b",
+        "position": {
+          "x": 8.925266532025082,
+          "z": -6.053736673398746
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -4
+          }
+        },
+        "path": [],
+        "readyAt": 415,
+        "recognized": true
+      },
+      {
+        "id": "u37",
+        "kind": "neutrophil",
+        "region": "b",
+        "position": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 10,
+            "z": -3
+          }
+        },
+        "path": [],
+        "readyAt": 407,
+        "recognized": true
+      },
+      {
+        "id": "u38",
+        "kind": "dendritic",
+        "region": "c",
+        "position": {
+          "x": -3.948401006591224,
+          "z": 16.2878831073962
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 0,
+            "z": 11
+          }
+        },
+        "path": [
+          {
+            "x": -5,
+            "z": 18
+          }
+        ],
+        "readyAt": 25,
+        "recognized": true,
+        "antigen": "pneumococcus:protein"
+      },
+      {
+        "id": "u46",
+        "kind": "neutrophil",
+        "position": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "region": "b",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -7
+          }
+        },
+        "path": [],
+        "readyAt": 407,
+        "recognized": true
+      }
+    ],
+    "colonies": [],
+    "arrivals": [],
+    "internal": [],
+    "immunity": {
+      "autoSeek": true,
+      "signals": {
+        "a": {
+          "cxcl8": 4,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 0,
+          "il17": 0,
+          "il22": 0
+        },
+        "b": {
+          "cxcl8": 91,
+          "il12": 4,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 36,
+          "ifni": 0,
+          "il17": 0,
+          "il22": 0
+        },
+        "c": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 0,
+          "il17": 0,
+          "il22": 0
+        }
+      },
+      "node": {
+        "stage": "primed",
+        "antigen": "pneumococcus:protein",
+        "until": 63,
+        "crossPresented": false
+      },
+      "antibodies": 0
+    },
+    "hosts": [
+      {
+        "id": "h4",
+        "region": "a",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 1.5707963267948966,
+          "radius": 7.549985807166464,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h5",
+        "region": "a",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.019595277307724,
+          "radius": 7.436883897803397,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h6",
+        "region": "a",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.4683942278205517,
+          "radius": 8.51944059323194,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h7",
+        "region": "a",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.9171931783333793,
+          "radius": 8.37223644998041,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h8",
+        "region": "a",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.365992128846207,
+          "radius": 8.1049202508056,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h9",
+        "region": "a",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.814791079359034,
+          "radius": 7.776966192595207,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h10",
+        "region": "a",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.263590029871862,
+          "radius": 7.461739889175007,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h11",
+        "region": "a",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.550014192833535,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h12",
+        "region": "a",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.161187930897517,
+          "radius": 8.663116102196605,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h13",
+        "region": "a",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.609986881410345,
+          "radius": 7.580559406768061,
+          "arc": 0.43982297150257105
+        },
+        "health": 87.16000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h14",
+        "region": "b",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.2243994752564138,
+          "radius": 8.612016482800392,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h15",
+        "region": "b",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.6731984257692414,
+          "radius": 7.9806597501067325,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h16",
+        "region": "b",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 1.121997376282069,
+          "radius": 7.868952587234249,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h17",
+        "region": "b",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 1.5707963267948966,
+          "radius": 7.549985807166464,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h18",
+        "region": "b",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.814791079359034,
+          "radius": 8.11934024989327,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h19",
+        "region": "b",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.263590029871862,
+          "radius": 8.231047412765752,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h20",
+        "region": "b",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.550014192833535,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h21",
+        "region": "b",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.161187930897517,
+          "radius": 7.893808578605861,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h22",
+        "region": "b",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.609986881410345,
+          "radius": 7.2381853494699975,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h23",
+        "region": "b",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 6.058785831923172,
+          "radius": 8.344700283625581,
+          "arc": 0.43982297150257105
+        },
+        "health": 85.60000000000001,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h24",
+        "region": "c",
+        "position": {
+          "x": 8.1967583526948,
+          "z": 9.870856605155543
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.2243994752564138,
+          "radius": 8.407553266529217,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h25",
+        "region": "c",
+        "position": {
+          "x": 6.490873310335829,
+          "z": 13.176298735599861
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.6731984257692414,
+          "radius": 8.3021385757528,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h26",
+        "region": "c",
+        "position": {
+          "x": -6.912109135641785,
+          "z": 13.512223096725279
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.4683942278205517,
+          "radius": 8.840919418878007,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h27",
+        "region": "c",
+        "position": {
+          "x": -7.9629901059147254,
+          "z": 9.817500528308365
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.9171931783333793,
+          "radius": 8.167773233709234,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h28",
+        "region": "c",
+        "position": {
+          "x": -7.49958103343256,
+          "z": 6.288269568458882
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.365992128846207,
+          "radius": 7.692446733470783,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h29",
+        "region": "c",
+        "position": {
+          "x": -1.6012548675897756e-15,
+          "z": -0.7168255026925952
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.716825502692595,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h30",
+        "region": "c",
+        "position": {
+          "x": 7.733349280212635,
+          "z": 6.234913491611701
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 6.058785831923172,
+          "radius": 7.932226766290767,
+          "arc": 0.43982297150257105
+        },
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h31",
+        "region": "c",
+        "position": {
+          "x": -6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h32",
+        "region": "c",
+        "position": {
+          "x": -3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h33",
+        "region": "c",
+        "position": {
+          "x": 0,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h34",
+        "region": "c",
+        "position": {
+          "x": 3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h35",
+        "region": "c",
+        "position": {
+          "x": 6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 92.20000000000003,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      }
+    ],
+    "serial": 90,
+    "eventId": 136,
+    "events": [
+      {
+        "id": 1,
+        "tick": 0,
+        "type": "wave",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "第 1 波：前緣接觸。感染入口與負荷已標示。",
+        "amount": 1
+      },
+      {
+        "id": 2,
+        "tick": 0,
+        "type": "mark",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p1",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 3,
+        "tick": 0,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "嗜中性球向肺泡入口集結，5 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 4,
+        "tick": 2,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 5,
+        "tick": 3,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p1",
+        "from": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "survives": false
+      },
+      {
+        "id": 6,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "message": "巨噬細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u36"
+      },
+      {
+        "id": 7,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u37"
+      },
+      {
+        "id": 8,
+        "tick": 5,
+        "type": "recognize",
+        "position": {
+          "x": 0.6095514542075675,
+          "z": 9.095151705601353
+        },
+        "message": "樹突細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u38"
+      },
+      {
+        "id": 9,
+        "tick": 5,
+        "type": "present",
+        "position": {
+          "x": 0.7619393177594593,
+          "z": 8.618939632001691
+        },
+        "message": "樹突細胞已捕捉蛋白抗原，成熟後將由淋巴引流至淋巴結；吞入病原不等於直接活化所有淋巴球。",
+        "amount": 1,
+        "actor": "u38"
+      },
+      {
+        "id": 10,
+        "tick": 5,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "樹突細胞吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "p3",
+        "from": {
+          "x": 0.7619393177594593,
+          "z": 8.618939632001691
+        },
+        "survives": false
+      },
+      {
+        "id": 11,
+        "tick": 12,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i40"
+      },
+      {
+        "id": 12,
+        "tick": 12,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 13,
+        "tick": 18,
+        "type": "clear",
+        "position": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i41"
+      },
+      {
+        "id": 14,
+        "tick": 18,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p1",
+        "from": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "survives": false
+      },
+      {
+        "id": 15,
+        "tick": 20,
+        "type": "clear",
+        "position": {
+          "x": -2.9016587122910718,
+          "z": 14.583673446197423
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "i42"
+      },
+      {
+        "id": 16,
+        "tick": 22,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i43"
+      },
+      {
+        "id": 17,
+        "tick": 22,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 18,
+        "tick": 23,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "樹突細胞經引流到達淋巴結：開始蛋白肽 MHC-II 呈遞，需共刺激與活化等待。",
+        "amount": 8,
+        "actor": "u38"
+      },
+      {
+        "id": 19,
+        "tick": 25,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "嗜中性球由微血管抵達，正前往肺泡入口。",
+        "amount": 1,
+        "actor": "u46"
+      },
+      {
+        "id": 20,
+        "tick": 32,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i45"
+      },
+      {
+        "id": 21,
+        "tick": 32,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 22,
+        "tick": 33,
+        "type": "clear",
+        "position": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i44"
+      },
+      {
+        "id": 23,
+        "tick": 33,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p1",
+        "from": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "survives": false
+      },
+      {
+        "id": 24,
+        "tick": 35,
+        "type": "grow",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p1"
+      },
+      {
+        "id": 25,
+        "tick": 35,
+        "type": "grow",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p2"
+      },
+      {
+        "id": 26,
+        "tick": 35,
+        "type": "grow",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p3"
+      },
+      {
+        "id": 27,
+        "tick": 40,
+        "type": "recognize",
+        "position": {
+          "x": 0,
+          "z": 8.20000000000001
+        },
+        "message": "嗜中性球以 PRRs（含 TLR）辨識微生物模式，促進局部趨化與發炎；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u46"
+      },
+      {
+        "id": 28,
+        "tick": 42,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i47"
+      },
+      {
+        "id": 29,
+        "tick": 42,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 30,
+        "tick": 48,
+        "type": "clear",
+        "position": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i48"
+      },
+      {
+        "id": 31,
+        "tick": 48,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p1",
+        "from": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "survives": false
+      },
+      {
+        "id": 32,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 33,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 1
+      },
+      {
+        "id": 34,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "肺泡壁前緣殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 1
+      },
+      {
+        "id": 35,
+        "tick": 50,
+        "type": "mark",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p2",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 36,
+        "tick": 52,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i49"
+      },
+      {
+        "id": 37,
+        "tick": 52,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 38,
+        "tick": 62,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i51"
+      },
+      {
+        "id": 39,
+        "tick": 62,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 40,
+        "tick": 63,
+        "type": "clear",
+        "position": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i50"
+      },
+      {
+        "id": 41,
+        "tick": 63,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "淋巴結：MHC-II／蛋白肽及共刺激已就緒；相符 CD4 T 可活化。這不是 MHC-I 交叉呈遞，不會直接活化 CD8。",
+        "amount": 1
+      },
+      {
+        "id": 42,
+        "tick": 63,
+        "type": "engulf",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "巨噬細胞吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u36",
+        "target": "p1",
+        "from": {
+          "x": -9.398347104306353,
+          "z": -5.50413223923412
+        },
+        "survives": false
+      },
+      {
+        "id": 43,
+        "tick": 63,
+        "type": "clear",
+        "position": {
+          "x": -8.4,
+          "z": -8
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 2,
+        "target": "p1"
+      },
+      {
+        "id": 44,
+        "tick": 70,
+        "type": "grow",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p2"
+      },
+      {
+        "id": 45,
+        "tick": 70,
+        "type": "grow",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p3"
+      },
+      {
+        "id": 46,
+        "tick": 72,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i52"
+      },
+      {
+        "id": 47,
+        "tick": 72,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 48,
+        "tick": 78,
+        "type": "clear",
+        "position": {
+          "x": -8.198516561838119,
+          "z": -4.297774842757178
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u36",
+        "target": "i53"
+      },
+      {
+        "id": 49,
+        "tick": 82,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i54"
+      },
+      {
+        "id": 50,
+        "tick": 82,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 51,
+        "tick": 89,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "p3",
+        "from": {
+          "x": -1.0693268407738097,
+          "z": 6.396009738839284
+        },
+        "survives": false
+      },
+      {
+        "id": 52,
+        "tick": 92,
+        "type": "clear",
+        "position": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i55"
+      },
+      {
+        "id": 53,
+        "tick": 92,
+        "type": "engulf",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p2",
+        "from": {
+          "x": 9.860694793370602,
+          "z": -4.393052066293985
+        },
+        "survives": false
+      },
+      {
+        "id": 54,
+        "tick": 92,
+        "type": "clear",
+        "position": {
+          "x": 9.6,
+          "z": -7
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p2"
+      },
+      {
+        "id": 55,
+        "tick": 99,
+        "type": "clear",
+        "position": {
+          "x": -1.0693268407738097,
+          "z": 6.396009738839284
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "i56"
+      },
+      {
+        "id": 56,
+        "tick": 99,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "p3",
+        "from": {
+          "x": -1.0693268407738097,
+          "z": 6.396009738839284
+        },
+        "survives": false
+      },
+      {
+        "id": 57,
+        "tick": 100,
+        "type": "damage",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "肺泡壁前緣殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 1
+      },
+      {
+        "id": 58,
+        "tick": 100,
+        "type": "mark",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p3",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 59,
+        "tick": 101,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p3",
+        "from": {
+          "x": -1.0096020187591501,
+          "z": 6.485596971861273
+        },
+        "survives": false
+      },
+      {
+        "id": 60,
+        "tick": 102,
+        "type": "clear",
+        "position": {
+          "x": 9.310055598258993,
+          "z": -5.034077837562589
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i57"
+      },
+      {
+        "id": 61,
+        "tick": 105,
+        "type": "grow",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p3"
+      },
+      {
+        "id": 62,
+        "tick": 109,
+        "type": "clear",
+        "position": {
+          "x": -1.0693268407738097,
+          "z": 6.396009738839284
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "i58"
+      },
+      {
+        "id": 63,
+        "tick": 109,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p3",
+        "from": {
+          "x": -1.0693268407738097,
+          "z": 6.396009738839284
+        },
+        "survives": false
+      },
+      {
+        "id": 64,
+        "tick": 116,
+        "type": "clear",
+        "position": {
+          "x": -1.0096020187591501,
+          "z": 6.485596971861273
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i59"
+      },
+      {
+        "id": 65,
+        "tick": 116,
+        "type": "engulf",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "巨噬細胞吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u36",
+        "target": "p3",
+        "from": {
+          "x": -1.0096020187591501,
+          "z": 6.485596971861273
+        },
+        "survives": false
+      },
+      {
+        "id": 66,
+        "tick": 116,
+        "type": "clear",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 2,
+        "target": "p3"
+      },
+      {
+        "id": 67,
+        "tick": 119,
+        "type": "clear",
+        "position": {
+          "x": -1.0693268407738097,
+          "z": 6.396009738839284
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i60"
+      },
+      {
+        "id": 68,
+        "tick": 131,
+        "type": "clear",
+        "position": {
+          "x": -1.0096020187591501,
+          "z": 6.485596971861273
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u36",
+        "target": "i61"
+      },
+      {
+        "id": 69,
+        "tick": 175,
+        "type": "wave",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "第 2 波：側翼滲入。感染入口與負荷已標示。",
+        "amount": 2
+      },
+      {
+        "id": 70,
+        "tick": 175,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p63",
+        "from": {
+          "x": 1.6,
+          "z": 6
+        },
+        "survives": false
+      },
+      {
+        "id": 71,
+        "tick": 175,
+        "type": "grow",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p62"
+      },
+      {
+        "id": 72,
+        "tick": 175,
+        "type": "grow",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p63"
+      },
+      {
+        "id": 73,
+        "tick": 176,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "巨噬細胞吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "p63",
+        "from": {
+          "x": 0.05959539159365068,
+          "z": 6.637967893282864
+        },
+        "survives": false
+      },
+      {
+        "id": 74,
+        "tick": 176,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "p63",
+        "from": {
+          "x": 0.31208366830878287,
+          "z": 6.623397085444527
+        },
+        "survives": false
+      },
+      {
+        "id": 75,
+        "tick": 185,
+        "type": "clear",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i64"
+      },
+      {
+        "id": 76,
+        "tick": 185,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p63",
+        "from": {
+          "x": 1.6,
+          "z": 6
+        },
+        "survives": false
+      },
+      {
+        "id": 77,
+        "tick": 186,
+        "type": "clear",
+        "position": {
+          "x": 0.31208366830878287,
+          "z": 6.623397085444527
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "i66"
+      },
+      {
+        "id": 78,
+        "tick": 186,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "p63",
+        "from": {
+          "x": 0.31208366830878287,
+          "z": 6.623397085444527
+        },
+        "survives": false
+      },
+      {
+        "id": 79,
+        "tick": 191,
+        "type": "clear",
+        "position": {
+          "x": 0.05959539159365068,
+          "z": 6.637967893282864
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "i65"
+      },
+      {
+        "id": 80,
+        "tick": 191,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "巨噬細胞吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "p63",
+        "from": {
+          "x": 0.05959539159365068,
+          "z": 6.637967893282864
+        },
+        "survives": false
+      },
+      {
+        "id": 81,
+        "tick": 195,
+        "type": "clear",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i67"
+      },
+      {
+        "id": 82,
+        "tick": 195,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p63",
+        "from": {
+          "x": 1.6,
+          "z": 6
+        },
+        "survives": false
+      },
+      {
+        "id": 83,
+        "tick": 196,
+        "type": "clear",
+        "position": {
+          "x": 0.31208366830878287,
+          "z": 6.623397085444527
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "i68"
+      },
+      {
+        "id": 84,
+        "tick": 196,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "p63",
+        "from": {
+          "x": 0.31208366830878287,
+          "z": 6.623397085444527
+        },
+        "survives": false
+      },
+      {
+        "id": 85,
+        "tick": 200,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 1
+      },
+      {
+        "id": 86,
+        "tick": 200,
+        "type": "damage",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "肺泡壁前緣殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 87,
+        "tick": 200,
+        "type": "mark",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p62",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 88,
+        "tick": 205,
+        "type": "clear",
+        "position": {
+          "x": 1.6,
+          "z": 6
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i70"
+      },
+      {
+        "id": 89,
+        "tick": 205,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "嗜中性球吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p63",
+        "from": {
+          "x": 1.6,
+          "z": 6
+        },
+        "survives": false
+      },
+      {
+        "id": 90,
+        "tick": 206,
+        "type": "clear",
+        "position": {
+          "x": 0.05959539159365068,
+          "z": 6.637967893282864
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "i69"
+      },
+      {
+        "id": 91,
+        "tick": 206,
+        "type": "clear",
+        "position": {
+          "x": 0.31208366830878287,
+          "z": 6.623397085444527
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u46",
+        "target": "i71"
+      },
+      {
+        "id": 92,
+        "tick": 206,
+        "type": "engulf",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "巨噬細胞吞入 1 負荷（莢膜限制效率），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "p63",
+        "from": {
+          "x": 0.05959539159365068,
+          "z": 6.637967893282864
+        },
+        "survives": false
+      },
+      {
+        "id": 93,
+        "tick": 206,
+        "type": "clear",
+        "position": {
+          "x": 2.6,
+          "z": 7
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p63"
+      },
+      {
+        "id": 94,
+        "tick": 210,
+        "type": "grow",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p62"
+      },
+      {
+        "id": 95,
+        "tick": 215,
+        "type": "clear",
+        "position": {
+          "x": -0.1324348410472329,
+          "z": 7.8013477384291505
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i72"
+      },
+      {
+        "id": 96,
+        "tick": 221,
+        "type": "clear",
+        "position": {
+          "x": -1.9396006094233031,
+          "z": 5.090599085865047
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "i73"
+      },
+      {
+        "id": 97,
+        "tick": 233,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p62",
+        "from": {
+          "x": -10.16070835907957,
+          "z": -7
+        },
+        "survives": false
+      },
+      {
+        "id": 98,
+        "tick": 239,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p62",
+        "from": {
+          "x": -9.839688274988744,
+          "z": -6.759532412483114
+        },
+        "survives": false
+      },
+      {
+        "id": 99,
+        "tick": 243,
+        "type": "clear",
+        "position": {
+          "x": -10.16070835907957,
+          "z": -7
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i74"
+      },
+      {
+        "id": 100,
+        "tick": 243,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p62",
+        "from": {
+          "x": -10.16070835907957,
+          "z": -7
+        },
+        "survives": false
+      },
+      {
+        "id": 101,
+        "tick": 245,
+        "type": "grow",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p62"
+      },
+      {
+        "id": 102,
+        "tick": 246,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p62",
+        "from": {
+          "x": -9.727591364425518,
+          "z": -6.5913870466382765
+        },
+        "survives": false
+      },
+      {
+        "id": 103,
+        "tick": 249,
+        "type": "clear",
+        "position": {
+          "x": -9.839688274988744,
+          "z": -6.759532412483114
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i75"
+      },
+      {
+        "id": 104,
+        "tick": 249,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p62",
+        "from": {
+          "x": -9.839688274988744,
+          "z": -6.759532412483114
+        },
+        "survives": false
+      },
+      {
+        "id": 105,
+        "tick": 250,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 106,
+        "tick": 253,
+        "type": "clear",
+        "position": {
+          "x": -10.16070835907957,
+          "z": -7
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i76"
+      },
+      {
+        "id": 107,
+        "tick": 253,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p62",
+        "from": {
+          "x": -10.16070835907957,
+          "z": -7
+        },
+        "survives": false
+      },
+      {
+        "id": 108,
+        "tick": 259,
+        "type": "clear",
+        "position": {
+          "x": -9.839688274988744,
+          "z": -6.759532412483114
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i78"
+      },
+      {
+        "id": 109,
+        "tick": 259,
+        "type": "engulf",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "嗜中性球吞入 1 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "p62",
+        "from": {
+          "x": -9.839688274988744,
+          "z": -6.759532412483114
+        },
+        "survives": false
+      },
+      {
+        "id": 110,
+        "tick": 259,
+        "type": "clear",
+        "position": {
+          "x": -12.4,
+          "z": -7
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p62"
+      },
+      {
+        "id": 111,
+        "tick": 261,
+        "type": "clear",
+        "position": {
+          "x": -9.727591364425518,
+          "z": -6.5913870466382765
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i77"
+      },
+      {
+        "id": 112,
+        "tick": 263,
+        "type": "clear",
+        "position": {
+          "x": -10.16070835907957,
+          "z": -7
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i79"
+      },
+      {
+        "id": 113,
+        "tick": 269,
+        "type": "clear",
+        "position": {
+          "x": -9.839688274988744,
+          "z": -6.759532412483114
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u37",
+        "target": "i80"
+      },
+      {
+        "id": 114,
+        "tick": 350,
+        "type": "wave",
+        "position": {
+          "x": 0,
+          "z": 8
+        },
+        "message": "第 3 波：深部菌群。感染入口與負荷已標示。",
+        "amount": 3
+      },
+      {
+        "id": 115,
+        "tick": 350,
+        "type": "grow",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p81"
+      },
+      {
+        "id": 116,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 2
+      },
+      {
+        "id": 117,
+        "tick": 350,
+        "type": "mark",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p81",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 118,
+        "tick": 377,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p81",
+        "from": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "survives": false
+      },
+      {
+        "id": 119,
+        "tick": 377,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p81",
+        "from": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "survives": false
+      },
+      {
+        "id": 120,
+        "tick": 385,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p81",
+        "from": {
+          "x": 8.925266532025082,
+          "z": -6.053736673398746
+        },
+        "survives": false
+      },
+      {
+        "id": 121,
+        "tick": 385,
+        "type": "grow",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "殘餘菌群繁殖 +2。",
+        "amount": 2,
+        "target": "p81"
+      },
+      {
+        "id": 122,
+        "tick": 387,
+        "type": "clear",
+        "position": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i82"
+      },
+      {
+        "id": 123,
+        "tick": 387,
+        "type": "clear",
+        "position": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i83"
+      },
+      {
+        "id": 124,
+        "tick": 387,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p81",
+        "from": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "survives": false
+      },
+      {
+        "id": 125,
+        "tick": 387,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p81",
+        "from": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "survives": false
+      },
+      {
+        "id": 126,
+        "tick": 397,
+        "type": "clear",
+        "position": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i85"
+      },
+      {
+        "id": 127,
+        "tick": 397,
+        "type": "clear",
+        "position": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i86"
+      },
+      {
+        "id": 128,
+        "tick": 397,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "p81",
+        "from": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "survives": false
+      },
+      {
+        "id": 129,
+        "tick": 397,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "嗜中性球吞入 2 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "p81",
+        "from": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "survives": false
+      },
+      {
+        "id": 130,
+        "tick": 400,
+        "type": "clear",
+        "position": {
+          "x": 8.925266532025082,
+          "z": -6.053736673398746
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i84"
+      },
+      {
+        "id": 131,
+        "tick": 400,
+        "type": "engulf",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "p81",
+        "from": {
+          "x": 8.925266532025082,
+          "z": -6.053736673398746
+        },
+        "survives": false
+      },
+      {
+        "id": 132,
+        "tick": 400,
+        "type": "clear",
+        "position": {
+          "x": 11.6,
+          "z": -6
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 3,
+        "target": "p81"
+      },
+      {
+        "id": 133,
+        "tick": 407,
+        "type": "clear",
+        "position": {
+          "x": 9.286900351353138,
+          "z": -6.035654982432343
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u37",
+        "target": "i87"
+      },
+      {
+        "id": 134,
+        "tick": 407,
+        "type": "clear",
+        "position": {
+          "x": 9.415037992497815,
+          "z": -6.029248100375109
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u46",
+        "target": "i88"
+      },
+      {
+        "id": 135,
+        "tick": 415,
+        "type": "clear",
+        "position": {
+          "x": 8.925266532025082,
+          "z": -6.053736673398746
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u36",
+        "target": "i89"
+      },
+      {
+        "id": 136,
+        "tick": 415,
+        "type": "result",
+        "position": {
+          "x": 0,
+          "z": 0
+        },
+        "message": "3 波感染來源均已清除",
+        "amount": 3
+      }
+    ],
+    "result": {
+      "type": "victory",
+      "reason": "3 波感染來源均已清除",
+      "preservation": 88,
+      "stars": 3,
+      "seconds": 83
+    }
+  },
+  "paused": false,
+  "undo": [],
+  "settings": {
+    "speed": 2,
+    "reduced": false,
+    "idle": true,
+    "hints": true,
+    "labels": false
+  },
+  "read": [],
+  "records": {
+    "m1": {
+      "type": "victory",
+      "reason": "3 波感染來源均已清除",
+      "preservation": 88,
+      "stars": 3,
+      "seconds": 83
+    }
+  },
+  "revealed": []
+}

@@ -1,0 +1,16 @@
+{
+  "project_id": "appgprj_6ad46cbb5b84819195ddcb9d47ccc99b",
+  "url": "https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site",
+  "status": "succeeded",
+  "deployment_id": "appgdep_6ad4e725d9048191a79dee384b19ad00",
+  "version_id": "appgprj_6ad46cbb5b84819195ddcb9d47ccc99b~appgver_d2f8a6e414fc819191ce3510bc0a8e82",
+  "github_branch": "art/tripo-samples",
+  "pull_request": "https://github.com/sces5504/Immuminati/pull/3",
+  "game_commit": "97aa825c46171bd178c6b386871b9f583d33a1c3",
+  "simulation_commit": "f169904275920dc693acb506973f94bfef5a0d58",
+  "hosted_source_commit": "1e724c5b3ce70272511bab9ec3bd4e40cd211cf4",
+  "access": "Existing owner-private audience preserved",
+  "main_unchanged": "36a1f39af9dd29410c93fcce1016ecace3fc6852",
+  "new_tripo_credits": 0,
+  "verification": "107 related rules tests; 12 actual desktop/mobile campaigns; real untreated TB rupture; native old HIV save resume; final UI selection/hover and original-model toggle; 23 /Immuminati/ assets."
+}

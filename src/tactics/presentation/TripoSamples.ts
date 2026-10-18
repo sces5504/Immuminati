@@ -15,7 +15,9 @@ import { cellCatalog } from "../content/cells";
 import { tissueCellCatalog } from "../content/anatomy";
 export { SAMPLE_RADII } from "./artCatalog";
 
-export const ART_PREVIEW = import.meta.env.VITE_ART_PREVIEW === "tripo";
+// The approved model set is now the default on Pages; keep an explicit opt-out
+// for fallback diagnostics and the in-game original-model switch.
+export const ART_PREVIEW = import.meta.env.VITE_ART_PREVIEW !== "original";
 type SampleKind = string;
 export interface SampleCell {
   root: THREE.Group;

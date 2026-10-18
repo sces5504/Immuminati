@@ -1,3 +1,13 @@
+# 最新發布授權：合併 main 並發布正式 Pages（2026-10-18）
+
+使用者最新明確指示「這次要推到main」，取代下文歷史的私人預覽／不得合併限制。將已完成 Tripo 模型與 v3.2 核心生命週期修正合併 main，發布並核對 `/Immuminati/` 正式站；不需要再次請求合併確認。新模型預設啟用，保留遊戲內原模型切換及載入失敗回退；`VITE_ART_PREVIEW=original` 可建置原模型診斷版。沒有追加付費生成。檢查限本輪相關規則、型別／建置、桌面／手機與發布核對；既有完整驗證工作流未減少檢查。詳細結果見 [CORE-LIFECYCLE.md](CORE-LIFECYCLE.md)，發布結果另記於交接。
+
+以下舊授權依時間保留，衝突時以上述最新授權為準。
+
+# 最新驗證與私人預覽（v3.2）
+
+遊戲來源 `97aa825`（引擎 `f169904`）；[私人Preview](https://immuminati-tripo-samples-20261018.paleswift64.chatgpt.site) 原生部署已成功，main仍為 `36a1f39`、不得自行合併。107項相關測試、12組雙平台六關實玩、TB破裂播散、真實舊HIV檔續玩與23資產核對均完成；[新證據與8段短片](evidence/core-lifecycle/README.md)、[部署識別](evidence/core-lifecycle/preview.json)。未追加Tripo額度。本輪詳細科學抽象、遷移與商業發行前限制見 [CORE-LIFECYCLE.md](CORE-LIFECYCLE.md)。
+
 # 最新授權：核心生命週期修正 v3.2（2026-10-18）
 
 使用者回報 TB 胞內不增殖並授權修正六關核心免疫機制及打磨體驗；本輪可修改純引擎與存檔，優先於下文美術輪「不改規則」。HIV 取消時間／CD4門檻結束，持續防守到全部防區組織耗盡；保留特殊無星等結果，不代表臨床病程。仍只更新 art/tripo-samples／PR #3／同一私人 Preview，不合併 main 或正式 Pages，不追加付費素材。規則3.2／campaign.3，舊 state 與 undo 顯式遷移並備份原文。詳見 [本輪修正與限制](CORE-LIFECYCLE.md)。

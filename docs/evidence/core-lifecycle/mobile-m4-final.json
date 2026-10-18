@@ -1,0 +1,4693 @@
+{
+  "schema": 2,
+  "rules": "3.2",
+  "content": "campaign.3",
+  "state": {
+    "version": 2,
+    "scenario": "m4",
+    "seed": 1,
+    "rng": 1,
+    "tick": 778,
+    "energy": 8,
+    "support": 0,
+    "wave": 1,
+    "nextWaveAt": 1600,
+    "health": {
+      "a": 74.50199999999992,
+      "b": 67.92399999999981,
+      "c": 100
+    },
+    "cells": [
+      {
+        "id": "u35",
+        "kind": "pdc",
+        "region": "a",
+        "position": {
+          "x": -14.054041646519458,
+          "z": -3.001749114295162
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -4
+          }
+        },
+        "path": [],
+        "readyAt": 0
+      },
+      {
+        "id": "u36",
+        "kind": "nk",
+        "region": "a",
+        "position": {
+          "x": -13.165063913477526,
+          "z": -3.0035817976302415
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -5.690285010249269,
+            "z": -9.996426408524725
+          }
+        },
+        "path": [],
+        "readyAt": 341
+      },
+      {
+        "id": "u37",
+        "kind": "dendritic",
+        "region": "c",
+        "position": {
+          "x": -4.248529157249602,
+          "z": 16.497058314499203
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": 0,
+            "z": 11
+          }
+        },
+        "path": [
+          {
+            "x": -5,
+            "z": 18
+          }
+        ],
+        "readyAt": 0,
+        "antigen": "influenza:protein",
+        "recognized": true
+      },
+      {
+        "id": "u38",
+        "kind": "cytotoxicT",
+        "region": "a",
+        "position": {
+          "x": -8.106020201582254,
+          "z": -14.61885181998661
+        },
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -8.106020201582254,
+            "z": -14.61885181998661
+          }
+        },
+        "path": [],
+        "readyAt": 473,
+        "activation": "effector",
+        "antigen": "influenza:protein",
+        "activationAt": 267
+      },
+      {
+        "id": "u40",
+        "kind": "macrophage",
+        "position": {
+          "x": -12.91061483822192,
+          "z": -3.5586015454732514
+        },
+        "region": "a",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -10,
+            "z": -7
+          }
+        },
+        "path": [],
+        "readyAt": 778,
+        "recognized": true
+      },
+      {
+        "id": "u98",
+        "kind": "bcell",
+        "position": {
+          "x": -4.46,
+          "z": 18
+        },
+        "region": "c",
+        "order": {
+          "type": "guard",
+          "point": {
+            "x": -5,
+            "z": 18
+          }
+        },
+        "path": [],
+        "readyAt": 495
+      }
+    ],
+    "colonies": [],
+    "arrivals": [],
+    "internal": [],
+    "immunity": {
+      "autoSeek": true,
+      "signals": {
+        "a": {
+          "cxcl8": 88,
+          "il12": 42,
+          "ifng": 100,
+          "il10": 0,
+          "inflammation": 48,
+          "ifni": 100,
+          "il17": 0,
+          "il22": 0
+        },
+        "b": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 22.5,
+          "ifni": 100,
+          "il17": 0,
+          "il22": 0
+        },
+        "c": {
+          "cxcl8": 0,
+          "il12": 0,
+          "ifng": 0,
+          "il10": 0,
+          "inflammation": 0,
+          "ifni": 0,
+          "il17": 0,
+          "il22": 0
+        }
+      },
+      "node": {
+        "stage": "primed",
+        "antigen": "influenza:protein",
+        "until": 183,
+        "crossPresented": true
+      },
+      "antibodies": 0
+    },
+    "hosts": [
+      {
+        "id": "h3",
+        "region": "a",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 1.5707963267948966,
+          "radius": 7.549985807166464,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 139,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 125,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h4",
+        "region": "a",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.019595277307724,
+          "radius": 7.436883897803397,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 210,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 210,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h5",
+        "region": "a",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.4683942278205517,
+          "radius": 8.51944059323194,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 330,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 330,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h6",
+        "region": "a",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.9171931783333793,
+          "radius": 8.37223644998041,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 274,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 255,
+          "cycles": 1
+        }
+      },
+      {
+        "id": "h7",
+        "region": "a",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.365992128846207,
+          "radius": 8.1049202508056,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 413,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 380,
+          "cycles": 3
+        }
+      },
+      {
+        "id": "h8",
+        "region": "a",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.814791079359034,
+          "radius": 7.776966192595207,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 393,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 380,
+          "cycles": 3
+        }
+      },
+      {
+        "id": "h9",
+        "region": "a",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.263590029871862,
+          "radius": 7.461739889175007,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 159,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 120,
+          "cycles": 1
+        }
+      },
+      {
+        "id": "h10",
+        "region": "a",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.550014192833535,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 433,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 425,
+          "cycles": 3
+        }
+      },
+      {
+        "id": "h11",
+        "region": "a",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.161187930897517,
+          "radius": 8.663116102196605,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 453,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 430,
+          "cycles": 2
+        }
+      },
+      {
+        "id": "h12",
+        "region": "a",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.609986881410345,
+          "radius": 7.580559406768061,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 321,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 305,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h13",
+        "region": "b",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.2243994752564138,
+          "radius": 8.612016482800392,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 321,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 290,
+          "cycles": 3
+        }
+      },
+      {
+        "id": "h14",
+        "region": "b",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.6731984257692414,
+          "radius": 7.9806597501067325,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 315,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 315,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h15",
+        "region": "b",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 1.121997376282069,
+          "radius": 7.868952587234249,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 98,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 80,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h16",
+        "region": "b",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 1.5707963267948966,
+          "radius": 7.549985807166464,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 225,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 225,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h17",
+        "region": "b",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.814791079359034,
+          "radius": 8.11934024989327,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 345,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 345,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h18",
+        "region": "b",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.263590029871862,
+          "radius": 8.231047412765752,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 222,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 215,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h19",
+        "region": "b",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.550014192833535,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 345,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 345,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h20",
+        "region": "b",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.161187930897517,
+          "radius": 7.893808578605861,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 255,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 255,
+          "cycles": 4
+        }
+      },
+      {
+        "id": "h21",
+        "region": "b",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 5.609986881410345,
+          "radius": 7.2381853494699975,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": false,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 58,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 50,
+          "cycles": 0
+        }
+      },
+      {
+        "id": "h22",
+        "region": "b",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 6.058785831923172,
+          "radius": 8.344700283625581,
+          "arc": 0.43982297150257105
+        },
+        "health": 0,
+        "antigen": "influenza:protein",
+        "mhc1": true,
+        "stressed": true,
+        "load": 0,
+        "apoptoticAt": 341,
+        "infection": {
+          "pathogen": "influenza-a",
+          "compartment": "nucleus",
+          "phase": "productive",
+          "since": 335,
+          "cycles": 3
+        }
+      },
+      {
+        "id": "h23",
+        "region": "c",
+        "position": {
+          "x": 8.1967583526948,
+          "z": 9.870856605155543
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.2243994752564138,
+          "radius": 8.407553266529217,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h24",
+        "region": "c",
+        "position": {
+          "x": 6.490873310335829,
+          "z": 13.176298735599861
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 0.6731984257692414,
+          "radius": 8.3021385757528,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h25",
+        "region": "c",
+        "position": {
+          "x": -6.912109135641785,
+          "z": 13.512223096725279
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.4683942278205517,
+          "radius": 8.840919418878007,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h26",
+        "region": "c",
+        "position": {
+          "x": -7.9629901059147254,
+          "z": 9.817500528308365
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 2.9171931783333793,
+          "radius": 8.167773233709234,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h27",
+        "region": "c",
+        "position": {
+          "x": -7.49958103343256,
+          "z": 6.288269568458882
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 3.365992128846207,
+          "radius": 7.692446733470783,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h28",
+        "region": "c",
+        "position": {
+          "x": -1.6012548675897756e-15,
+          "z": -0.7168255026925952
+        },
+        "kind": "alveolarII",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 4.71238898038469,
+          "radius": 8.716825502692595,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h29",
+        "region": "c",
+        "position": {
+          "x": 7.733349280212635,
+          "z": 6.234913491611701
+        },
+        "kind": "alveolarI",
+        "layer": "epithelium",
+        "wall": {
+          "angle": 6.058785831923172,
+          "radius": 7.932226766290767,
+          "arc": 0.43982297150257105
+        },
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h30",
+        "region": "c",
+        "position": {
+          "x": -6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h31",
+        "region": "c",
+        "position": {
+          "x": -3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h32",
+        "region": "c",
+        "position": {
+          "x": 0,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h33",
+        "region": "c",
+        "position": {
+          "x": 3,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      },
+      {
+        "id": "h34",
+        "region": "c",
+        "position": {
+          "x": 6,
+          "z": 18.8
+        },
+        "kind": "endothelial",
+        "layer": "vascular",
+        "health": 100,
+        "antigen": "self",
+        "mhc1": true,
+        "stressed": false,
+        "load": 0,
+        "apoptoticAt": 0
+      }
+    ],
+    "serial": 114,
+    "eventId": 256,
+    "events": [
+      {
+        "id": 1,
+        "tick": 0,
+        "type": "wave",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "第 1 波：病毒入侵。感染入口與負荷已標示。",
+        "amount": 1
+      },
+      {
+        "id": 2,
+        "tick": 0,
+        "type": "mark",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p1",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 3,
+        "tick": 0,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "巨噬細胞向肺泡入口集結，8 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 4,
+        "tick": 15,
+        "type": "infect",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h4",
+        "from": {
+          "x": -10,
+          "z": -7
+        }
+      },
+      {
+        "id": 5,
+        "tick": 15,
+        "type": "infect",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h21",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 6,
+        "tick": 30,
+        "type": "infect",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h16",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 7,
+        "tick": 40,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "巨噬細胞由微血管抵達，正前往肺泡入口。",
+        "amount": 1,
+        "actor": "u40"
+      },
+      {
+        "id": 8,
+        "tick": 45,
+        "type": "infect",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h9",
+        "from": {
+          "x": -10,
+          "z": -7
+        }
+      },
+      {
+        "id": 9,
+        "tick": 45,
+        "type": "infect",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h15",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 10,
+        "tick": 50,
+        "type": "present",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h4"
+      },
+      {
+        "id": 11,
+        "tick": 50,
+        "type": "present",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h21"
+      },
+      {
+        "id": 12,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 13,
+        "tick": 50,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 14,
+        "tick": 50,
+        "type": "mark",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p2",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 15,
+        "tick": 58,
+        "type": "cytotoxic",
+        "position": {
+          "x": 15.659041182154501,
+          "z": -10.512934749357838
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h21",
+        "from": {
+          "x": 13.737710351203422,
+          "z": -8.383177685123675
+        }
+      },
+      {
+        "id": 16,
+        "tick": 60,
+        "type": "infect",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h20",
+        "from": {
+          "x": 10,
+          "z": -6
+        }
+      },
+      {
+        "id": 17,
+        "tick": 65,
+        "type": "present",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h16"
+      },
+      {
+        "id": 18,
+        "tick": 80,
+        "type": "present",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h9"
+      },
+      {
+        "id": 19,
+        "tick": 80,
+        "type": "present",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h15"
+      },
+      {
+        "id": 20,
+        "tick": 80,
+        "type": "present",
+        "position": {
+          "x": 10,
+          "z": -1.2046505340852516
+        },
+        "message": "樹突細胞於感染焦點取得抗原材料，成熟後引流至淋巴結；未直接消除原感染宿主。",
+        "amount": 1,
+        "actor": "u37"
+      },
+      {
+        "id": 21,
+        "tick": 85,
+        "type": "recognize",
+        "position": {
+          "x": -7.632674700059142,
+          "z": -3.4490120500887147
+        },
+        "message": "巨噬細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u40"
+      },
+      {
+        "id": 22,
+        "tick": 90,
+        "type": "infect",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h3",
+        "from": {
+          "x": -10,
+          "z": -7
+        }
+      },
+      {
+        "id": 23,
+        "tick": 90,
+        "type": "release",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p41",
+        "from": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        }
+      },
+      {
+        "id": 24,
+        "tick": 93,
+        "type": "engulf",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "巨噬細胞吞入 3 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 3,
+        "actor": "u40",
+        "target": "p1",
+        "from": {
+          "x": -10,
+          "z": -7
+        },
+        "survives": false
+      },
+      {
+        "id": 25,
+        "tick": 93,
+        "type": "clear",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 3,
+        "target": "p1"
+      },
+      {
+        "id": 26,
+        "tick": 95,
+        "type": "present",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h20"
+      },
+      {
+        "id": 27,
+        "tick": 98,
+        "type": "cytotoxic",
+        "position": {
+          "x": 13.41421057148798,
+          "z": 1.0896813040982538
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h15",
+        "from": {
+          "x": 11.403851899360376,
+          "z": -0.17087364287906276
+        }
+      },
+      {
+        "id": 28,
+        "tick": 100,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 29,
+        "tick": 100,
+        "type": "mark",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p41",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 30,
+        "tick": 105,
+        "type": "release",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "3 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 3,
+        "target": "p43",
+        "from": {
+          "x": 10,
+          "z": 1.5499858071664638
+        }
+      },
+      {
+        "id": 31,
+        "tick": 108,
+        "type": "clear",
+        "position": {
+          "x": -10.782724509003469,
+          "z": -2.7515011659404593
+        },
+        "message": "吞噬體完成殺菌，清除 3 活負荷；吞入與死亡分開結算。",
+        "amount": 3,
+        "actor": "u40",
+        "target": "i42"
+      },
+      {
+        "id": 32,
+        "tick": 108,
+        "type": "engulf",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "巨噬細胞吞入 1 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p41",
+        "from": {
+          "x": -10.782724509003469,
+          "z": -2.7515011659404593
+        },
+        "survives": false
+      },
+      {
+        "id": 33,
+        "tick": 108,
+        "type": "clear",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p41"
+      },
+      {
+        "id": 34,
+        "tick": 110,
+        "type": "recognize",
+        "position": {
+          "x": 4.359286452893227,
+          "z": 1.896998965949486
+        },
+        "message": "樹突細胞以 PRRs（含 TLR）辨識微生物模式，誘發 CXCL8／IL-12；辨識不等於抗原專一性。",
+        "amount": 1,
+        "actor": "u37"
+      },
+      {
+        "id": 35,
+        "tick": 120,
+        "type": "infect",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h14",
+        "from": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        }
+      },
+      {
+        "id": 36,
+        "tick": 120,
+        "type": "release",
+        "position": {
+          "x": -11.251898462922203,
+          "z": -11.66437603945248
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p45",
+        "from": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        }
+      },
+      {
+        "id": 37,
+        "tick": 123,
+        "type": "clear",
+        "position": {
+          "x": -10.489523633367622,
+          "z": -7.531003215287539
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i44"
+      },
+      {
+        "id": 38,
+        "tick": 125,
+        "type": "present",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h3"
+      },
+      {
+        "id": 39,
+        "tick": 125,
+        "type": "engulf",
+        "position": {
+          "x": -11.251898462922203,
+          "z": -11.66437603945248
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p45",
+        "from": {
+          "x": -10.783366139484377,
+          "z": -9.124131139089965
+        },
+        "survives": false
+      },
+      {
+        "id": 40,
+        "tick": 125,
+        "type": "clear",
+        "position": {
+          "x": -11.251898462922203,
+          "z": -11.66437603945248
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p45"
+      },
+      {
+        "id": 41,
+        "tick": 130,
+        "type": "release",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p47",
+        "from": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        }
+      },
+      {
+        "id": 42,
+        "tick": 135,
+        "type": "infect",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h13",
+        "from": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        }
+      },
+      {
+        "id": 43,
+        "tick": 135,
+        "type": "infect",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h5",
+        "from": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        }
+      },
+      {
+        "id": 44,
+        "tick": 135,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p48",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 45,
+        "tick": 139,
+        "type": "cytotoxic",
+        "position": {
+          "x": -10,
+          "z": 0.5499858071664638
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h3",
+        "from": {
+          "x": -7.682047370497831,
+          "z": -1.103914387259105
+        }
+      },
+      {
+        "id": 46,
+        "tick": 140,
+        "type": "clear",
+        "position": {
+          "x": -8.197945021119377,
+          "z": -6.90989725105597
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i46"
+      },
+      {
+        "id": 47,
+        "tick": 143,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "樹突細胞經引流到達淋巴結：開始蛋白肽 MHC-II 呈遞，需共刺激與活化等待。",
+        "amount": 8,
+        "actor": "u37"
+      },
+      {
+        "id": 48,
+        "tick": 145,
+        "type": "release",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p43",
+        "from": {
+          "x": 10,
+          "z": 1.5499858071664638
+        }
+      },
+      {
+        "id": 49,
+        "tick": 150,
+        "type": "infect",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h17",
+        "from": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        }
+      },
+      {
+        "id": 50,
+        "tick": 150,
+        "type": "infect",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h19",
+        "from": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        }
+      },
+      {
+        "id": 51,
+        "tick": 150,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 52,
+        "tick": 150,
+        "type": "mark",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p43",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 53,
+        "tick": 155,
+        "type": "present",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h14"
+      },
+      {
+        "id": 54,
+        "tick": 159,
+        "type": "cytotoxic",
+        "position": {
+          "x": -13.237527603437886,
+          "z": -13.722795340532329
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h9",
+        "from": {
+          "x": -12.678396580967165,
+          "z": -12.452768715650254
+        }
+      },
+      {
+        "id": 55,
+        "tick": 170,
+        "type": "release",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p49",
+        "from": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        }
+      },
+      {
+        "id": 56,
+        "tick": 170,
+        "type": "present",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h5"
+      },
+      {
+        "id": 57,
+        "tick": 170,
+        "type": "present",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h13"
+      },
+      {
+        "id": 58,
+        "tick": 175,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p50",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 59,
+        "tick": 180,
+        "type": "infect",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h22",
+        "from": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        }
+      },
+      {
+        "id": 60,
+        "tick": 180,
+        "type": "infect",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h6",
+        "from": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        }
+      },
+      {
+        "id": 61,
+        "tick": 180,
+        "type": "infect",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h18",
+        "from": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        }
+      },
+      {
+        "id": 62,
+        "tick": 183,
+        "type": "present",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "淋巴結：DC 呈遞 MHC-II 肽給 CD4，另以交叉呈遞的 MHC-I 病毒肽及共刺激啟動相符 CD8。",
+        "amount": 1
+      },
+      {
+        "id": 63,
+        "tick": 185,
+        "type": "release",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p51",
+        "from": {
+          "x": 10,
+          "z": 1.5499858071664638
+        }
+      },
+      {
+        "id": 64,
+        "tick": 185,
+        "type": "present",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h17"
+      },
+      {
+        "id": 65,
+        "tick": 185,
+        "type": "present",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h19"
+      },
+      {
+        "id": 66,
+        "tick": 195,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p52",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 67,
+        "tick": 200,
+        "type": "engulf",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p52",
+        "from": {
+          "x": 12.135437264793968,
+          "z": -2.8268642531529102
+        },
+        "survives": false
+      },
+      {
+        "id": 68,
+        "tick": 200,
+        "type": "clear",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p52"
+      },
+      {
+        "id": 69,
+        "tick": 200,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 70,
+        "tick": 200,
+        "type": "mark",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p51",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 71,
+        "tick": 210,
+        "type": "release",
+        "position": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p54",
+        "from": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        }
+      },
+      {
+        "id": 72,
+        "tick": 210,
+        "type": "clear",
+        "position": {
+          "x": -13.226742992962098,
+          "z": -0.29959913387434334
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h4"
+      },
+      {
+        "id": 73,
+        "tick": 210,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p55",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 74,
+        "tick": 210,
+        "type": "release",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p56",
+        "from": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        }
+      },
+      {
+        "id": 75,
+        "tick": 215,
+        "type": "clear",
+        "position": {
+          "x": 10.354943915862679,
+          "z": -0.7971245076654635
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i53"
+      },
+      {
+        "id": 76,
+        "tick": 215,
+        "type": "present",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h6"
+      },
+      {
+        "id": 77,
+        "tick": 215,
+        "type": "present",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h18"
+      },
+      {
+        "id": 78,
+        "tick": 215,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p57",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 79,
+        "tick": 215,
+        "type": "present",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h22"
+      },
+      {
+        "id": 80,
+        "tick": 215,
+        "type": "engulf",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "巨噬細胞吞入 1 負荷（調理支援），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p51",
+        "from": {
+          "x": 10.354943915862679,
+          "z": -0.7971245076654635
+        },
+        "survives": false
+      },
+      {
+        "id": 81,
+        "tick": 215,
+        "type": "clear",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p51"
+      },
+      {
+        "id": 82,
+        "tick": 222,
+        "type": "cytotoxic",
+        "position": {
+          "x": 6.428682371695292,
+          "z": -13.415917469130695
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h18",
+        "from": {
+          "x": 5.453806183738632,
+          "z": -10.934500257742052
+        }
+      },
+      {
+        "id": 83,
+        "tick": 225,
+        "type": "infect",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h7",
+        "from": {
+          "x": -11.242731544017783,
+          "z": -0.2546592637931918
+        }
+      },
+      {
+        "id": 84,
+        "tick": 225,
+        "type": "infect",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h8",
+        "from": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        }
+      },
+      {
+        "id": 85,
+        "tick": 225,
+        "type": "release",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p59",
+        "from": {
+          "x": 10,
+          "z": 1.5499858071664638
+        }
+      },
+      {
+        "id": 86,
+        "tick": 225,
+        "type": "clear",
+        "position": {
+          "x": 10,
+          "z": 1.5499858071664638
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h16"
+      },
+      {
+        "id": 87,
+        "tick": 225,
+        "type": "release",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p60",
+        "from": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        }
+      },
+      {
+        "id": 88,
+        "tick": 225,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p61",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 89,
+        "tick": 227,
+        "type": "activate",
+        "position": {
+          "x": -5,
+          "z": 18
+        },
+        "message": "相符 CD8 T 接受 DC 交叉呈遞的 MHC-I 肽／共刺激，開始擴增分化。",
+        "amount": 1,
+        "actor": "u38"
+      },
+      {
+        "id": 90,
+        "tick": 230,
+        "type": "clear",
+        "position": {
+          "x": 13.245604260018881,
+          "z": -2.2605734390336796
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i58"
+      },
+      {
+        "id": 91,
+        "tick": 230,
+        "type": "engulf",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p56",
+        "from": {
+          "x": 13.245604260018881,
+          "z": -2.2605734390336796
+        },
+        "survives": false
+      },
+      {
+        "id": 92,
+        "tick": 230,
+        "type": "clear",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p56"
+      },
+      {
+        "id": 93,
+        "tick": 235,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p63",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 94,
+        "tick": 245,
+        "type": "clear",
+        "position": {
+          "x": 13.245604260018881,
+          "z": -2.2605734390336796
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i62"
+      },
+      {
+        "id": 95,
+        "tick": 245,
+        "type": "engulf",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p63",
+        "from": {
+          "x": 13.245604260018881,
+          "z": -2.2605734390336796
+        },
+        "survives": false
+      },
+      {
+        "id": 96,
+        "tick": 245,
+        "type": "clear",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p63"
+      },
+      {
+        "id": 97,
+        "tick": 250,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p65",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 98,
+        "tick": 250,
+        "type": "release",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p66",
+        "from": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        }
+      },
+      {
+        "id": 99,
+        "tick": 250,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 100,
+        "tick": 250,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 101,
+        "tick": 250,
+        "type": "mark",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "補體 C3b 已沉積；經補體受體促進吞噬。C3b 標記不是終末膜攻擊複合體，不直接清除此來源。",
+        "amount": 100,
+        "target": "p57",
+        "opsonin": "c3b",
+        "from": {
+          "x": 0,
+          "z": 18
+        }
+      },
+      {
+        "id": 102,
+        "tick": 255,
+        "type": "release",
+        "position": {
+          "x": -15.437977952101168,
+          "z": -4.366451806970171
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p67",
+        "from": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        }
+      },
+      {
+        "id": 103,
+        "tick": 255,
+        "type": "release",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p57",
+        "from": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        }
+      },
+      {
+        "id": 104,
+        "tick": 255,
+        "type": "clear",
+        "position": {
+          "x": 13.424995181963766,
+          "z": -13.112075778504927
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h20"
+      },
+      {
+        "id": 105,
+        "tick": 255,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p68",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 106,
+        "tick": 260,
+        "type": "clear",
+        "position": {
+          "x": 13.245604260018881,
+          "z": -2.2605734390336796
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i64"
+      },
+      {
+        "id": 107,
+        "tick": 260,
+        "type": "present",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h7"
+      },
+      {
+        "id": 108,
+        "tick": 260,
+        "type": "present",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h8"
+      },
+      {
+        "id": 109,
+        "tick": 260,
+        "type": "engulf",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p66",
+        "from": {
+          "x": 13.245604260018881,
+          "z": -2.2605734390336796
+        },
+        "survives": false
+      },
+      {
+        "id": 110,
+        "tick": 260,
+        "type": "clear",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p66"
+      },
+      {
+        "id": 111,
+        "tick": 265,
+        "type": "release",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p60",
+        "from": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        }
+      },
+      {
+        "id": 112,
+        "tick": 265,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p61",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 113,
+        "tick": 267,
+        "type": "activate",
+        "position": {
+          "x": -5.423963559901049,
+          "z": 17.599935504249643
+        },
+        "message": "細胞毒性 T 細胞已活化，依其亞群及相符抗原執行效應；不直接清除所有種類的病原。",
+        "amount": 1,
+        "actor": "u38"
+      },
+      {
+        "id": 114,
+        "tick": 270,
+        "type": "infect",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h12",
+        "from": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        }
+      },
+      {
+        "id": 115,
+        "tick": 270,
+        "type": "infect",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h10",
+        "from": {
+          "x": -15.437977952101168,
+          "z": -4.366451806970171
+        }
+      },
+      {
+        "id": 116,
+        "tick": 274,
+        "type": "cytotoxic",
+        "position": {
+          "x": -18.16232700247196,
+          "z": -5.1370021258472605
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h6",
+        "from": {
+          "x": -15.367496763269557,
+          "z": -5.774903889973472
+        }
+      },
+      {
+        "id": 117,
+        "tick": 275,
+        "type": "clear",
+        "position": {
+          "x": 14.197752943854718,
+          "z": -4.199390832154981
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i69"
+      },
+      {
+        "id": 118,
+        "tick": 275,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p70",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 119,
+        "tick": 275,
+        "type": "engulf",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p68",
+        "from": {
+          "x": 14.197752943854718,
+          "z": -4.199390832154981
+        },
+        "survives": false
+      },
+      {
+        "id": 120,
+        "tick": 275,
+        "type": "clear",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p68"
+      },
+      {
+        "id": 121,
+        "tick": 290,
+        "type": "clear",
+        "position": {
+          "x": 14.134258345050057,
+          "z": -3.663136754387142
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i71"
+      },
+      {
+        "id": 122,
+        "tick": 290,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p72",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 123,
+        "tick": 290,
+        "type": "release",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p73",
+        "from": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        }
+      },
+      {
+        "id": 124,
+        "tick": 290,
+        "type": "engulf",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p73",
+        "from": {
+          "x": 14.134258345050057,
+          "z": -3.663136754387142
+        },
+        "survives": false
+      },
+      {
+        "id": 125,
+        "tick": 290,
+        "type": "clear",
+        "position": {
+          "x": 15.636680961864233,
+          "z": -3.4710991416500705
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p73"
+      },
+      {
+        "id": 126,
+        "tick": 295,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p75",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 127,
+        "tick": 300,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p76",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 128,
+        "tick": 300,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p77",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 129,
+        "tick": 300,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 130,
+        "tick": 300,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 131,
+        "tick": 305,
+        "type": "clear",
+        "position": {
+          "x": 14.134258345050057,
+          "z": -3.663136754387142
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i74"
+      },
+      {
+        "id": 132,
+        "tick": 305,
+        "type": "present",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h10"
+      },
+      {
+        "id": 133,
+        "tick": 305,
+        "type": "present",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "message": "此受壓宿主 MHC-I 降低，NK 可辨識；不是所有感染細胞都相同。",
+        "amount": 1,
+        "target": "h12"
+      },
+      {
+        "id": 134,
+        "tick": 305,
+        "type": "release",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p60",
+        "from": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        }
+      },
+      {
+        "id": 135,
+        "tick": 305,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p61",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 136,
+        "tick": 305,
+        "type": "engulf",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p70",
+        "from": {
+          "x": 14.134258345050057,
+          "z": -3.663136754387142
+        },
+        "survives": false
+      },
+      {
+        "id": 137,
+        "tick": 305,
+        "type": "clear",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p70"
+      },
+      {
+        "id": 138,
+        "tick": 315,
+        "type": "infect",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "message": "A 型流感病毒進入易感宿主，胞內感染建立中；抗體不能進入清除。",
+        "amount": 1,
+        "target": "h11",
+        "from": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        }
+      },
+      {
+        "id": 139,
+        "tick": 315,
+        "type": "release",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p79",
+        "from": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        }
+      },
+      {
+        "id": 140,
+        "tick": 315,
+        "type": "clear",
+        "position": {
+          "x": 16.239531043498882,
+          "z": -1.0241400337039837
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h14"
+      },
+      {
+        "id": 141,
+        "tick": 320,
+        "type": "clear",
+        "position": {
+          "x": 14.345396011766356,
+          "z": -4.160148711681528
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i78"
+      },
+      {
+        "id": 142,
+        "tick": 320,
+        "type": "engulf",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p75",
+        "from": {
+          "x": 14.345396011766356,
+          "z": -4.160148711681528
+        },
+        "survives": false
+      },
+      {
+        "id": 143,
+        "tick": 320,
+        "type": "clear",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p75"
+      },
+      {
+        "id": 144,
+        "tick": 321,
+        "type": "cytotoxic",
+        "position": {
+          "x": -4.073280001069559,
+          "z": -11.726401482504178
+        },
+        "message": "自然殺手細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u36",
+        "target": "h12",
+        "from": {
+          "x": -5.690285010249269,
+          "z": -9.996426408524725
+        }
+      },
+      {
+        "id": 145,
+        "tick": 321,
+        "type": "cytotoxic",
+        "position": {
+          "x": 18.39609524925204,
+          "z": -4.083646049000083
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h13",
+        "from": {
+          "x": 15.8989009915428,
+          "z": -4.3579468488902
+        }
+      },
+      {
+        "id": 146,
+        "tick": 330,
+        "type": "release",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p81",
+        "from": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        }
+      },
+      {
+        "id": 147,
+        "tick": 330,
+        "type": "clear",
+        "position": {
+          "x": -16.66076686880484,
+          "z": -1.6882156725785666
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h5"
+      },
+      {
+        "id": 148,
+        "tick": 335,
+        "type": "clear",
+        "position": {
+          "x": 14.257641447120479,
+          "z": -3.6273268499079965
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i80"
+      },
+      {
+        "id": 149,
+        "tick": 335,
+        "type": "release",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p82",
+        "from": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        }
+      },
+      {
+        "id": 150,
+        "tick": 335,
+        "type": "engulf",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p79",
+        "from": {
+          "x": 14.257641447120479,
+          "z": -3.6273268499079965
+        },
+        "survives": false
+      },
+      {
+        "id": 151,
+        "tick": 335,
+        "type": "clear",
+        "position": {
+          "x": 13.80360138697405,
+          "z": -0.870519028648386
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p79"
+      },
+      {
+        "id": 152,
+        "tick": 340,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p76",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 153,
+        "tick": 340,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p77",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 154,
+        "tick": 341,
+        "type": "cytotoxic",
+        "position": {
+          "x": 18.135481225298157,
+          "z": -7.856870500697888
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h22",
+        "from": {
+          "x": 17.277683919513493,
+          "z": -6.51492567065377
+        }
+      },
+      {
+        "id": 155,
+        "tick": 345,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p84",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 156,
+        "tick": 345,
+        "type": "release",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p60",
+        "from": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        }
+      },
+      {
+        "id": 157,
+        "tick": 345,
+        "type": "clear",
+        "position": {
+          "x": 3.6520441757635984,
+          "z": -11.06232584362959
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h17"
+      },
+      {
+        "id": 158,
+        "tick": 345,
+        "type": "release",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p61",
+        "from": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        }
+      },
+      {
+        "id": 159,
+        "tick": 345,
+        "type": "clear",
+        "position": {
+          "x": 9.999999999999998,
+          "z": -14.550014192833535
+        },
+        "message": "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+        "amount": 1,
+        "target": "h19"
+      },
+      {
+        "id": 160,
+        "tick": 350,
+        "type": "clear",
+        "position": {
+          "x": 14.449188986315884,
+          "z": -4.132212520360412
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i83"
+      },
+      {
+        "id": 161,
+        "tick": 350,
+        "type": "present",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "message": "感染宿主呈遞病毒肽／MHC-I：只有相符、已活化 CD8 可辨識。",
+        "amount": 1,
+        "target": "h11"
+      },
+      {
+        "id": 162,
+        "tick": 350,
+        "type": "engulf",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p82",
+        "from": {
+          "x": 14.449188986315884,
+          "z": -4.132212520360412
+        },
+        "survives": false
+      },
+      {
+        "id": 163,
+        "tick": 350,
+        "type": "clear",
+        "position": {
+          "x": 15.415159041503433,
+          "z": -6.678339925593205
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p82"
+      },
+      {
+        "id": 164,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 165,
+        "tick": 350,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 166,
+        "tick": 365,
+        "type": "clear",
+        "position": {
+          "x": 12.517376884703697,
+          "z": -8.591775503889705
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i85"
+      },
+      {
+        "id": 167,
+        "tick": 365,
+        "type": "engulf",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p57",
+        "from": {
+          "x": 12.517376884703697,
+          "z": -8.591775503889705
+        },
+        "survives": false
+      },
+      {
+        "id": 168,
+        "tick": 380,
+        "type": "clear",
+        "position": {
+          "x": 12.517376884703697,
+          "z": -8.591775503889705
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i86"
+      },
+      {
+        "id": 169,
+        "tick": 380,
+        "type": "release",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p76",
+        "from": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        }
+      },
+      {
+        "id": 170,
+        "tick": 380,
+        "type": "release",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p77",
+        "from": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        }
+      },
+      {
+        "id": 171,
+        "tick": 380,
+        "type": "engulf",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p57",
+        "from": {
+          "x": 12.517376884703697,
+          "z": -8.591775503889705
+        },
+        "survives": false
+      },
+      {
+        "id": 172,
+        "tick": 380,
+        "type": "clear",
+        "position": {
+          "x": 11.411245904669201,
+          "z": -11.145264411729189
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p57"
+      },
+      {
+        "id": 173,
+        "tick": 385,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p84",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 174,
+        "tick": 390,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p88",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 175,
+        "tick": 393,
+        "type": "cytotoxic",
+        "position": {
+          "x": -16.080277007460463,
+          "z": -11.84885911048325
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h8",
+        "from": {
+          "x": -13.959216221829022,
+          "z": -10.324944049169645
+        }
+      },
+      {
+        "id": 176,
+        "tick": 395,
+        "type": "clear",
+        "position": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i87"
+      },
+      {
+        "id": 177,
+        "tick": 395,
+        "type": "engulf",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p61",
+        "from": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "survives": false
+      },
+      {
+        "id": 178,
+        "tick": 400,
+        "type": "wave",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "第 2 波：呼吸道再暴露。感染入口與負荷已標示。",
+        "amount": 2
+      },
+      {
+        "id": 179,
+        "tick": 400,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 180,
+        "tick": 400,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 181,
+        "tick": 410,
+        "type": "clear",
+        "position": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i89"
+      },
+      {
+        "id": 182,
+        "tick": 410,
+        "type": "engulf",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p61",
+        "from": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "survives": false
+      },
+      {
+        "id": 183,
+        "tick": 413,
+        "type": "cytotoxic",
+        "position": {
+          "x": -17.901712978518084,
+          "z": -8.803514423850707
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h7",
+        "from": {
+          "x": -16.347547414490958,
+          "z": -9.403274849207953
+        }
+      },
+      {
+        "id": 184,
+        "tick": 425,
+        "type": "clear",
+        "position": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i91"
+      },
+      {
+        "id": 185,
+        "tick": 425,
+        "type": "release",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p84",
+        "from": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        }
+      },
+      {
+        "id": 186,
+        "tick": 425,
+        "type": "engulf",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p61",
+        "from": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "survives": false
+      },
+      {
+        "id": 187,
+        "tick": 430,
+        "type": "release",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "1 胞外感染負荷由胞內來源釋出；胞內外分開追蹤。",
+        "amount": 1,
+        "target": "p88",
+        "from": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        }
+      },
+      {
+        "id": 188,
+        "tick": 433,
+        "type": "cytotoxic",
+        "position": {
+          "x": -10.000000000000002,
+          "z": -15.550014192833535
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h10",
+        "from": {
+          "x": -11.290161932711253,
+          "z": -14.300667225634827
+        }
+      },
+      {
+        "id": 189,
+        "tick": 440,
+        "type": "clear",
+        "position": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i92"
+      },
+      {
+        "id": 190,
+        "tick": 440,
+        "type": "engulf",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p61",
+        "from": {
+          "x": 10.549936105078535,
+          "z": -10.440877117827652
+        },
+        "survives": false
+      },
+      {
+        "id": 191,
+        "tick": 440,
+        "type": "clear",
+        "position": {
+          "x": 8.499999999999998,
+          "z": -12.367512063908505
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p61"
+      },
+      {
+        "id": 192,
+        "tick": 450,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 193,
+        "tick": 450,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 194,
+        "tick": 450,
+        "type": "request",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "B 細胞向肺泡壁前緣集結，9 秒後到場。",
+        "amount": 1
+      },
+      {
+        "id": 195,
+        "tick": 453,
+        "type": "cytotoxic",
+        "position": {
+          "x": -6.241214793169412,
+          "z": -14.805197907103295
+        },
+        "message": "細胞毒性 T 細胞形成免疫突觸，穿孔素協助顆粒酶進入，誘導宿主凋亡；失去的宿主有組織代價，胞外病原仍獨立存在，未被一併清除。",
+        "amount": 1,
+        "actor": "u38",
+        "target": "h11",
+        "from": {
+          "x": -8.106020201582254,
+          "z": -14.61885181998661
+        }
+      },
+      {
+        "id": 196,
+        "tick": 455,
+        "type": "clear",
+        "position": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i93"
+      },
+      {
+        "id": 197,
+        "tick": 455,
+        "type": "engulf",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p90",
+        "from": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "survives": false
+      },
+      {
+        "id": 198,
+        "tick": 470,
+        "type": "clear",
+        "position": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i95"
+      },
+      {
+        "id": 199,
+        "tick": 470,
+        "type": "engulf",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p90",
+        "from": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "survives": false
+      },
+      {
+        "id": 200,
+        "tick": 485,
+        "type": "clear",
+        "position": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i96"
+      },
+      {
+        "id": 201,
+        "tick": 485,
+        "type": "engulf",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p90",
+        "from": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "survives": false
+      },
+      {
+        "id": 202,
+        "tick": 495,
+        "type": "arrive",
+        "position": {
+          "x": 0,
+          "z": 18
+        },
+        "message": "B 細胞由微血管抵達，先前往淋巴結接受活化；肺泡壁前緣為後續支援防區。",
+        "amount": 1,
+        "actor": "u98"
+      },
+      {
+        "id": 203,
+        "tick": 500,
+        "type": "clear",
+        "position": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i97"
+      },
+      {
+        "id": 204,
+        "tick": 500,
+        "type": "engulf",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p90",
+        "from": {
+          "x": 10.350844114267291,
+          "z": -8.83315749699981
+        },
+        "survives": false
+      },
+      {
+        "id": 205,
+        "tick": 500,
+        "type": "clear",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p90"
+      },
+      {
+        "id": 206,
+        "tick": 500,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 207,
+        "tick": 500,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 208,
+        "tick": 515,
+        "type": "clear",
+        "position": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i99"
+      },
+      {
+        "id": 209,
+        "tick": 515,
+        "type": "engulf",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p60",
+        "from": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "survives": false
+      },
+      {
+        "id": 210,
+        "tick": 530,
+        "type": "clear",
+        "position": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i100"
+      },
+      {
+        "id": 211,
+        "tick": 530,
+        "type": "engulf",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p60",
+        "from": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "survives": false
+      },
+      {
+        "id": 212,
+        "tick": 545,
+        "type": "clear",
+        "position": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i101"
+      },
+      {
+        "id": 213,
+        "tick": 545,
+        "type": "engulf",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p60",
+        "from": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "survives": false
+      },
+      {
+        "id": 214,
+        "tick": 550,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 215,
+        "tick": 550,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 216,
+        "tick": 560,
+        "type": "clear",
+        "position": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i102"
+      },
+      {
+        "id": 217,
+        "tick": 560,
+        "type": "engulf",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p60",
+        "from": {
+          "x": 5.5057996922509,
+          "z": -9.214135906739587
+        },
+        "survives": false
+      },
+      {
+        "id": 218,
+        "tick": 560,
+        "type": "clear",
+        "position": {
+          "x": 3.1042375493990586,
+          "z": -9.402976967085152
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p60"
+      },
+      {
+        "id": 219,
+        "tick": 575,
+        "type": "clear",
+        "position": {
+          "x": 6.834855273962093,
+          "z": -4.539394067801064
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i103"
+      },
+      {
+        "id": 220,
+        "tick": 580,
+        "type": "engulf",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p59",
+        "from": {
+          "x": 7.7208923284362205,
+          "z": -1.4228995085087153
+        },
+        "survives": false
+      },
+      {
+        "id": 221,
+        "tick": 580,
+        "type": "clear",
+        "position": {
+          "x": 8.5,
+          "z": 1.3174879360914942
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p59"
+      },
+      {
+        "id": 222,
+        "tick": 595,
+        "type": "clear",
+        "position": {
+          "x": 9.88716735992596,
+          "z": -5.7733997657141
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i104"
+      },
+      {
+        "id": 223,
+        "tick": 600,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 224,
+        "tick": 600,
+        "type": "damage",
+        "position": {
+          "x": 10,
+          "z": -6
+        },
+        "message": "深部肺泡殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 225,
+        "tick": 635,
+        "type": "engulf",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p77",
+        "from": {
+          "x": -11.374182207149682,
+          "z": -8.643453470578692
+        },
+        "survives": false
+      },
+      {
+        "id": 226,
+        "tick": 650,
+        "type": "clear",
+        "position": {
+          "x": -11.374182207149682,
+          "z": -8.643453470578692
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i105"
+      },
+      {
+        "id": 227,
+        "tick": 650,
+        "type": "engulf",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p77",
+        "from": {
+          "x": -11.374182207149682,
+          "z": -8.643453470578692
+        },
+        "survives": false
+      },
+      {
+        "id": 228,
+        "tick": 650,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 229,
+        "tick": 665,
+        "type": "clear",
+        "position": {
+          "x": -11.374182207149682,
+          "z": -8.643453470578692
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i106"
+      },
+      {
+        "id": 230,
+        "tick": 665,
+        "type": "engulf",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p77",
+        "from": {
+          "x": -11.374182207149682,
+          "z": -8.643453470578692
+        },
+        "survives": false
+      },
+      {
+        "id": 231,
+        "tick": 665,
+        "type": "clear",
+        "position": {
+          "x": -13.668235456341392,
+          "z": -10.071530243910763
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p77"
+      },
+      {
+        "id": 232,
+        "tick": 675,
+        "type": "signal",
+        "position": {
+          "x": -13.852006775146052,
+          "z": -8.537895364345744
+        },
+        "message": "自然殺手細胞提供 IFN-γ，增強此區巨噬功能；訊號本身不造成直接傷害。",
+        "amount": 1,
+        "actor": "u36"
+      },
+      {
+        "id": 233,
+        "tick": 680,
+        "type": "clear",
+        "position": {
+          "x": -12.924993399632305,
+          "z": -8.175068324282794
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i107"
+      },
+      {
+        "id": 234,
+        "tick": 680,
+        "type": "engulf",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "巨噬細胞吞入 2 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u40",
+        "target": "p76",
+        "from": {
+          "x": -12.924993399632305,
+          "z": -8.175068324282794
+        },
+        "survives": false
+      },
+      {
+        "id": 235,
+        "tick": 695,
+        "type": "clear",
+        "position": {
+          "x": -12.924993399632305,
+          "z": -8.175068324282794
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u40",
+        "target": "i108"
+      },
+      {
+        "id": 236,
+        "tick": 695,
+        "type": "engulf",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p76",
+        "from": {
+          "x": -12.924993399632305,
+          "z": -8.175068324282794
+        },
+        "survives": false
+      },
+      {
+        "id": 237,
+        "tick": 695,
+        "type": "clear",
+        "position": {
+          "x": -15.216456031740371,
+          "z": -7.482987260273101
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p76"
+      },
+      {
+        "id": 238,
+        "tick": 700,
+        "type": "signal",
+        "position": {
+          "x": -11.98503078019882,
+          "z": -10.170317072817788
+        },
+        "message": "自然殺手細胞提供 IFN-γ，增強此區巨噬功能；訊號本身不造成直接傷害。",
+        "amount": 1,
+        "actor": "u36"
+      },
+      {
+        "id": 239,
+        "tick": 700,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 240,
+        "tick": 710,
+        "type": "clear",
+        "position": {
+          "x": -10.07556807410696,
+          "z": -11.422093934630633
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i109"
+      },
+      {
+        "id": 241,
+        "tick": 710,
+        "type": "engulf",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "巨噬細胞吞入 2 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u40",
+        "target": "p84",
+        "from": {
+          "x": -10.07556807410696,
+          "z": -11.422093934630633
+        },
+        "survives": false
+      },
+      {
+        "id": 242,
+        "tick": 725,
+        "type": "clear",
+        "position": {
+          "x": -10.07556807410696,
+          "z": -11.422093934630633
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u40",
+        "target": "i110"
+      },
+      {
+        "id": 243,
+        "tick": 725,
+        "type": "signal",
+        "position": {
+          "x": -9.65131078651478,
+          "z": -12.210844208407844
+        },
+        "message": "自然殺手細胞提供 IFN-γ，增強此區巨噬功能；訊號本身不造成直接傷害。",
+        "amount": 1,
+        "actor": "u36"
+      },
+      {
+        "id": 244,
+        "tick": 725,
+        "type": "engulf",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p84",
+        "from": {
+          "x": -10.07556807410696,
+          "z": -11.422093934630633
+        },
+        "survives": false
+      },
+      {
+        "id": 245,
+        "tick": 725,
+        "type": "clear",
+        "position": {
+          "x": -8.500000000000002,
+          "z": -13.217512063908504
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p84"
+      },
+      {
+        "id": 246,
+        "tick": 740,
+        "type": "clear",
+        "position": {
+          "x": -7.976960556290576,
+          "z": -11.933412315059655
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i111"
+      },
+      {
+        "id": 247,
+        "tick": 740,
+        "type": "engulf",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "巨噬細胞吞入 2 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 2,
+        "actor": "u40",
+        "target": "p88",
+        "from": {
+          "x": -7.976960556290576,
+          "z": -11.933412315059655
+        },
+        "survives": false
+      },
+      {
+        "id": 248,
+        "tick": 740,
+        "type": "clear",
+        "position": {
+          "x": -5.3050325741940005,
+          "z": -12.5844182210378
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 2,
+        "target": "p88"
+      },
+      {
+        "id": 249,
+        "tick": 750,
+        "type": "signal",
+        "position": {
+          "x": -10.172742594477569,
+          "z": -7.713402720325537
+        },
+        "message": "自然殺手細胞提供 IFN-γ，增強此區巨噬功能；訊號本身不造成直接傷害。",
+        "amount": 1,
+        "actor": "u36"
+      },
+      {
+        "id": 250,
+        "tick": 750,
+        "type": "damage",
+        "position": {
+          "x": -10,
+          "z": -7
+        },
+        "message": "肺泡入口殘餘感染與過強發炎造成組織損傷；降低發炎不會直接修復已失去的組織。",
+        "amount": 0
+      },
+      {
+        "id": 251,
+        "tick": 755,
+        "type": "clear",
+        "position": {
+          "x": -10.44378769725625,
+          "z": -7.746006930266454
+        },
+        "message": "吞噬體完成殺菌，清除 2 活負荷；吞入與死亡分開結算。",
+        "amount": 2,
+        "actor": "u40",
+        "target": "i112"
+      },
+      {
+        "id": 252,
+        "tick": 763,
+        "type": "engulf",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "巨噬細胞吞入 1 負荷（接觸攝入），進入吞噬體，等待胞內殺菌。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "p81",
+        "from": {
+          "x": -12.91061483822192,
+          "z": -3.5586015454732514
+        },
+        "survives": false
+      },
+      {
+        "id": 253,
+        "tick": 763,
+        "type": "clear",
+        "position": {
+          "x": -14.161651838484111,
+          "z": -1.4349833216917816
+        },
+        "message": "此處已無胞外菌；已吞入的活菌仍需胞內處理。",
+        "amount": 1,
+        "target": "p81"
+      },
+      {
+        "id": 254,
+        "tick": 775,
+        "type": "signal",
+        "position": {
+          "x": -13.165063913477526,
+          "z": -3.0035817976302415
+        },
+        "message": "自然殺手細胞提供 IFN-γ，增強此區巨噬功能；訊號本身不造成直接傷害。",
+        "amount": 1,
+        "actor": "u36"
+      },
+      {
+        "id": 255,
+        "tick": 778,
+        "type": "clear",
+        "position": {
+          "x": -12.91061483822192,
+          "z": -3.5586015454732514
+        },
+        "message": "吞噬體完成殺菌，清除 1 活負荷；吞入與死亡分開結算。",
+        "amount": 1,
+        "actor": "u40",
+        "target": "i113"
+      },
+      {
+        "id": 256,
+        "tick": 778,
+        "type": "result",
+        "position": {
+          "x": 0,
+          "z": 0
+        },
+        "message": "2 波感染來源均已清除",
+        "amount": 2
+      }
+    ],
+    "campaign": {
+      "containment": {
+        "a": 0,
+        "b": 0,
+        "c": 0
+      },
+      "barrier": {
+        "a": 0,
+        "b": 0,
+        "c": 0
+      },
+      "stable": 0,
+      "cd4": 100,
+      "impairment": 0
+    },
+    "result": {
+      "type": "victory",
+      "reason": "2 波感染來源均已清除",
+      "preservation": 81,
+      "stars": 2,
+      "seconds": 155.60000000000002
+    }
+  },
+  "paused": false,
+  "undo": [],
+  "settings": {
+    "speed": 2,
+    "reduced": false,
+    "idle": true,
+    "hints": true,
+    "labels": false
+  },
+  "read": [],
+  "records": {
+    "m4": {
+      "type": "victory",
+      "reason": "2 波感染來源均已清除",
+      "preservation": 81,
+      "stars": 2,
+      "seconds": 155.60000000000002
+    }
+  },
+  "revealed": []
+}
