@@ -83,23 +83,7 @@ export default function TacticalApp() {
     return ctrl;
   });
   const content = controller.content;
-  const [artSamples, setArtSamples] = useState(ART_PREVIEW);
-  const artControls = ART_PREVIEW ? (
-    <section className="t-art-preview" aria-label="美術樣本比較">
-      <strong>Tripo 六關美術 · 待審閱</strong>
-      <p>
-        六關免疫細胞、病原與宿主，以及肺泡、腸黏膜、口腔與淋巴組織。此預覽獨立存檔，可隨時比較原模型。
-      </p>
-      <button
-        data-testid="art-toggle"
-        aria-pressed={artSamples}
-        onClick={() => setArtSamples(!artSamples)}
-      >
-        {artSamples ? "比較原模型" : "查看 Tripo 樣本"}
-      </button>
-      <small>關卡內可從「設定與存檔」切換比較。</small>
-    </section>
-  ) : null;
+  const artSamples = ART_PREVIEW;
   // Landing specimen is visual only; never becomes the player's deployed team.
   const specimen = useMemo(() => createTactical(content, 1), [content]);
   const [snapshot, setSnapshot] = useState(() => controller.snapshot());
@@ -771,7 +755,6 @@ export default function TacticalApp() {
                 </button>
               ) : null}
             </div>
-            {artControls}
             <div className="t-landing-facts">
               <span>即時行動</span>
               <span>隨時暫停部署</span>
@@ -1756,7 +1739,6 @@ export default function TacticalApp() {
       {modal === "settings" && (
         <Dialog title="設定與存檔" onClose={() => setModal(null)}>
           <div className="t-dialog-content">
-            {artControls}
             <label className="toggle">
               行動速度
               <select

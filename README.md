@@ -1,4 +1,4 @@
-本分支最新：核心生命週期修正 v3.2（TB胞內增殖、病毒來源、HIV持續防守），見 [實作／查證／限制](docs/CORE-LIFECYCLE.md)。使用者已授權將 PR #3 合併 main 並發布正式 Pages；新模型預設啟用，保留原模型切換與載入回退。發布狀態見 [交接](docs/CLOUD-HANDOFF.md)。
+本分支最新：核心生命週期修正 v3.2（TB胞內增殖、病毒來源、HIV持續防守），見 [實作／查證／限制](docs/CORE-LIFECYCLE.md)。使用者已授權將 PR #3 合併 main 並發布正式 Pages；新模型預設啟用，移除玩家模型切換入口，保留載入失敗自動回退。發布狀態見 [交接](docs/CLOUD-HANDOFF.md)。
 
 > v3.1 更新：新局先選知識套組／自行配置（12部署點），手機戰場支援雙指縮放，移除略過動畫鍵。舊局保留原隊伍。[本輪進度與驗證](docs/DEPLOYMENT-AND-GESTURES.md) · [給美術建模組的交接 prompt](docs/ART-HANDOFF-PROMPT.md)。
 

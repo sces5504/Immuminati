@@ -110,6 +110,7 @@ try {
     await page.clock.install({ time: new Date("2030-01-01") });
     await page.clock.pauseAt(new Date("2030-01-01T00:01:00Z"));
     await page.goto(target);
+    assert.equal(await page.getByTestId("art-toggle").count(), 0);
     await page.clock.runFor(200);
     const click = (l) => l.evaluate((el) => el.click());
     await click(page.locator(".t-case-cards button").nth(2));
