@@ -1,3 +1,4 @@
+import { intracellularControl } from "./intracellularControl";
 import type {
   Cell,
   Colony,
@@ -21,6 +22,7 @@ export function initialCampaign(s: TacticalState, c: TacticalContent) {
   };
   if (c.mechanics === "containment") {
     const host = s.cells.find((u) => u.kind === "macrophage")!;
+    host.replicateAt = s.tick + c.lifecycle!.intracellular!.every;
     const id = `i${s.serial++}`;
     s.internal.push({
       id,
@@ -59,6 +61,7 @@ function infect(
     compartment: "nucleus",
     phase,
     since: s.tick,
+    cycles: 0,
   };
   h.load = 1;
   h.antigen = "self";
@@ -108,6 +111,63 @@ function release(
     n,
     { target: p.id, from },
   );
+}
+export function intracellularStep(s: TacticalState, c: TacticalContent) {
+  const config = c.lifecycle?.intracellular;
+  if (!config) return;
+  for (const u of [...s.cells]) {
+    const cargo = s.internal.filter(
+      (p) => p.host === u.id && p.stage === "persistent" && p.load > 0,
+    );
+    if (!cargo.length) {
+      delete u.replicateAt;
+      continue;
+    }
+    u.replicateAt ??= s.tick + config.every;
+    if (s.tick < u.replicateAt) continue;
+    u.replicateAt = s.tick + config.every;
+    const total = cargo.reduce((n, p) => n + p.load, 0);
+    const { controlled } = intracellularControl(s, u, c);
+    if (!controlled) {
+      const n = Math.max(1, Math.ceil(total * config.fraction));
+      cargo[0].load += n;
+      emit(
+        s,
+        "grow",
+        u.position,
+        `${c.pathogen.name}在巨噬含菌囊泡內增殖 +${n}（${total}→${total + n}）；需局部 IFN-γ 支援${c.mechanics === "containment" ? "與圍堵" : ""}，胞外調理不能進入囊泡。`,
+        n,
+        { actor: u.id, target: cargo[0].id },
+      );
+    } else {
+      emit(
+        s,
+        "contain",
+        u.position,
+        "局部巨噬活化／圍堵抑制胞內增殖；仍存活的菌量不等於已清除。",
+        total,
+        { actor: u.id },
+      );
+    }
+    if (cargo.reduce((n, p) => n + p.load, 0) >= config.ruptureAt) {
+      // Overloaded infected host ruptures. Transfer viable cargo, never duplicate or clear it.
+      const viable = s.internal
+        .filter((p) => p.host === u.id)
+        .reduce((n, p) => n + p.load, 0);
+      s.internal = s.internal.filter((p) => p.host !== u.id);
+      s.cells = s.cells.filter((x) => x.id !== u.id);
+      s.health[u.region] = Math.max(0, s.health[u.region] - 5);
+      emit(
+        s,
+        "damage",
+        u.position,
+        `${c.cells[u.kind].name}感染失控而破裂，活菌重返胞外；原宿主失去，組織受損 5%。`,
+        5,
+        { actor: u.id },
+      );
+      release(s, c, u.region, u.position, viable, u.position);
+    }
+  }
 }
 export function campaignStep(s: TacticalState, c: TacticalContent) {
   if (!s.campaign || !c.mechanics) return;
@@ -161,17 +221,7 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
           Math.round(q.barrier[f.id]),
         );
     }
-  if (c.mechanics === "intravesicular" && s.tick % 90 === 0) {
-    for (const p of [...s.internal].filter((p) => p.stage === "persistent")) {
-      const u = s.cells.find((u) => u.id === p.host);
-      if (!u) continue;
-      if (s.immunity.signals[u.region].ifng < 20) p.load++;
-      if (p.load >= 7) {
-        p.load -= 3;
-        release(s, c, u.region, u.position, 3, u.position);
-      }
-    }
-  }
+  intracellularStep(s, c);
   if (c.mechanics === "containment") {
     for (const f of c.fields) {
       const infected = s.cells.filter(
@@ -184,6 +234,7 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
         (u) =>
           (u.kind === "th1" || u.kind === "helperT") &&
           u.activation === "effector" &&
+          u.antigen === (c.pathogen.antigen ?? `${c.pathogen.id}:protein`) &&
           focus.some((m) => dist(u.position, m.position) < 6),
       );
       const active =
@@ -271,6 +322,7 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
           .filter(
             (h) =>
               h.region === p.region &&
+              h.health > 0 &&
               !h.infection &&
               !h.apoptoticAt &&
               (c.mechanics === "retroviral"
@@ -283,22 +335,38 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
           )[0];
         if (h) {
           p.load--;
-          infect(s, h, c, "eclipse", p.position);
+          infect(
+            s,
+            h,
+            c,
+            c.mechanics === "retroviral" &&
+              (s.tick + Number(h.id.slice(1))) % 4 === 0
+              ? "latent"
+              : "eclipse",
+            p.position,
+          );
         }
       }
     for (const h of s.hosts.filter((h) => h.load > 0 && !h.apoptoticAt)) {
+      if (s.health[h.region] <= 0) {
+        h.apoptoticAt = s.tick;
+        h.load = 0;
+        continue;
+      }
       const infection = h.infection;
       if (!infection) continue;
       if (infection.phase === "latent") {
         // Deterministic low-frequency reactivation, independent of playback and ending.
         if (
-          h.id !== s.hosts.find((x) => x.kind === "cd4host")?.id &&
-          s.tick > 150 &&
-          (s.tick + Number(h.id.slice(1)) * 7) % 260 === 0
+          s.tick - (infection.since ?? 0) > 300 &&
+          (s.tick + Number(h.id.slice(1)) * 7) % 520 === 0
         ) {
           infection.phase = "productive";
           infection.since = s.tick;
           h.antigen = c.pathogen.antigen!;
+          h.stressed = true;
+          h.mhc1 = Number(h.id.slice(1)) % 3 !== 0;
+          infection.cycles = 0;
           emit(
             s,
             "activate",
@@ -312,9 +380,11 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
       }
       if (
         infection.phase === "eclipse" &&
-        s.tick - (infection.since ?? 0) >= 35
+        s.tick - (infection.since ?? 0) >= (c.lifecycle?.virus?.eclipse ?? 35)
       ) {
         infection.phase = "productive";
+        infection.since = s.tick;
+        infection.cycles = 0;
         h.antigen = c.pathogen.antigen!;
         h.stressed = true;
         h.mhc1 = Number(h.id.slice(1)) % 3 !== 0;
@@ -329,7 +399,13 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
           { target: h.id },
         );
       }
-      if (infection.phase === "productive" && s.tick % 40 === 0) {
+      if (
+        infection.phase === "productive" &&
+        s.tick - (infection.since ?? s.tick) >=
+          (c.lifecycle?.virus?.every ?? 40)
+      ) {
+        infection.since = s.tick;
+        infection.cycles = (infection.cycles ?? 0) + 1;
         const n = s.immunity.signals[h.region].ifni >= 35 ? 1 : 3;
         release(
           s,
@@ -343,13 +419,39 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
           0,
           s.health[h.region] - (c.mechanics === "viral" ? 0.4 : 0.15),
         );
+        if (infection.cycles >= (c.lifecycle?.virus?.lifespan ?? 4)) {
+          h.load = 0;
+          h.apoptoticAt = s.tick;
+          s.health[h.region] = Math.max(0, s.health[h.region] - 2);
+          emit(
+            s,
+            "clear",
+            h.position,
+            "產毒宿主因感染相關細胞死亡而停止產毒；已釋出的病毒仍在胞外，宿主損失不能被當作無代價清除。",
+            1,
+            { target: h.id },
+          );
+        }
       }
     }
     if (c.mechanics === "retroviral") {
       const susceptible = s.hosts.filter((h) => h.kind === "cd4host");
-      const healthy = susceptible.filter(
-        (h) => !h.infection && !h.apoptoticAt,
-      ).length;
+      // Latent infection is not synonymous with a dead/nonfunctional CD4 cell.
+      // Weights represent population-level support, not measured clinical percentages.
+      const functional = susceptible.reduce(
+        (n, h) =>
+          n +
+          (h.health <= 0 || h.apoptoticAt
+            ? 0
+            : !h.infection
+              ? 1
+              : h.infection.phase === "latent"
+                ? 0.8
+                : h.infection.phase === "eclipse"
+                  ? 0.5
+                  : 0),
+        0,
+      );
       // Untreated chronic impairment accumulates continuously, not as a final scripted wipe.
       const burden = s.colonies.reduce((n, p) => n + p.load, 0);
       const productive = susceptible.filter(
@@ -357,19 +459,25 @@ export function campaignStep(s: TacticalState, c: TacticalContent) {
       ).length;
       q.impairment = Math.min(
         100,
-        q.impairment + 0.018 + burden * 0.0003 + productive * 0.001,
+        q.impairment + burden * 0.0003 + productive * 0.001,
       );
       const impairment = q.impairment;
       q.cd4 = Math.max(
         0,
-        (100 * healthy) / Math.max(1, susceptible.length) - impairment,
+        (100 * functional) / Math.max(1, susceptible.length) - impairment,
       );
+      if (s.tick % c.damageEvery === 0) {
+        // Aggregate immune-support failure, not direct HIV infection of stromal cells.
+        const injury = (1 - q.cd4 / 100) * 0.55;
+        for (const f of c.fields)
+          s.health[f.id] = Math.max(0, s.health[f.id] - injury);
+      }
       if (s.tick % 100 === 0)
         emit(
           s,
           "damage",
           c.fields[0].center,
-          `功能性 CD4 支援 ${Math.round(q.cd4)}%；產毒、潛伏與功能障礙分別計算。`,
+          `功能性 CD4 支援 ${Math.round(q.cd4)}%；支援不足增加局部組織耗損（教學抽象），不代表 HIV 直接感染基質。`,
           Math.round(q.cd4),
         );
     }

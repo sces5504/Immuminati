@@ -93,6 +93,22 @@ export const sources: Record<string, { name: string; url: string }> = {
     name: "NIH · Latent HIV Reservoir",
     url: "https://hivinfo.nih.gov/understanding-hiv/fact-sheets/what-latent-hiv-reservoir",
   },
+  B26: {
+    name: "2025 · CD4 與局部髓系反應限制 Mtb（原始研究）",
+    url: "https://pubmed.ncbi.nlm.nih.gov/40489538/",
+  },
+  B27: {
+    name: "2025 · 人類巨噬中 IFN-γ 不保證單獨限制 Mtb（原始研究）",
+    url: "https://pubmed.ncbi.nlm.nih.gov/40285696/",
+  },
+  B28: {
+    name: "NIAID · Salmonella-containing vacuole",
+    url: "https://pubmed.ncbi.nlm.nih.gov/18304858/",
+  },
+  B25: {
+    name: "流感複製、干擾素反應與細胞死亡",
+    url: "https://pubmed.ncbi.nlm.nih.gov/28805681/",
+  },
   B15: {
     name: "NIH · HIV Life Cycle",
     url: "https://hivinfo.nih.gov/understanding-hiv/fact-sheets/hiv-life-cycle",
@@ -314,7 +330,7 @@ export const entries: Entry[] = [
       "胞外來源與吞噬囊泡內活菌需要分開保存與處理，經適當訊號支援改善胞內處理。",
     scope:
       "M2 是腸黏膜／局部巨噬細胞感染模型，不代表所有沙門氏菌或傷寒病程。胞外及囊泡來源分開，Th1 支援缺乏時可增殖及再播散。",
-    sources: ["B4S", "B11"],
+    sources: ["B4S", "B11", "B28"],
   },
   {
     id: "tuberculosis",
@@ -323,10 +339,10 @@ export const entries: Entry[] = [
     keywords: "M3 結核 控制 感染灶 肉芽腫",
     summary: "限制感染灶與擴散，不等同完全滅菌或臨床治癒。",
     mechanism:
-      "巨噬細胞與 Th1 協作可限制感染，也可能伴隨活菌存留與局部損傷；感染灶控制不是永久無敵屏障。",
+      "結核菌可在巨噬含菌囊泡內增殖，失控後宿主破裂可再播散。相符 Th1 與局部巨噬協作支持控制；IFN-γ 不是單獨保證滅菌的開關，肉芽腫也不是永久無敵屏障。",
     scope:
       "M3 肺部防禦片段：感染巨噬與 Th1／IFN-γ 建立圍堵，負荷與播散受控並維持 20 模擬秒才成功；不是臨床治癒。",
-    sources: ["B4", "B12"],
+    sources: ["B4", "B12", "B26", "B27"],
   },
   {
     id: "influenza",
@@ -337,8 +353,8 @@ export const entries: Entry[] = [
     mechanism:
       "中和有助阻斷合適游離病毒；清除感染宿主需要其他辨識及作用路徑，不能由抗體中和直接視為已治好宿主。",
     scope:
-      "M4 由未活化 CD8 開始。pDC／感染上皮的 IFN-I 降低傳播，DC 交叉呈遞後啟動特異 CD8；抗體中和胞外病毒，不消除核內複製材料。",
-    sources: ["B5", "B10", "B21"],
+      "M4 由未活化 CD8 開始。pDC／感染上皮的 IFN-I 降低傳播，DC 交叉呈遞後啟動特異 CD8；抗體中和胞外病毒，不消除核內複製材料。產毒來源有生命週期，宿主死亡後停止產毒，已釋出的病毒仍需處理。",
+    sources: ["B5", "B10", "B21", "B25"],
   },
   {
     id: "candida",
@@ -361,7 +377,7 @@ export const entries: Entry[] = [
     mechanism:
       "HIV 可損害 CD4 支援，也能感染其他合適宿主。活躍與潛伏感染需區分，免疫辨識並非能看見所有潛伏來源。",
     scope:
-      "遊戲時間與負荷不代表現實病程。現代抗反轉錄病毒治療能有效抑制 HIV，讓人長期健康生活。M6 分開易感、感染建立、產毒及潛伏宿主；CD4 功能下降影響新活化、T–B 幫助與訊號支援。",
+      "遊戲時間與負荷不代表現實病程。現代抗反轉錄病毒治療能有效抑制 HIV，讓人長期健康生活。M6 分開易感、感染建立、產毒及潛伏宿主；潛伏不等於宿主死亡，仍可保留部分支援。CD4 功能下降影響新活化、T–B 幫助與訊號；遊戲無倒數期限，持續到全部防區組織耗盡。組織耗損是局部防禦模型，不是 HIV 直接感染所有人體組織。",
     sources: ["B13", "B14", "B15", "B22"],
   },
   {

@@ -192,7 +192,8 @@ try {
         previous = 0;
       for (
         let n = 0;
-        n < 180 && !(await page.getByTestId("tactical-result").count());
+        n < (id === "m6" ? 1000 : 180) &&
+        !(await page.getByTestId("tactical-result").count());
         n++
       ) {
         await pause(true);
@@ -260,9 +261,7 @@ try {
       }
       if (id === "m6") {
         assert.equal(final.state.result.stars, 0);
-        assert.ok(
-          final.state.hosts.some((h) => h.infection?.phase === "latent"),
-        );
+        assert.ok(Object.values(final.state.health).every((n) => n === 0));
         await expect(page.getByTestId("hiv-explanation")).toContainText("ART");
       }
       await page.screenshot({ path: dir + `${device}-${id}-result.png` });

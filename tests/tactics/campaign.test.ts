@@ -45,7 +45,7 @@ function run(id: string, seed = 1) {
       [150, "pdc", "a"],
     ],
   };
-  for (let i = 0; i < c.limit && !s.result; i++) {
+  for (let i = 0; i < (id === "m6" ? 10000 : c.limit) && !s.result; i++) {
     for (const [tick, kind, region] of plan[id] ?? [])
       if (tick === i)
         s = commandTactical(s, { type: "recruit", kind, region }, c).state;
@@ -246,7 +246,7 @@ describe("campaign robustness", () => {
         expect(run(id, seed).result?.type, `${id} seed ${seed}`).toBe(
           id === "m6" ? "limited" : "victory",
         );
-  });
+  }, 15000);
   it("remaining disease scenarios have actual failure conditions", () => {
     for (const id of ["m4", "m5"]) {
       const c = tacticalScenarios[id];
@@ -260,13 +260,11 @@ describe("campaign robustness", () => {
     const c = tacticalScenarios.m6;
     let s = createTactical(c);
     s.cells = [];
-    for (let i = 0; i < c.limit; i++) s = stepTactical(s, c);
+    for (let i = 0; i < 10000 && !s.result; i++) s = stepTactical(s, c);
     const defended = run("m6");
     expect(defended.result!.seconds).toBeGreaterThan(s.result!.seconds);
-    expect(
-      defended.hosts.some((h) => h.infection?.phase === "latent" && h.load > 0),
-    ).toBe(true);
-  });
+    expect(Object.values(defended.health).every((n) => n === 0)).toBe(true);
+  }, 15000);
   it("a forged early limited ending and campaign victory record are rejected", () => {
     const c = tacticalScenarios.m6,
       ctrl = new TacticalController(c);

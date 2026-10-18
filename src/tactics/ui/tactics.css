@@ -3393,3 +3393,20 @@
   background: #b2e5ec;
   color: #183347;
 }
+
+/* Lifecycle explanations remain readable and wrap inside the existing dock. */
+.t-selection-info > p {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.t-compartment-summary {
+  font-variant-numeric: tabular-nums;
+  line-height: 1.6;
+}
+@media (max-width: 760px) {
+  .t-command-dock:not(.is-empty) .t-selection-info > p {
+    font-size: 10px;
+    line-height: 1.5;
+    margin: 3px 0;
+  }
+}

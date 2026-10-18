@@ -80,6 +80,7 @@ const terrain = tissueFloor;
 const vector = (p: Vec, y = 0) => new THREE.Vector3(p.x, y, p.z);
 const sphere = new THREE.SphereGeometry(1, 24, 16);
 const smallSphere = new THREE.SphereGeometry(1, 10, 8);
+const intracellularRod = new THREE.CapsuleGeometry(0.5, 1.7, 3, 6);
 const dummy = new THREE.Object3D();
 function material(color: number, roughness = 0.5) {
   return new THREE.MeshStandardMaterial({ color, roughness, metalness: 0.02 });
@@ -477,12 +478,16 @@ export class BattleScene {
       ),
     );
     const liveMat = material(0x4c669b, 0.3);
-    for (const x of [-0.16, 0.16])
+    for (let i = 0; i < 6; i++)
       vacuole.add(
         mesh(
           smallSphere,
           liveMat,
-          new THREE.Vector3(x, 0.15, 0.25),
+          new THREE.Vector3(
+            Math.cos(i * 2.4) * 0.24,
+            0.12,
+            Math.sin(i * 2.4) * 0.24,
+          ),
           new THREE.Vector3(0.17, 0.19, 0.17),
         ),
       );
@@ -905,6 +910,15 @@ export class BattleScene {
         const t = Math.min(1, p / 0.8);
         f.ghost.position.copy(from.lerp(to, t));
         f.ghost.position.y += Math.sin(t * Math.PI) * 0.5;
+        if (e.type === "release")
+          f.ghost.children.forEach((part, i) => {
+            const angle = (i * Math.PI * 2) / f.ghost!.children.length;
+            part.position.set(
+              Math.cos(angle) * t * 0.85,
+              Math.sin(angle) * t * 0.12,
+              Math.sin(angle) * t * 0.85,
+            );
+          });
         f.ghost.scale.setScalar(
           e.type === "infect"
             ? 1 - Math.max(0, (p - 0.6) / 0.4) * 0.85
@@ -1039,6 +1053,15 @@ export class BattleScene {
         actor.sample?.dispose();
         this.actors.delete(id);
       }
+    const cargoLoads = new Map<string, number>();
+    const phagosomes = new Set<string>();
+    for (const cargo of s.internal) {
+      cargoLoads.set(
+        cargo.host,
+        (cargoLoads.get(cargo.host) ?? 0) + cargo.load,
+      );
+      if (cargo.compartment === "phagosome") phagosomes.add(cargo.host);
+    }
     for (const cell of s.cells) {
       let actor = this.actors.get(cell.id);
       if (actor && actor.kind !== cell.kind) {
@@ -1069,15 +1092,15 @@ export class BattleScene {
         ? this.samples?.pathogen(this.content.pathogen.shape ?? "coccus", false)
         : undefined;
       for (const part of actor.vacuole.children.slice(1))
-        (part as THREE.Mesh).geometry = internalShape?.geometry ?? smallSphere;
+        (part as THREE.Mesh).geometry =
+          internalShape?.geometry ??
+          (["acidfast", "rod"].includes(this.content.pathogen.shape ?? "")
+            ? intracellularRod
+            : smallSphere);
       actor.shell.visible = actor.lobes.visible = !useSample;
       if (actor.sample) {
         actor.sample.root.visible = useSample;
-        actor.sample.update(
-          phase,
-          live,
-          s.internal.some((p) => p.host === cell.id),
-        );
+        actor.sample.update(phase, live, (cargoLoads.get(cell.id) ?? 0) > 0);
       }
       actor.body.position.y = live ? Math.sin(phase * 1.5) * 0.07 : 0;
       actor.body.rotation.set(
@@ -1116,10 +1139,31 @@ export class BattleScene {
       actor.ring.scale.setScalar(
         input.reduced ? 1 : 1 + Math.sin(this.now * 4) * 0.04,
       );
-      const infected = s.internal.some((p) => p.host === cell.id);
-      actor.vacuole.visible = s.internal.some(
-        (p) => p.host === cell.id && p.compartment === "phagosome",
-      );
+      const cargoLoad = cargoLoads.get(cell.id) ?? 0;
+      const cargoVisual = actor.vacuole.userData;
+      if (cargoLoad > (cargoVisual.load ?? cargoLoad))
+        cargoVisual.divisionAt = this.now;
+      cargoVisual.load = cargoLoad;
+      const division = input.reduced
+        ? 1
+        : Math.min(
+            1,
+            Math.max(0, (this.now - (cargoVisual.divisionAt ?? -100)) / 0.9),
+          );
+      actor.vacuole.children.slice(1).forEach((part, i) => {
+        part.visible = i < Math.min(6, cargoLoad);
+        const radius = 0.1 + 0.14 * division;
+        part.position.set(
+          Math.cos(i * 2.4) * radius,
+          0.12 + Math.sin(i) * 0.03,
+          Math.sin(i * 2.4) * radius,
+        );
+        part.rotation.z = i * 0.9;
+        part.scale.setScalar(0.14 * (0.7 + 0.3 * division));
+      });
+      actor.vacuole.scale.setScalar(1 + Math.min(0.25, cargoLoad * 0.012));
+      const infected = cargoLoad > 0;
+      actor.vacuole.visible = phagosomes.has(cell.id);
       (actor.shell.material as THREE.MeshPhysicalMaterial).emissive.setHex(
         infected ? 0x6b4110 : 0x120c26,
       );

@@ -18,3 +18,5 @@ docs/evidence/tripo-expansion/*-raw.webm
 __pycache__/
 
 docs/evidence/tripo-expansion/**/*-raw.webm
+
+docs/evidence/core-lifecycle/*-raw.webm

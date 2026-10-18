@@ -1,3 +1,7 @@
+# 最新授權：核心生命週期修正 v3.2（2026-10-18）
+
+使用者回報 TB 胞內不增殖並授權修正六關核心免疫機制及打磨體驗；本輪可修改純引擎與存檔，優先於下文美術輪「不改規則」。HIV 取消時間／CD4門檻結束，持續防守到全部防區組織耗盡；保留特殊無星等結果，不代表臨床病程。仍只更新 art/tripo-samples／PR #3／同一私人 Preview，不合併 main 或正式 Pages，不追加付費素材。規則3.2／campaign.3，舊 state 與 undo 顯式遷移並備份原文。詳見 [本輪修正與限制](CORE-LIFECYCLE.md)。
+
 # Tripo 全角色／器官預覽交接（2026-10-18）
 
 第一批已由使用者確認；本輪擴充14種免疫、六關病原、八種宿主與四種組織。工作分支 `art/tripo-samples`、Draft PR #3，仍不可合併main／正式Pages。原規則3.1、部署、存檔與操作保留。最新素材、320 credits收據、adapter與實際新驗證見 [本輪美術交接](art/tripo-expansion/README.md)；部署來源核對 `art/tripo-expansion/preview.json`，不要沿用首批preview.json或舊錄影當成最新。

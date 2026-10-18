@@ -177,7 +177,8 @@ describe("spatial fixed-step tactics", () => {
     for (let i = 0; i < m1.cells.neutrophil.delay; i++) ctrl.step();
     expect(ctrl.save.state.arrivals).toHaveLength(0);
     expect(ctrl.save.state.cells).toHaveLength(31);
-    expect(occupied(ctrl.save.state, "b")).toBe(30);
+    // Travelling cells are counted where they physically are, not as reserved slots.
+    expect(occupied(ctrl.save.state, "b")).toBe(28);
     expect(parseTactical(JSON.stringify(ctrl.snapshot()), m1)).toEqual(
       ctrl.snapshot(),
     );

@@ -54,7 +54,9 @@ try {
     ],
   };
   const results = [];
-  for (const c of Object.values(tacticalScenarios))
+  for (const c of Object.values(tacticalScenarios).filter(
+    (c) => !process.env.CASE || c.id === process.env.CASE,
+  ))
     for (const mode of ["legacy-observe", "kit-observe", "selected-defense"]) {
       let s =
         mode === "legacy-observe" ? createTactical(c) : createDeployment(c);
@@ -79,7 +81,7 @@ try {
           });
         issue({ type: "begin" });
       }
-      while (!s.result && s.tick < c.limit) {
+      while (!s.result && s.tick < (c.id === "m6" ? 10000 : c.limit)) {
         if (mode === "selected-defense") {
           for (const [tick, kind, region] of plans[c.id])
             if (tick === s.tick) issue({ type: "recruit", kind, region });

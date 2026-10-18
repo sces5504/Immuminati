@@ -85,9 +85,13 @@ export function Tutorial({
                   ? "點下方任一細胞；各細胞的合法目標、活化與功能不同，選取後可查看。"
                   : step === 2
                     ? "選取細胞後，點 B 防區地標或地面指定位置；手動移動優先。"
-                    : step === 9
-                      ? (content.objective ?? base.text)
-                      : base.text,
+                    : step === 6 && ["m2", "m3"].includes(content.id)
+                      ? "恢復行動，觀察吞噬。巨噬含菌囊泡可繼續增殖，吞入不是殺死；選取巨噬並用局部剖視查看活菌與增殖時鐘。DC 呈遞後的相符 Th1 支援有助控制。"
+                      : step === 6 && ["m4", "m6"].includes(content.id)
+                        ? "恢復行動，觀察胞外病毒進入宿主，再由產毒宿主釋出。NK／相符已活化 CD8 針對合法宿主；抗體只中和胞外病毒。"
+                        : step === 9
+                          ? (content.objective ?? base.text)
+                          : base.text,
             target:
               step === 1
                 ? ".t-roster>button:first-child"
@@ -103,7 +107,13 @@ export function Tutorial({
     s.immunity.autoSeek,
     events.some((e) => e.type === "mark"),
     events.some((e) => e.type === "request"),
-    events.some((e) => e.type === "engulf"),
+    events.some(
+      (e) =>
+        e.type === "engulf" ||
+        (content &&
+          ["m4", "m6"].includes(content.id) &&
+          ["infect", "release", "cytotoxic"].includes(e.type)),
+    ),
     save.settings.speed === 2,
     seenMechanisms,
     true,

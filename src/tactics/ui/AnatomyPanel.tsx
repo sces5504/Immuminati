@@ -1,3 +1,4 @@
+import { intracellularStatus } from "../application/infectionStatus";
 import type {
   TacticalState,
   TacticalContent,
@@ -258,6 +259,11 @@ function Cutaway({
                       />
                     ))}
                   </g>
+                ) : content.pathogen.shape === "acidfast" ||
+                  content.pathogen.shape === "rod" ? (
+                  <g transform={`rotate(${i * 37} ${x} ${y})`}>
+                    <rect x={x - 3} y={y - 9} width="6" height="18" rx="3" />
+                  </g>
                 ) : (
                   <>
                     <ellipse cx={x - 4} cy={y} rx="5" ry="7" />
@@ -287,6 +293,12 @@ function Cutaway({
             ? " · 活病原仍計入感染負荷；位置不由模型重疊判定。"
             : "；沒有感染不代表這顆細胞沒有功能。"}
       </p>
+      {cell && intracellularStatus(cell, state, content) && (
+        <p data-testid="intracellular-status">
+          {intracellularStatus(cell, state, content)!.text}
+          。負荷過高會導致宿主破裂與活菌再播散；時間／菌量為教學壓縮。
+        </p>
+      )}
       {host?.infection && (
         <p>
           {hostStatus(host)}

@@ -151,8 +151,13 @@ export function populateTissue(s: TacticalState, c: TacticalContent) {
 }
 /** Tissue health is the regional aggregate, not extra damage counted per visible cell. */
 export function syncTissueHealth(s: TacticalState) {
-  for (const host of s.hosts)
+  for (const host of s.hosts) {
+    if (s.health[host.region] <= 0 && !host.apoptoticAt) {
+      host.apoptoticAt = Math.max(1, s.tick);
+      host.load = 0;
+    }
     host.health = host.apoptoticAt ? 0 : s.health[host.region];
+  }
 }
 export function hostStatus(host: HostCell) {
   return host.apoptoticAt
