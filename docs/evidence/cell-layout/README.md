@@ -8,4 +8,6 @@
 - `desktop-separated-cells.png`／`mobile-separated-cells.png`：兩個巨噬細胞權威位置相同，展示層自然分開；桌面圖由最後補查更新。
 - `performance.json`：同點擁擠的純函式20次計算；`npx vite-node docs/evidence/cell-layout/profile.ts` 可重做量測。屬雲端CPU，非真機或瀏覽器FPS。
 
-使用 Chromium 的軟體 WebGL；沒有實體 iPhone／Android 實測。空間不足時仍容許重疊；沒有強制名額或物理碰撞。發布來源及結果另記於交接。
+使用 Chromium 的軟體 WebGL；沒有實體 iPhone／Android 實測。空間不足時仍容許重疊；沒有強制名額或物理碰撞。
+
+[發布39104837457](https://github.com/sces5504/Immuminati/actions/runs/39104837457) 建置／部署成功，HEAD `a32fd98`；`public-assets.json` 記錄公開站HTML引用的4資產皆與本機正式建置逐位元相同。公開站未另跑完整遊玩矩陣。

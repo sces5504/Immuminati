@@ -1,0 +1,27 @@
+{
+  "deploymentRun": 39104837457,
+  "head": "a32fd982a4d6a6c3ac6eac547929b2f6ba99d654",
+  "gameSource": "ff62c59",
+  "assets": [
+    {
+      "path": "/Immuminati/assets/index-C3g-Ghwv.js",
+      "sha256": "27248c95ea947b00918c1c651e847a9be8cbc3ca339d5f6173d7f56493a263b9",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/index-l03wE7lA.css",
+      "sha256": "3c7f86bc996404f122baa62d3044a619d17a940d2a5f71b1d4040810bca4f13b",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/mark.svg",
+      "sha256": "3988a8a4f084b0f72802c68d9acc57a5d39229e3fc0f0f73e41f0a692c9cbf86",
+      "matchesLocalBuild": true
+    },
+    {
+      "path": "/Immuminati/assets/three-DH6SqBiy.js",
+      "sha256": "7fd6393b3bbde940bab8fd39fc2066eb6d2ec6dd07d26708237487e1f7123def",
+      "matchesLocalBuild": true
+    }
+  ]
+}
