@@ -158,6 +158,21 @@ try {
     await touch("touchEnd", []);
     assert.equal(await zoom(), 0.75);
     await page.screenshot({ path: `${dir}/${device}-pinch-in.png` });
+    // Begin on an actual clickable world label: capture transfer must not cancel pinch.
+    await page.getByRole("button", { name: "重設鏡頭" }).click();
+    const lb = await page.locator(".t-cell-label").first().boundingBox();
+    const labelPair = (d) => [
+      { x: lb.x + lb.width / 2, y: lb.y + lb.height / 2, id: 1 },
+      { x: lb.x + lb.width / 2 + d, y: lb.y + lb.height / 2, id: 2 },
+    ];
+    await touch("touchStart", labelPair(45));
+    await touch("touchMove", labelPair(85));
+    assert.ok((await zoom()) > 1.2);
+    await touch("touchEnd", []);
+    assert.equal(
+      await page.locator(".tactical-root").getAttribute("data-selected"),
+      selected,
+    );
     // Cancellation, third finger and a new gesture must not leave captured input stuck.
     await touch("touchStart", points(80));
     await touch("touchMove", [...points(110), { x: cx, y: cy + 60, id: 3 }]);
@@ -177,7 +192,7 @@ try {
     await page.locator(".t-roster>button[data-cell-id]").nth(1).click();
     const marker = () =>
       page
-        .locator(".t-field-label")
+        .locator(".t-cell-label")
         .first()
         .evaluate((el) => {
           const r = el.getBoundingClientRect();
@@ -208,6 +223,7 @@ try {
         "native CDP two-finger spread/pinch clamps",
         "one-finger release never issues command",
         "cancel/third-finger recover",
+        "pinch beginning on world-label capture remains responsive",
         "pinch leaves authority/selection/page scale unchanged",
         "single-finger same-direction drag preserved",
       ],
@@ -223,6 +239,9 @@ try {
     dir + `/browser-results-${process.env.DEVICE ?? "all"}.json`,
     JSON.stringify({ date: new Date().toISOString(), checks }, null, 2),
   );
+} catch (error) {
+  console.error(error);
+  throw error;
 } finally {
   await browser.close();
   server?.kill();

@@ -206,6 +206,8 @@ export class BattleScene {
     host.addEventListener("click", this.guardClick, true);
     host.addEventListener("lostpointercapture", this.cancelPointer);
     window.addEventListener("blur", this.resetPointers);
+    window.addEventListener("pointerup", this.cancelPointer);
+    window.addEventListener("pointercancel", this.cancelPointer);
     this.lastEvent = this.read().state.eventId;
     this.lastSeed = this.read().state.seed;
     this.lastTick = this.read().state.tick;
@@ -1408,6 +1410,7 @@ export class BattleScene {
     if (!this.pointer || this.pointer.id !== e.pointerId) return;
     const p = this.pointer;
     if (!p.moved && Math.hypot(e.clientX - p.x, e.clientY - p.y) <= 6) return;
+    if (!p.moved && p.label) this.host.setPointerCapture(e.pointerId);
     p.moved = true;
     this.swallowClick = true;
     // Keep the grabbed ground point under the pointer. Ray/plane projection
@@ -1486,6 +1489,12 @@ export class BattleScene {
     if (hit) this.pick({ type: "ground", point: { x: hit.x, z: hit.z } });
   };
   private cancelPointer = (e: PointerEvent) => {
+    // Transferring implicit capture from a world-label button to the scene is not cancellation.
+    if (
+      e.type === "lostpointercapture" &&
+      this.host.hasPointerCapture(e.pointerId)
+    )
+      return;
     if (!this.contacts.has(e.pointerId)) return;
     this.contacts.delete(e.pointerId);
     this.pointer = undefined;
@@ -1510,6 +1519,8 @@ export class BattleScene {
     this.host.removeEventListener("click", this.guardClick, true);
     this.host.removeEventListener("lostpointercapture", this.cancelPointer);
     window.removeEventListener("blur", this.resetPointers);
+    window.removeEventListener("pointerup", this.cancelPointer);
+    window.removeEventListener("pointercancel", this.cancelPointer);
     this.observer.disconnect();
     this.host.removeEventListener("pointerdown", this.down);
     this.host.removeEventListener("pointermove", this.move);

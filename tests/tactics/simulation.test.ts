@@ -352,13 +352,15 @@ describe("pause, save and rendering independence", () => {
       ctrl.save.state,
     );
     ctrl.restart(1);
+    // This regression measures active combat history; opening preparation is covered separately.
+    ctrl.save.state = createTactical(m1);
     for (let i = 0; i < 30; i++)
       ctrl.command({
         type: "move",
         cell: "u1",
         point: { x: -10 + (i % 3), z: -7 },
       });
-    expect(ctrl.save.undo.length).toBeLessThanOrEqual(10);
+    expect(ctrl.save.undo.length).toBe(10);
     expect(parseTactical(JSON.stringify(ctrl.snapshot()), m1)).toEqual(
       ctrl.snapshot(),
     );

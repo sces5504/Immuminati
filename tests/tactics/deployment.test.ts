@@ -20,6 +20,7 @@ describe("player-owned opening deployment", () => {
       const ctrl = new TacticalController(c);
       const before = ctrl.snapshot();
       expect(before.state.cells.length).toBe(c.id === "m3" ? 1 : 0);
+      expect(before.state.immunity.autoSeek).toBe(true);
       ctrl.pause(false);
       for (let i = 0; i < c.limit + 1; i++) ctrl.step();
       expect(ctrl.snapshot()).toEqual(before);
