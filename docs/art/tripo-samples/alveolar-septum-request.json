@@ -1,0 +1,14 @@
+{
+  "asset": "alveolar-septum",
+  "request": {
+    "prompt": "One modular short lung alveolar septal tissue ridge for a microscopic strategy game map. A gently curved low elongated organic wall segment, open on both ends, smoothly continuous pale dusty rose and blush pink tissue. Delicate flat squamous epithelial surface with subtle soft polygonal cell junction seams, occasional small oval mauve epithelial nuclei embedded flush, a thin muted reddish capillary trace embedded along its outer side. An elegant shallow biological ridge, not a tube or a whole organ. Horizontal length 5, depth 1.2, height 1.3, flattened underside, rounded crest, approximately straight with very gentle curve. No base or pedestal, no floor slab, no surrounding cells. Restrained scientific game miniature, soft satin hydrated material, fine surface texture, muted pastel palette, neutral lighting, no cast shadow baked into material. Standalone reusable map wall tile, clean smooth optimized topology, readable at small scale, soft micro 3D educational biology aesthetic.",
+    "negative_prompt": "whole lungs, organ, blood, gore, cartoon, text, labels, pedestal, stand, slab, black void, sharp spikes, rocks, bricks, pipes, multiple objects, glowing neon, dramatic contrast",
+    "model": "v3.1-20260211",
+    "face_limit": 3000,
+    "texture": true,
+    "pbr": true,
+    "model_seed": 550403,
+    "image_seed": 550403,
+    "texture_seed": 550403
+  }
+}

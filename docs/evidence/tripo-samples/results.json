@@ -1,0 +1,54 @@
+[
+  {
+    "device": "desktop",
+    "sample": {
+      "assets": "3",
+      "cells": "2",
+      "triangles": 229026,
+      "drawCalls": 209
+    },
+    "original": {
+      "assets": "3",
+      "cells": "0",
+      "triangles": 200380,
+      "drawCalls": 209
+    },
+    "requests": 3,
+    "actionStart": 100.589,
+    "checks": [
+      "real GLB render with independent cells and terrain-fitted batched tissue",
+      "toggle retains exact paused authority",
+      "selection, move, C3b, engulf, pause, 2x and reduced motion",
+      "no runtime errors"
+    ]
+  },
+  {
+    "device": "mobile",
+    "sample": {
+      "assets": "3",
+      "cells": "2",
+      "triangles": 227330,
+      "drawCalls": 197
+    },
+    "original": {
+      "assets": "3",
+      "cells": "0",
+      "triangles": 198684,
+      "drawCalls": 197
+    },
+    "requests": 3,
+    "actionStart": 62.284,
+    "checks": [
+      "real GLB render with independent cells and terrain-fitted batched tissue",
+      "toggle retains exact paused authority",
+      "selection, move, C3b, engulf, pause, 2x and reduced motion",
+      "no runtime errors"
+    ]
+  },
+  {
+    "device": "mobile",
+    "checks": [
+      "all three assets unavailable: originals render and remain selectable without runtime error"
+    ]
+  }
+]

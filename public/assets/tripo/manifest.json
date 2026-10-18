@@ -1,0 +1,92 @@
+{
+  "source": "TripoAI v3.1, three one-time text generations; offline size/material/morph adapter",
+  "assets": [
+    {
+      "asset": "macrophage",
+      "triangles": 3918,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_d4b52970-9bcb-4edc-8750-547d4123eaa8",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_d4b52970-9bcb-4edc-8750-547d4123eaa8",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "ORM_d4b52970-9bcb-4edc-8750-547d4123eaa8",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.6,
+        3.3,
+        2.2
+      ],
+      "bytes": 504264,
+      "morphTargets": 1
+    },
+    {
+      "asset": "neutrophil",
+      "triangles": 3860,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_3ea5f0d1-06c4-474d-9d6c-4c2b6e7be2ae",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_3ea5f0d1-06c4-474d-9d6c-4c2b6e7be2ae",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "ORM_3ea5f0d1-06c4-474d-9d6c-4c2b6e7be2ae",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        3.0,
+        2.85,
+        2.25
+      ],
+      "bytes": 497260,
+      "morphTargets": 1
+    },
+    {
+      "asset": "alveolar-septum",
+      "triangles": 2876,
+      "materials": 1,
+      "textures": [
+        {
+          "name": "Color_f9fdc4cf-65d6-41fd-9030-8943dc57e487",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "NormalGL_f9fdc4cf-65d6-41fd-9030-8943dc57e487",
+          "width": 512,
+          "height": 512
+        },
+        {
+          "name": "ORM_f9fdc4cf-65d6-41fd-9030-8943dc57e487",
+          "width": 512,
+          "height": 512
+        }
+      ],
+      "dimensionsXYZ": [
+        4.2,
+        1.15,
+        1.0
+      ],
+      "bytes": 713408,
+      "morphTargets": 0
+    }
+  ]
+}

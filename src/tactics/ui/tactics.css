@@ -11,6 +11,40 @@
   --t-cyan: #8bdcf0;
   --t-gold: #ffe0a1;
 }
+.t-art-preview {
+  max-width: 390px;
+  margin: 12px 0;
+  padding: 12px;
+  border: 1px solid #8bdcf055;
+  border-radius: 10px;
+  background: #1d334cdd;
+  color: #edf4ff;
+}
+.t-art-preview > strong {
+  font-size: 12px;
+}
+.t-art-preview > p {
+  font-size: 11px;
+  line-height: 1.6;
+  margin: 8px 0;
+  color: #bed6e6;
+}
+.t-art-preview > small {
+  display: block;
+  font-size: 10px;
+  margin-top: 8px;
+  color: #a9c6d8;
+}
+.t-art-preview > button {
+  min-height: 44px;
+  font-size: 12px;
+  background: #304f65;
+  padding: 8px 14px;
+}
+.tactical-root dialog .t-art-preview > button {
+  color: #edf4ff;
+  background: #304f65;
+}
 .tactical-root button {
   min-height: 44px;
   border-color: var(--t-line);

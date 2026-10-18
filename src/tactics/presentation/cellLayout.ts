@@ -20,11 +20,12 @@ export function layoutCells(
   cells: readonly Cell[],
   content: TacticalContent,
   previous: ReadonlyMap<string, Vec> = new Map(),
+  radii?: Partial<Record<Cell["kind"], number>>,
 ): Map<string, Vec> {
   const result = new Map<string, Vec>();
   const buckets = new Map<string, { point: Vec; radius: number }[]>();
   for (const cell of cells) {
-    const radius = bodyRadius(cell.kind);
+    const radius = radii?.[cell.kind] ?? bodyRadius(cell.kind);
     const old = previous.get(cell.id);
     const candidates = [OFFSETS[0]];
     if (old) {

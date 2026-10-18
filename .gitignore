@@ -1,4 +1,9 @@
 node_modules/
+.art-source/
+.art-work/
+docs/evidence/tripo-samples/*-raw.webm
+.env*
+!.env.example
 dist/
 playwright-report/
 test-results/

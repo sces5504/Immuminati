@@ -7,6 +7,12 @@ import { coatings } from "../engine/opsonization";
 import { chooseEntity } from "./selection";
 import { layoutCells } from "./cellLayout";
 import {
+  ART_PREVIEW,
+  SAMPLE_RADII,
+  TripoSamples,
+  type SampleCell,
+} from "./TripoSamples";
+import {
   makeTissueActor,
   updateTissueActor,
   disposeTissueActor,
@@ -31,6 +37,7 @@ export interface SceneInput {
   reduced: boolean;
   idle: boolean;
   speed: number;
+  artSamples?: boolean;
 }
 export type Pick =
   | { type: "cell"; id: string }
@@ -47,6 +54,7 @@ interface Actor {
   ring: THREE.Mesh;
   kind: string;
   phase: number;
+  sample?: SampleCell;
 }
 interface Bacteria {
   root: THREE.Group;
@@ -90,7 +98,10 @@ export class BattleScene {
   scene = new THREE.Scene();
   camera = new THREE.OrthographicCamera();
   private actors = new Map<string, Actor>();
+  private samples?: TripoSamples;
+  private sampleTissue?: THREE.Group;
   private layoutState?: TacticalState;
+  private sampleLayout = false;
   private cellLayout = new Map<string, Vec>();
   private hosts = new Map<string, THREE.Group>();
   private bacteria = new Map<string, Bacteria>();
@@ -147,6 +158,7 @@ export class BattleScene {
     private read: () => SceneInput,
     private pick: (pick: Pick) => void,
   ) {
+    if (ART_PREVIEW && content.id === "m1") this.samples = new TripoSamples();
     this.renderer = new THREE.WebGLRenderer({
       canvas,
       alpha: true,
@@ -991,9 +1003,16 @@ export class BattleScene {
     }
     this.lastTick = s.tick;
     this.lastSeed = s.seed;
-    if (this.layoutState !== s) {
-      this.cellLayout = layoutCells(s.cells, this.content, this.cellLayout);
+    const sampleLayout = !!this.samples && !!input.artSamples;
+    if (this.layoutState !== s || this.sampleLayout !== sampleLayout) {
+      this.cellLayout = layoutCells(
+        s.cells,
+        this.content,
+        this.cellLayout,
+        sampleLayout ? SAMPLE_RADII : undefined,
+      );
       this.layoutState = s;
+      this.sampleLayout = sampleLayout;
     }
     const fresh = this.lastEvent === 0;
     for (const e of s.events)
@@ -1006,6 +1025,7 @@ export class BattleScene {
         this.scene.remove(actor.root);
         actor.lobes.dispose();
         actor.granules.dispose();
+        actor.sample?.dispose();
         this.actors.delete(id);
       }
     for (const cell of s.cells) {
@@ -1014,6 +1034,7 @@ export class BattleScene {
         this.scene.remove(actor.root);
         actor.lobes.dispose();
         actor.granules.dispose();
+        actor.sample?.dispose();
         this.actors.delete(cell.id);
         actor = undefined;
       }
@@ -1028,6 +1049,20 @@ export class BattleScene {
         actor.root.position.copy(target);
       const phase = this.now + actor.phase;
       const live = input.idle && !input.reduced;
+      if (!actor.sample && this.samples) {
+        actor.sample = this.samples.cell(cell.kind);
+        if (actor.sample) actor.body.add(actor.sample.root);
+      }
+      const useSample = !!input.artSamples && !!actor.sample;
+      actor.shell.visible = actor.lobes.visible = !useSample;
+      if (actor.sample) {
+        actor.sample.root.visible = useSample;
+        actor.sample.update(
+          phase,
+          live,
+          s.internal.some((p) => p.host === cell.id),
+        );
+      }
       actor.body.position.y = live ? Math.sin(phase * 1.5) * 0.07 : 0;
       actor.body.rotation.set(
         live ? Math.sin(phase) * 0.025 : 0,
@@ -1074,6 +1109,18 @@ export class BattleScene {
       );
       (actor.shell.material as THREE.MeshPhysicalMaterial).emissiveIntensity =
         infected ? 0.4 : 0.1;
+    }
+    if (this.samples) {
+      if (!this.sampleTissue) {
+        this.sampleTissue = this.samples.tissue(this.content);
+        if (this.sampleTissue) this.scene.add(this.sampleTissue);
+      }
+      if (this.sampleTissue) this.sampleTissue.visible = !!input.artSamples;
+      this.host.dataset.artAssets = String(this.samples.readyCount);
+      this.host.dataset.artMode = input.artSamples ? "tripo" : "original";
+      this.host.dataset.artCells = String(
+        [...this.actors.values()].filter((a) => a.sample?.root.visible).length,
+      );
     }
     if (s.campaign && this.content.mechanics === "containment")
       for (const field of this.content.fields) {
@@ -1197,6 +1244,12 @@ export class BattleScene {
     } else this.routeGeometry.setDrawRange(0, 0);
     this.animateEffects(input.reduced, input.speed);
     this.renderer.render(this.scene, this.camera);
+    if (this.samples) {
+      this.host.dataset.artTriangles = String(
+        this.renderer.info.render.triangles,
+      );
+      this.host.dataset.artDrawCalls = String(this.renderer.info.render.calls);
+    }
     if (this.software) {
       const gl = this.renderer.getContext() as WebGL2RenderingContext;
       this.pendingFrame = gl.fenceSync(gl.SYNC_GPU_COMMANDS_COMPLETE, 0);
@@ -1558,9 +1611,14 @@ export class BattleScene {
     this.host.removeEventListener("pointercancel", this.cancelPointer);
     this.canvas.removeEventListener("wheel", this.wheel);
     for (const a of this.actors.values()) {
+      a.sample?.dispose();
       a.lobes.dispose();
       a.granules.dispose();
     }
+    this.sampleTissue?.traverse((o) => {
+      if (o instanceof THREE.Mesh) o.geometry.dispose();
+    });
+    this.samples?.dispose();
     for (const h of this.hosts.values()) disposeTissueActor(h);
     for (const b of this.bacteria.values()) {
       b.core.dispose();

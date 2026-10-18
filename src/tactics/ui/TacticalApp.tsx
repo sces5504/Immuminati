@@ -44,6 +44,7 @@ import { recruitableCells } from "../content/cells";
 import { ImmunePanel, cellActivity } from "./ImmunePanel";
 import { practiceContent, createPractice } from "../content/practice";
 import { Tutorial } from "./Tutorial";
+import { ART_PREVIEW } from "../presentation/TripoSamples";
 type Modal =
   | "anatomy"
   | "immune"
@@ -81,6 +82,23 @@ export default function TacticalApp() {
     return ctrl;
   });
   const content = controller.content;
+  const [artSamples, setArtSamples] = useState(ART_PREVIEW);
+  const artControls = ART_PREVIEW ? (
+    <section className="t-art-preview" aria-label="美術樣本比較">
+      <strong>Tripo 美術樣本 · 待審閱</strong>
+      <p>
+        M1：巨噬、嗜中性球與肺泡入口局部隔壁。其他模型維持原版；此預覽獨立存檔。
+      </p>
+      <button
+        data-testid="art-toggle"
+        aria-pressed={artSamples}
+        onClick={() => setArtSamples(!artSamples)}
+      >
+        {artSamples ? "比較原模型" : "查看 Tripo 樣本"}
+      </button>
+      <small>關卡內可從「設定與存檔」切換比較。</small>
+    </section>
+  ) : null;
   // Landing specimen is visual only; never becomes the player's deployed team.
   const specimen = useMemo(() => createTactical(content, 1), [content]);
   const [snapshot, setSnapshot] = useState(() => controller.snapshot());
@@ -122,6 +140,7 @@ export default function TacticalApp() {
     reduced: snapshot.settings.reduced,
     idle: snapshot.settings.idle,
     speed: snapshot.settings.speed,
+    artSamples,
   });
   const pickRef = useRef<(pick: Pick) => void>(() => {});
   input.current = {
@@ -132,6 +151,7 @@ export default function TacticalApp() {
     reduced: snapshot.settings.reduced,
     idle: snapshot.settings.idle,
     speed: snapshot.settings.speed,
+    artSamples,
   };
   const update = (persist = false) => {
     setSnapshot(controller.snapshot());
@@ -745,6 +765,7 @@ export default function TacticalApp() {
                 </button>
               ) : null}
             </div>
+            {artControls}
             <div className="t-landing-facts">
               <span>即時行動</span>
               <span>隨時暫停部署</span>
@@ -1701,6 +1722,7 @@ export default function TacticalApp() {
       {modal === "settings" && (
         <Dialog title="設定與存檔" onClose={() => setModal(null)}>
           <div className="t-dialog-content">
+            {artControls}
             <label className="toggle">
               行動速度
               <select
