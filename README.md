@@ -1,6 +1,6 @@
 [線上遊玩 →](https://sces5504.github.io/Immuminati/)
 
-![Immuminati 微觀防線：紫色細胞與深藍微觀視野，從免疫知識，到戰場決策。](public/assets/polisher-readme-banner.png)
+![Immuminati 微觀防線品牌概念視覺：柔光下的紫色免疫細胞、藍色菌群與組織，從免疫知識，到戰場決策。](public/assets/polisher-readme-banner.png)
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Immuminati-79BFAE?style=flat&labelColor=263247)](https://sces5504.github.io/Immuminati/) [![GitHub](https://img.shields.io/badge/GitHub-Source-3D485C?style=flat&labelColor=263247)](https://github.com/sces5504/Immuminati)
 
